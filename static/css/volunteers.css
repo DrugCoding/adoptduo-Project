@@ -1,0 +1,33 @@
+.container {
+    min-width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.main_image {
+    position: relative;
+}
+
+.main_image_text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: white;
+}
+
+.conatainer_cards {
+    display: flex;
+}
+
+.card {
+    margin: auto;
+}
+
+.card_image {
+    width: 300px;
+    height: 500px;
+}
+
+.card_text {
+    text-align: center;
+}
