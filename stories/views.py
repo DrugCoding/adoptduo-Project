@@ -31,10 +31,11 @@ def create(request):
 def detail(request, pk):
     stories = get_object_or_404(Stories, pk=pk)
     comment_form = Stories_CommentForm()
+    comment_view = StoryComment.objects.filter(stories=pk)
     context = {
         "stories": stories,
-        "comments": stories.comment_set.all(),
         "comment_form": comment_form,
+        "comment_view": comment_view,
     }
     return render(request, "stories/detail.html", context)
 
@@ -57,3 +58,24 @@ def update(request, pk):
 def delete(request, pk):
     Stories.objects.get(pk=pk).delete()
     return redirect("stories:index")
+
+@login_required
+def comment_create(request, pk):
+    stories = get_object_or_404(Stories, pk=pk)
+    comment_form = Stories_CommentForm(request.POST)
+    if comment_form.is_valid():
+        comment = comment_form.save(commit=False)
+        comment.stories = stories
+        comment.user = request.user
+        comment.save()
+    return redirect('stories:detail', stories.pk)
+
+@login_required
+def comment_delete(request, stories_pk, comment_pk):
+    comment = StoryComment.objects.get(pk=comment_pk)
+    if request.user == comment.user:
+        if request.method == "POST":
+            comment.delete()
+            return redirect("stories:index", stories_pk)
+    else:
+        return redirect("stories:detail", stories_pk)
