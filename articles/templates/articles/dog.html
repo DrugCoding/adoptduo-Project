@@ -1,8 +1,9 @@
+{% extends 'base.html' %}
 {% comment %} {% extends 'base.html' %}
 {% load static %} {% endcomment %}
 {% comment %} navbar 받아옴 {% endcomment %}
 {% comment %} {% block content %} {% endcomment %}
-<!DOCTYPE html>
+{% comment %} <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -33,7 +34,7 @@
             </ul>
         </div>
         {% comment %} 강아지 카드로 보여주기 {% endcomment %}
-        <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% comment %} <div class="row row-cols-1 row-cols-md-3 g-4">
             <div class="col">
               <div class="card">
                 <img src="..." class="card-img-top" alt="...">
@@ -73,5 +74,25 @@
           </div>
     </div>
 </body>
-</html>
-{% comment %} {% endblock content %} {% endcomment %}
+</html> {% endcomment %}
+
+
+{% block content %}
+
+<a href="{% url 'articles:dog_create' %}" class="nav-link btn nav_btn me-1">글작성</a>
+{% comment %} {% for dog_article in dog_articles %}
+    {{ dog_article.name }}
+{% endfor %} {% endcomment %}
+
+{% for i in page_obj %}
+  {{ i.name }}
+{% endfor %}
+
+<ul id="pagination" class="d-flex my-5 d-flex justify-content-center p-5">
+    <li class="mx-2 rounded"><a class="border border-0 text-muted" href="?page=1">1</a></li>
+    <li class="mx-2 rounded"><a class="border border-0 text-muted" href="?page=2">2</a></li>
+    <li class="mx-2 rounded"><a class="border border-0 text-muted" href="?page=3">3</a></li>
+    <li class="mx-2 rounded"><a class="border border-0 text-muted" href="?page=4">4</a></li>
+</ul>
+
+{% endblock content %}
