@@ -4,30 +4,36 @@
     padding: 0;
 }
 
-.main_image {
+.main-image {
     position: relative;
 }
 
-.main_image_text {
+.main-image-text {
     position: absolute;
     top: 50%;
     left: 50%;
     color: white;
 }
 
-.conatainer_cards {
+.container-cards {
     display: flex;
+    flex-direction: column;
+}
+
+.post-row {
+    display: flex;
+    flex-direction: row;
 }
 
 .card {
     margin: auto;
 }
 
-.card_image {
+.card-image {
     width: 300px;
     height: 500px;
 }
 
-.card_text {
+.card-text {
     text-align: center;
 }
