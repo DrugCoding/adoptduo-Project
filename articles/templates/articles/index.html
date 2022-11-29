@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<a href="{% url 'articles:create' %}" class="nav-link btn nav_btn me-1">글작성</a>
+{% for article in articles%}
+    {{ article.name }}
+{% endfor %}
+
+
+<ul id="pagination" class="d-flex my-5 d-flex justify-content-center p-5">
+    <li class="mx-2 rounded"><a class="border border-0 text-muted" href="?page=1">1</a></li>
+    <li class="mx-2 rounded"><a class="border border-0 text-muted" href="?page=2">2</a></li>
+    <li class="mx-2 rounded"><a class="border border-0 text-muted" href="?page=3">3</a></li>
+    <li class="mx-2 rounded"><a class="border border-0 text-muted" href="?page=4">4</a></li>
+</ul>
+
+{% endblock content %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+
+  {% comment %} {% if request.resolver_match.url_name == 'create' %} {% endcomment %}
+    <!--resolver_match = 어떤 url을 통해서 왔는지 검사하는 인스턴스, 따라서 create url로 왔는지 여부를 검사 -->
+    <p class="text-center fw-bold mb-3" style="color: white; font-family: 'Jost', sans-serif; font-size:70px;">Put Yours</p>
+  {% comment %} {% else %} {% endcomment %}
+    <p class="text-center fw-bold mb-3" style="color: white; font-family: 'Jost', sans-serif; font-size:70px;">Update Yours</p>
+  {% comment %} {% endif %} {% endcomment %}
+  <div class="d-flex justify-content-center align-items-center m-auto mt-5">
+    <form action="" style="color: white;"method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% bootstrap_form article_form %}
+      {% bootstrap_button button_type="submit" button_class="detail_btn w-100" content="OK"%}
+    </form>
+  </div>
+
+{% endblock %}
