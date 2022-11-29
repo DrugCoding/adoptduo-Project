@@ -6,9 +6,16 @@ class CustomUserCreationForm(UserCreationForm):
         model = get_user_model()
         fields = [
             "username",
+            "volunteer_c",
             "area",
+            "password1",
+            "password2",
             "image",
         ]
+        labels = {
+            "volunteer_c": "이동봉사 여부",
+            "area": "지역",
+        }
 
 class CustomUserChangeForm(UserChangeForm):
     class Meta:
