@@ -9,4 +9,8 @@ urlpatterns = [
     path("<int:product_pk>/", views.detail, name="detail"), # 입양글 조회 페이지
     path("<int:product_pk>/update/", views.update, name="update"), # 입양글 수정
     path("<int:product_pk>/delete/", views.delete, name="delete"), # 입양글 삭제
+    # 강아지페이지(임시)
+    path("dog/", views.dog, name="dog"),
+    # 고양이페이지(임시)
+    path("cat/", views.cat, name="cat"),
 ]
