@@ -1,0 +1,77 @@
+{% comment %} {% extends 'base.html' %}
+{% load static %} {% endcomment %}
+{% comment %} navbar 받아옴 {% endcomment %}
+{% comment %} {% block content %} {% endcomment %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/dog.css">
+</head>
+<body>
+    <div class="dog-banner">
+        <img src="https://tinypawsteacuppuppyboutique.com/wp-content/uploads/2020/04/puppy-banner-2-768x288.jpg{# comment #}{% static 'images/puppybanner.jpg' %}{# comment #}" alt="PetBanner">
+        <div class="text-center">
+            <h1>건강한 반려문화의 시작</h1>
+            <h4>평생을 함께해 주세요</h4>
+        </div>
+    </div>
+    <div class="border-top border-4"></div>
+    <div id="categories">
+        <h1>강아지</h1>
+        <div id="puppy-categories">
+            <ul id="puppy-ul">
+                <li id="puppy-li">강아지1</li>
+                <li id="puppy-li">강아지2</li>
+                <li id="puppy-li">강아지3</li>
+                <li id="puppy-li">강아지4</li>
+                <li id="puppy-li">강아지5</li>
+                <li id="puppy-li">강아지6</li>
+            </ul>
+        </div>
+        {% comment %} 강아지 카드로 보여주기 {% endcomment %}
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+              <div class="card">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+</body>
+</html>
+{% comment %} {% endblock content %} {% endcomment %}
