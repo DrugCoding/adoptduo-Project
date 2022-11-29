@@ -20,8 +20,6 @@ class Stories(models.Model):
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    # 반려동물 나이
-    age = models.IntegerField()
     # 좋아요
     like = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='stories_like')
     # 성별
@@ -31,16 +29,10 @@ class Stories(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     # 견종
     breed = models.CharField(max_length=20)
-    # 특이사항
-    memo = models.CharField(max_length=20)
-    # 중성화 여부
-    neutered = models.CharField(max_length=20)
-    # 접종 여부
-    vaccination = models.CharField(max_length=20)
 
 class StoryComment(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     content = models.TextField()
     like = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='comment_like')
-    article = models.ForeignKey(Stories, on_delete=models.CASCADE)
+    stories = models.ForeignKey(Stories, on_delete=models.CASCADE)
