@@ -8,13 +8,11 @@
         <h3 style="font-size:2.5vw; font-weight:800;">입양해듀오</h3>
       </div>
       <div class="search-form-section align-self-center" style="flex: 75%; display: flex;">
-        <form class="d-flex row" role="search" method="GET" action="" 
-              style="border: solid #FFCD00 2px; display: inline-block; width: 100%; border-radius: 6px; align-self: flex-end; height: 100%; max-height: 100%;
+        <form class="d-flex row" role="search" method="GET" action="" style="border: solid #FFCD00 2px; display: inline-block; width: 100%; border-radius: 6px; align-self: flex-end; height: 100%; max-height: 100%;
                      overflow: auto; position: relative;">
-            {% csrf_token %}
-            <input class=" form-control col mx-1 search-block search" type="search" placeholder="궁금한 사항을 검색해주세요"
-                name="search" aria-label="Search">
-            <button class="btn btn-light col-3 col-lg-2 col-xl-1 mx-1 search" type="submit">검색</button>
+          {% csrf_token %}
+          <input class=" form-control col mx-1 search-block search" type="search" placeholder="궁금한 사항을 검색해주세요" name="search" aria-label="Search">
+          <button class="btn btn-light col-3 col-lg-2 col-xl-1 mx-1 search" type="submit">검색</button>
         </form>
       </div>
     </div>
