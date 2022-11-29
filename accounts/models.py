@@ -7,10 +7,11 @@ from django.conf import settings
 
 class User(AbstractUser):
     image = ProcessedImageField(
+        upload_to='images/',
         blank=True,
-        processors=[Thumbnail(200, 300)],
+        processors=[ResizeToFill(360, 360)],
         format="JPEG",
-        options={"quality": 50},
+        options={"quality": 80},
     )
     followings = models.ManyToManyField('self', symmetrical=False, related_name='followers')
     area = models.CharField(max_length=20, default='서울')
