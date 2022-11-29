@@ -1,1 +1,73 @@
-{% comment %} {% extends 'base.html' %} {% endcomment %}
+{% extends 'base.html' %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/dog.css' %}">
+{% comment %} navbar 받아옴 {% endcomment %}
+{% block content %}
+    <div class="container text-center">
+        <div class="has-bg-img">
+                <h1>건강한 반려문화의 시작</h1>
+                <h5>평생을 함께해 주세요</h5>
+                <img src="{% static 'images/puppybanner.jpg' %}" alt="PetBanner">
+                <div class="border-top border-4 border-secondary w-25 container">
+                </div>
+        </div>
+    </div>
+
+    <div class="container text-center mt-5">
+        <h1>고양이</h1>
+        <div id="dog-categories" class="container w-50 border">
+            <ul id="puppy-ul">
+                <li id="puppy-li">노르웨이숲</li>
+                <li id="puppy-li">코리안숏헤어</li>
+                <li id="puppy-li">냥1</li>
+                <li id="puppy-li">냥2</li>
+                <li id="puppy-li">냥3</li>
+                <li id="puppy-li">냥4</li>
+            </ul>
+        </div>
+    </div>
+        {% comment %} 강아지 카드로 보여주기 {% endcomment %}
+    <div class="container text-center">
+        <div class="row row-cols-1 row-cols-md-3 mt-4">
+            {% comment %} {% for card in cards %} {% endcomment %}
+            <div class="col">
+              <div class="card mt-4">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p class="card-text">커여운 고양이 입양</p>
+                  <h5 class="card-title">고양이</h5>
+                </div>
+              </div>
+            </div>
+            {% comment %} {% endfor %} {% endcomment %}
+            <div class="col">
+              <div class="card mt-4">
+                <img src="{% static 'static/images/doge.jpg' %}" class="card-img-top" alt="cat">
+                <div class="card-body">
+                    <p class="card-text">커여운 고양이 입양</p>
+                    <h5 class="card-title">고양이</h5>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card mt-4">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p class="card-text">커여운 고양이 입양</p>
+                    <h5 class="card-title">고양이</h5>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card mt-4">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p class="card-text">커여운 고양이 입양</p>
+                    <h5 class="card-title">고양이</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+{% endblock content %}
