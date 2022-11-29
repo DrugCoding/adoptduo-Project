@@ -1,98 +1,73 @@
 {% extends 'base.html' %}
-{% comment %} {% extends 'base.html' %}
-{% load static %} {% endcomment %}
+{% load static %}
 {% comment %} navbar 받아옴 {% endcomment %}
-{% comment %} {% block content %} {% endcomment %}
-{% comment %} <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/static/css/dog.css">
-</head>
-<body>
-    <div class="dog-banner">
-        <img src="https://tinypawsteacuppuppyboutique.com/wp-content/uploads/2020/04/puppy-banner-2-768x288.jpg{# comment #}{% static 'images/puppybanner.jpg' %}{# comment #}" alt="PetBanner">
-        <div class="text-center">
-            <h1>건강한 반려문화의 시작</h1>
-            <h4>평생을 함께해 주세요</h4>
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/dog.css' %}">
+    <div class="container text-center">
+        <div class="has-bg-img">
+                <h1>건강한 반려문화의 시작</h1>
+                <h5>평생을 함께해 주세요</h5>
+                <img src="{% static 'images/puppybanner.jpg' %}" alt="PetBanner">
+                <div class="border-top border-4 border-secondary w-25 container">
+                </div>
         </div>
     </div>
-    <div class="border-top border-4"></div>
-    <div id="categories">
+
+    <div class="container text-center mt-5">
         <h1>강아지</h1>
-        <div id="puppy-categories">
+        <div id="dog-categories" class="container w-50 border">
             <ul id="puppy-ul">
-                <li id="puppy-li">강아지1</li>
-                <li id="puppy-li">강아지2</li>
-                <li id="puppy-li">강아지3</li>
-                <li id="puppy-li">강아지4</li>
-                <li id="puppy-li">강아지5</li>
-                <li id="puppy-li">강아지6</li>
+                <li id="puppy-li">요크셔테리어</li>
+                <li id="puppy-li">푸들</li>
+                <li id="puppy-li">시바견</li>
+                <li id="puppy-li">이탈리안그레이하운드</li>
+                <li id="puppy-li">포메라니안</li>
+                <li id="puppy-li">말티즈</li>
             </ul>
         </div>
+    </div>
         {% comment %} 강아지 카드로 보여주기 {% endcomment %}
-        {% comment %} <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="container text-center">
+        <div class="row row-cols-1 row-cols-md-3 mt-5">
+            {% comment %} {% for card in cards %} {% endcomment %}
             <div class="col">
-              <div class="card">
-                <img src="..." class="card-img-top" alt="...">
+              <div class="card mt-5">
+                <img src="{% static 'images/doge.jpg' %}" class="card-img-top" alt="...">
                 <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <p class="card-text">커여운 강아지 입양</p>
+                  <h5 class="card-title">시바견</h5>
+                </div>
+              </div>
+            </div>
+            {% comment %} {% endfor %} {% endcomment %}
+            <div class="col">
+              <div class="card mt-5">
+                <img src="{% static 'images/doge.jpg' %}" class="card-img-top" alt="dog">
+                <div class="card-body">
+                    <p class="card-text">커여운 강아지 입양</p>
+                    <h5 class="card-title">시바견</h5>
                 </div>
               </div>
             </div>
             <div class="col">
-              <div class="card">
-                <img src="..." class="card-img-top" alt="...">
+              <div class="card mt-5">
+                <img src="{% static 'images/doge.jpg' %}" class="card-img-top" alt="...">
                 <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <p class="card-text">커여운 강아지 입양</p>
+                    <h5 class="card-title">시바견</h5>
                 </div>
               </div>
             </div>
             <div class="col">
-              <div class="card">
-                <img src="..." class="card-img-top" alt="...">
+              <div class="card mt-5">
+                <img src="{% static 'images/doge.jpg' %}" class="card-img-top" alt="...">
                 <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <p class="card-text">커여운 강아지 입양</p>
+                    <h5 class="card-title">시바견</h5>
                 </div>
               </div>
             </div>
           </div>
+        </div>
     </div>
-</body>
-</html> {% endcomment %}
-
-
-{% block content %}
-
-<a href="{% url 'articles:dog_create' %}" class="nav-link btn nav_btn me-1">글작성</a>
-{% comment %} {% for dog_article in dog_articles %}
-    {{ dog_article.name }}
-{% endfor %} {% endcomment %}
-
-{% for i in page_obj %}
-  {{ i.name }}
-{% endfor %}
-
-<ul id="pagination" class="d-flex my-5 d-flex justify-content-center p-5">
-    <li class="mx-2 rounded"><a class="border border-0 text-muted" href="?page=1">1</a></li>
-    <li class="mx-2 rounded"><a class="border border-0 text-muted" href="?page=2">2</a></li>
-    <li class="mx-2 rounded"><a class="border border-0 text-muted" href="?page=3">3</a></li>
-    <li class="mx-2 rounded"><a class="border border-0 text-muted" href="?page=4">4</a></li>
-</ul>
-
 {% endblock content %}
