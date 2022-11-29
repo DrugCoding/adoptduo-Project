@@ -1,24 +1,22 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
-
-  <a href="{% url 'articles:create' %}" class="nav-link btn nav_btn me-1">글작성</a>
-  {% for article in articles%}
-    {{ article.name }}
-  {% endfor %}
-
-  <ul id="pagination" class="d-flex my-5 d-flex justify-content-center p-5">
-    <li class="mx-2 rounded">
-      <a class="border border-0 text-muted" href="?page=1">1</a>
-    </li>
-    <li class="mx-2 rounded">
-      <a class="border border-0 text-muted" href="?page=2">2</a>
-    </li>
-    <li class="mx-2 rounded">
-      <a class="border border-0 text-muted" href="?page=3">3</a>
-    </li>
-    <li class="mx-2 rounded">
-      <a class="border border-0 text-muted" href="?page=4">4</a>
-    </li>
-  </ul>
-
+  <div class="container">
+    <div class="search-section d-flex" style="padding:10px; padding-top:30px;">
+      <div class="search-title" style="flex:25%; margin:auto;">
+        <h4 style="font-size:1.2vw; color: #707070; font-weight:600; left: 5rem;">가족이 되어주세요</h4>
+        <h3 style="font-size:2.5vw; font-weight:800;">입양해듀오</h3>
+      </div>
+      <div class="search-form-section align-self-center" style="flex: 75%; display: flex;">
+        <form class="d-flex row" role="search" method="GET" action="" 
+              style="border: solid #FFCD00 2px; display: inline-block; width: 100%; border-radius: 6px; align-self: flex-end; height: 100%; max-height: 100%;
+                     overflow: auto; position: relative;">
+            {% csrf_token %}
+            <input class=" form-control col mx-1 search-block search" type="search" placeholder="궁금한 사항을 검색해주세요"
+                name="search" aria-label="Search">
+            <button class="btn btn-light col-3 col-lg-2 col-xl-1 mx-1 search" type="submit">검색</button>
+        </form>
+      </div>
+    </div>
+  </div>
 {% endblock content %}
