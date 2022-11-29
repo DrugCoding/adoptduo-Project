@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+  <h1>회원목록</h1>
+  {% for account in accounts %}
+  <p>{{ account.username}} | {{account.area}}</p>
+  {% endfor %}
+{% endblock content %}
