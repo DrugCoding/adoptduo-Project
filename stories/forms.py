@@ -5,7 +5,7 @@ class StoriesForm(forms.ModelForm):
     class Meta:
         model = Stories
         fields = ["title", "content", "image"]
-        label = {
+        labels = {
             "title": "제목",
             "content": "내용",
             "image": "사진",
@@ -14,7 +14,7 @@ class StoriesForm(forms.ModelForm):
 class Stories_CommentForm(forms.ModelForm):
     class Meta:
         model = StoryComment
-        fields = ["content"]
-        label = {
+        fields = ["content",]
+        labels = {
             "content": "댓글입력",
         }
