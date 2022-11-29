@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+
+{% block css %}
+{% endblock css %}
+
+{% block content %}
+<h1>글 작성</h1>
+<form action="" method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  {% bootstrap_form form %}
+  <input type="submit" class="btn btn-success" value="글쓰기">
+  <a href="{% url 'stories:index' %}" class="btn btn-danger">뒤로</a>
+</form>
+
+{% endblock content %}
