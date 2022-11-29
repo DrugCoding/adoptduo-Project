@@ -49,3 +49,9 @@ def update(request):
 
 def delete(request):
     pass
+
+def dog(request):
+    return render(request, "articles/dog.html")
+
+def cat(request):
+    return render(request, "articles/cat.html")

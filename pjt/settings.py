@@ -125,6 +125,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
+
 STATICFILES_DIRS = [BASE_DIR / "static/"]  # static 파일들이 어디에 있는지를 쓰는 곳
 STATIC_ROOT = "/static/"  # static 파일들이 어디로 모일지를 쓰는 곳
 
