@@ -1,3 +1,4 @@
+/* search form */
 .search-section {
   padding: 10px;
   padding-top: 30px;
@@ -6,19 +7,6 @@
 .search-title {
   flex: 25%;
   margin: auto;
-}
-
-#tagline {
-  font-size: 1.2vw;
-  font-weight: 600;
-  color: #707070;
-  margin-left: 0.4rem;
-}
-
-#brand{
-  font-size: 2.5vw;
-  font-weight: 800;
-  color: black;
 }
 
 .search-form-section{
@@ -65,13 +53,27 @@ button.search-submit {
 .img-search{
   width: 20px;
 }
+/* brand name */
+#tagline {
+  font-size: 1.2vw;
+  font-weight: 600;
+  color: #707070;
+  margin-left: 0.4rem;
+}
 
-.popular-post-section{
+#brand{
+  font-size: 2.5vw;
+  font-weight: 800;
+  color: black;
+}
+
+/*입양정보*/
+.adopted-post-section{
   margin-top: 60px;
 
 }
 
-h3.popular-font{
+h3.adopted-font{
   margin-top: 20px;
   margin-bottom: 30px;
   text-align: center;
@@ -80,10 +82,108 @@ h3.popular-font{
   
 }
 
-.popular-stroke{
+.adopted-stroke{
   display: flex;
   margin-top: -20px;
-  margin-left: 605px;
+  margin-left: 602px;
+  border: 2px solid #ffcd00;
+  width: 88px;
+}
+
+.see-more{
+  float: right;
+  font-size: 14px;
+  font-weight: 600;
+  color:black;
+}
+
+.post-img{
+  object-fit: cover;
+  display: block;
+  max-height: 200px;
+} 
+
+.post-title{
+  color: black;
+}
+
+.post-title:hover{
+  color:#FFCD00
+}
+
+
+/* story */
+
+.story-post-section{
+  margin-top: 60px;
+
+}
+
+h3.story-font{
+  margin-top: 20px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-size: 35px;
+  font-weight: 800;
+  
+}
+
+.story-stroke{
+  display: flex;
+  margin-top: -20px;
+  margin-left: 602px;
+  border: 2px solid #ffcd00;
+  width: 88px;
+}
+
+.main-story-img{
+  object-fit: cover;
+  border-radius: 10px;
+  width: 40rem;
+  height: 25rem;
+}
+
+
+
+.main-story{
+  width: 40rem;
+  height: 30rem;
+  border-radius: 10px;
+}
+
+.stoy-post{
+  width: 40rem;
+}
+
+
+.stories-post{
+  width: 40rem;
+  left: 1rem;
+}
+
+.stories-img{
+  object-fit: cover;
+}
+
+/*volunteer*/
+.volunteers-post-section{
+  margin-top: 60px;
+
+}
+
+h3.volunteers-font{
+  margin-top: 20px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-size: 35px;
+  font-weight: 800;
+  
+}
+
+.volunteers-stroke{
+  display: flex;
+  margin-top: -20px;
+  margin-left: 602px;
   border: 2px solid #ffcd00;
   width: 88px;
 }
