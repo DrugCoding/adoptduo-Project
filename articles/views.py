@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import DogArticle, CatArticle
-from .forms import DogArticleForm, CatArticleForm
+from .forms import DogArticleForm, CatArticleForm, DogCommentForm, CatCommentForm
 from django.core.paginator import Paginator
+from django.http import JsonResponse
 # Create your views here.
 
 def index(request):
@@ -46,9 +47,12 @@ def dog_create(request):
 
 def dog_detail(request, dog_article_pk):
     dog_article = DogArticle.objects.get(id=dog_article_pk)
+    dog_comment_form = DogCommentForm()
 
     context = {
-        "dog_article":dog_article
+        "dog_article":dog_article,
+        'dog_comments': dog_article.dogarticlecomment_set.all(), # 도그 게시물의 모든 댓글 출력하기
+        "dog_comment_form":dog_comment_form
     }
 
     return render(request, "articles/dog_detail.html", context)
@@ -72,11 +76,18 @@ def dog_update(request, dog_article_pk):
         "dog_article_form": dog_article_form # 유효하지 않을 때는 요청 받은 product_form, 제출 안눌렀을 때는 바로위의 폼
     }
 
-    return render(request, "products/forms.html", context) # 유효하지 않을 때나, 제출 안눌렀을 때는 위의 컨텍스트 값을 가져와서 forms.html을 보여줌
+    return render(request, "articles/form.html", context) # 유효하지 않을 때나, 제출 안눌렀을 때는 위의 컨텍스트 값을 가져와서 forms.html을 보여줌
     
 
-def dog_delete(request):
-    pass
+
+def dog_delete(request, dog_article_pk):
+
+    dog_article = DogArticle.objects.get(id=dog_article_pk)
+    dog_article.delete()
+
+    return redirect("articles:dog_index")
+
+
 
 def cat_index(request):
     cat_articles = CatArticle.objects.all()
@@ -91,6 +102,7 @@ def cat_index(request):
         "page_obj": page_obj,
     }
     return render(request, "articles/cat.html", context) # 템플릿 네임 적어주고, 이쪽으로 context 값을 넘겨줌
+
 
 
 def cat_create(request):
@@ -111,3 +123,83 @@ def cat_create(request):
     }
 
     return render(request, "articles/catform.html", context) # 제출에 이슈가 있다면 값을 보내며 다시 폼으로 돌아가기
+
+
+
+def cat_detail(request, cat_article_pk):
+    cat_article = CatArticle.objects.get(id=cat_article_pk)
+    cat_comment_form = CatCommentForm()
+
+    context = {
+        "cat_article":cat_article,
+        'cat_comments': cat_article.catarticlecomment_set.all(), # 도그 게시물의 모든 댓글 출력하기
+        "cat_comment_form":cat_comment_form
+    }
+
+    return render(request, "articles/cat_detail.html", context)
+
+
+
+def cat_update(request, cat_article_pk):
+    cat_article = CatArticle.objects.get(id=cat_article_pk)
+
+    if request.method == "POST": # 업데이트 제출 버튼 눌렀을 때
+        cat_article_form = CatArticleForm(request.POST, request.FILES, instance=cat_article) # 요청된 포스트와 요청 된 파일, 기존에 모델에 있는 것을 넣어 놓은 것을 요청 된 것으로 바꿈
+
+        if cat_article_form.is_valid(): # 위 폼이 유효하다면
+            cat_article_form.save() # 저장
+
+            return redirect("articles:cat_detail", cat_article_pk) # 몇번 상품의 디테일 페이지에 보내줄껀지? 
+    else:
+        cat_article_form = CatArticleForm(instance=cat_article) # 기존 모델에 저장 되어있는 값을 보여줌
+
+    context = {
+        "cat_article_form": cat_article_form # 유효하지 않을 때는 요청 받은 product_form, 제출 안눌렀을 때는 바로위의 폼
+    }
+
+    return render(request, "articles/catform.html", context) # 유효하지 않을 때나, 제출 안눌렀을 때는 위의 컨텍스트 값을 가져와서 forms.html을 보여줌
+
+
+def cat_delete(request, cat_article_pk):
+
+    cat_article = CatArticle.objects.get(id=cat_article_pk)
+    cat_article.delete()
+
+    return redirect("articles:cat_index")
+
+
+
+def dog_comment_create(request, dog_article_pk):
+
+    dog_article = DogArticle.objects.get(pk=dog_article_pk)
+    dog_comment_form = DogCommentForm(request.POST)
+    if dog_comment_form.is_valid():
+        dog_comment = dog_comment_form.save(commit=False)
+        dog_comment.dogarticle = dog_article # 게시글은 입력 받은 댓글의 게시글
+        dog_comment.user = request.user # 로그인한 유저가 댓글작성자(커멘트의 유저)임!
+        dog_comment.save()
+        context = {
+            'dog_content': dog_comment.content,
+            'dog_userName': dog_comment.user.username,
+        }
+        return JsonResponse(context)
+
+
+def cat_comment_create(request, cat_article_pk):
+    article = CatArticle.objects.get(pk=cat_article_pk)
+    cat_comment_form = CatCommentForm(request.POST)
+    if cat_comment_form.is_valid():
+        cat_comment = cat_comment_form.save(commit=False)
+        cat_comment.catarticle = article
+        cat_comment.user = request.user
+        cat_comment.save()
+        context = {
+            'cat_content': cat_comment.content,
+            'cat_userName': cat_comment.user.username,
+        }
+        
+    return JsonResponse(context)
+
+
+
+
