@@ -6,6 +6,7 @@
 <form action="" method="POST">
     {% csrf_token %}
     {% bootstrap_form form %}
-    {% bootstrap_button button_type="submit" content="OK" %}
+    {% bootstrap_button button_type="submit" content="로그인" %}
+    <button class="btn btn-primary"><a class="text-decoration-none text-white" href="{% url 'accounts:signup' %}">회원가입</a></button>
 </form>
 {% endblock content %}
