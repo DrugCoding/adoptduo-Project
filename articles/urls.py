@@ -4,6 +4,7 @@ from . import views # 현재 같은 경로에 있는 views파일 참조
 app_name = 'articles'
 
 urlpatterns = [
+    path("", views.index, name="index"),
     path("dog/", views.dog_index, name="dog_index"),
     path("dog/create/", views.dog_create, name="dog_create"), # 입양글 작성
     path("dog/<int:dog_article_pk>/", views.dog_detail, name="dog_detail"), # 입양글 조회 페이지

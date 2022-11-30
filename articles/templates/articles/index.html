@@ -1,21 +1,33 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+  <link rel="stylesheet" href="{% static 'css/index.css' %}">
   <div class="container">
-    <div class="search-section d-flex" style="padding:10px; padding-top:30px;">
-      <div class="search-title" style="flex:25%; margin:auto;">
-        <h4 style="font-size:1.2vw; color: #707070; font-weight:600; left: 5rem;">가족이 되어주세요</h4>
-        <h3 style="font-size:2.5vw; font-weight:800;">입양해듀오</h3>
+    <div class="search-section d-flex">
+      <div class="search-title">
+        <h4 id="tagline">가족이 되어주세요</h4>
+        <h3 id="brand">입양해듀오</h3>
       </div>
-      <div class="search-form-section align-self-center" style="flex: 75%; display: flex;">
-        <form class="d-flex row" role="search" method="GET" action="" 
-              style="border: solid #FFCD00 2px; display: inline-block; width: 100%; border-radius: 6px; align-self: flex-end; height: 100%; max-height: 100%;
-                     overflow: auto; position: relative;">
-            {% csrf_token %}
-            <input class=" form-control col mx-1 search-block search" type="search" placeholder="궁금한 사항을 검색해주세요"
-                name="search" aria-label="Search">
-            <button class="btn btn-light col-3 col-lg-2 col-xl-1 mx-1 search" type="submit">검색</button>
+      <div class="search-form-section">
+        <form role="search" method="GET" action="" class="search-form" id="searchform">
+          {% csrf_token %}
+          <input value name="s" id="s" class="search-field" type="text" placeholder="궁금한 사항을 검색해주세요" name="search" aria-label="Search">
+          <button class="search-submit" type="submit">
+            <img class="img-search" src="{% static 'images/search.png' %}" alt="">
+          </button>
         </form>
+      </div>
+    </div>
+    <div class="popular-post-section">
+      <h3 class="popular-font">입양정보</h3>
+      <div class="popular-stroke"></div>
+      <div class="popular-post-subsection">
+        <div class="popular-post-meta">
+          <span class="category">🐶&nbsp;강아지</span>
+          <a href="#">
+            <span>더보기</span>
+          </a>
+        </div>
       </div>
     </div>
   </div>
