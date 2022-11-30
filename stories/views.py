@@ -31,28 +31,30 @@ def create(request):
 def detail(request, pk):
     stories = get_object_or_404(Stories, pk=pk)
     comment_form = Stories_CommentForm()
-    comment_view = StoryComment.objects.filter(stories=pk)
     context = {
         "stories": stories,
         "comment_form": comment_form,
-        "comment_view": comment_view,
+        "comments": stories.storycomment_set.all(),
     }
+    stories.hits +=1
+    stories.save()
     return render(request, "stories/detail.html", context)
 
 @login_required
 def update(request, pk):
     stories = get_object_or_404(Stories, pk=pk)
-    if request.method == "POST":
-        stories_form = StoriesForm(request.POST, request.FILES)
-        if stories_form.is_valid():
-            stories_form.save()
-            return redirect("stories:detail", pk)
-    else:
-        stories_form = StoriesForm(instance=stories)
-    context = {
-        "stories_form": stories_form,
-    }
-    return render(request, "stories/update.html", context)
+    if request.user == stories.user:
+        if request.method == "POST":
+            stories_form = StoriesForm(request.POST, request.FILES, instance=stories)
+            if stories_form.is_valid():
+                stories_form.save()
+                return redirect("stories:detail", stories.pk)
+        else:
+            stories_form = StoriesForm(instance=stories)
+        context = {
+            "stories_form": stories_form,
+        }
+        return render(request, "stories/update.html", context)
 
 @login_required
 def delete(request, pk):
@@ -71,11 +73,17 @@ def comment_create(request, pk):
     return redirect('stories:detail', stories.pk)
 
 @login_required
-def comment_delete(request, stories_pk, comment_pk):
-    comment = StoryComment.objects.get(pk=comment_pk)
+def comment_delete(request, pk, storycomment_pk):
+    comment = StoryComment.objects.get(pk=storycomment_pk)
     if request.user == comment.user:
-        if request.method == "POST":
-            comment.delete()
-            return redirect("stories:index", stories_pk)
+        comment.delete()
+        return redirect("stories:detail", pk)
+    
+@login_required
+def likes(request, stories_pk):
+    stories=get_object_or_404(Stories, pk=stories_pk)
+    if request.user in stories.like.all():
+        stories.like.remove(request.user)
     else:
-        return redirect("stories:detail", stories_pk)
+        stories.like.add(request.user)
+    return redirect("stories:detail", stories_pk)
