@@ -18,6 +18,9 @@ def index(request):
     }
     return render(request,"articles/index.html", context)
 
+def introduction(request):
+    return render(request,"articles/introduction.html")
+
 def dog_index(request):
     dog_articles = DogArticle.objects.all()
 
