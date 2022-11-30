@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="/static/css/style.css">
   </head>
 
-  <body class="bg-light">
+  <body>
     <header>
       <div>
         <!-- 1번째 navbar -->
@@ -46,7 +46,7 @@
       </nav>
       <div>
         <!-- 2번째 navbar -->
-        <nav class="navbar navbar-expand-xl p-0 navbar-small " style="background-color: white; height: 10rem;">
+        <nav class="navbar navbar-expand-xl p-0 navbar-small " style=" background-color: white; height: 10rem;">
           <div class="container-fluid w-100 container">
             <div class="small-collapse collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
               <a href="{% url 'articles:index' %}">
@@ -57,10 +57,13 @@
                   <a class="nav-link nav-font" href="#" style="font-size: 20px; color: black;">입양해듀오</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link nav-font" href="#" style="font-size: 20px; color: black;">강아지</a>
+                  <a class="nav-link nav-font" href="{% url 'articles:dog_index' %}" style="font-size: 20px; color: black;">강아지</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link nav-font" href="#" style="font-size: 20px; color: black;">고양이</a>
+                  <a class="nav-link nav-font" href="{% url 'articles:cat_index' %}" style="font-size: 20px; color: black;">고양이</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link nav-font" href="{% url 'articles:index' %}" style="font-size: 20px; color: black;">스토리</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link nav-font" href="#" style="font-size: 20px; color: black;">봉사자</a>
