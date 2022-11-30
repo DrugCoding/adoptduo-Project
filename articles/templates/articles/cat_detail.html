@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  <link rel="stylesheet" href="{% static 'css/dog_cat_detail.css' %}">
+  <div class="bg-image w-100 d-flex flex-column align-items-center justify-content-center text-light" id="cat-banner">
+    <div class="text-center">
+      <h2 class="mb-4">건강한 반려문화의 시작</h2>
+      <p>평생을 함께해 주세요</p>
+    </div>
+  </div>
+  <div class="container mt-4">
+    <h2>글제목{{ cat_article.title }}</h2>
+    <hr id="divider">
+  </div>
+  <div class="container">
+    <h2 class="text-center mb-3">입양동물정보</h2>
+    <div class="text-center">
+      {% comment %} DB에서 가져와서 이미지 삽입예정 {% endcomment %}
+      {% comment %} <img id="cat-detail-img" class="mb-4 w-25 rounded" src="{{ cat_article.image }}" alt="cat_article.image"> {% endcomment %}
+      <img id="pet-detail-img" class="mb-4 w-25 rounded" src="{% static 'images/cat_sample.jpg' %}" alt="cat_article.image">
+    </div>
+    <div class="row">
+      <div id="pet-info-var-div" class="col-1 text-center py-3">이름</div>
+      <div id="pet-info-div" class="col-5 text-center py-3">{{ cat_article.name }}강아지</div>
+      <div id="pet-info-var-div" class="col-1 text-center py-3">나이</div>
+      <div id="pet-info-div" class="col-5 text-center py-3">{{ cat_article.age }}9살</div>
+    </div>
+    <div class="row mt-1">
+      <div id="pet-info-var-div" class="col-1 text-center py-3">성별</div>
+      <div id="pet-info-div" class="col-5 text-center py-3">{{ cat_article.gender }}수컷</div>
+      <div id="pet-info-var-div" class="col-1 text-center py-3">묘종</div>
+      <div id="pet-info-div" class="col-5 text-center py-3">{{ cat_article.breed }}포메라니안</div>
+    </div>
+    <div class="row mt-1">
+      <div id="pet-info-var-div" class="col-1 text-center py-3">접종유무</div>
+      <div id="pet-info-div" class="col-5 text-center py-3">{{ cat_article.vaccination }}접종완료</div>
+      <div id="pet-info-var-div" class="col-1 text-center py-3">중성화유무</div>
+      <div id="pet-info-div" class="col-5 text-center py-3">{{ cat_article.neutered }}중성화완료</div>
+    </div>
+    <div class="row mt-1">
+      <div id="pet-info-var-div" class="col-1 text-center py-3">지역</div>
+      <div id="pet-info-div" class="col-5 text-center py-3">cat_article.지역??</div>
+      <div id="pet-info-var-div" class="col-1 text-center py-3">특이사항</div>
+      <div id="pet-info-div" class="col-5 text-center py-3">{{ cat_article.memo }}코 밑에 까만 점이 있어요!</div>
+    </div>
+  </div>
+{% endblock %}

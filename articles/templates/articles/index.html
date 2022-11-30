@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  <link rel="stylesheet" href="{% static 'css/index.css' %}">
+  <div class="">
+    <div class="search-section d-flex container">
+      <div class="search-title">
+        <h4 id="tagline">가족이 되어주세요</h4>
+        <h3 id="brand">입양해듀오</h3>
+      </div>
+      <div class="search-form-section">
+        <form role="search" method="GET" action="" class="search-form" id="searchform">
+          {% csrf_token %}
+          <input value="value" name="search" id="s" class="search-field" type="text" placeholder="궁금한 사항을 검색해주세요" aria-label="Search">
+          <button class="search-submit" type="submit">
+            <img class="img-search" src="{% static 'images/search.png' %}" alt="">
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="adopted-post-section container">
+      <h3 class="adopted-font">입양정보</h3>
+      <div class="adopted-stroke"></div>
+      <div class="adopted-post-subsection">
+        <div class="adopted-post-meta">
+          <span class="category">🐶&nbsp;강아지</span>
+          <a href="{% url 'articles:dog_index' %}">
+            <span class="see-more">더보기</span>
+          </a>
+        </div>
+        <p></p>
+        <div class="row row-cols-4">
+          {% for dog in dog_articles %}
+            <div class="col  ">
+              <a style="text-decoration:none;" href="">
+                <div class="card h-100">
+                  <img src="{{ dog.image.url }}" class="card-img-top post-img" alt="...">
+                  <div class="card-body">
+                    <h5 class="post-title">{{ dog.title }}</h5>
+                  </div>
+                </div>
+              </a>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="adopted-post-section">
+        <div class="adopted-post-subsection">
+          <div class="adopted-post-meta">
+            <span class="category">🐱&nbsp;고양이</span>
+            <a href="{% url 'articles:cat_index' %}">
+              <span class="see-more">더보기</span>
+            </a>
+          </div>
+          <p></p>
+          <div class="row row-cols-4">
+            {% for cat in cat_articles %}
+              <div class="col ">
+                <a style="text-decoration:none;" href="">
+                  <div class="card h-100">
+                    <img src="{{ cat.image.url }}" class="card-img-top post-img" alt="...">
+                    <div class="card-body">
+                      <h5 class="post-title">{{ cat.title }}</h5>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="story-post-section container">
+      <h3 class="story-font">스토리</h3>
+      <div class="story-stroke"></div>
+      <div class="story-post-subsection d-flex my-3 ">
+        {% for story in stories %}
+          <a href="">
+            <div class="main-story gx-3">
+              <img class="main-story-img" src="{{ story.image.url }}" alt="">
+            </div>
+          </a>
+        {% endfor %}
+        <div class="card mb-3 stories-post">
+          {% for stories in story %}
+            <a href="">
+              <div class="main-story gx-3">
+                <img class="main-story-img" src="{{ stories.image.url }}" alt="">
+              </div>
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="volunteers-post-section container">
+  <h3 class="volunteers-font">봉사자</h3>
+  <div class="volunteers-stroke"></div>
+  <div class="volunteers-post-subsection">
+    <p></p>
+    <div class="row row-cols-4">
+      {% for dog in dog_articles %}
+        <div class="col ">
+          <a style="text-decoration:none;" href="">
+            <div class="card h-100">
+              <img src="{{ dog.image.url }}" class="card-img-top post-img" alt="...">
+              <div class="card-body">
+                <h5 class="post-title">{{ dog.title }}</h5>
+              </div>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+</div>
+{% endblock content %}

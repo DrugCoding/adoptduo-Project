@@ -1,73 +1,114 @@
 {% extends 'base.html' %}
 {% load static %}
-{% comment %} navbar 받아옴 {% endcomment %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/dog.css' %}">
-    <div class="container text-center">
-        <div class="has-bg-img">
-            <h1>건강한 반려문화의 시작</h1>
-            <h5>평생을 함께해 주세요</h5>
-            <img src="{% static 'images/puppybanner.jpg' %}" alt="PetBanner">
-            <div class="border-top border-4 border-secondary w-25 container">
-            </div>
-        </div>
+<link rel="stylesheet" href="{% static 'css/dog_cat.css' %}">
+<div class="bg-image w-100 d-flex flex-column align-items-center justify-content-center text-light" id="cat-banner">
+    <div class="text-center">
+        <h2 class="mb-4">건강한 반려문화의 시작</h2>
+        <p>평생을 함께해 주세요</p>
     </div>
+</div>
 
-    <div class="container text-center mt-5">
-        <h1>강아지</h1>
-        <div id="dog-categories" class="container w-50 border">
-            <ul id="puppy-ul">
-                <li id="puppy-li">요크셔테리어</li>
-                <li id="puppy-li">푸들</li>
-                <li id="puppy-li">시바견</li>
-                <li id="puppy-li">이탈리안그레이하운드</li>
-                <li id="puppy-li">포메라니안</li>
-                <li id="puppy-li">말티즈</li>
-            </ul>
+<div class="container text-center mt-5">
+    <hr class="py-2 justify-content-center align-items-center" id="divider">
+    <h1>고양이</h1>
+    <ul id="puppy-ul" class="nav my-4">
+        <li class="nav-item mt-2"><a href="#" class="nav-link active text-dark">전체</a></li>
+        <li class="nav-item mt-2"><a href="#" class="nav-link active text-dark">고양이종1</a></li>
+        <li class="nav-item mt-2"><a href="#" class="nav-link active text-dark">푸들</a></li>
+        <li class="nav-item mt-2"><a href="#" class="nav-link active text-dark">시바견</a></li>
+        <li class="nav-item mt-2"><a href="#" class="nav-link active text-dark">이탈리안그레이하운드</a></li>
+        <li class="nav-item mt-2"><a href="#" class="nav-link active text-dark">포메라니안</a></li>
+        <li class="nav-item mt-2"><a href="#" class="nav-link active text-dark">아주 긴 견종이름 어쩌고 저쩌고</a></li>
+        <li class="nav-item mt-2"><a href="#" class="nav-link active text-dark">좀 짧은 견종이름</a></li>
+        <li class="nav-item mt-2"><a href="#" class="nav-link active text-dark">견종이름입니다</a></li>
+        <li class="nav-item mt-2"><a href="#" class="nav-link active text-dark">견종이름</a></li>
+        <li class="nav-item mt-2"><a href="#" class="nav-link active text-dark">견종명</a></li>
+        <li class="nav-item mt-2"><a href="#" class="nav-link active text-dark">견종6</a></li>
+    </ul>
+</div>
+    {% comment %} 카드로 보여주기 {% endcomment %}
+<div class="container text-center">
+    <div class="row row-cols-1 row-cols-md-3">
+        {% for cat_article in cat_articles %}
+        <div class="col">
+            <a href="#" class="card-link">
+                <div class="card">
+                    <img src="{{ cat_article.image }}" class="card-img-top" alt="dog">
+                    <div class="card-body text-dark">
+                        <h5 class="card-title">{{ cat_article.name }} / {{ cat_article.age }} / {{ cat_article.gender }}</h5>
+                        <p class="card-text" id="dog-card-text">{{ cat_article.memo }} <br> 조회수: {{ cat_article.hits }}</p>
+                    </div>
+                </div>
+            </a>
         </div>
-    </div>
-        {% comment %} 강아지 카드로 보여주기 {% endcomment %}
-    <div class="container text-center">
-        <div class="row row-cols-1 row-cols-md-3 mt-5">
-            {% comment %} {% for card in cards %} {% endcomment %}
-            <div class="col">
-              <div class="card mt-5">
-                <img src="{% static 'images/doge.jpg' %}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <p class="card-text">커여운 강아지 입양</p>
-                  <h5 class="card-title">시바견</h5>
+        {% endfor %}
+        <div class="col">
+            <a href="#" class="card-link">
+                <div class="card">
+                    <img src="{% static 'images/cat_sample.jpg' %}" class="card-img-top" alt="...">
+                    <div class="card-body text-dark">
+                        <h5 class="card-title">마루 / 5살 / 수컷</h5>
+                        <p class="card-text" id="dog-card-text">털빠짐이 적고 밥을 잘 먹어요!<br> 조회수: 58</p>
+                    </div>
                 </div>
-              </div>
-            </div>
-            {% comment %} {% endfor %} {% endcomment %}
-            <div class="col">
-              <div class="card mt-5">
-                <img src="{% static 'images/doge.jpg' %}" class="card-img-top" alt="dog">
-                <div class="card-body">
-                    <p class="card-text">커여운 강아지 입양</p>
-                    <h5 class="card-title">시바견</h5>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card mt-5">
-                <img src="{% static 'images/doge.jpg' %}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <p class="card-text">커여운 강아지 입양</p>
-                    <h5 class="card-title">시바견</h5>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card mt-5">
-                <img src="{% static 'images/doge.jpg' %}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <p class="card-text">커여운 강아지 입양</p>
-                    <h5 class="card-title">시바견</h5>
-                </div>
-              </div>
-            </div>
-          </div>
+            </a>
         </div>
+        <div class="col">
+            <a href="#" class="card-link">
+                <div class="card">
+                    <img src="{% static 'images/cat_sample.jpg' %}" class="card-img-top" alt="...">
+                    <div class="card-body text-dark">
+                        <h5 class="card-title">마루 / 5살 / 수컷</h5>
+                        <p class="card-text" id="dog-card-text">털빠짐이 적고 밥을 잘 먹어요!<br> 조회수: 58</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a href="#" class="card-link">
+                <div class="card">
+                    <img src="{% static 'images/cat_sample.jpg' %}" class="card-img-top" alt="...">
+                    <div class="card-body text-dark">
+                        <h5 class="card-title">마루 / 5살 / 수컷</h5>
+                        <p class="card-text" id="dog-card-text">털빠짐이 적고 밥을 잘 먹어요!<br> 조회수: 58</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a href="#" class="card-link">
+                <div class="card">
+                    <img src="{% static 'images/cat_sample.jpg' %}" class="card-img-top" alt="...">
+                    <div class="card-body text-dark">
+                        <h5 class="card-title">마루 / 5살 / 수컷</h5>
+                        <p class="card-text" id="dog-card-text">털빠짐이 적고 밥을 잘 먹어요!<br> 조회수: 58</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col">
+          <a href="#" class="card-link">
+              <div class="card">
+                  <img src="{% static 'images/cat_sample.jpg' %}" class="card-img-top" alt="...">
+                  <div class="card-body text-dark">
+                      <h5 class="card-title">마루 / 5살 / 수컷</h5>
+                      <p class="card-text" id="dog-card-text">털빠짐이 적고 밥을 잘 먹어요!<br> 조회수: 58</p>
+                  </div>
+              </div>
+          </a>
+      </div>
+      <div class="col">
+        <a href="#" class="card-link">
+            <div class="card">
+                <img src="{% static 'images/cat_sample.jpg' %}" class="card-img-top" alt="...">
+                <div class="card-body text-dark">
+                    <h5 class="card-title">마루 / 5살 / 수컷</h5>
+                    <p class="card-text" id="dog-card-text">털빠짐이 적고 밥을 잘 먹어요!<br> 조회수: 58</p>
+                </div>
+            </div>
+        </a>
     </div>
+    </div>
+</div>
 {% endblock content %}

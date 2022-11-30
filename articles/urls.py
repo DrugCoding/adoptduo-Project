@@ -15,4 +15,5 @@ urlpatterns = [
     # path("cat/<int:product_pk>/", views.catdetail, name="catdetail"), # 입양글 조회 페이지
     # path("<int:product_pk>/update/", views.update, name="update"), # 입양글 수정
     # path("<int:product_pk>/delete/", views.delete, name="delete"), # 입양글 삭제
+    path("introduction/", views.introduction, name="introduction"),
 ]

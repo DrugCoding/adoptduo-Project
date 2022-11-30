@@ -17,13 +17,13 @@
     <link rel="stylesheet" href="/static/css/style.css">
   </head>
 
-  <body class="bg-light">
+  <body>
     <header>
       <div>
         <!-- 1번째 navbar -->
         <nav class="navbar navbar-expand-xl p-0 navbar-small " style="background-color: #FFCD00; height: 5rem;">
           <div class="container-fluid w-100 container">
-            <a class="navbar-brand mx-5 p-0" href="#" style="z-index: 1; font-weight:600">입양해듀오</a>
+            <a class="navbar-brand mx-5 p-0" href="{% url 'articles:index' %}" style="z-index: 1; font-weight:600">입양해듀오</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -34,13 +34,19 @@
                 </li>
               </ul>
             </div>
-            <a class="nav-link ms-2" href="#" style="z-index: 1; color: black; font-size: 20px;">로그인</a>
+            {% if request.user.is_authenticated %}
+            <a class="nav-link ms-2" href="{% url 'accounts:logout' %}" style="z-index: 1; color: black; font-size: 20px;">로그아웃</a>
+            <a class="nav-link ms-2" href="{% url 'accounts:detail' request.user.pk %}" style="z-index: 1; color: black; font-size: 20px;">마이페이지</a>
+            {% else %}
+            <a class="nav-link ms-2" href="{% url 'accounts:login' %}" style="z-index: 1; color: black; font-size: 20px;">로그인</a>
+            <a class="nav-link ms-2" href="{% url 'accounts:signup' %}" style="z-index: 1; color: black; font-size: 20px;">회원가입</a>
+            {% endif %}
           </div>
         </div>
       </nav>
       <div>
         <!-- 2번째 navbar -->
-        <nav class="navbar navbar-expand-xl p-0 navbar-small " style="background-color: white; height: 10rem;">
+        <nav class="navbar navbar-expand-xl p-0 navbar-small " style=" background-color: white; height: 10rem;">
           <div class="container-fluid w-100 container">
             <div class="small-collapse collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
               <a href="{% url 'articles:index' %}">
@@ -51,10 +57,13 @@
                   <a class="nav-link nav-font" href="#" style="font-size: 20px; color: black;">입양해듀오</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link nav-font" href="#" style="font-size: 20px; color: black;">강아지</a>
+                  <a class="nav-link nav-font" href="{% url 'articles:dog_index' %}" style="font-size: 20px; color: black;">강아지</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link nav-font" href="#" style="font-size: 20px; color: black;">고양이</a>
+                  <a class="nav-link nav-font" href="{% url 'articles:cat_index' %}" style="font-size: 20px; color: black;">고양이</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link nav-font" href="{% url 'articles:index' %}" style="font-size: 20px; color: black;">스토리</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link nav-font" href="#" style="font-size: 20px; color: black;">봉사자</a>
