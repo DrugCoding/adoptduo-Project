@@ -25,18 +25,38 @@ class DogArticle(models.Model):
     # 북마크
     bookmarks = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='dogarticle_bookmark')
     # 성별
-    gender = models.CharField(max_length=20)
+    gender_list = [
+        ('암컷', '암컷'),
+        ('수컷', '수컷'), 
+    ]
+    gender = models.CharField(max_length=20, choices=gender_list)
     # 조회수
     hits = models.IntegerField(default=0)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     # 견종
-    breed = models.CharField(max_length=20)
+    breed_list = [
+        ('포메라니안', '포메라니안'),
+        ('웰시코기', '웰시코기'), 
+        ('말티즈', '말티즈'), 
+        ('시츄', '시츄'), 
+        ('푸들', '푸들'), 
+        ('비숑', '비숑'), 
+        ('시바견', '시바견'), 
+        ('골든 리트리버', '골든 리트리버'), 
+    ]
+    breed = models.CharField(max_length=20, choices=breed_list)
     # 특이사항
     memo = models.CharField(max_length=20)
     # 중성화 여부
-    neutered = models.CharField(max_length=20)
+    neutered_list = [
+        ('Yes', 'Yes'),
+    ]
+    neutered = models.CharField(max_length=20, choices=neutered_list)
     # 접종 여부
-    vaccination = models.CharField(max_length=20)
+    vaccination_list = [
+        ('Yes', 'Yes'),
+    ]
+    vaccination = models.CharField(max_length=20, choices=vaccination_list)
 
 class DogArticleComment(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -63,18 +83,35 @@ class CatArticle(models.Model):
     # 북마크
     bookmarks = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='catarticle_bookmark')
     # 성별
-    gender = models.CharField(max_length=20)
+    gender_list = [
+        ('암컷', '암컷'),
+        ('수컷', '수컷'), 
+    ]
+    gender = models.CharField(max_length=20, choices=gender_list)
     # 조회수
     hits = models.IntegerField(default=0)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     # 견종
-    breed = models.CharField(max_length=20)
+    breed_list = [
+        ('페르시안', '페르시안'),
+        ('러시안블루', '러시안블루'), 
+        ('샴', '샴'), 
+        ('렉돌', '렉돌'), 
+        ('스코티쉬폴드', '스코티쉬폴드'), 
+    ]
+    breed = models.CharField(max_length=20, choices=breed_list)
     # 특이사항
     memo = models.CharField(max_length=20)
     # 중성화 여부
-    neutered = models.CharField(max_length=20)
+    neutered_list = [
+        ('Yes', 'Yes'),
+    ]
+    neutered = models.CharField(max_length=20, choices=neutered_list)
     # 접종 여부
-    vaccination = models.CharField(max_length=20)
+    vaccination_list = [
+        ('Yes', 'Yes'),
+    ]
+    vaccination = models.CharField(max_length=20, choices=vaccination_list)
 
 
 class CatArticleComment(models.Model):
