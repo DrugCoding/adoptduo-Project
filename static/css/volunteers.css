@@ -1,18 +1,20 @@
-.container {
+.volunteers-banner {
     min-width: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-.main-image {
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url(/static/images/volunteers_banner.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
     position: relative;
 }
 
-.main-image-text {
+.banner-text {
     position: absolute;
-    top: 50%;
-    left: 50%;
     color: white;
+    text-align: center;
 }
 
 .container-cards {
@@ -23,17 +25,15 @@
 .post-row {
     display: flex;
     flex-direction: row;
+    justify-content: center;
 }
 
-.card {
-    margin: auto;
+.nav-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.card-image {
-    width: 300px;
-    height: 500px;
-}
-
-.card-text {
-    text-align: center;
+.page-detail {
+    text-decoration-color: grey;
 }
