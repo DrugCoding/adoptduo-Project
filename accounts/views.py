@@ -16,14 +16,14 @@ def index(request):
 
 def signup(request):
     if request.method == 'POST':
-        print(request.FILES) #체크
+        # print(request.FILES) #체크
         form = CustomUserCreationForm(request.POST, request.FILES)
-        print(form) #체크
+        # print(form) #체크
         if form.is_valid():
-            print(request.FILES) #체크
+            # print(request.FILES) #체크
             user = form.save()
             auth_login(request, user)
-            return redirect('accounts:index')
+            return redirect('articles:index')
     else:   
         form = CustomUserCreationForm()
     context = {
@@ -43,7 +43,7 @@ def login(request):
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
             auth_login(request, form.get_user())
-            return redirect('accounts:index')
+            return redirect('articles:index')
     else:
         form = AuthenticationForm()
     context = {
@@ -51,7 +51,55 @@ def login(request):
     }
     return render(request, 'accounts/login.html', context)
 
-
 def logout(request):
     auth_logout(request)
+    messages.warning(request, '로그아웃 하였습니다.')
+    return redirect("accounts:login")
+
+@login_required
+def follow(request, pk):
+    accounts = get_user_model().objects.get(pk=pk)
+    if request.user == accounts:
+        return redirect("accounts:detail", pk)
+    if request.user in accounts.followers.all():
+        accounts.followers.remove(request.user)
+    else:
+        accounts.followers.add(request.user)
+    return redirect("accounts:detail", pk)
+
+@login_required
+def update(request):
+    if request.method == "POST":
+        form = CustomUserChangeForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect("accounts:detail", request.user.pk)
+    else:
+        form = CustomUserChangeForm(instance=request.user)
+    context = {
+        "form": form,
+    }
+    return render(request, "accounts/update.html", context)
+
+def change_password(request):
+    if request.method == "POST":
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            return redirect("accounts:detail", request.user.pk)
+    else:
+        form = PasswordChangeForm(request.user)
+    context = {
+        "form": form,
+    }
+    return render(request, "accounts/change_password.html", context)
+
+def delete(request):
+    request.user.delete()
+    auth_logout(request)
     return redirect("accounts:index")
+
+# def __init__(self, *args, **kwargs):
+#     super(CustomUserCreationForm, self).__init__(*args, **kwargs)
+#     self.fields['username'].widget.attrs['placeholder'] = "추후 수정이 불가능 합니다"
