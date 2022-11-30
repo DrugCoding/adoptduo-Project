@@ -1,12 +1,26 @@
 from django.shortcuts import render, redirect
 from .models import DogArticle, CatArticle
 from .forms import DogArticleForm, CatArticleForm, DogCommentForm, CatCommentForm
+from stories.models import Stories
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 # Create your views here.
 
 def index(request):
-    return render(request,"articles/index.html")
+    dog_articles = DogArticle.objects.all()[0:4]
+    cat_articles = CatArticle.objects.all()[0:4]
+    stories = Stories.objects.order_by("-hits")[0:1]
+    story = Stories.objects.order_by("-hits")[1:3]
+    context = {
+        "dog_articles" : dog_articles,
+        "cat_articles" : cat_articles,
+        "stories" : stories,
+        "story" : story,
+    }
+    return render(request,"articles/index.html", context)
+
+def introduction(request):
+    return render(request,"articles/introduction.html")
 
 def dog_index(request):
     dog_articles = DogArticle.objects.all()
@@ -21,8 +35,6 @@ def dog_index(request):
         "page_obj": page_obj,
     }
     return render(request, "articles/dog.html", context) # 템플릿 네임 적어주고, 이쪽으로 context 값을 넘겨줌
-
-
 
 def dog_create(request):
     if request.method == "POST":

@@ -18,3 +18,6 @@ class Stories_CommentForm(forms.ModelForm):
         labels = {
             "content": "댓글입력",
         }
+        widgets = {
+            "content": forms.Textarea(attrs={"rows": 1, "cols": 10}),
+        }

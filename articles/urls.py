@@ -17,4 +17,5 @@ urlpatterns = [
     path("<int:cat_article_pk>/delete/", views.cat_delete, name="cat_delete"), # 입양글 삭제
     path('<int:dog_article_pk>/dog/comments/', views.dog_comment_create, name='dog_comment_create'), # 댓글생성
     path('<int:cat_article_pk>/cat/comments/', views.cat_comment_create, name='cat_comment_create'),
+    path("introduction/", views.introduction, name="introduction"),
 ]

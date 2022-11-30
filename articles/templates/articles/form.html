@@ -10,7 +10,9 @@
     <p class="text-center fw-bold mb-3">글 수정</p>
   {% endif %}
   <div class="d-flex justify-content-center align-items-center m-auto mt-5">
+
     <form action="" method="POST" enctype="multipart/form-data">
+
       {% csrf_token %}
       {% bootstrap_form dog_article_form %}
       {% bootstrap_button button_type="submit" button_class="detail_btn w-100" content="OK"%}
