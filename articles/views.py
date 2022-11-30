@@ -21,8 +21,6 @@ def dog_index(request):
     }
     return render(request, "articles/dog.html", context) # 템플릿 네임 적어주고, 이쪽으로 context 값을 넘겨줌
 
-
-
 def dog_create(request):
     if request.method == "POST":
         dog_article_form = DogArticleForm(request.POST, request.FILES) # 사용자가 요청하여 Productform에 담긴 포스트를 productform 변수에 저장

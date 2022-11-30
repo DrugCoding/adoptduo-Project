@@ -1,0 +1,33 @@
+#divider {
+  color: black;
+  border-top: 2px solid black;
+}
+#dog-banner {
+  background-image: url("/static/images/dog_banner.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+  filter: brightness(65%);
+  position: relative;
+}
+#cat-banner {
+  background-image: url("/static/images/cat_banner.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+  filter: brightness(65%);
+  position: relative;
+}
+#pet-info-var-div {
+  background-color: #504a46;
+  color: #ffffff;
+}
+#pet-info-div {
+  border: 2px solid #504a46;
+}
+#pet-detail-img {
+  max-width: 100%;
+  height: auto;
+}
