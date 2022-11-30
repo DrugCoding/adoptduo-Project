@@ -1,20 +1,19 @@
 {% extends 'base.html' %}
 {% load static %}
-{% comment %} navbar 받아옴 {% endcomment %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/dog.css' %}">
+<link rel="stylesheet" href="{% static 'css/dog_cat.css' %}">
 <div class="bg-image w-100 d-flex flex-column align-items-center justify-content-center text-light" id="dog-banner">
     <div class="text-center">
         <h2 class="mb-4">건강한 반려문화의 시작</h2>
         <p>평생을 함께해 주세요</p>
     </div>
-    {% comment %} <p>평생을 함께해 주세요</p> {% endcomment %}
 </div>
 
 <div class="container text-center mt-5">
     <hr class="py-2 justify-content-center align-items-center" id="divider">
     <h1>강아지</h1>
-    <ul id="puppy-ul" class="nav mt-4">
+    <ul id="puppy-ul" class="nav my-4">
+        <li class="nav-item mt-2"><a href="#" class="nav-link active text-dark">전체</a></li>
         <li class="nav-item mt-2"><a href="#" class="nav-link active text-dark">요크셔테리어</a></li>
         <li class="nav-item mt-2"><a href="#" class="nav-link active text-dark">푸들</a></li>
         <li class="nav-item mt-2"><a href="#" class="nav-link active text-dark">시바견</a></li>
@@ -28,47 +27,87 @@
         <li class="nav-item mt-2"><a href="#" class="nav-link active text-dark">견종6</a></li>
     </ul>
 </div>
-    {% comment %} 강아지 카드로 보여주기 {% endcomment %}
+    {% comment %} 카드로 보여주기 {% endcomment %}
 <div class="container text-center">
     <div class="row row-cols-1 row-cols-md-3">
-        {% comment %} {% for card in cards %} {% endcomment %}
+        {% for dog_article in dog_articles %}
         <div class="col">
-            <div class="card mt-5">
-            <img src="{% static 'images/doge.jpg' %}" class="card-img-top" alt="...">
-            <div class="card-body">
-                <p class="card-text">커여운 강아지 입양</p>
-                <h5 class="card-title">시바견</h5>
-            </div>
-            </div>
+            <a href="#" class="card-link">
+                <div class="card">
+                    <img src="{{ dog_article.image }}" class="card-img-top" alt="dog">
+                    <div class="card-body text-dark">
+                        <h5 class="card-title">{{ dog_article.name }} / {{ dog_article.age }} / {{ dog_article.gender }}</h5>
+                        <p class="card-text" id="dog-card-text">{{ dog_article.memo }} <br> 조회수: {{ dog_article.hits }}</p>
+                    </div>
+                </div>
+            </a>
         </div>
-        {% comment %} {% endfor %} {% endcomment %}
+        {% endfor %}
         <div class="col">
-            <div class="card mt-5">
-            <img src="{% static 'images/doge.jpg' %}" class="card-img-top" alt="dog">
-            <div class="card-body">
-                <p class="card-text">커여운 강아지 입양</p>
-                <h5 class="card-title">시바견</h5>
-            </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card mt-5">
-            <img src="{% static 'images/doge.jpg' %}" class="card-img-top" alt="...">
-            <div class="card-body">
-                <p class="card-text">커여운 강아지 입양</p>
-                <h5 class="card-title">시바견</h5>
-            </div>
-            </div>
+            <a href="#" class="card-link">
+                <div class="card">
+                    <img src="{% static 'images/dog_sample.jpg' %}" class="card-img-top" alt="...">
+                    <div class="card-body text-dark">
+                        <h5 class="card-title">마루 / 5살 / 수컷</h5>
+                        <p class="card-text" id="dog-card-text">배변훈련이 잘 되어 있어요! <br> 조회수: 58</p>
+                    </div>
+                </div>
+            </a>
         </div>
         <div class="col">
-            <div class="card mt-5">
-            <img src="{% static 'images/doge.jpg' %}" class="card-img-top" alt="...">
-            <div class="card-body">
-                <p class="card-text">커여운 강아지 입양</p>
-                <h5 class="card-title">시바견</h5>
-            </div>
-            </div>
+            <a href="#" class="card-link">
+                <div class="card">
+                    <img src="{% static 'images/dog_sample.jpg' %}" class="card-img-top" alt="...">
+                    <div class="card-body text-dark">
+                        <h5 class="card-title">마루 / 5살 / 수컷</h5>
+                        <p class="card-text" id="dog-card-text">배변훈련이 잘 되어 있어요! <br> 조회수: 58</p>
+                    </div>
+                </div>
+            </a>
         </div>
+        <div class="col">
+            <a href="#" class="card-link">
+                <div class="card">
+                    <img src="{% static 'images/dog_sample.jpg' %}" class="card-img-top" alt="...">
+                    <div class="card-body text-dark">
+                        <h5 class="card-title">마루 / 5살 / 수컷</h5>
+                        <p class="card-text" id="dog-card-text">배변훈련이 잘 되어 있어요! <br> 조회수: 58</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a href="#" class="card-link">
+                <div class="card">
+                    <img src="{% static 'images/dog_sample.jpg' %}" class="card-img-top" alt="...">
+                    <div class="card-body text-dark">
+                        <h5 class="card-title">마루 / 5살 / 수컷</h5>
+                        <p class="card-text" id="dog-card-text">배변훈련이 잘 되어 있어요! <br> 조회수: 58</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a href="#" class="card-link">
+                <div class="card">
+                    <img src="{% static 'images/dog_sample.jpg' %}" class="card-img-top" alt="...">
+                    <div class="card-body text-dark">
+                        <h5 class="card-title">마루 / 5살 / 수컷</h5>
+                        <p class="card-text" id="dog-card-text">배변훈련이 잘 되어 있어요! <br> 조회수: 58</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a href="#" class="card-link">
+                <div class="card">
+                    <img src="{% static 'images/dog_sample.jpg' %}" class="card-img-top" alt="...">
+                    <div class="card-body text-dark">
+                        <h5 class="card-title">마루 / 5살 / 수컷</h5>
+                        <p class="card-text" id="dog-card-text">배변훈련이 잘 되어 있어요! <br> 조회수: 58</p>
+                    </div>
+                </div>
+            </a>
         </div>
     </div>
 </div>
