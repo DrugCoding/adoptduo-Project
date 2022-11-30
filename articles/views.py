@@ -4,6 +4,9 @@ from .forms import DogArticleForm, CatArticleForm
 from django.core.paginator import Paginator
 # Create your views here.
 
+def index(request):
+    return render(request,"articles/index.html")
+
 def dog_index(request):
     dog_articles = DogArticle.objects.all()
 
