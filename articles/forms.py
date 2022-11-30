@@ -10,21 +10,6 @@ class DogArticleForm(forms.ModelForm):
         widget=forms.RadioSelect(
         ),
     )
-
-    neutered_list = [
-        ('Yes', 'Yes'),
-    ]
-    neutered = forms.MultipleChoiceField(choices=neutered_list,
-        widget=forms.CheckboxSelectMultiple(
-        ),
-    )
-
-    # vaccination_list = [
-    #     ('Yes', 'Yes'),
-    # ]
-    # vaccination = forms.BooleanField()
-
-
     class Meta:
         model = DogArticle
         exclude = (
@@ -32,6 +17,7 @@ class DogArticleForm(forms.ModelForm):
             "hits",
             "user",
         )
+
 
 
 
