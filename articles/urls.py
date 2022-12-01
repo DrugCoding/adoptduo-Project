@@ -18,5 +18,8 @@ urlpatterns = [
     path('<int:dog_article_pk>/dog/comments/', views.dog_comment_create, name='dog_comment_create'), # 댓글생성
     path('<int:cat_article_pk>/cat/comments/', views.cat_comment_create, name='cat_comment_create'),
     path("introduction/", views.introduction, name="introduction"),
+    path('<int:dog_article_pk>/comments/<int:dog_comment_pk>/dog/delete/', views.dog_comments_delete, name='dog_comments_delete'),
+    path('<int:cat_article_pk>/comments/<int:cat_comment_pk>/cat/delete/', views.cat_comments_delete, name='cat_comments_delete'),
+    path('<int:dog_article_pk>/dog/bookmark/', views.dog_bookmark, name="dog_bookmark"), # 좋아요
     path("search/", views.search, name="search"), # 검색기능
 ]
