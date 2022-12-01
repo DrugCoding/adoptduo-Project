@@ -200,6 +200,7 @@ def dog_comment_create(request, dog_article_pk):
         context = {
             'dog_content': dog_comment.content,
             'dog_userName': dog_comment.user.username,
+            'dog_pk':dog_comment.pk,
         }
         return JsonResponse(context)
 
@@ -224,7 +225,11 @@ def cat_comment_create(request, cat_article_pk):
 def dog_comments_delete(request, dog_article_pk, dog_comment_pk):
     dog_comment = DogArticleComment.objects.get(pk=dog_comment_pk)
     dog_comment.delete()
-    return redirect('articles:dog_detail', dog_article_pk)
+    context = {
+        '1': 1
+    }
+    return JsonResponse(context)
+
 
 
 
