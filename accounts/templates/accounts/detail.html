@@ -5,9 +5,9 @@
 {% block content %}
 <!-- 프로필-->
 {% if user.image %}
-  <img src="{{ user.image.url }}">
+  <img src="{{ user.image.url }}"> 
 {% else %}
-  <img src="{% static 'images/doge.jpg' %}">
+  <img src="https://dummyimage.com/300x300/000/454545">
 {% endif %}
 <h1>{{ user.name }}님의 프로필</h1>
 <p>팔로우 : <a href="#">{{ user.followings.count }}명</a> | 팔로워 : <a href="#">{{ user.followers.count }}명</a></p>
