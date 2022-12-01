@@ -9,9 +9,8 @@
         <h3 id="brand">입양해듀오</h3>
       </div>
       <div class="search-form-section">
-        <form role="search" method="GET" action="" class="search-form" id="searchform">
-          {% csrf_token %}
-          <input value="value" name="search" id="s" class="search-field" type="text" placeholder="궁금한 사항을 검색해주세요" aria-label="Search">
+        <form role="search" method="GET" action="{% url 'articles:search' %}" class="search-form" id="searchform">
+          <input name="searchs" id="s" class="search-field" type="text" placeholder="검색어를 입력해주세요" aria-label="Search">
           <button class="search-submit" type="submit">
             <img class="img-search" src="{% static 'images/search.png' %}" alt="">
           </button>
@@ -34,7 +33,7 @@
             <div class="col  ">
               <a style="text-decoration:none;" href="">
                 <div class="card h-100">
-                  <img src="{{ dog.image.url }}" class="card-img-top post-img" alt="...">
+                  {% comment %} <img src="{{ dog.image.url }}" class="card-img-top post-img" alt="..."> {% endcomment %}
                   <div class="card-body">
                     <h5 class="post-title">{{ dog.title }}</h5>
                   </div>
@@ -58,7 +57,7 @@
               <div class="col ">
                 <a style="text-decoration:none;" href="">
                   <div class="card h-100">
-                    <img src="{{ cat.image.url }}" class="card-img-top post-img" alt="...">
+                    {% comment %} <img src="{{ cat.image.url }}" class="card-img-top post-img" alt="..."> {% endcomment %}
                     <div class="card-body">
                       <h5 class="post-title">{{ cat.title }}</h5>
                     </div>
@@ -77,7 +76,7 @@
         {% for story in stories %}
           <a href="">
             <div class="main-story gx-3">
-              <img class="main-story-img" src="{{ story.image.url }}" alt="">
+              {% comment %} <img class="main-story-img" src="{{ story.image.url }}" alt=""> {% endcomment %}
             </div>
           </a>
         {% endfor %}
@@ -85,7 +84,7 @@
           {% for stories in story %}
             <a href="">
               <div class="main-story gx-3">
-                <img class="main-story-img" src="{{ stories.image.url }}" alt="">
+                {% comment %} <img class="main-story-img" src="{{ stories.image.url }}" alt=""> {% endcomment %}
               </div>
             </a>
           {% endfor %}
@@ -104,7 +103,7 @@
         <div class="col ">
           <a style="text-decoration:none;" href="">
             <div class="card h-100">
-              <img src="{{ dog.image.url }}" class="card-img-top post-img" alt="...">
+              {% comment %} <img src="{{ dog.image.url }}" class="card-img-top post-img" alt="..."> {% endcomment %}
               <div class="card-body">
                 <h5 class="post-title">{{ dog.title }}</h5>
               </div>
