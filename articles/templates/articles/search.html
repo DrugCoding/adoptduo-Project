@@ -13,13 +13,17 @@
 <hr>
 {% comment %} 강아지 검색 {% endcomment %}
 <div>
-  <h2>강아지 카테고리 검색결과</h2>
+  <h3>강아지 카테고리 검색결과</h3>
   {% if not dogs %}
-    <h4 class="no-search title-font">"{{ query }}" 검색결과가 없습니다.</h4>
+    <p class="no-search title-font">"{{ query }}" 검색결과가 없습니다.</p>
   {% else %}
     {% for dog in dogs %}
-      <p>{{ dog.image }}</p>
-      <a href="{% url 'stories:detail' user.pk %}"><h5>{{ dog.title }}</h5></a>
+      {% if dog.image %}
+        <img src="{{ dog.image.url }}"> 
+      {% else %}
+        <img src="https://dummyimage.com/200x200/000/454545">
+      {% endif %}
+      <a href="{% url 'articles:dog_detail' dog.pk %}"><h5>{{ dog.title }}</h5></a>
       <p>{{ dog.name}} | {{ dog.breed }} | {{ dog.age }}</p>
     {% endfor %}
   {% endif %}
@@ -27,13 +31,17 @@
 <hr>
 {% comment %} 고양이 검색 {% endcomment %}
 <div>
-  <h2>고양이 카테고리 검색결과</h2>
+  <h3>고양이 카테고리 검색결과</h3>
   {% if not cats %}
-    <h4 class="no-search title-font">"{{ query }}" 검색결과가 없습니다.</h4>
+    <p class="no-search title-font">"{{ query }}" 검색결과가 없습니다.</p>
   {% else %}
     {% for cat in cats %}
-      <p>{{ cat.image }}</p>
-      <a href="{% url 'stories:detail' user.pk %}"><h5>{{ cat.title }}</h5></a>
+      {% if cat.image %}
+        <img src="{{ cat.image.url }}"> 
+      {% else %}
+        <img src="https://dummyimage.com/200x200/000/454545">
+      {% endif %}
+      <a href="{% url 'articles:cat_detail' cat.pk %}"><h5>{{ cat.title }}</h5></a>
       <p>{{ cat.name}} | {{ cat.breed }} | {{ cat.age }}</p>
     {% endfor %}
   {% endif %}
@@ -41,12 +49,16 @@
 <hr>
 {% comment %} 스토리 검색 {% endcomment %}
 <div>
-  <h2>스토리 카테고리 검색결과</h2>
+  <h3>스토리 카테고리 검색결과</h3>
   {% if not stories %}
-    <h4 class="no-search title-font">"{{ query }}" 검색결과가 없습니다.</h4>
+    <p class="no-search title-font">"{{ query }}" 검색결과가 없습니다.</p>
   {% else %}
     {% for story in stories %}
-      <p>{{ story.image }}</p>
+      {% if story.image %}
+        <img src="{{ story.image.url }}"> 
+      {% else %}
+        <img src="https://dummyimage.com/200x200/000/454545">
+      {% endif %}
       <a href="{% url 'stories:detail' story.pk %}"><h5>{{ story.title }}</h5></a>
       <p> {{ story.name }} | {{ story.breed }}</p>
     {% endfor %}
