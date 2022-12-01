@@ -4,21 +4,29 @@ from .forms import DogArticleForm, CatArticleForm, DogCommentForm, CatCommentFor
 from stories.models import Stories
 from django.core.paginator import Paginator
 from django.http import JsonResponse
+from django.db.models import Count
 from django.db.models import Q
+
 # Create your views here.
 
 def index(request):
-    dog_articles = DogArticle.objects.all()[0:4]
-    cat_articles = CatArticle.objects.all()[0:4]
-    stories = Stories.objects.order_by("-hits")[0:1]
-    story = Stories.objects.order_by("-hits")[1:3]
+    dog_articles = DogArticle.objects.all()[0:5]
+    cat_articles = CatArticle.objects.all()[0:5]
+    stor = Stories.objects.all()
+    storie = stor.annotate(like_count=Count("like"))
+    stories = storie.order_by('-like_count')[0:1]
+    sto = stor.annotate(like_count=Count("like"))
+    story = sto.order_by('-like_count')[1:3]
     context = {
         "dog_articles" : dog_articles,
         "cat_articles" : cat_articles,
         "stories" : stories,
-        "story" : story,
+        "story": story,
     }
     return render(request,"articles/index.html", context)
+
+def information(request):
+    return render(request,"articles/information.html")
 
 def introduction(request):
     return render(request,"articles/introduction.html")
