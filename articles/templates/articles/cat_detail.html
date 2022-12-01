@@ -59,13 +59,11 @@
   <p>{{ cat_comments.count }}개의 댓글이 있습니다.</p>
   <div id="cat-comments">
     {% for cat_comment in cat_comments %}
-      <p>
-        {{ cat_comment.user.username }}
-        |
-        {{ cat_comment.content }}</p>
-      <hr>
-      {% empty %}
-      <p>댓글이 없어요 ㅠ_ㅠ</p>
+        <p> {{ cat_comment.user.username }} | {{ cat_comment.content }}</p>
+        <a href="{% url 'articles:cat_comments_delete' cat_article.pk cat_comment.pk %}" class="btn detail_btn2 my-3">댓글 삭제</a>
+        <hr>    
+    {% empty %}
+        <p>댓글이 없어요 ㅠ_ㅠ</p>
     {% endfor %}
   </div>
 

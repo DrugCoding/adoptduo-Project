@@ -1,0 +1,29 @@
+#dog-banner {
+  background-image: url("/static/images/dog_banner.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+  filter: brightness(65%);
+  position: relative;
+}
+
+.row{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.u-btn-outline-primary{
+  border: 1px solid #FFCD00;
+  width: 20rem;
+  height: 4rem;
+}
+
+.u-btn-outline-primary:hover{
+  background-color: #FFCD00;
+  color: white;
+}
+
+.date-font{
+  color: #FFCD00;
+}

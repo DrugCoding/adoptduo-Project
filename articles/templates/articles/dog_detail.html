@@ -75,6 +75,76 @@
         {% endfor %}
     </div>
   </div>
+{{ dog_article.title }}
+{{ dog_article.name }}
+{{ dog_article.location }}
+{{ dog_article.content }}
+{% if dog_article.image %}
+  <img src="{{ dog_article.image.url }}" class="" alt="dog">
+{% else %}
+  <img src="https://dummyimage.com/200x200/000/454545" class="" alt="...">
+{% endif %}
+
+{% if dog_article.neutered %}
+  <span>중성화 완료</span>
+{% else %}
+  <span>중성화 안함</span>
+{% endif %}
+
+{% if dog_article.vaccination%}
+  <span>접종 완료</span>
+{% else %}
+  <span>접종 안함</span>
+{% endif %}
+
+{% if request.user == dog_article.user %}
+  <a href="{% url 'articles:dog_update' dog_article.pk %}" class="btn detail_btn2 mx-2 my-3">글수정</a>
+  <a href="{% url 'articles:dog_delete' dog_article.pk %}" class="btn detail_btn2 my-3">글삭제</a>
+{% endif %}
+<span>
+  {% comment %} {% if request.user.is_authenticated %} {% endcomment %}
+    <a class="like-heart" href="{% url 'articles:dog_bookmark' dog_article.pk %}">
+    {% if request.user in dog_article.bookmarks.all %}
+      <i id="bookmark-btn" data-article-id="{{ dog_article.pk }}" class="bi-bookmark-heart-fill"></i>
+    {% else %}
+      <i id="bookmark-btn" data-article-id="{{ dog_article.pk }}" class="bi-bookmark-heart"></i>
+    {% endif %}</a>{{ dog_article.bookmarks.count }}
+</span>
+  {% comment %} {% endif %} {% endcomment %}
+
+
+<h4>댓글</h4>
+<form id="dog-comment-form" data-article-id="{{ dog_article.pk }}">
+    {% csrf_token %}
+    {% bootstrap_form dog_comment_form %}
+    {% bootstrap_button content="ok" button_type="submit" button_class="btn-danger col-3" %}
+</form>
+<hr>
+<p>{{ dog_comments.count }}개의 댓글이 있습니다.</p>
+ <div id="dog-comments">
+    {% for dog_comment in dog_comments %}
+      <p> {{ dog_comment.user.username }} | {{ dog_comment.content }}</p>
+      <a href="{% url 'articles:dog_comments_delete' dog_article.pk dog_comment.pk %}" class="btn detail_btn2 my-3">댓글 삭제</a>
+      <hr>    
+    {% empty %}
+      <p>댓글이 없어요 ㅠ_ㅠ</p>
+    {% endfor %}
+</div> 
+
+{% comment %} {% for dog_comment in dog_comments %}
+  <div id="dog-comments" data-comment-id="{{ dog_comment.pk }}">
+    <p> {{ dog_comment.user.username }} | {{ dog_comment.content }}</p>
+    <hr>    
+  {% empty %}
+    <p>댓글이 없어요 ㅠ_ㅠ</p>
+  </div>
+  <div id="dog-delete">
+    <a href="{% url 'articles:dog_comments_delete' dog_article.pk dog_comment.pk %}" class="btn detail_btn2 my-3">댓글 삭제</a>
+  </div>
+{% endfor %} {% endcomment %}
+
+
+
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
@@ -99,5 +169,43 @@
           commentForm.reset()
         })
       })
+    {% comment %} const dogComments = document.querySelector('#dog-comments')
+    dogComments.addEventListener('submit', function(event){
+      event.preventDefault();
+      axios({
+        //method: 'post',
+        url: `${event.target.dataset.commentId}/comments/${event.target.dataset.articleId}/dog/delete/`,
+        //headers: {'X-CSRFToken': csrftoken},
+        //data: new Data(dogComments) // 폼에 있는 정보를 data로 넘겨줄 수 있도록 변환
+      })
+      .then(response => {
+        //console.log(response.data)
+        // 댓글을 추가하는 로직
+        const delete = document.querySelector('#dog-delete')
+        const a = document.createElement('a')
+        a.innerText = `${response.data.dog_userName}`
+        delete.append(a) 
+        commentForm.reset()
+      })
+    }) {% endcomment %}
+    const bookmarkBtn = document.querySelector('#bookmark-btn')
+    bookmarkBtn.addEventListener('click', function (event){
+        console.log(event.target.dataset)
+        axios({
+            method: 'get',
+            url: `/${event.target.dataset.articleId}/dog/bookmark/` //서버에 요청 보냈고, 
+        })
+        .then(context => {
+            console.log(context)
+            console.log(context.data)
+            if (context.data.isBookmarked === true) {
+            event.target.classList.add('bi-bookmark-heart-fill')
+            event.target.classList.remove('bi-bookmark-heart')
+            } else {
+            event.target.classList.add('bi-bookmark-heart')
+            event.target.classList.remove('bi-bookmark-heart-fill')
+            }
+        }) // 돌아오면 어떤걸 하고 싶은가?
+    })
 </script>
 {% endblock %}
