@@ -1,115 +1,93 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block content %}
-<link rel="stylesheet" href="{% static 'css/dog_cat.css' %}">
-<div class="bg-image w-100 d-flex flex-column align-items-center justify-content-center text-light" id="cat-banner">
-    <div class="text-center">
-        <h2 class="mb-4">건강한 반려문화의 시작</h2>
-        <p>평생을 함께해 주세요</p>
-    </div>
+{% extends 'base.html' %} {% load static %} {% block content %}
+<link rel="stylesheet" href="{% static 'css/dog_cat.css' %}" />
+<div
+  class="bg-image w-100 d-flex flex-column align-items-center justify-content-center text-light"
+  id="cat-banner"
+>
+  <div class="text-center">
+    <h2 class="mb-4">건강한 반려문화의 시작</h2>
+    <p>평생을 함께해 주세요</p>
+  </div>
 </div>
 
 <div class="container text-center mt-5">
-    <hr class="py-2 justify-content-center align-items-center" id="divider">
-    <h1>고양이</h1>
-    <ul id="puppy-ul" class="nav my-4">
-        <li class="nav-item mt-2"><a href="#" class="nav-link active text-dark">전체</a></li>
-        <li class="nav-item mt-2"><a href="#" class="nav-link active text-dark">고양이종1</a></li>
-        <li class="nav-item mt-2"><a href="#" class="nav-link active text-dark">푸들</a></li>
-        <li class="nav-item mt-2"><a href="#" class="nav-link active text-dark">시바견</a></li>
-        <li class="nav-item mt-2"><a href="#" class="nav-link active text-dark">이탈리안그레이하운드</a></li>
-        <li class="nav-item mt-2"><a href="#" class="nav-link active text-dark">포메라니안</a></li>
-        <li class="nav-item mt-2"><a href="#" class="nav-link active text-dark">아주 긴 견종이름 어쩌고 저쩌고</a></li>
-        <li class="nav-item mt-2"><a href="#" class="nav-link active text-dark">좀 짧은 견종이름</a></li>
-        <li class="nav-item mt-2"><a href="#" class="nav-link active text-dark">견종이름입니다</a></li>
-        <li class="nav-item mt-2"><a href="#" class="nav-link active text-dark">견종이름</a></li>
-        <li class="nav-item mt-2"><a href="#" class="nav-link active text-dark">견종명</a></li>
-        <li class="nav-item mt-2"><a href="#" class="nav-link active text-dark">견종6</a></li>
-    </ul>
+  <hr class="py-2 justify-content-center align-items-center" id="divider" />
+  <h1>고양이</h1>
+  <ul id="puppy-ul" class="nav my-4">
+    <li class="nav-item mt-2">
+      <a href="#" class="nav-link active text-dark">전체</a>
+    </li>
+    <li class="nav-item mt-2">
+      <a href="#" class="nav-link active text-dark">요크셔테리어</a>
+    </li>
+    <li class="nav-item mt-2">
+      <a href="#" class="nav-link active text-dark">푸들</a>
+    </li>
+    <li class="nav-item mt-2">
+      <a href="#" class="nav-link active text-dark">시바견</a>
+    </li>
+    <li class="nav-item mt-2">
+      <a href="#" class="nav-link active text-dark">이탈리안그레이하운드</a>
+    </li>
+    <li class="nav-item mt-2">
+      <a href="#" class="nav-link active text-dark">포메라니안</a>
+    </li>
+    <li class="nav-item mt-2">
+      <a href="#" class="nav-link active text-dark"
+        >아주 긴 견종이름 어쩌고 저쩌고</a
+      >
+    </li>
+    <li class="nav-item mt-2">
+      <a href="#" class="nav-link active text-dark">좀 짧은 견종이름</a>
+    </li>
+    <li class="nav-item mt-2">
+      <a href="#" class="nav-link active text-dark">견종이름입니다</a>
+    </li>
+    <li class="nav-item mt-2">
+      <a href="#" class="nav-link active text-dark">견종이름</a>
+    </li>
+    <li class="nav-item mt-2">
+      <a href="#" class="nav-link active text-dark">견종명</a>
+    </li>
+    <li class="nav-item mt-2">
+      <a href="#" class="nav-link active text-dark">견종6</a>
+    </li>
+  </ul>
 </div>
-    {% comment %} 카드로 보여주기 {% endcomment %}
-<div class="container text-center">
-    <div class="row row-cols-1 row-cols-md-3">
-        {% for cat_article in cat_articles %}
-        <div class="col">
-            <a href="#" class="card-link">
-                <div class="card">
-                    <img src="{{ cat_article.image }}" class="card-img-top" alt="dog">
-                    <div class="card-body text-dark">
-                        <h5 class="card-title">{{ cat_article.name }} / {{ cat_article.age }} / {{ cat_article.gender }}</h5>
-                        <p class="card-text" id="dog-card-text">{{ cat_article.memo }} <br> 조회수: {{ cat_article.hits }}</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        {% endfor %}
-        <div class="col">
-            <a href="#" class="card-link">
-                <div class="card">
-                    <img src="{% static 'images/cat_sample.jpg' %}" class="card-img-top" alt="...">
-                    <div class="card-body text-dark">
-                        <h5 class="card-title">마루 / 5살 / 수컷</h5>
-                        <p class="card-text" id="dog-card-text">털빠짐이 적고 밥을 잘 먹어요!<br> 조회수: 58</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="col">
-            <a href="#" class="card-link">
-                <div class="card">
-                    <img src="{% static 'images/cat_sample.jpg' %}" class="card-img-top" alt="...">
-                    <div class="card-body text-dark">
-                        <h5 class="card-title">마루 / 5살 / 수컷</h5>
-                        <p class="card-text" id="dog-card-text">털빠짐이 적고 밥을 잘 먹어요!<br> 조회수: 58</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="col">
-            <a href="#" class="card-link">
-                <div class="card">
-                    <img src="{% static 'images/cat_sample.jpg' %}" class="card-img-top" alt="...">
-                    <div class="card-body text-dark">
-                        <h5 class="card-title">마루 / 5살 / 수컷</h5>
-                        <p class="card-text" id="dog-card-text">털빠짐이 적고 밥을 잘 먹어요!<br> 조회수: 58</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="col">
-            <a href="#" class="card-link">
-                <div class="card">
-                    <img src="{% static 'images/cat_sample.jpg' %}" class="card-img-top" alt="...">
-                    <div class="card-body text-dark">
-                        <h5 class="card-title">마루 / 5살 / 수컷</h5>
-                        <p class="card-text" id="dog-card-text">털빠짐이 적고 밥을 잘 먹어요!<br> 조회수: 58</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="col">
-          <a href="#" class="card-link">
-              <div class="card">
-                  <img src="{% static 'images/cat_sample.jpg' %}" class="card-img-top" alt="...">
-                  <div class="card-body text-dark">
-                      <h5 class="card-title">마루 / 5살 / 수컷</h5>
-                      <p class="card-text" id="dog-card-text">털빠짐이 적고 밥을 잘 먹어요!<br> 조회수: 58</p>
-                  </div>
-              </div>
-          </a>
-      </div>
-      <div class="col">
-        <a href="#" class="card-link">
-            <div class="card">
-                <img src="{% static 'images/cat_sample.jpg' %}" class="card-img-top" alt="...">
-                <div class="card-body text-dark">
-                    <h5 class="card-title">마루 / 5살 / 수컷</h5>
-                    <p class="card-text" id="dog-card-text">털빠짐이 적고 밥을 잘 먹어요!<br> 조회수: 58</p>
-                </div>
-            </div>
-        </a>
-    </div>
-    </div>
-<a href="{% url 'articles:cat_create' %}" class="nav-link btn nav_btn me-1">고양이 글작성</a>
 
+<div class="container text-center">
+  <div class="row row-cols-1 row-cols-md-3">
+    {% for cat_article in cat_articles %}
+    <div class="col">
+      <a
+        href="{% url 'articles:cat_detail' cat_article.pk %}"
+        class="card-link"
+      >
+        <div class="card">
+          <img
+            src="{{ cat_article.image.url }}"
+            class="card-img-top"
+            alt="cat_image"
+          />
+          <div class="card-body text-dark">
+            <h5 class="card-title">
+              {{ cat_article.name }} / {{ cat_article.age }}살 / {{
+              cat_article.gender }}
+            </h5>
+            <p class="card-text" id="dog-card-text">
+              {{ cat_article.memo }}
+              <br />
+              조회수: {{ cat_article.hits }}
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<a href="{% url 'articles:cat_create' %}" class="nav-link btn nav_btn me-1"
+  >고양이 글작성</a
+>
 {% endblock content %}
