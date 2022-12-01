@@ -58,7 +58,7 @@
               <div class="col ">
                 <a style="text-decoration:none;" href="">
                   <div class="card h-100">
-                    <img src="{{ cat.image.url }}" class="card-img-top post-img" alt="...">
+                    {% comment %} <img src="{{ cat.image.url }}" class="card-img-top post-img" alt="..."> {% endcomment %}
                     <div class="card-body">
                       <h5 class="post-title">{{ cat.title }}</h5>
                     </div>
@@ -77,7 +77,7 @@
         {% for story in stories %}
           <a href="">
             <div class="main-story gx-3">
-              <img class="main-story-img" src="{{ story.image.url }}" alt="">
+              {% comment %} <img class="main-story-img" src="{{ story.image.url }}" alt=""> {% endcomment %}
             </div>
           </a>
         {% endfor %}
@@ -85,7 +85,7 @@
           {% for stories in story %}
             <a href="">
               <div class="main-story gx-3">
-                <img class="main-story-img" src="{{ stories.image.url }}" alt="">
+                {% comment %} <img class="main-story-img" src="{{ stories.image.url }}" alt=""> {% endcomment %}
               </div>
             </a>
           {% endfor %}
@@ -104,7 +104,7 @@
         <div class="col ">
           <a style="text-decoration:none;" href="">
             <div class="card h-100">
-              <img src="{{ dog.image.url }}" class="card-img-top post-img" alt="...">
+              {% comment %} <img src="{{ dog.image.url }}" class="card-img-top post-img" alt="..."> {% endcomment %}
               <div class="card-body">
                 <h5 class="post-title">{{ dog.title }}</h5>
               </div>

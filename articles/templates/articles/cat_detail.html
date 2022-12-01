@@ -1,9 +1,13 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
 {% block content %}
+
 {{ cat_article.title }}
+
+{% if request.user == article.user %}
 <a href="{% url 'articles:cat_update' cat_article.pk %}" class="btn detail_btn2 mx-2 my-3">글수정</a>
 <a href="{% url 'articles:cat_delete' cat_article.pk %}" class="btn detail_btn2 my-3">글삭제</a>
+{% endif %}
 
 <h4 class="my-3">댓글</h4>
 <form id="cat-comment-form" data-article-id="{{ cat_article.pk }}">
@@ -16,6 +20,7 @@
 <div id="cat-comments">
     {% for cat_comment in cat_comments %}
         <p> {{ cat_comment.user.username }} | {{ cat_comment.content }}</p>
+        <a href="{% url 'articles:cat_comments_delete' cat_article.pk cat_comment.pk %}" class="btn detail_btn2 my-3">댓글 삭제</a>
         <hr>    
     {% empty %}
         <p>댓글이 없어요 ㅠ_ㅠ</p>
