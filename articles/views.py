@@ -4,6 +4,7 @@ from .forms import DogArticleForm, CatArticleForm, DogCommentForm, CatCommentFor
 from stories.models import Stories
 from django.core.paginator import Paginator
 from django.http import JsonResponse
+from django.db.models import Q
 # Create your views here.
 
 def index(request):
@@ -213,6 +214,7 @@ def cat_comment_create(request, cat_article_pk):
     return JsonResponse(context)
 
 
+
 def dog_comments_delete(request, dog_article_pk, dog_comment_pk):
     dog_comment = DogArticleComment.objects.get(pk=dog_comment_pk)
     dog_comment.delete()
@@ -245,4 +247,40 @@ def dog_bookmark(request, dog_article_pk):
     # 상세 페이지로 redirect
     
 
+
+
+# 검색
+def search(request):
+    query = None
+    dogs = None
+    cats = None
+    stories = None
+    if 'searchs' in request.GET:
+        query = request.GET.get('searchs')
+        dogs = DogArticle.objects.all().filter(
+            Q(breed__icontains=query)
+        )
+        cats = CatArticle.objects.all().filter(
+            Q(breed__icontains=query)
+        )
+        stories = Stories.objects.all().filter(
+            Q(breed__icontains=query)|
+            Q(content__icontains=query)
+        )
+        # # 조회수 최다 강아지 분양글
+        # most_dog = DogArticle.objects.order_by('-hits')[:4]
+        # # 조회수 최다 고양이 분양글
+        # most_cat = CatArticle.objects.order_by('-hits')[:4]
+        # # 좋아요 최다 잡담글
+        # most_like = Stories.objects.order_by('-hits')[:4]
+    context = {
+        'query': query,
+        'dogs': dogs,
+        'cats': cats,
+        'stories': stories,
+    #     'most_dog': most_dog,
+    #     'most_cat': most_cat,
+    #     'most_like': most_like
+    }
+    return render(request, 'articles/search.html', context)
 

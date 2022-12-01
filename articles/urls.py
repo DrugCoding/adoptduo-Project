@@ -21,4 +21,5 @@ urlpatterns = [
     path('<int:dog_article_pk>/comments/<int:dog_comment_pk>/dog/delete/', views.dog_comments_delete, name='dog_comments_delete'),
     path('<int:cat_article_pk>/comments/<int:cat_comment_pk>/cat/delete/', views.cat_comments_delete, name='cat_comments_delete'),
     path('<int:dog_article_pk>/dog/bookmark/', views.dog_bookmark, name="dog_bookmark"), # 좋아요
+    path("search/", views.search, name="search"), # 검색기능
 ]

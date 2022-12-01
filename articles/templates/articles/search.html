@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+{% comment %} 검색 바 {% endcomment %}
+<div>
+  <h1>- SEARCH -</h1>
+  <form action="{% url 'articles:search' %}" method="get">
+    <input type="search" placeholder="검색어를 입력하세요" name="searchs">
+    <input type="submit" value="검색">
+  </form>
+</div>
+<hr>
+{% comment %} 강아지 검색 {% endcomment %}
+<div>
+  <h2>강아지 카테고리 검색결과</h2>
+  {% if not dogs %}
+    <h4 class="no-search title-font">"{{ query }}" 검색결과가 없습니다.</h4>
+  {% else %}
+    {% for dog in dogs %}
+      <p>{{ dog.image }}</p>
+      <a href="{% url 'stories:detail' user.pk %}"><h5>{{ dog.title }}</h5></a>
+      <p>{{ dog.name}} | {{ dog.breed }} | {{ dog.age }}</p>
+    {% endfor %}
+  {% endif %}
+</div>
+<hr>
+{% comment %} 고양이 검색 {% endcomment %}
+<div>
+  <h2>고양이 카테고리 검색결과</h2>
+  {% if not cats %}
+    <h4 class="no-search title-font">"{{ query }}" 검색결과가 없습니다.</h4>
+  {% else %}
+    {% for cat in cats %}
+      <p>{{ cat.image }}</p>
+      <a href="{% url 'stories:detail' user.pk %}"><h5>{{ cat.title }}</h5></a>
+      <p>{{ cat.name}} | {{ cat.breed }} | {{ cat.age }}</p>
+    {% endfor %}
+  {% endif %}
+</div>
+<hr>
+{% comment %} 스토리 검색 {% endcomment %}
+<div>
+  <h2>스토리 카테고리 검색결과</h2>
+  {% if not stories %}
+    <h4 class="no-search title-font">"{{ query }}" 검색결과가 없습니다.</h4>
+  {% else %}
+    {% for story in stories %}
+      <p>{{ story.image }}</p>
+      <a href="{% url 'stories:detail' story.pk %}"><h5>{{ story.title }}</h5></a>
+      <p> {{ story.name }} | {{ story.breed }}</p>
+    {% endfor %}
+  {% endif %}
+</div>
+{% endblock content %}
