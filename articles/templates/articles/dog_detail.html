@@ -1,6 +1,80 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
+{% load static %}
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/dog_cat_detail.css' %}">
+  <div class="bg-image w-100 d-flex flex-column align-items-center justify-content-center text-light" id="dog-banner">
+    <div class="text-center">
+      <h2 class="mb-4">건강한 반려문화의 시작</h2>
+      <p>평생을 함께해 주세요</p>
+    </div>
+  </div>
+  <div class="container mt-4">
+    <h2>{{ dog_article.title }}</h2>
+    <hr id="divider">
+  </div>
+  <div class="container">
+    <h2 class="text-center mb-3">입양동물정보</h2>
+    <div class="text-center">
+      {% comment %} DB에서 가져와서 이미지 삽입예정 {% endcomment %}
+      {% comment %} <img id="dog-detail-img" class="mb-4 w-25 rounded" src="{{ dog_article.image }}" alt="dog_article.image"> {% endcomment %}
+      <img id="pet-detail-img" class="mb-4 w-25 rounded" src="{{ dog_article.image.url }}" alt="dog_article.image">
+    </div>
+    <div class="row">
+      <div id="pet-info-var-div" class="col-1 text-center py-3">이름</div>
+      <div id="pet-info-div" class="col-5 text-center py-3">{{ dog_article.name }}</div>
+      <div id="pet-info-var-div" class="col-1 text-center py-3">나이</div>
+      <div id="pet-info-div" class="col-5 text-center py-3">{{ dog_article.age }}살</div>
+    </div>
+    <div class="row mt-1">
+      <div id="pet-info-var-div" class="col-1 text-center py-3">성별</div>
+      <div id="pet-info-div" class="col-5 text-center py-3">{{ dog_article.gender }}</div>
+      <div id="pet-info-var-div" class="col-1 text-center py-3">견종</div>
+      <div id="pet-info-div" class="col-5 text-center py-3">{{ dog_article.breed }}</div>
+    </div>
+    <div class="row mt-1">
+      <div id="pet-info-var-div" class="col-1 text-center py-3">접종유무</div>
+      <div id="pet-info-div" class="col-5 text-center py-3">{{ dog_article.vaccination }}</div>
+      <div id="pet-info-var-div" class="col-1 text-center py-3">중성화유무</div>
+      <div id="pet-info-div" class="col-5 text-center py-3">{{ dog_article.neutered }}</div>
+    </div>
+    <div class="row mt-1">
+      <div id="pet-info-var-div" class="col-1 text-center py-3">지역</div>
+      <div id="pet-info-div" class="col-5 text-center py-3">{{ dog_article.location }}</div>
+      <div id="pet-info-var-div" class="col-1 text-center py-3">특이사항</div>
+      <div id="pet-info-div" class="col-5 text-center py-3">{{ dog_article.memo }}</div>
+    </div>
+  </div>
+  <div class="container text-center mt-4">
+    <div class="row d-flex justify-content-center">
+      <div id="pet-info-var-div" class="col-1 py-3">Content</div>
+      <div id="pet-info-div" class="col-5 py-3">{{ dog_article.content }}</div>
+    </div>
+  </div>
+  <div class="container text-center">
+    <a href="{% url 'articles:dog_update' dog_article.pk %}" class="btn btn-primary detail_btn2 mx-2 my-3">글수정</a>
+    <a href="{% url 'articles:dog_delete' dog_article.pk %}" class="btn btn-primary detail_btn2 my-3">글삭제</a>
+    <h4 class="mt-5">댓글</h4>
+    <form id="dog-comment-form" data-article-id="{{ dog_article.pk }}">
+        {% csrf_token %}
+        {% bootstrap_form dog_comment_form %}
+        {% bootstrap_button content="ok" button_type="submit" button_class="btn-danger col-3" %}
+    </form>
+    <hr>
+    <p>{{ dog_comments.count }}개의 댓글이 있습니다.</p>
+    <div id="dog-comments">
+        {% for dog_comment in dog_comments %}
+          <p> {{ dog_comment.user.username }} | {{ dog_comment.content }}</p>
+          {% comment %} <form action="{% url 'articles:comments_delete' article.pk comment.pk %}">
+            {% csrf_token %}
+            <input type="submit" value="delete">
+          </form> {% endcomment %}
+          <hr>    
+        {% empty %}
+          <p>댓글이 없어요 ㅠ_ㅠ</p>
+        {% endfor %}
+    </div>
+  </div>
 {{ dog_article.title }}
 {{ dog_article.name }}
 {{ dog_article.location }}

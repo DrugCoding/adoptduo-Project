@@ -146,7 +146,6 @@ def cat_create(request):
     return render(request, "articles/catform.html", context) # 제출에 이슈가 있다면 값을 보내며 다시 폼으로 돌아가기
 
 
-
 def cat_detail(request, cat_article_pk):
     cat_article = CatArticle.objects.get(id=cat_article_pk)
     cat_comment_form = CatCommentForm()
@@ -158,7 +157,6 @@ def cat_detail(request, cat_article_pk):
     }
 
     return render(request, "articles/cat_detail.html", context)
-
 
 
 def cat_update(request, cat_article_pk):

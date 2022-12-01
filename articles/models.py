@@ -68,7 +68,7 @@ class CatArticle(models.Model):
     content = models.TextField()
     image = ProcessedImageField(
         blank=True,
-        processors=[ResizeToFill(200, 300)],
+        processors=[ResizeToFill(550, 500)],
         format="JPEG",
         options={"quality": 80},
     )
