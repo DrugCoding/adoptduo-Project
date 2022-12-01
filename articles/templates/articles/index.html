@@ -29,7 +29,7 @@
           </a>
         </div>
         <p></p>
-        <div class="row row-cols-4">
+        <div class="row row-cols-5">
           {% for dog in dog_articles %}
             <div class="col  ">
               <a style="text-decoration:none;" href="">
@@ -53,7 +53,7 @@
             </a>
           </div>
           <p></p>
-          <div class="row row-cols-4">
+          <div class="row row-cols-5">
             {% for cat in cat_articles %}
               <div class="col ">
                 <a style="text-decoration:none;" href="">
@@ -75,17 +75,30 @@
       <div class="story-stroke"></div>
       <div class="story-post-subsection d-flex my-3 ">
         {% for story in stories %}
-          <a href="">
-            <div class="main-story gx-3">
+          <a href="{% url 'stories:detail' story.pk %}">
+            <div class="main-story card ">
               <img class="main-story-img" src="{{ story.image.url }}" alt="">
             </div>
           </a>
         {% endfor %}
-        <div class="card mb-3 stories-post">
+        <div class="">
           {% for stories in story %}
-            <a href="">
-              <div class="main-story gx-3">
-                <img class="main-story-img" src="{{ stories.image.url }}" alt="">
+            <a style="text-decoration:none; color:black;" href="{% url 'stories:detail' stories.pk %}">
+              <div class="card mb-3 stories-post" style="max-width: 540px;">
+                <div class="row g-0">
+                  <div class="col-md-4">
+                    <img src="{{ stories.image.url }}" class="img-fluid rounded-start stories-img" alt="...">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ stories.title }}</h5>
+                      <p class="card-text">{{ stories.content }}</p>
+                      <p class="card-text">
+                        <small class="text-muted">{{ stories.created_at }}</small>
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </a>
           {% endfor %}
@@ -99,17 +112,16 @@
   <div class="volunteers-stroke"></div>
   <div class="volunteers-post-subsection">
     <p></p>
-    <div class="row row-cols-4">
+    <div class="row row-cols-5">
       {% for dog in dog_articles %}
-        <div class="col ">
-          <a style="text-decoration:none;" href="">
-            <div class="card h-100">
-              <img src="{{ dog.image.url }}" class="card-img-top post-img" alt="...">
-              <div class="card-body">
-                <h5 class="post-title">{{ dog.title }}</h5>
+        <div class="animated-title">
+          <div class="col track ">
+            <a style="text-decoration:none;" href="">
+              <div class="card h-100 content">
+                <img src="{{ user.image.url }}" class="card-img-top" alt="...">
               </div>
-            </div>
-          </a>
+            </a>
+          </div>
         </div>
       {% endfor %}
     </div>
