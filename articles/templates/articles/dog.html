@@ -30,20 +30,33 @@
     {% comment %} 카드로 보여주기 {% endcomment %}
 <div class="container text-center">
     <div class="row row-cols-1 row-cols-md-3">
-        {% for dog_article in dog_articles %}
-        <div class="col">
-            <a href="#" class="card-link">
-                <div class="card">
-                    <img src="{{ dog_article.image }}" class="card-img-top" alt="dog">
-                    <div class="card-body text-dark">
-                        <h5 class="card-title">{{ dog_article.name }} / {{ dog_article.age }} / {{ dog_article.gender }}</h5>
-                        <p class="card-text" id="dog-card-text">{{ dog_article.memo }} <br> 조회수: {{ dog_article.hits }}</p>
+        {% for i in page_obj %}
+            <div class="col">
+                <a href="#" class="card-link">
+                    <div class="card">
+                        {% if i.image %}
+                            <img src="{{ i.image.url }}" class="card-img-top" alt="dog">
+                        {% else %}
+                            <img src="https://dummyimage.com/550x500/000/454545" class="card-img-top" alt="...">
+                        {% endif %}
+                        <div class="card-body text-dark">
+                            <h5 class="card-title">{{ i.name }} / {{ i.age }} / {{ i.gender }}</h5>
+                            <p class="card-text" id="dog-card-text">{{ i.memo }} <br> 조회수: {{ i.hits }}</p>
+                        </div> 
                     </div>
-                </div>
-            </a>
-        </div>
+                </a>
+            </div>
         {% endfor %}
-        <div class="col">
+    </div>
+</div>
+<ul id="pagination" class="d-flex my-5 d-flex justify-content-center p-5">
+    <li class="mx-2 rounded"><a class="border border-0 text-muted" href="?page=1">1</a></li>
+    <li class="mx-2 rounded"><a class="border border-0 text-muted" href="?page=2">2</a></li>
+    <li class="mx-2 rounded"><a class="border border-0 text-muted" href="?page=3">3</a></li>
+    <li class="mx-2 rounded"><a class="border border-0 text-muted" href="?page=4">4</a></li>
+</ul>
+
+        {% comment %} <div class="col">
             <a href="#" class="card-link">
                 <div class="card">
                     <img src="{% static 'images/dog_sample.jpg' %}" class="card-img-top" alt="...">
@@ -110,7 +123,7 @@
             </a>
         </div>
     </div>
-</div>
+</div> {% endcomment %}
 
 <a href="{% url 'articles:dog_create' %}" class="nav-link btn nav_btn me-1">강아지 글작성</a>
 {% endblock content %}

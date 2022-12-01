@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
-from .models import DogArticle, CatArticle
+from .models import DogArticle, CatArticle, DogArticleComment, CatArticleComment
 from .forms import DogArticleForm, CatArticleForm, DogCommentForm, CatCommentForm
 from stories.models import Stories
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.db.models import Count
+from django.db.models import Q
+
 # Create your views here.
 
 def index(request):
@@ -221,4 +223,72 @@ def cat_comment_create(request, cat_article_pk):
 
 
 
+def dog_comments_delete(request, dog_article_pk, dog_comment_pk):
+    dog_comment = DogArticleComment.objects.get(pk=dog_comment_pk)
+    dog_comment.delete()
+    return redirect('articles:dog_detail', dog_article_pk)
+
+
+
+def cat_comments_delete(request, cat_article_pk, cat_comment_pk):
+    cat_comment = CatArticleComment.objects.get(pk=cat_comment_pk)
+    cat_comment.delete()
+    return redirect('articles:cat_detail', cat_article_pk)
+
+
+def dog_bookmark(request, dog_article_pk):
+    dog_article = DogArticle.objects.get(pk=dog_article_pk)
+    # 만약에 로그인한 유저가 이 글을 좋아요를 눌렀다면,
+    # if article.like_users.filter(id=request.user.id).exists():
+    if request.user in dog_article.bookmarks.all(): 
+        # 좋아요 삭제하고
+        dog_article.bookmarks.remove(request.user)
+        is_bookmarked= False
+    else:
+        # 좋아요 추가하고 
+        dog_article.bookmarks.add(request.user)
+        is_bookmarked= True 
+    context = {
+        'isbookmarked' : is_bookmarked,
+    }
+    return JsonResponse(context)
+    # 상세 페이지로 redirect
+    
+
+
+
+# 검색
+def search(request):
+    query = None
+    dogs = None
+    cats = None
+    stories = None
+    if 'searchs' in request.GET:
+        query = request.GET.get('searchs')
+        dogs = DogArticle.objects.all().filter(
+            Q(breed__icontains=query)
+        )
+        cats = CatArticle.objects.all().filter(
+            Q(breed__icontains=query)
+        )
+        stories = Stories.objects.all().filter(
+            Q(breed__icontains=query)|
+            Q(content__icontains=query)
+        )
+        # # 조회수 최다 강아지 분양글
+        # most_dog = DogArticle.objects.order_by('-hits')[:4]
+        # # 조회수 최다 고양이 분양글
+        # most_cat = CatArticle.objects.order_by('-hits')[:4]
+        # # 좋아요 최다 잡담글
+        # most_like = Stories.objects.order_by('-hits')[:4]
+    context = {
+        'query': query,
+        'dogs': dogs,
+        'cats': cats,
+        'stories': stories,
+    #     'most_dog': most_dog,
+    #     'most_cat': most_cat,
+    #     'most_like': most_like
+    }
+    return render(request, 'articles/search.html', context)
 

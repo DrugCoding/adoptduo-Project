@@ -4,9 +4,11 @@ from django import forms
 class StoriesForm(forms.ModelForm):
     class Meta:
         model = Stories
-        fields = ["title", "content", "image"]
+        fields = ["title","name", "breed", "content", "image"]
         labels = {
             "title": "제목",
+            "name": "반려동물 이름",
+            "breed": "견종",
             "content": "내용",
             "image": "사진",
         }
