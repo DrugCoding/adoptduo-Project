@@ -11,6 +11,7 @@ class DogArticle(models.Model):
     title = models.CharField(max_length=20)
     # 반려동물 이름
     name = models.CharField(max_length=20)
+    location = models.CharField(max_length=20)
     content = models.TextField()
     image = ProcessedImageField(
         blank=True,
@@ -48,15 +49,9 @@ class DogArticle(models.Model):
     # 특이사항
     memo = models.CharField(max_length=20)
     # 중성화 여부
-    neutered_list = [
-        ('Yes', 'Yes'),
-    ]
-    neutered = models.CharField(max_length=20, choices=neutered_list)
+    neutered = models.BooleanField("중성화 했나요?", default=False)
     # 접종 여부
-    vaccination_list = [
-        ('Yes', 'Yes'),
-    ]
-    vaccination = models.CharField(max_length=20, choices=vaccination_list)
+    vaccination = models.BooleanField("예방접종 했나요?", default=False)
 
 class DogArticleComment(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -69,6 +64,7 @@ class CatArticle(models.Model):
     title = models.CharField(max_length=20)
     # 반려동물 이름
     name = models.CharField(max_length=20)
+    location = models.CharField(max_length=20)
     content = models.TextField()
     image = ProcessedImageField(
         blank=True,
@@ -103,15 +99,9 @@ class CatArticle(models.Model):
     # 특이사항
     memo = models.CharField(max_length=20)
     # 중성화 여부
-    neutered_list = [
-        ('Yes', 'Yes'),
-    ]
-    neutered = models.CharField(max_length=20, choices=neutered_list)
+    neutered = models.BooleanField("중성화 했나요?", default=False)
     # 접종 여부
-    vaccination_list = [
-        ('Yes', 'Yes'),
-    ]
-    vaccination = models.CharField(max_length=20, choices=vaccination_list)
+    vaccination = models.BooleanField("예방접종 했나요?", default=False)
 
 
 class CatArticleComment(models.Model):
