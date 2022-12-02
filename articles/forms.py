@@ -43,8 +43,20 @@ class DogCommentForm(forms.ModelForm):
     class Meta:
         model = DogArticleComment 
         fields = ['content',]
+        labels = {
+            "content": "댓글입력",
+        }
+        widgets = {
+            "content": forms.Textarea(attrs={"rows": 1, "cols": 10}),
+        }
 
 class CatCommentForm(forms.ModelForm):
     class Meta:
         model = CatArticleComment 
         fields = ['content',]
+        labels = {
+            "content": "댓글입력",
+        }
+        widgets = {
+            "content": forms.Textarea(attrs={"rows": 1, "cols": 10}),
+        }

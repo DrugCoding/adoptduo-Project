@@ -14,7 +14,7 @@ class DogArticle(models.Model):
     location = models.CharField(max_length=20)
     content = models.TextField()
     image = ProcessedImageField(
-        blank=True,
+        blank=False,
         processors=[ResizeToFill(550, 500)],
         format="JPEG",
         options={"quality": 80},
@@ -67,7 +67,7 @@ class CatArticle(models.Model):
     location = models.CharField(max_length=20)
     content = models.TextField()
     image = ProcessedImageField(
-        blank=True,
+        blank=False,
         processors=[ResizeToFill(550, 500)],
         format="JPEG",
         options={"quality": 80},
