@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+  <link rel="stylesheet" href="{% static 'css/declar.css' %}">
+
+  <div class="bg-image w-100 d-flex flex-column align-items-center justify-content-center text-light" id="dog-banner">
+    <div class="text-center">
+      <h2 class="mb-4 text-white">건강한 반려문화의 시작</h2>
+      <p>평생을 함께해 주세요</p>
+    </div>
+  </div>
+  <section class="container my-5 d-flex justify-content-center">
+    <div class="row">
+      <div class="col-6 col-md-4">
+        <a class="btn btn-block btn-md u-btn-outline-primary g-py-10 g-py20--md g-my10 g-my-15--md" href="{% url 'articles:information' %}">
+          <span class="material-symbols-outlined flight">
+            flight
+          </span>
+          <br>
+          해외이동봉사
+        </a>
+      </div>
+      <div class="col-6 col-md-4">
+        <a class="btn btn-block btn-md u-btn-outline-primary g-py-10 g-py20--md g-my10 g-my-15--md" href="{% url 'articles:info_adopt' %}">
+          <span class="material-symbols-outlined desc">
+            description
+          </span>
+          <br>
+          입양절차
+        </a>
+      </div>
+      <div class="col-6 col-md-4">
+        <a class="btn btn-block btn-md u-btn-outline-primary g-py-10 g-py20--md g-my10 g-my-15--md" href="{% url 'articles:info_declartation' %}">
+          <span class="material-symbols-outlined smart">
+            smartphone
+          </span>
+          <br>
+          학대신고
+        </a>
+      </div>
+    </div>
+  </section>
+  <hr class="my-5 container" style="width:1000px;">
+  <section class="container  g-mb-120">
+    <div class="row">
+      <div class="col-lg-9">
+        <div class="row my-5" style="position: relative; left:1.5rem;">
+          <div class="col-sm-6 col-md-4 g-my-30">
+            <div class="text-center">
+              <h4 class="date-font">
+                <img style="width:100px;" src="{% static 'images/circle.png' %}" alt="">
+                <span style="position: relative; left:-77px; top:6px; font-size:35px;">01</span>
+              </h4>
+              <p style="position:relative; left:-1.4rem;">동물 학대는 형행법 위반에 해당<br>
+                하는 범죄 행위입니다.</p>
+            </div>
+            <ul class="text-left">
+              <li class="list-text">동물 학대 시 3년이하의 징역 또는3천만원 이하의 벌금</li>
+              <li class="list-text">동물 유기 시 300만원 이하의 벌금</li>
+            </ul>
+          </div>
+          <div class="col-sm-6 col-md-4 g-my-30">
+            <div class="text-center">
+              <h4 class="date-font">
+                <img style="width:100px;" src="{% static 'images/circle.png' %}" alt="">
+                <span style="position: relative; left:-78px; top:6px; font-size:35px;">02</span>
+              </h4>
+              <p style="position:relative; left:-1.4rem;">동물 학대 목격 시 사진, 영상 등 증거<br>
+                확보가 중요합니다.</p>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-4 g-my-30">
+            <div class="text-center">
+              <h4 class="date-font">
+                <img style="width:100px;" src="{% static 'images/circle.png' %}" alt="">
+                <span style="position: relative; left:-78px; top:6px; font-size:35px;">03</span>
+              </h4>
+              <p style="position:relative; left:-1.4rem;">112에 동물 학대 사건 신고 후 확보해둔
+                <br>
+                증거 자료를 제시해 주세요.</p>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-4 g-my-30 my-5">
+            <div class="text-center">
+              <h4 class="date-font">
+                <img style="width:100px;" src="{% static 'images/circle.png' %}" alt="">
+                <span style="position: relative; left:-78px; top:6px; font-size:35px;">04</span>
+              </h4>
+              <p style="position:relative; left:-1.4rem;">각 시 군, 구의 동물보호 전담 공무원<br>(동물보호감시원)에게 사건을 신고해
+                <br>주세요</p>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-4 g-my-30 my-5">
+            <div class="text-center">
+              <h4 class="date-font">
+                <img style="width:100px;" src="{% static 'images/circle.png' %}" alt="">
+                <span style="position: relative; left:-78px; top:6px; font-size:35px;">05</span>
+              </h4>
+              <p style="position:relative; left:-1.4rem;">적절한 치료·보호를 받을 수 없다고 판<br>단되는 피학대 동물은 시, 군, 구청 담당<br>자의 권한으로 '긴급격리' 조치 및 재발<br>방지 모니터링이 필요할 수 있습니다.</p>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-4 g-my-30 my-5">
+            <div class="text-center">
+              <h4 class="date-font">
+                <img style="width:100px; " src="{% static 'images/circle.png' %}" alt="">
+                <span style="position: relative; left:-78px; top:6px; font-size:35px;">06</span>
+              </h4>
+              <p style="position:relative; left:-1.4rem;">동물 살해 사건 발생 시 사망 원인을 밝<br>히고 범죄 행위 증거 수집을 위해 '사체<br>부검'이 필요합니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock content %}

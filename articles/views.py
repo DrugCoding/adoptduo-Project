@@ -26,6 +26,12 @@ def index(request):
     }
     return render(request,"articles/index.html", context)
 
+def info_declartation(request):
+    return render(request, "articles/info_declartation.html")
+
+def info_adopt(request):
+    return render(request, "articles/info_adopt.html")
+
 def information(request):
     return render(request,"articles/information.html")
 
