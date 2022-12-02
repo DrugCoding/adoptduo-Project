@@ -59,13 +59,14 @@
       </a>
       {% else %}
       {% endif %} -->
+      <!-- 좋아요 비동기 -->
       {% if request.user.is_authenticated %}
       <div class="mt-3" style="float: right; margin-right:5px;">
         {% if request.user in stories.like.all %}
-        <i class="bi bi-hand-thumbs-up btn btn-warning" data-stories-id="{{ stories.pk }}" style="color: black;"
+        <i class="bi bi-hand-thumbs-up-fill btn btn-danger" data-stories-id="{{ stories.pk }}" style="color: black;"
           id="like-button"></i>
         {% else %}
-        <i class="bi bi-hand-thumbs-up-fill btn btn-danger" data-stories-id="{{ stories.pk }}" style="color: black;"
+        <i class="bi bi-hand-thumbs-up btn btn-warning" data-stories-id="{{ stories.pk }}" style="color: black;"
           id="like-button"></i>
         {% endif %}
       </div>
@@ -80,50 +81,55 @@
   <div style="border-top: 1px solid;" class="py-2 my-3">
     <h4 class="mx-2">댓글</h4>
     {% if request.user.is_authenticated %}
-    <div>
-      <form action="{% url 'stories:comment_create' stories.pk %}" method="POST">
-        {% csrf_token %}
-        {% bootstrap_form comment_form layout="inline" %}
+    <form id='comment-form' data-stories-id="{{ stories.pk }}">
+      {% csrf_token %}
+      {% bootstrap_form comment_form layout="inline" %}
+      <div class="d-flex justify-content-end">
         <input type="submit" class="btn btn-warning mt-3 mx-2" value="댓글쓰기">
-      </form>
-    </div>
+      </div>
+    </form>
     {% endif %}
   </div>
-  {% for comment in comments %}
-  <div class="mb-3" style="border: 1px solid;">
-    <div class="px-2">
-      <div class="d-flex justify-content-between my-1 pb-1" style="border-bottom: 1px solid; align-items:center;">
-        <span>{{ comment.user.username }}</span>
-        <div>
-          <span>{{ comment.created_at|date:"Y.m.d" }}</span> |
-          <span>
-            {% if request.user.is_authenticated %}
-            <a href="{% url 'stories:comment_likes' comment.pk %}" style="text-decoration:none; color:black;">
-              {% if request.user in comment.like.all %}
-              <!-- 좋아요 취소 -->
-              <i class="bi bi-hand-thumbs-up-fill"></i>
-              {% else %}
-              <!-- 좋아요 -->
-              <i class="bi bi-hand-thumbs-up"></i>
+  <div id="comments">
+    {% for comment in comments %}
+    <div class="mb-3 border border-dark">
+      <div class="px-2">
+        <div class="d-flex justify-content-between my-1 pb-1" style="border-bottom: 1px solid; align-items:center;">
+          <a href="{% url 'accounts:detail' comment.user.pk %}" class='text-decoration-none text-dark'>{{
+            comment.user.username }}</a>
+          <div>
+            <span class='text-secondary'>{{ comment.created_at|date:"Y.m.d" }}</span> |
+            <span>
+              {% if request.user.is_authenticated %}
+              <a href="{% url 'stories:comment_likes' comment.pk %}" class='text-decoration-none text-dark'>
+                {% if request.user in comment.like.all %}
+                <!-- 좋아요 취소 -->
+                <i class="bi bi-hand-thumbs-up-fill"></i>
+                {% else %}
+                <!-- 좋아요 -->
+                <i class="bi bi-hand-thumbs-up"></i>
+                {% endif %}
+              </a>
               {% endif %}
+            </span>
+            <span class='mx-1'>{{ comment.like.count }}</span> |
+            <a href="{% url 'stories:comment_delete' stories.pk comment.pk %}" class='text-decoration-none text-dark'>
+              삭제
             </a>
-            {% endif %}
-          </span> |
-          <a href="{% url 'stories:comment_delete' stories.pk comment.pk %}" style="text-decoration: none; color:black">
-            삭제
-          </a>
+          </div>
         </div>
       </div>
+      <div class="my-1 px-2 pb-1">
+        <p>{{ comment.content }}</p>
+      </div>
     </div>
-    <div class="my-1 px-2 pb-1">
-      {{ comment.content }}
-    </div>
+    {% endfor %}
   </div>
-  {% endfor %}
 </div>
 {% endblock content %}
 
 {% block script %}
+<!-- 좋아요 -->
 <script>
   const likeBtn = document.querySelector('#like-button')
   likeBtn.addEventListener('click', function (event) {
@@ -138,6 +144,63 @@
         } else {
           likeBtn.classList.remove('bi-hand-thumbs-up', 'btn-warning')
           likeBtn.classList.add('bi-hand-thumbs-up-fill', 'btn-danger')
+        }
+      })
+  })
+</script>
+<!-- 댓글 비동기 -->
+<script>
+  const commentForm = document.querySelector('#comment-form')
+  const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+  commentForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+    axios({
+      method: 'POST',
+      url: `/stories/${event.target.dataset.storiesId}/comments/`,
+      headers: { 'X-CSRFToken': csrftoken },
+      data: new FormData(commentForm)
+    })
+      .then(response => {
+        const comments = document.querySelector('#comments')
+        comments.replaceChildren()
+        for (comment of response.data.comments) {
+          const div1 = document.createElement('div')
+          div1.classList.add('mb-3', 'border', 'border-dark')
+          const a1 = document.createElement('a')
+          a1.setAttribute('href', `/accounts/detail/${comment[3]}`)
+          a1.classList.add('text-decoration-none', 'text-dark')
+          a1.innerText = comment[0]
+          div1.append(a1)
+          const span1 = document.createElement('span')
+          span1.classList.add('text-secondary')
+          span1.innerText = `${new Date(comment[2]).getFullyear()}.${new Date(comment[2]).getMonth() + 1}.${new Date(comment[2]).getDate()}`
+          div1.append(span1)
+          if (comment[9] === True) {
+            const a2 = document.createElement('a')
+            a2.classList.add('text-decoration-none', 'text-dark')
+            a2.setAttribute('href', `/stories/comments/${comment[5]}/likes/`)
+            if (comment[7] === True) {
+              const i1 = document.createElement('i')
+              i1.classList.add('bi', 'bi-hand-thumbs-up-fill')
+              a2.append(i1)
+            } else {
+              const i1 = document.createElement('i')
+              i1.classList.add('bi', 'bi-hand-thumbs-up')
+              a2.append(i2)
+            }
+            const span2 = document.createElemint('span')
+            span2.classList.add('mx-1')
+            span2.innerText = comment[8]
+          }
+          if (comment[3] === comment[4]) {
+            const a3 = document.createElement('a')
+            a3.classList.add('text-decoration-none', 'text-dark')
+            a3.setAttribute('href', `/stories/${comment[6]}/comments/${comment[5]}/delete/`)
+          }
+          const p = document.createElement('p')
+          p.innerText = comment[1]
+          comments.append(div1, p)
+          commentForm.reset()
         }
       })
   })
