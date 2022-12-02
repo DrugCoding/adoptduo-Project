@@ -1,5 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth import get_user_model
+from django import forms
 
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
@@ -22,10 +23,26 @@ class CustomUserCreationForm(UserCreationForm):
             "email": "이메일",
             "image": "이미지 파일",
         }
-        # widgets = {
-        #     'username': UserCreationForm(attrs={'placeholder': '추후 수정불가'}),
-        # }
-
+        widgets = {
+            'name': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': '실명을 입력해주세요'
+                }
+            ),
+            'username': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': '추후 변경이 불가능 합니다'
+                }
+            ),
+            'email': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'ex)user1004@cjstk.com'
+                }
+            ),
+        }
 class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = get_user_model()
@@ -43,3 +60,22 @@ class CustomUserChangeForm(UserChangeForm):
             "email": "이메일",
             "image": "이미지 파일",
         }
+
+# class LoginForm(forms.ModelForm):
+#     class Meta:
+#         model = User
+#         fields = ['username', 'password']
+#         widgets = {
+#             'username': forms.TextInput(
+#                 attrs={
+#                     'class': 'form-control',
+#                     'placeholder': '아이디를 입력하세요'
+#                 }
+#             ),
+#             'password': forms.PasswordInput(
+#                 attrs={
+#                     'class': 'form-control',
+#                     'placeholder': '비밀번호를 입력하세요'
+#                 }
+#             )
+#         }
