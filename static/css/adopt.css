@@ -1,0 +1,89 @@
+#dog-banner {
+  background-image: url("/static/images/dog_banner.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+  filter: brightness(65%);
+  position: relative;
+}
+
+
+
+.row{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.u-btn-outline-primary{
+  border: 1px solid #FFCD00;
+  width: 20rem;
+  height: 4rem;
+}
+
+.u-btn-outline-primary:hover{
+  background-color: #FFCD00;
+  color: white;
+}
+
+.date-font{
+  color: #FFCD00;
+}
+
+.text-left{
+  text-align: left!important;
+}
+
+.adobt-circle{
+  width:150px;  
+  background-color: #FFCD00; 
+  border-radius: 80px;
+}
+
+
+.right{
+  width: 50px;
+  height: 50px;
+  position: relative;
+  top: 50px;
+}
+
+.adobt-circle-text{
+  position: relative; 
+  left: 2rem;
+  top: 3.3rem;
+  font-size:17px;
+}
+
+.adobt-circle-text-1{
+  position: relative; 
+  left: 3rem;
+  top: 3.3rem;
+  font-size:17px;
+}
+
+.adobt-circle-text-2{
+  position: relative; 
+  left: 3.5rem;
+  top: 3.3rem;
+  font-size:17px;
+}
+
+
+.circle-adobt{
+  margin: 0 auto;
+  width: 150px;
+  height: 150px;
+  background-color: #FFCD00; 
+  border-radius: 50%;
+}
+
+.adopt-font{
+  font-weight: bold;
+}
+
+
+.adopt-list{
+  font-weight: bold;
+}

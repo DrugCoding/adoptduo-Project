@@ -6,6 +6,7 @@ from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.db.models import Count
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -24,6 +25,12 @@ def index(request):
         "story": story,
     }
     return render(request,"articles/index.html", context)
+
+def info_declartation(request):
+    return render(request, "articles/info_declartation.html")
+
+def info_adopt(request):
+    return render(request, "articles/info_adopt.html")
 
 def information(request):
     return render(request,"articles/information.html")
@@ -45,6 +52,7 @@ def dog_index(request):
     }
     return render(request, "articles/dog.html", context) # 템플릿 네임 적어주고, 이쪽으로 context 값을 넘겨줌
 
+@login_required
 def dog_create(request):
     if request.method == "POST":
         dog_article_form = DogArticleForm(request.POST, request.FILES) # 사용자가 요청하여 Productform에 담긴 포스트를 productform 변수에 저장
@@ -79,7 +87,7 @@ def dog_detail(request, dog_article_pk):
     return render(request, "articles/dog_detail.html", context)
 
 
-
+@login_required
 def dog_update(request, dog_article_pk):
     dog_article = DogArticle.objects.get(id=dog_article_pk)
 
@@ -206,16 +214,17 @@ def dog_comment_create(request, dog_article_pk):
 
 
 def cat_comment_create(request, cat_article_pk):
-    article = CatArticle.objects.get(pk=cat_article_pk)
+    cat_article = CatArticle.objects.get(pk=cat_article_pk)
     cat_comment_form = CatCommentForm(request.POST)
     if cat_comment_form.is_valid():
         cat_comment = cat_comment_form.save(commit=False)
-        cat_comment.catarticle = article
+        cat_comment.catarticle = cat_article
         cat_comment.user = request.user
         cat_comment.save()
         context = {
             'cat_content': cat_comment.content,
             'cat_userName': cat_comment.user.username,
+            'cat_pk':cat_comment.pk,
         }
         
     return JsonResponse(context)
@@ -236,7 +245,10 @@ def dog_comments_delete(request, dog_article_pk, dog_comment_pk):
 def cat_comments_delete(request, cat_article_pk, cat_comment_pk):
     cat_comment = CatArticleComment.objects.get(pk=cat_comment_pk)
     cat_comment.delete()
-    return redirect('articles:cat_detail', cat_article_pk)
+    context = {
+        '1': 1
+    }
+    return JsonResponse(context)
 
 
 def dog_bookmark(request, dog_article_pk):
@@ -246,13 +258,35 @@ def dog_bookmark(request, dog_article_pk):
     if request.user in dog_article.bookmarks.all(): 
         # 좋아요 삭제하고
         dog_article.bookmarks.remove(request.user)
-        is_bookmarked= False
+        is_bookmarked = False
     else:
         # 좋아요 추가하고 
         dog_article.bookmarks.add(request.user)
-        is_bookmarked= True 
+        is_bookmarked = True 
     context = {
         'isbookmarked' : is_bookmarked,
+        'bookmarkcount': dog_article.bookmarks.count()
+    }
+    return JsonResponse(context)
+    # 상세 페이지로 redirect
+
+
+
+def cat_bookmark(request, cat_article_pk):
+    cat_article = CatArticle.objects.get(pk=cat_article_pk)
+    # 만약에 로그인한 유저가 이 글을 좋아요를 눌렀다면,
+    # if article.like_users.filter(id=request.user.id).exists():
+    if request.user in cat_article.bookmarks.all(): 
+        # 좋아요 삭제하고
+        cat_article.bookmarks.remove(request.user)
+        is_bookmarked = False
+    else:
+        # 좋아요 추가하고 
+        cat_article.bookmarks.add(request.user)
+        is_bookmarked = True 
+    context = {
+        'isbookmarked' : is_bookmarked,
+        'bookmarkcount': cat_article.bookmarks.count()
     }
     return JsonResponse(context)
     # 상세 페이지로 redirect

@@ -8,11 +8,12 @@
   position: relative;
 }
 
+
+
 .row{
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  
 }
 
 .u-btn-outline-primary{
@@ -28,4 +29,8 @@
 
 .date-font{
   color: #FFCD00;
+}
+
+.text-left{
+  text-align: left!important;
 }
