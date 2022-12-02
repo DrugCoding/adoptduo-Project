@@ -42,6 +42,159 @@
     
     }
 
+.undered {
+    position: relative;
+    
+    height: 350px;
+    overflow: hidden;
+   
+    
+}
+    
+    
+    
+.undered_img {
+    position: absolute; 
+    bottom: 500; 		 
+    left: 100;
+    width: 100%; 
+    height: 1280px;
+    top:-330px;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    
+    
+   
+    
+    
+}
+
+.undered_img:hover ~.undered_text { color:white;
+    -webkit-filter: grayscale(0%);
+    filter: grayscale(0%);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+    
+}
+
+.undered_img:hover { color:white;
+    -webkit-filter: grayscale(0%);
+    filter: grayscale(0%);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+}
+   
+.undered_img_2 {
+    position: absolute; 
+    bottom: 500; 		 
+    left: 100;
+    width: 100%; 
+    height: 1280px;
+    top:-450px;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+   
+    
+}
+
+.undered_img_2:hover ~.undered_text { color:white;
+    -webkit-filter: grayscale(0%);
+    filter: grayscale(0%);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+    
+}
+
+.undered_img_2:hover { color:white;
+    -webkit-filter: grayscale(0%);
+    filter: grayscale(0%);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+}
+
+
+.undered_img_3 {
+    position: absolute; 
+    bottom: 500; 		 
+    left: 100;
+    width: 100%; 
+    height: 1280px;
+    top:-450px;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    
+    
+}
+
+.undered_img_3:hover ~.undered_text { color:white;
+    -webkit-filter: grayscale(0%);
+    filter: grayscale(0%);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+    
+}
+
+.undered_img_3:hover { color:white;
+    -webkit-filter: grayscale(0%);
+    filter: grayscale(0%);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+}
+
+.undered_text{
+    position: absolute;
+    bottom: 20%;
+    right: 35%;
+    filter:brightness(100%);
+    color: #FFCD00;
+    font-family: 'Gothic A1', sans-serif;  
+
+}
+.undered_text:hover{
+    position: absolute;
+    bottom: 20%;
+    right: 35%;
+    filter:brightness(100%);
+    color: white;
+    font-family: 'Gothic A1', sans-serif;  
+
+}
+    
+    
+    
+.undered_img_4 {
+    position: absolute; 
+    bottom: 500; 		 
+    left: 100;
+    width: 100%; 
+    height: 1280px;
+    bottom:-350px;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    
+    
+}
+
+.undered_img_4:hover ~.undered_text { color:white;
+    -webkit-filter: grayscale(0%);
+    filter: grayscale(0%);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+    
+}
+
+.undered_img_4:hover { color:white;
+    -webkit-filter: grayscale(0%);
+    filter: grayscale(0%);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+}
+
+
+    
+    
+    
+
 .main_logo{
     position: absolute;
     top: 30%;
@@ -133,9 +286,16 @@
     
 
       }     
+.center-hr_2 {
+position: relative;
+
+left:33%;
 
 
-
+    }  
+.undered_link{
+    position: absolute;
+}
 
 
 

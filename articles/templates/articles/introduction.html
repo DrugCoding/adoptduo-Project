@@ -42,11 +42,15 @@
       </div>
 
       <div class="col-6">
-        <h3 class="text-center" style="font-family: 'Noto Sans KR', sans-serif;"> <span class="colored_text" style="font-size:40px;">[</span>야생에서의 삶은 아이들에게 가혹합니다<span class="colored_text" style="font-size:40px;">]
-        </span></h3>
-        <h5 class="mt-4" style="font-family: 'Noto Sans KR', sans-serif;" >  매년 수 천마리의 아이들이 가정에서 버려집니다. <br>
-          야생에서 아이들은 평균수명의 절반도 채 살지 못합니다. </h5>
 
+        <div class="d-flex;">
+          <h3 class="text-center" style="font-family: 'Noto Sans KR', sans-serif;"> <span class="colored_text" style="font-size:40px;">[</span>야생에서의 삶은 아이들에게 가혹합니다<span class="colored_text" style="font-size:40px;">]
+          </span></h3>
+          <h5 class="mt-4 ms-2" style="font-family: 'Noto Sans KR', sans-serif;" >  매년 수 천 마리의 아이들이 가정에서 버려집니다. </h5>
+          <h6 style="font-family: 'Noto Sans KR', sans-serif;">  야생에서 아이들은 굶주림과 질병으로 인해 평균수명의 절반도 채 살지 못합니다. <br>
+          
+          </h6>
+        </div>
         
       </div>
 
@@ -131,8 +135,8 @@
       <div class="col-6">
         <h3 class="text-center" style="font-family: 'Noto Sans KR', sans-serif;"> <span class="colored_text" style="font-size:40px;">[</span>자원봉사로 기쁨을 나눠보세요<span class="colored_text" style="font-size:40px;">]
         </span></h3>
-        <h5 class="mt-4" style="font-family: 'Noto Sans KR', sans-serif;" >  매년 수 천마리의 아이들이 가정에서 버려집니다. <br>
-          야생에서 아이들은 평균수명의 절반도 채 살지 못합니다. </h5>
+        <h5 class="mt-4" style="font-family: 'Noto Sans KR', sans-serif;" >  매년 수 천 마리의 아이들이 가정에서 버려집니다. <br>
+          야생에서 아이들은 굶주림과 질병으로 인해 평균수명의 절반도 채 살지 못합니다. </h5>
 
         
       </div>
@@ -142,11 +146,67 @@
 
     </div>
 
+    <hr>
+    <h1 class="d-flex justify-content-center" style="font-size:88px; font-family: 'Inter', sans-serif;">
+      입양해듀오
+    </h1>
+    <h6 class="d-flex justify-content-center mt-4" style="font-size:22px; font-family: 'Inter', sans-serif;">바로가기</h6>
+
+    <hr class="center-hr_2" style="width:450px;">
+
+    <div>
+      <div class="undered ">
+        <a href="{% url 'articles:dog_index' %}">
+        <img class="undered_img" src="{% static 'images/under_image.jpg' %}" alt="">
+        <h1 class="undered_text" style="font-size:70px">&nbsp;&nbsp;&nbsp;&nbsp;강아지 <br>
+        입양해듀오</h1></a>
+        
+      </div>
+    </div>
+
+    <div>
+      <div class="undered">
+        <a href="{% url 'articles:cat_index' %}">
+        <img class="undered_img_2" src="{% static 'images/under_image_2.jpg' %}" alt="">
+        <h1 class="undered_text" style="font-size:70px">&nbsp;&nbsp;&nbsp;&nbsp;고양이 <br>
+        입양해듀오</h1></a>
+        
+      </div>
+    </div>
+
+    <div>
+      <div class="undered ">
+        <a href="{% url 'articles:dog_index' %}">
+        <img class="undered_img_3" src="{% static 'images/under_image_3.jpg' %}" alt="">
+        <h1 class="undered_text" style="font-size:70px">&nbsp;&nbsp;자원봉사 <br>
+        등록해듀오</h1></a>
+        
+      </div>
+    </div>
+
+    <div>
+      <div class="undered ">
+        <a href="{% url 'articles:dog_index' %}">
+        <img class="undered_img_4" src="{% static 'images/under_image_4.jpg' %}" alt="">
+        <h1 class="undered_text" style="font-size:70px">&nbsp;&nbsp;입양절차 <br>
+        알아봐듀오</h1></a>
+        
+      </div>
+    </div>
+
+    
+  
+    
+  </div>
+
+
+
+    
+
       
 
 
     
- </div>
 
   {% comment %} <video class="main-box mt-5" src="{% static 'images/main page.mp4' %}" muted="muted" controls="controls" autoplay="autoplay" loop="loop"></video> {% endcomment %}
 
