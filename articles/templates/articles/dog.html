@@ -54,13 +54,9 @@
     <div class="row row-cols-1 row-cols-md-3">
         {% for i in page_obj %}
             <div class="col">
-                <a href="#" class="card-link">
+                <a href="{% url 'articles:dog_detail' i.pk %}" class="card-link">
                     <div class="card">
-                        {% if i.image %}
-                            <img src="{{ i.image.url }}" class="card-img-top" alt="dog">
-                        {% else %}
-                            <img src="https://dummyimage.com/550x500/000/454545" class="card-img-top" alt="...">
-                        {% endif %}
+                        <img src="{{ i.image.url }}" class="card-img-top" alt="dog">
                         <div class="card-body text-dark">
                             <h5 class="card-title">{{ i.name }} / {{ i.age }} / {{ i.gender }}</h5>
                             <p class="card-text" id="dog-card-text">{{ i.memo }} <br> 조회수: {{ i.hits }}</p>
@@ -71,6 +67,8 @@
         {% endfor %}
     </div>
 </div>
+
+<a href="{% url 'articles:dog_create' %}" class="nav-link btn nav_btn me-1">강아지 글작성</a>
 <ul id="pagination" class="d-flex my-5 d-flex justify-content-center p-5">
     <li class="mx-2 rounded"><a class="border border-0 text-muted" href="?page=1">1</a></li>
     <li class="mx-2 rounded"><a class="border border-0 text-muted" href="?page=2">2</a></li>
