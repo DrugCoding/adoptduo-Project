@@ -2,6 +2,42 @@ a {
   text-decoration: none;
   padding: 10px;
 }
+.pet-banner-div {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+}
+.pet-banner-img {
+  position: absolute;
+  object-fit: fill;
+  width: 100%;
+  height: auto;
+  filter: brightness(50%);
+  top: -80px;
+}
+.pet-banner-text {
+  position: absolute;
+  top: 39%;
+  right: 32%;
+  filter: brightness(100%);
+  color: white;
+}
+.pet-banner-text_2 {
+  position: absolute;
+  top: 73%;
+  right: 38%;
+  color: white;
+}
+.banner-logo {
+  position: absolute;
+  left: 32%;
+}
+.hover1:hover {
+  box-shadow: 200px 0 0 0 #ffcd00 inset;
+}
+.cat-create {
+  background-color: #fff08b;
+}
 
 #puppy-ul {
   list-style: none;
@@ -16,22 +52,13 @@ a {
   float: left;
   position: relative;
   /* display: block; */
-  border: 2px solid black;
-  border-radius: 1em;
+  /* border: 1px solid #fff08b; */
+  background-color: #fff08b;
+  border-radius: 2em;
 }
 
 #dog-banner {
   background-image: url("/static/images/dog_banner.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  height: 300px;
-  filter: brightness(65%);
-  position: relative;
-}
-
-#cat-banner {
-  background-image: url("/static/images/cat_banner.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
