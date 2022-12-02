@@ -2,52 +2,92 @@
 {% load django_bootstrap5 %}
 {% load static %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/dog_cat_detail.css' %}">
-  <div class="bg-image w-100 d-flex flex-column align-items-center justify-content-center text-light" id="cat-banner">
-    <div class="text-center">
-      <h2 class="mb-4">건강한 반려문화의 시작</h2>
-      <p>평생을 함께해 주세요</p>
+  <link rel="stylesheet" href="{% static 'css/dog_cat_detail.css' %}"/>
+
+  <div class="pet-banner-div d-flex justify-content-center">
+    <img class="pet-banner-img" src="{% static 'images/cat_banner.jpg' %}" alt="cat_banner">
+    <h1 class="pet-banner-text">건강한 반려문화의 시작</h1>
+    <p class="pet-banner-text_2 text-center">평생을 함께해 주세요. 반려동물의 삶을 환하게 비춰주세요.</p>
+    <div class="banner-logo">
+      <img src="{% static 'images/logo_white.png' %}" alt="banner_logo" style="width:300px">
     </div>
   </div>
+
   <div class="container mt-4">
     <h2>글제목{{ cat_article.title }}</h2>
-    <hr id="divider">
+    <hr id="divider"/>
   </div>
   <div class="container">
     <h2 class="text-center mb-3">입양동물정보</h2>
     <div class="text-center">
-      {% comment %} DB에서 가져와서 이미지 삽입예정 {% endcomment %}
-      {% comment %} <img id="cat-detail-img" class="mb-4 w-25 rounded" src="{{ cat_article.image }}" alt="cat_article.image"> {% endcomment %}
-      <img id="pet-detail-img" class="mb-4 w-25 rounded" src="{{ cat_article.image.url }}" alt="cat_article.image">
+      <img id="pet-detail-img" class="mb-4 w-25 rounded" src="{{ cat_article.image.url }}" alt="cat_article.image"/>
     </div>
     <div class="row">
       <div id="pet-info-var-div" class="col-1 text-center py-3">이름</div>
-      <div id="pet-info-div" class="col-5 text-center py-3">{{ cat_article.name }}</div>
+      <div id="pet-info-div" class="col-5 text-center py-3">
+        {{ cat_article.name }}
+      </div>
       <div id="pet-info-var-div" class="col-1 text-center py-3">나이</div>
-      <div id="pet-info-div" class="col-5 text-center py-3">{{ cat_article.age }}</div>
+      <div id="pet-info-div" class="col-5 text-center py-3">
+        {{ cat_article.age }}살
+      </div>
     </div>
     <div class="row mt-1">
       <div id="pet-info-var-div" class="col-1 text-center py-3">성별</div>
-      <div id="pet-info-div" class="col-5 text-center py-3">{{ cat_article.gender }}</div>
+      <div id="pet-info-div" class="col-5 text-center py-3">
+        {% if cat_article.gender == '수컷' %}
+          <span>왕자님</span>
+        {% else %}
+          <span>공주님</span>
+        {% endif %}
+      </div>
       <div id="pet-info-var-div" class="col-1 text-center py-3">묘종</div>
-      <div id="pet-info-div" class="col-5 text-center py-3">{{ cat_article.breed }}</div>
+      <div id="pet-info-div" class="col-5 text-center py-3">
+        {{ cat_article.breed }}
+      </div>
     </div>
     <div class="row mt-1">
       <div id="pet-info-var-div" class="col-1 text-center py-3">접종유무</div>
-      <div id="pet-info-div" class="col-5 text-center py-3">{{ cat_article.vaccination }}</div>
+      <div id="pet-info-div" class="col-5 text-center py-3">
+        {% if cat_article.vaccination %}
+          <span>접종 완료</span>
+        {% else %}
+          <span>접종 안함</span>
+        {% endif %}
+      </div>
       <div id="pet-info-var-div" class="col-1 text-center py-3">중성화유무</div>
-      <div id="pet-info-div" class="col-5 text-center py-3">{{ cat_article.neutered }}</div>
+      <div id="pet-info-div" class="col-5 text-center py-3">
+        {% if cat_article.neutered %}
+          <span>중성화 완료</span>
+        {% else %}
+          <span>중성화 안함</span>
+        {% endif %}
+      </div>
     </div>
     <div class="row mt-1">
       <div id="pet-info-var-div" class="col-1 text-center py-3">지역</div>
-      <div id="pet-info-div" class="col-5 text-center py-3">{{ cat_article.location }}</div>
+      <div id="pet-info-div" class="col-5 text-center py-3">
+        {{ cat_article.location }}
+      </div>
       <div id="pet-info-var-div" class="col-1 text-center py-3">특이사항</div>
-      <div id="pet-info-div" class="col-5 text-center py-3">{{ cat_article.memo }}</div>
+      <div id="pet-info-div" class="col-5 text-center py-3">
+        {{ cat_article.memo }}
+      </div>
     </div>
   </div>
 
-  <a href="{% url 'articles:cat_update' cat_article.pk %}" class="btn detail_btn2 mx-2 my-3">글수정</a>
-  <a href="{% url 'articles:cat_delete' cat_article.pk %}" class="btn detail_btn2 my-3">글삭제</a>
+
+  <div class="container mt-4">
+    <div class="row d-flex justify-content-center">
+      <div id="pet-info-var-div" class="col-1 py-3 text-center">Content</div>
+      <div id="pet-info-div" class="col-5 py-3">{{ cat_article.content }}</div>
+    </div>
+  </div>
+  <div class="container text-center">
+    {% if request.user == cat_article.user %}
+      <a href="{% url 'articles:cat_update' cat_article.pk %}" class="btn btn-primary detail_btn2 mx-2 my-3">글수정</a>
+      <a href="{% url 'articles:cat_delete' cat_article.pk %}" class="btn btn-primary detail_btn2 mx-2 my-3">글삭제</a>
+    {% endif %}
 
   <span>
     {% if request.user.is_authenticated %} 
@@ -78,10 +118,9 @@
     </div>    
     {% empty %}
         <p>댓글이 없어요 ㅠ_ㅠ</p>
-    {% endfor %}
+      {% endfor %}
+    </div>
   </div>
-
-
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script

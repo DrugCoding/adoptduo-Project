@@ -8,8 +8,8 @@ from django.conf import settings
 
 # Create your models here.
 class Volunteer(models.Model):
-    title = models.CharField(max_length=20)
-    content = models.TextField()
+    title = models.CharField(max_length=50)
+    content = models.CharField(max_length=100)
     image = ProcessedImageField(
         blank=True,
         processors=[ResizeToFill(200, 300)],
@@ -25,7 +25,8 @@ class Volunteer(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     # 견종
     breed = models.CharField(max_length=20)
-    # 지역
+    area = models.CharField(max_length=20)
+    # 도착 지역
     adopt_location = models.CharField(max_length=20)
     # 날짜
     adopt_date = models.DateField()

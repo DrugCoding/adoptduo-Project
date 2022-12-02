@@ -1,3 +1,34 @@
+.pet-banner-div {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+}
+.pet-banner-img {
+  position: absolute;
+  object-fit: fill;
+  width: 100%;
+  height: auto;
+  filter: brightness(50%);
+  top: -80px;
+}
+.pet-banner-text {
+  position: absolute;
+  top: 39%;
+  right: 32%;
+  filter: brightness(100%);
+  color: white;
+}
+.pet-banner-text_2 {
+  position: absolute;
+  top: 73%;
+  right: 38%;
+  color: white;
+}
+.banner-logo {
+  position: absolute;
+  left: 32%;
+}
+
 #divider {
   color: black;
   border-top: 2px solid black;
