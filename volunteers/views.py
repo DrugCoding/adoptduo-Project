@@ -7,7 +7,7 @@ from .forms import VolunteerForm
 def index(request):
     v_articles = Volunteer.objects.order_by('-pk')
     context ={'v_articles': v_articles}
-    return render(request, 'volunteers/index.html')
+    return render(request, 'volunteers/index.html', context)
 
 def create(request):
     if request.method == 'POST':
