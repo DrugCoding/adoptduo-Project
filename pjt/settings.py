@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "django_bootstrap5",
     "django_extensions",
     "multiselectfield",
+    "notes",
     "accounts",
     "articles",
     "stories",

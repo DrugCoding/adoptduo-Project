@@ -25,5 +25,7 @@ urlpatterns = [
     path('<int:cat_article_pk>/comments/<int:cat_comment_pk>/cat/delete/', views.cat_comments_delete, name='cat_comments_delete'),
     path('<int:dog_article_pk>/dog/bookmark/', views.dog_bookmark, name="dog_bookmark"), # 북마크
     path("search/", views.search, name="search"), # 검색기능
-    path('<int:cat_article_pk>/cat/bookmark/', views.cat_bookmark, name="cat_bookmark"), # 좋아요
+    path('<int:cat_article_pk>/cat/bookmark/', views.cat_bookmark, name="cat_bookmark"), 
+    path("<int:cat_category_pk>/cat/category/", views.cat_category, name="cat_category"),
+    path("<int:dog_category_pk>/dog/category/", views.dog_category, name="dog_category"),
 ]
