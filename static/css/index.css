@@ -1,3 +1,24 @@
+@font-face {
+  font-family: 'MICEGothic Bold';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'GothicA1-Light';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/GothicA1-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NanumSquareNeo-Variable';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* search form */
 .search-section {
   padding: 10px;
@@ -11,7 +32,7 @@
 
 .search-form-section{
   align-self: center;
-  display: flex;
+  
   flex: 75%;
 }
 form#searchform { 
@@ -45,9 +66,12 @@ input#s {
 button.search-submit {
   background-color: #FFCD00;
   border-radius: unset;
-  height: 61px;
+  height: 63px;
   border: solid #FFCD00 ;
-  width: 66.5px;
+  width: 67px;
+  
+  top:278px;
+  position: absolute;
 }
 
 .img-search{
@@ -58,13 +82,16 @@ button.search-submit {
   font-size: 1.2vw;
   font-weight: 600;
   color: #707070;
-  margin-left: 0.4rem;
+  margin-left: 1.7rem;
+  font-family: 'MICEGothic Bold';
 }
 
 #brand{
   font-size: 2.5vw;
-  font-weight: 800;
+  font-family: 'MICEGothic Bold';
   color: black;
+  margin-left: 1.6rem;
+  
 }
 
 /*입양정보*/
@@ -79,16 +106,20 @@ h3.adopted-font{
   text-align: center;
   font-size: 35px;
   font-weight: 800;
-  
+  font-family: 'NanumSquareNeo-Variable';
 }
 
 .adopted-stroke{
   display: flex;
   margin-top: -20px;
-  margin-left: 602px;
+  margin-left: 590px;
   background-color: #FFCD00;
-  border: 2px solid #ffcd00;
+  border: 1px solid #ffcd00;
   width: 88px;
+}
+
+.category{
+  font-family: 'NanumSquareNeo-Variable';
 }
 
 .see-more{
@@ -96,16 +127,27 @@ h3.adopted-font{
   font-size: 14px;
   font-weight: 600;
   color:black;
+  font-family: 'NanumSquareNeo-Variable';
 }
 
 .post-img{
   object-fit: cover;
   display: block;
   max-height: 200px;
+  height:140px;
+  border-radius: 15px;
+  width: 100%;
 } 
+
+.card{
+  border-radius: 15px;
+}
 
 .post-title{
   color: black;
+  font-family: 'NanumSquareNeo-Variable';
+  font-size: 15px;
+  font-weight: 600;
 }
 
 .post-title:hover{
@@ -126,16 +168,16 @@ h3.story-font{
   text-align: center;
   font-size: 35px;
   font-weight: 800;
-  
+  font-family: 'NanumSquareNeo-Variable';
 }
 
 .story-stroke{
   display: flex;
   margin-top: -20px;
-  margin-left: 602px;
+  margin-left: 605px;
   background-color: #FFCD00;
-  border: 2px solid #ffcd00;
-  width: 88px;
+  border: 1px solid #ffcd00;
+  width: 65px;
 }
 
 .main-story-img{
@@ -172,7 +214,16 @@ h3.story-font{
 .stoy-post{
   width: 40rem;
 }
-
+.story-title{
+  font-family: 'NanumSquareNeo-Variable';
+  font-weight: 600;
+}
+.story-title1{
+  font-family: 'NanumSquareNeo-Variable';
+}
+.story-title2{
+  font-family: 'NanumSquareNeo-Variable';
+}
 
 .stories-post{
   width: 40rem;
@@ -197,16 +248,16 @@ h3.volunteers-font{
   text-align: center;
   font-size: 35px;
   font-weight: 800;
-  
+  font-family: 'NanumSquareNeo-Variable';
 }
 
 .volunteers-stroke{
   display: flex;
   margin-top: -20px;
-  margin-left: 602px;
+  margin-left: 616px;
   background-color: #FFCD00;
-  border: 2px solid #ffcd00;
-  width: 88px;
+  border: 1.3px solid #ffcd00;
+  width: 65px;
 }
 
 
