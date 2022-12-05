@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import DogArticle, CatArticle, DogArticleComment, CatArticleComment
+from .models import DogArticle, CatArticle, DogArticleComment, CatArticleComment, CatCategory, DogCategory
 from .forms import DogArticleForm, CatArticleForm, DogCommentForm, CatCommentForm
 from stories.models import Stories
 from django.core.paginator import Paginator
@@ -120,6 +120,7 @@ def dog_delete(request, dog_article_pk):
 
 def cat_index(request):
     cat_articles = CatArticle.objects.all()
+    form = CatArticleForm()
 
     cat_article_item = CatArticle.objects.order_by("pk") # pk 순으로 정렬(등록한 것부터)
     paginator = Paginator(cat_article_item, 9) # 정렬을 9개까지 보여줌
@@ -129,6 +130,7 @@ def cat_index(request):
     context = {
         'cat_articles':cat_articles,
         "page_obj": page_obj,
+        'form':form
     }
     return render(request, "articles/cat.html", context) # 템플릿 네임 적어주고, 이쪽으로 context 값을 넘겨줌
 
@@ -290,6 +292,32 @@ def cat_bookmark(request, cat_article_pk):
     }
     return JsonResponse(context)
     # 상세 페이지로 redirect
+
+
+
+def cat_category(request, cat_category_pk):
+    category = CatCategory.objects.get(pk=cat_category_pk)
+    category_articles = (
+        CatArticle.objects.filter(cat_breed=category)
+    )
+    context = {
+        "category": category, 
+        "category_articles": category_articles
+        }
+    return render(request, "articles/cat.html", context)
+
+
+
+def dog_category(request, dog_category_pk):
+    category = DogCategory.objects.get(pk=dog_category_pk)
+    category_articles = (
+        DogArticle.objects.filter(dog_breed=category)
+    )
+    context = {
+        "category": category, 
+        "category_articles": category_articles
+        }
+    return render(request, "articles/dog.html", context) 
     
 
 

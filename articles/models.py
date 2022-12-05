@@ -6,6 +6,7 @@ from multiselectfield import MultiSelectField
 from django.db import models
 from django.conf import settings
 
+
 # Create your models here.
 class DogArticle(models.Model):
     title = models.CharField(max_length=20)
@@ -35,17 +36,7 @@ class DogArticle(models.Model):
     hits = models.IntegerField(default=0)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     # 견종
-    breed_list = [
-        ('포메라니안', '포메라니안'),
-        ('웰시코기', '웰시코기'), 
-        ('말티즈', '말티즈'), 
-        ('시츄', '시츄'), 
-        ('푸들', '푸들'), 
-        ('비숑', '비숑'), 
-        ('시바견', '시바견'), 
-        ('골든 리트리버', '골든 리트리버'), 
-    ]
-    breed = models.CharField(max_length=20, choices=breed_list)
+    dog_breed = models.ForeignKey('articles.DogCategory', on_delete=models.CASCADE,)
     # 특이사항
     memo = models.CharField(max_length=20)
     # 중성화 여부
@@ -88,14 +79,7 @@ class CatArticle(models.Model):
     hits = models.IntegerField(default=0)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     # 견종
-    breed_list = [
-        ('페르시안', '페르시안'),
-        ('러시안블루', '러시안블루'), 
-        ('샴', '샴'), 
-        ('렉돌', '렉돌'), 
-        ('스코티쉬폴드', '스코티쉬폴드'), 
-    ]
-    breed = models.CharField(max_length=20, choices=breed_list)
+    cat_breed = models.ForeignKey('articles.CatCategory', on_delete=models.CASCADE)
     # 특이사항
     memo = models.CharField(max_length=20)
     # 중성화 여부
@@ -109,3 +93,14 @@ class CatArticleComment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     content = models.TextField()
     catarticle = models.ForeignKey(CatArticle, on_delete=models.CASCADE)
+
+
+class CatCategory(models.Model):
+    name = models.CharField(max_length=30)
+    def __str__(self):
+      return self.name
+
+class DogCategory(models.Model):
+    name = models.CharField(max_length=30)
+    def __str__(self):
+      return self.name

@@ -10,6 +10,8 @@ class DogArticleForm(forms.ModelForm):
         widget=forms.RadioSelect(
         ),
     )
+
+    
     class Meta:
         model = DogArticle
         exclude = (
@@ -17,6 +19,7 @@ class DogArticleForm(forms.ModelForm):
             "hits",
             "user",
         )
+ 
 
 
 
@@ -31,6 +34,7 @@ class CatArticleForm(forms.ModelForm):
         widget=forms.RadioSelect(
         ),
     )
+
     class Meta:
         model = CatArticle
         exclude = (
@@ -38,6 +42,10 @@ class CatArticleForm(forms.ModelForm):
             "hits",
             "user",
         )
+        # fields = {
+        #     "title", "cat_breed"
+        # }
+
 
 class DogCommentForm(forms.ModelForm):
     class Meta:

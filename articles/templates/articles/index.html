@@ -57,7 +57,7 @@
               <div class="col ">
                 <a style="text-decoration:none;" href="">
                   <div class="card h-100">
-                    <img src="{{ cat.image.url }}" class="card-img-top post-img" alt="...">
+                    <img src="{{ cat.image }}" class="card-img-top post-img" alt="...">
                     <div class="card-body">
                       <h5 class="post-title">{{ cat.title }}</h5>
                     </div>
@@ -118,7 +118,9 @@
           <div class="col track ">
             <a style="text-decoration:none;" href="">
               <div class="card h-100 content">
-                <img src="{{ user.image.url }}" class="card-img-top" alt="...">
+                {% if user.volunteer_c == "가능" %}
+                  <img src="{{ user.image.url }}" class="card-img-top" alt="...">
+                {% endif %}
               </div>
             </a>
           </div>
