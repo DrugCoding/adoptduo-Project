@@ -26,7 +26,6 @@
     font-size: larger;
     font-weight: bold;
     margin: 1rem auto;
-    min-width: 20%;
     background-color: #FFCD00;
     color: black;
     border-style: solid;
@@ -34,4 +33,11 @@
     border-color: #d7ac00;
     border-radius: 3rem;
     height: 3rem;
+}
+
+.btn:hover {
+    background-color: white;
+    border-radius: 3rem;
+    border-color: #FFCD00;
+    border-width: 2px;
 }
