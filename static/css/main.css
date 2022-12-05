@@ -1,0 +1,57 @@
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'InfinitySans-RegularA1';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NanumSquareNeo-Variable';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+.top-nav{
+  background-color: #FFCD00;
+  height: 5rem;
+}
+
+.top-nav-a{
+  z-index: 1;
+  font-family: 'Pretendard-Regular';
+  
+  
+}
+
+.top-nav-accounts{
+  font-family: 'Pretendard-Regular';
+  z-index: 1;
+}
+
+.botton-nav{
+  background-color: white;
+  height: 10rem;
+}
+
+.bottom-nav-logo{
+  width:17rem; 
+  z-index:0; 
+  display: block; 
+  left: -2.3rem; 
+  top: 1rem; 
+  position: relative;
+}
+
+.nav-font{
+  font-size: 20px;
+  color: black;
+  font-family: 'NanumSquareNeo-Variable';
+}

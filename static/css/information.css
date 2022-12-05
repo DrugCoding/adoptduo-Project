@@ -1,11 +1,41 @@
-#dog-banner {
-  background-image: url("/static/images/dog_banner.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  height: 300px;
-  filter: brightness(65%);
+@font-face {
+  font-family: 'NanumSquareNeo-Variable';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+ font-family: 'NanumBarunGothic';
+ font-style: normal;
+ font-weight: 400;
+ src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
+ src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
+}
+
+.nanumbarungothic * {
+ font-family: 'NanumBarunGothic', sans-serif;
+}
+
+.pet-banner-div {
   position: relative;
+  height: 300px;
+  overflow: hidden;
+}
+.pet-banner-img {
+  position: absolute;
+  object-fit: fill;
+  width: 100%;
+  height: auto;
+  filter: brightness(50%);
+  top: -80px;
+}
+.pet-banner-text {
+  position: absolute;
+  top: 39%;
+  right: 32%;
+  filter: brightness(100%);
+  color: white;
 }
 
 .row{
@@ -28,4 +58,16 @@
 
 .date-font{
   color: #FFCD00;
+}
+
+p{
+  font-family: 'NanumBarunGothic';
+}
+
+.a-text{
+  font-family: 'NanumSquareNeo-Variable';
+}
+
+li{
+  font-family: 'NanumBarunGothic';
 }
