@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block content %}
+
+<div class="container fs-5 mt-4">
+    <div class="d-flex justify-content-center">
+      <table class="list-table">
+            <thead>
+            <th class="fs-2 fw-bold">받은 편지함</th>
+            <tr>
+                <th>보낸사람</th>
+                <th>제목</th>
+                <th>날짜</th>
+                <th>읽음</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for note in notes %}
+                {% if note.read == 1 %}
+                <tr class="text-muted" id="{{note.pk}}">
+                        <td>
+                        {{ note.from_user.username }}
+                        </td> <!---보낸이 -->
+                        <td><a class="" style="text-decoration:none;" href="">{{ note.title }}</a></td> <!---제목 -->
+                        <td class="">{{ note.created_at|date:'o.m.d' }} {{ note.created_at|time:"H:i" }}</td> <!---보낸시간 -->
+                        {% if note.read == 1 %}
+                        <td>읽음</td> <!---읽음 -->
+                        {% else %}
+                        <td>안읽음</td> <!---읽음 -->
+                        {% endif %}
+                </tr>
+                {% else %}
+                <tr id="{{note.pk}}">
+                    <td>
+                      {{note.from_user.username}}
+                    </td> <!---보낸이 -->
+                    <td><a class="custom-link" style="text-decoration:none; color:black;" href="">{{ note.title }}</a></td> <!---제목 -->
+                    <td class="tc">{{ note.created_at|date:'o.m.d' }} {{ note.created_at|time:"H:i" }}</td> <!---보낸시간 -->
+                    {% if note.read == 1 %}
+                    <td>읽음</td> <!---읽음 -->
+                    {% else %}
+                    <td>안읽음</td> <!---읽음 -->
+                    {% endif %}
+                  </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

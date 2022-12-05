@@ -30,14 +30,14 @@
       <div id="pet-info-var-div" class="col-1 text-center py-3">성별</div>
       <div id="pet-info-div" class="col-5 text-center py-3">{{ dog_article.gender }}</div>
       <div id="pet-info-var-div" class="col-1 text-center py-3">견종</div>
-      <div id="pet-info-div" class="col-5 text-center py-3">{{ dog_article.breed }}</div>
+      <div id="pet-info-div" class="col-5 text-center py-3">{{ dog_article.dog_breed }}</div>
     </div>
     <div class="row mt-1">
       <div id="pet-info-var-div" class="col-1 text-center py-3">접종유무</div>
       {% if dog_article.vaccination%}
       <div id="pet-info-div" class="col-5 text-center py-3"><span>접종 완료</span></div>
       {% else %}
-      <div id="pet-info-div" class="col-5 text-center py-3"><span>미접종</span></div>
+      <div id="pet-info-div" class="col-5 text-center py-3"><span>접종 안함</span></div>
       {% endif %}
       <div id="pet-info-var-div" class="col-1 text-center py-3">중성화유무</div>
       {% if dog_article.neutered %}
@@ -65,6 +65,16 @@
     <a href="{% url 'articles:dog_update' dog_article.pk %}" class="btn btn-primary detail_btn2 mx-2 my-3">글수정</a>
     <a href="{% url 'articles:dog_delete' dog_article.pk %}" class="btn btn-primary detail_btn2 my-3">글삭제</a>
   {% endif %}
+    <span>
+      {% if request.user.is_authenticated %} 
+        {% if request.user in dog_article.bookmarks.all %}
+          <i id="bookmark-btn" data-article-id="{{ dog_article.pk }}" class="bi-bookmark-heart-fill"></i>
+        {% else %}
+          <i id="bookmark-btn" data-article-id="{{ dog_article.pk }}" class="bi-bookmark-heart"></i>
+        {% endif %}
+        <span id="bookmark-count">{{ dog_article.bookmarks.count }}</span>
+    </span>
+    {% endif %} 
     <h4 class="mt-5">댓글</h4>
     <form id="dog-comment-form" data-article-id="{{ dog_article.pk }}">
         {% csrf_token %}
@@ -82,21 +92,12 @@
         <hr>    
       </div>
       {% empty %}
-        <p>댓글이 없어요 ㅠ_ㅠ</p>
+        <p>댓글이 없어요! </p>
       {% endfor %}
     </div>
   </div>
 
-<span>
-  {% if request.user.is_authenticated %} 
-    {% if request.user in dog_article.bookmarks.all %}
-      <i id="bookmark-btn" data-article-id="{{ dog_article.pk }}" class="bi-bookmark-heart-fill"></i>
-    {% else %}
-      <i id="bookmark-btn" data-article-id="{{ dog_article.pk }}" class="bi-bookmark-heart"></i>
-    {% endif %}
-    <span id="bookmark-count">{{ dog_article.bookmarks.count }}</span>
-</span>
-  {% endif %} 
+
 
 
 

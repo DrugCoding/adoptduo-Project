@@ -1,19 +1,10 @@
-.container {
-    min-width: 100%;
-    margin: 2rem 0;
-    padding: 4rem 0;
-    border-style: solid none none;
-    border-width: 1px;
-    border-color: lightgrey;
-}
-
 .form-label {
+    margin-top: 1rem;
     font-size: larger;
     font-weight: bold;
 }
 
 .form-control {
-    margin-bottom: 2rem;
     border-style: solid;
     border-color: darkgrey;
     border-width: 2px;
@@ -24,8 +15,7 @@
 .btn {
     font-size: larger;
     font-weight: bold;
-    margin-top: 1rem;
-    width: 100%;
+    margin: 1rem auto;
     background-color: #FFCD00;
     color: black;
     border-style: solid;

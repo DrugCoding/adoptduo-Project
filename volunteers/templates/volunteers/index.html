@@ -1,89 +1,121 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/volunteers.css' %}">
+  <link rel="stylesheet" href="{% static 'css/volunteers.css' %}">
 
-<div class="volunteers-banner opacity-75">
+  <div class="volunteers-banner opacity-75">
     <div class="banner-text">
-        <h2>건강한 반려문화의 시작</h2>
-        <p>평생을 함께해 주세요</p>
+      <h2>건강한 반려문화의 시작</h2>
+      <p>평생을 함께해 주세요</p>
     </div>
-</div>
+  </div>
 
-<div class="container-cards mt-5">
+  <div class="container-cards mt-5">
     <div class="post-row">
-        <div class="card my-3 mx-3" style="width: 18rem;">
-            <img src="../static/images/volunteer_img.png" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-text text-center">봉사자 이름</h5>
-            </div>
+      <div class="card my-3 mx-3" style="width: 18rem;">
+        <img src="../static/images/volunteer_img.png" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-text text-center">봉사자 이름</h5>
         </div>
-        <div class="card my-3 mx-3" style="width: 18rem;">
-            <img src="../static/images/volunteer_img.png" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-text text-center">봉사자 이름</h5>
-            </div>
+      </div>
+      <div class="card my-3 mx-3" style="width: 18rem;">
+        <img src="../static/images/volunteer_img.png" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-text text-center">봉사자 이름</h5>
         </div>
-        <div class="card my-3 mx-3" style="width: 18rem;">
-            <img src="../static/images/volunteer_img.png" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-text text-center">봉사자 이름</h5>
-            </div>
+      </div>
+      <div class="card my-3 mx-3" style="width: 18rem;">
+        <img src="../static/images/volunteer_img.png" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-text text-center">봉사자 이름</h5>
         </div>
+      </div>
     </div>
-</div>
-<div class="container">
-  <table class="table table-hover" style="border: 1px solid; border-color: #cccccc">
-    <thead class="px-2">
-      <tr>
-        <th scope="col">번호</th>
-        <th scope="col">제목</th>
-        <th scope="col">작성자</th>
-        <th scope="col">출발지역</th>
-        <th scope="col">도착지역</th>
-        <th scope="col">출발날짜</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for v_article in v_articles %}
-      <tr>
-        <th scope="row">{{ v_article.pk }}</th>
-        <td>
-          <a href="{% url 'volunteers:detail' v_article.pk %}" style="text-decoration: none; color:black;">
-            {{ v_article.title }}
-          </a>
-        </td>
-        <td>{{ v_article.user }}</td>
-        <td>{{ v_article.area }}</td>
-        <td>{{ v_article.adopt_location }}</td>
-        <td>{{ v_article.adopt_date }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</div>
+    <div class="post-row">
+      <div class="card my-3 mx-3" style="width: 18rem;">
+        <img src="../static/images/volunteer_img.png" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-text text-center">봉사자 이름</h5>
+        </div>
+      </div>
+      <div class="card my-3 mx-3" style="width: 18rem;">
+        <img src="../static/images/volunteer_img.png" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-text text-center">봉사자 이름</h5>
+        </div>
+      </div>
+      <div class="card my-3 mx-3" style="width: 18rem;">
+        <img src="../static/images/volunteer_img.png" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-text text-center">봉사자 이름</h5>
+        </div>
+      </div>
+    </div>  
+  </div>
+  <div class="container">
+    <table class="table table-hover" style="border: 1px solid; border-color: #cccccc">
+      <thead class="px-2">
+        <tr>
+          <th scope="col">번호</th>
+          <th scope="col">제목</th>
+          <th scope="col">작성자</th>
+          <th scope="col">출발지역</th>
+          <th scope="col">도착지역</th>
+          <th scope="col">출발날짜</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for v_article in v_articles %}
+        <tr>
+          <th scope="row">{{ v_article.pk }}</th>
+          <td>
+            <a href="{% url 'volunteers:detail' v_article.pk %}" style="text-decoration: none; color:black;">
+              {{ v_article.title }}
+            </a>
+          </td>
+          <td>{{ v_article.user.name }}</td>
+          <td>{{ v_article.area }}</td>
+          <td>{{ v_article.adopt_location }}</td>
+          <td>{{ v_article.adopt_date }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
     <!-- 글작성 버튼 -->
     <div class="d-flex justify-content-center">
-        <a href="{% url 'volunteers:create' %}"><button>글작성</button></a>
+      <a href="{% url 'volunteers:create' %}">
+        <button>글작성</button>
+      </a>
     </div>
     <nav aria-label="Page navigation example" class="nav-page mt-5 mb-2">
-        <ul class="pagination">
-            <li class="page-item">
-                <a class="page-link text-black-50" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <li class="page-item"><a class="page-link text-black-50" href="#">1</a></li>
-            <li class="page-item"><a class="page-link text-black-50" href="#">2</a></li>
-            <li class="page-item"><a class="page-link text-black-50" href="#">3</a></li>
-            <li class="page-item"><a class="page-link text-black-50" href="#">4</a></li>
-            <li class="page-item"><a class="page-link text-black-50" href="#">5</a></li>
-            <li class="page-item">
-                <a class="page-link text-black-50" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
+      <ul class="pagination">
+        <li class="page-item">
+          <a class="page-link text-black-50" href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        <li class="page-item">
+          <a class="page-link text-black-50" href="#">1</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link text-black-50" href="#">2</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link text-black-50" href="#">3</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link text-black-50" href="#">4</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link text-black-50" href="#">5</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link text-black-50" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
     </nav>
-</div>
+  </div>
 {% endblock content %}
