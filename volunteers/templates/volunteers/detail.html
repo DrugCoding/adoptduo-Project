@@ -1,8 +1,58 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
-
+{% load static %}
 {% block content %}
+  <link rel="stylesheet" href="{% static 'css/dog_cat_detail.css' %}"/>
 
-  <h1>ㅎㅇㅎㅇ</h1>
+  <div class="pet-banner-div d-flex justify-content-center">
+    <img class="pet-banner-img" src="{% static 'images/cat_banner.jpg' %}" alt="cat_banner">
+    <h1 class="pet-banner-text">건강한 반려문화의 시작</h1>
+    <p class="pet-banner-text_2 text-center">평생을 함께해 주세요. 반려동물의 삶을 환하게 비춰주세요.</p>
+    <div class="banner-logo">
+      <img src="{% static 'images/logo_white.png' %}" alt="banner_logo" style="width:300px">
+    </div>
+  </div>
 
+  <div class="container mt-4">
+    <h2>{{ v_article.title }}</h2>
+    <hr id="divider"/>
+  </div>
+  <div class="container">
+    <h2 class="text-center mb-3">봉자사 정보?</h2>
+    <div class="text-center">   
+      <a href="{% url 'accounts:detail' v_article.user.pk %}"><img class="mb-4 w-25 rounded" src="{{ v_article.user.image.url }}" alt="cat_article.image"/></a>
+    </div>
+    <div class="row">
+      <div id="pet-info-var-div" class="col-1 text-center py-3">이름</div>
+      <div id="pet-info-div" class="col-5 text-center py-3">
+        {{ v_article.user.name }}
+      </div>
+      <div id="pet-info-var-div" class="col-1 text-center py-3">출발날짜</div>
+      <div id="pet-info-div" class="col-5 text-center py-3">
+        {{ v_article.adopt_date }}
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div id="pet-info-var-div" class="col-1 text-center py-3">출발지역</div>
+      <div id="pet-info-div" class="col-5 text-center py-3">
+        {{ v_article.area }}
+      </div>
+      <div id="pet-info-var-div" class="col-1 text-center py-3">도착지역</div>
+      <div id="pet-info-div" class="col-5 text-center py-3">
+        {{ v_article.adopt_location }}
+      </div>
+    </div>
+  </div>
+
+  <div class="container mt-4">
+    <div class="row d-flex justify-content-center">
+      <div id="pet-info-var-div" class="col-1 py-3 text-center">추가정보</div>
+      <div id="pet-info-div" class="col-5 py-3">{{ v_article.content }}</div>
+    </div>
+  </div>
+  <div class="container text-center">
+    {% if request.user == v_article.user %}
+      <a href="{% url 'volunteers:update' v_article.pk %}" class="btn btn-primary detail_btn2 mx-2 my-3">글수정</a>
+      <a href="{% url 'volunteers:delete' v_article.pk %}" class="btn btn-primary detail_btn2 mx-2 my-3">글삭제</a>
+    {% endif %}
 {% endblock %}
