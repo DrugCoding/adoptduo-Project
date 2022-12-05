@@ -80,7 +80,6 @@
   </div>
   <div style="border-top: 1px solid;" class="py-2 my-3">
     <h4 class="mx-2">댓글</h4>
-    {% if request.user.is_authenticated %}
     <form id='comment-form' data-stories-id="{{ stories.pk }}">
       {% csrf_token %}
       {% bootstrap_form comment_form layout="inline" %}
@@ -88,15 +87,14 @@
         <input type="submit" class="btn btn-warning mt-3 mx-2" value="댓글쓰기">
       </div>
     </form>
-    {% endif %}
   </div>
-  <div id="comments">
+  {% comment %} <div id="comments">
     {% for comment in comments %}
-    <div class="mb-3 border border-dark">
+    <div class="mb-3 border border-dark" id = "{{ comment.pk }}">
       <div class="px-2">
-        <div class="d-flex justify-content-between my-1 pb-1" style="border-bottom: 1px solid; align-items:center;">
-          <a href="{% url 'accounts:detail' comment.user.pk %}" class='text-decoration-none text-dark'>{{
-            comment.user.username }}</a>
+        <div class="d-flex justify-content-between my-1 pb-1">
+          <a href="{% url 'accounts:detail' comment.user.pk %}" class='text-decoration-none text-dark'>
+            {{ comment.user.username }}</a>
           <div>
             <span class='text-secondary'>{{ comment.created_at|date:"Y.m.d" }}</span> |
             <span>
@@ -113,9 +111,9 @@
               {% endif %}
             </span>
             <span class='mx-1'>{{ comment.like.count }}</span> |
-            <a href="{% url 'stories:comment_delete' stories.pk comment.pk %}" class='text-decoration-none text-dark'>
+            <button data-comment-id="{{comment.pk}}" onclick="remove(event)" class="btn btn-light">
               삭제
-            </a>
+            </button>
           </div>
         </div>
       </div>
@@ -124,6 +122,18 @@
       </div>
     </div>
     {% endfor %}
+  </div> {% endcomment %}
+  <div id="comments">
+    {% for comment in comments %}
+    {% csrf_token %}
+    <div class="mb-3 border border-dark d-flex justify-content-between" id = "{{ comment.pk }}">
+      <p class="ms-2 mt-2">{{ comment.user.username }} | {{ comment.content }}</p>
+      <button data-comment-id="{{comment.pk}}" onclick="remove(event)" class="btn btn-light me-2 my-1">
+        삭제
+      </button>
+    </div>
+      {% endfor %}
+    </div>
   </div>
 </div>
 {% endblock content %}
@@ -148,61 +158,107 @@
       })
   })
 </script>
-<!-- 댓글 비동기 -->
-<script>
+
+{% comment %} 댓글 {% endcomment %}
+{% comment %} <script>
   const commentForm = document.querySelector('#comment-form')
-  const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+  const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
   commentForm.addEventListener('submit', function (event) {
     event.preventDefault();
     axios({
-      method: 'POST',
+      method: 'post',
       url: `/stories/${event.target.dataset.storiesId}/comments/`,
-      headers: { 'X-CSRFToken': csrftoken },
+      headers: {'X-CSRFToken': csrftoken},
       data: new FormData(commentForm)
     })
       .then(response => {
-        const comments = document.querySelector('#comments')
-        comments.replaceChildren()
-        for (comment of response.data.comments) {
-          const div1 = document.createElement('div')
-          div1.classList.add('mb-3', 'border', 'border-dark')
-          const a1 = document.createElement('a')
-          a1.setAttribute('href', `/accounts/detail/${comment[3]}`)
-          a1.classList.add('text-decoration-none', 'text-dark')
-          a1.innerText = comment[0]
-          div1.append(a1)
-          const span1 = document.createElement('span')
-          span1.classList.add('text-secondary')
-          span1.innerText = `${new Date(comment[2]).getFullyear()}.${new Date(comment[2]).getMonth() + 1}.${new Date(comment[2]).getDate()}`
-          div1.append(span1)
-          if (comment[9] === True) {
-            const a2 = document.createElement('a')
-            a2.classList.add('text-decoration-none', 'text-dark')
-            a2.setAttribute('href', `/stories/comments/${comment[5]}/likes/`)
-            if (comment[7] === True) {
-              const i1 = document.createElement('i')
-              i1.classList.add('bi', 'bi-hand-thumbs-up-fill')
-              a2.append(i1)
-            } else {
-              const i1 = document.createElement('i')
-              i1.classList.add('bi', 'bi-hand-thumbs-up')
-              a2.append(i2)
-            }
-            const span2 = document.createElemint('span')
-            span2.classList.add('mx-1')
-            span2.innerText = comment[8]
-          }
-          if (comment[3] === comment[4]) {
-            const a3 = document.createElement('a')
-            a3.classList.add('text-decoration-none', 'text-dark')
-            a3.setAttribute('href', `/stories/${comment[6]}/comments/${comment[5]}/delete/`)
-          }
-          const p = document.createElement('p')
-          p.innerText = comment[1]
-          comments.append(div1, p)
-          commentForm.reset()
-        }
+        console.log(response.data)
+        const comment = document.querySelector('#comments')
+        const div1 = document.createElement('div')
+        const a1 = document.createElement('a')
+        a1.setAttribute('href', `/stories/detail/${response.data.user_pk}`)
+        a1.innerText = `${response.data.user}`
+        a1.classList.add('text-decoration-none', 'text-dark')
+        const btn1 = document.createElement('abutton')
+        btn1.innerText = '삭제'
+        btn1.dataset.commentId = response.data.comment_pk
+        btn1.onclick = remove;
+        const p = document.createElement('p')
+        p.innerText = `${response.data.user} | ${response.data.content}`
+        div1.appendChild(span)
+        div1.appendChild(btn1)
+        div2.appendChild(p)
+        comment.appendChild(div1)
+        commentForm.reset()
       })
   })
+  function remove(e) {
+    console.log(e.target.dataset.commentId)
+    var remove_warning = confirm('댓글을 삭제하시겠습니까?')
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+    const commentForm = document.querySelector('#comment-form')
+    if(remove_warning === true) {
+      axios({
+        method: 'post',
+        url: `/stories/${commentForm.dataset.storiesId}/comments/${event.target.dataset.commentId}/delete/`,
+        headers: {'X-CSRFToken': csrftoken},
+      })
+      .then(response => {
+        const div = document.getElementById(e.target.dataset.commentId)
+        div.remove()
+      })
+    }
+  }
+</script> {% endcomment %}
+<script>
+  const commentForm = document.querySelector('#comment-form')
+  const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+  commentForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+    axios({
+      method: 'post',
+      url: `/stories/${event.target.dataset.storiesId}/comments/`,
+      headers: {'X-CSRFToken': csrftoken},
+      data: new FormData(commentForm)
+    })
+      .then(response => {
+        console.log(response.data)
+        const comment = document.querySelector('#comments')
+        const div1 = document.createElement('div')
+        const div2 = document.createElement('div')
+        div2.id = response.data.user_pk
+        div2.classList.add('bm-3', 'border', 'border-dark', 'd-flex', 'justify-content-between')
+        const p = document.createElement('p')
+        p.classList.add('ms-2', 'mt-2')
+        p.innerText = `${response.data.user} | ${response.data.content}`
+        const btn1 = document.createElement('abutton')
+        btn1.classList.add('btn', 'btn-light', 'me-2', 'my-1')
+        btn1.innerText = '삭제'
+        btn1.dataset.commentId = response.data.comment_pk
+        btn1.onclick = remove;
+        div1.appendChild(div2)
+        div2.appendChild(p)
+        div2.appendChild(btn1)
+        comment.appendChild(div1)
+        commentForm.reset()
+      })
+  })
+  function remove(e) {
+    console.log(e.target.dataset.commentId)
+    var remove_warning = confirm('댓글을 삭제하시겠습니까?')
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+    const commentForm = document.querySelector('#comment-form')
+    if (remove_warning === true) {
+      axios({
+        method: 'post',
+        url: `/stories/${commentForm.dataset.storiesId}/comments/${event.target.dataset.commentId}/delete/`,
+        headers: {'X-CSRFToken': csrftoken},
+      })
+      .then(response => {
+        const div = document.getElementById(e.target.dataset.commentId)
+        div.remove()
+      })
+    }
+  }
 </script>
 {% endblock script %}

@@ -63,61 +63,80 @@ def delete(request, pk):
     Stories.objects.get(pk=pk).delete()
     return redirect("stories:index")
 
+# @login_required
+# def comment_create(request, stories_pk):
+#     stories = get_object_or_404(Stories, pk=stories_pk)
+#     if request.method == "POST":
+#         comment_form = Stories_CommentForm(request.POST)
+#         if comment_form.is_valid():
+#             comment = comment_form.save(commit=False)
+#             comment.stories = stories
+#             comment.user = request.user
+#             comment.save()
+#             comments = []
+#             for a in stories.storycomment_set.all():
+#                 if request.user in a.like.all():
+#                     is_liked = True
+#                 else:
+#                     is_liked = False
+#                 comment_like_user = a.like.count()
+#                 if request.user:
+#                     islogin = True
+#                 else:
+#                     islogin = False
+#                 comments.append([
+#                     # 0
+#                     a.user.username,
+#                     # 1
+#                     a.content,
+#                     # 2
+#                     a.created_at,
+#                     # 3
+#                     a.user.id,
+#                     # 4
+#                     request.user.id,
+#                     # 5
+#                     a.id,
+#                     # 6
+#                     a.stories.id,
+#                     # 7
+#                     is_liked,
+#                     # 8
+#                     comment_like_user,
+#                     # 9
+#                     islogin,
+#                 ])
+#             context = {
+#                 'comments': comments,
+#                 'comments_count': stories.storycomment_set.count,
+#             }
+#             return JsonResponse(context)
+
 @login_required
 def comment_create(request, stories_pk):
     stories = get_object_or_404(Stories, pk=stories_pk)
-    if request.method == "POST":
-        comment_form = Stories_CommentForm(request.POST)
-        if comment_form.is_valid():
-            comment = comment_form.save(commit=False)
-            comment.stories = stories
-            comment.user = request.user
-            comment.save()
-            comments = []
-            for a in stories.storycomment_set.all():
-                if request.user in a.like.all():
-                    is_liked = True
-                else:
-                    is_liked = False
-                comment_like_user = a.like.count()
-                if request.user:
-                    islogin = True
-                else:
-                    islogin = False
-                comments.append([
-                    # 0
-                    a.user.username,
-                    # 1
-                    a.content,
-                    # 2
-                    a.created_at,
-                    # 3
-                    a.user.id,
-                    # 4
-                    request.user.id,
-                    # 5
-                    a.id,
-                    # 6
-                    a.stories.id,
-                    # 7
-                    is_liked,
-                    # 8
-                    comment_like_user,
-                    # 9
-                    islogin,
-                ])
-            context = {
-                'comments': comments,
-                'comments_count': stories.storycomment_set.count,
-            }
-            return JsonResponse(context)
+    comment_form = Stories_CommentForm(request.POST)
+    if comment_form.is_valid():
+        comment = comment_form.save(commit=False)
+        comment.stories = stories
+        comment.user = request.user
+        comment.save()
+        context = {
+            'content': comment.content,
+            'user':comment.user.username,
+            'comment_pk': comment.pk,
+            'user_pk':comment.user.pk
+        }
+    return JsonResponse(context)
 
 @login_required
 def comment_delete(request, stories_pk, storycomment_pk):
     comment = StoryComment.objects.get(pk=storycomment_pk)
-    if request.user == comment.user:
-        comment.delete()
-        return redirect("stories:detail", stories_pk)
+    comment.delete()
+    context = {
+        '1': 1
+    }
+    return JsonResponse(context)
     
 @login_required
 def likes(request, stories_pk):
