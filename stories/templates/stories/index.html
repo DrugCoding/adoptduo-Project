@@ -5,8 +5,21 @@
 {% block css %}{% endblock css %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/story_index.css' %}">
+<div>
+  <div class="cropped d-flex justify-content-center">
+    <img class="cropped_img" src="{% static 'images/first_image_4.jpg' %}" alt="">
+    <h1 class="main_image_text" style="font-size:70px">Adopt Animals</h1>
+    <h1 class="main_image_text_2" style="font-size:70px">Adopt Family</h1>
+  </div>
+
+  <div class="main_logo">
+    {% comment %} <img src="{% static 'images/logo_white.png' %}" alt="" style="width:700px;"> {% endcomment %}
+  </div>
+</div>
+
 <div class="container">
-  <h3>Stories</h3>
+
   {% if request.user.is_authenticated %}
   <div>
     <button class="float-end btn btn-warning my-2">

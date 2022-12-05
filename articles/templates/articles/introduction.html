@@ -3,6 +3,9 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/introduction.css' %}">
 
+
+ 
+
  <div>
     <div class="cropped d-flex justify-content-center">
       <img class="cropped_img" src="{% static 'images/main_image.jpg' %}" alt="">
@@ -11,7 +14,7 @@
     </div>
 
     <div class="main_logo">
-      <img src="{% static 'images/logo_white.png' %}" alt="" style="width:700px;">
+      {% comment %} <img src="{% static 'images/logo_white.png' %}" alt="" style="width:700px;"> {% endcomment %}
     </div>
  </div>
 
@@ -36,33 +39,33 @@
       <h1 class="main_image_text_6" style="font-size:100px">만듭니다</h1>
     </div>
 
-    <div class="row mt-5 cropped_2">
+    <div class="row mt-5 cropped_2 d-flex align-items-center" >
       <div class="col-6">
         <img class="cropped_img_2"src="{% static 'images/first_image.jpg' %}" style="width:648px;"alt="">
       </div>
 
       <div class="col-6">
 
-        <div class="d-flex;">
+        
           <h3 class="text-center" style="font-family: 'Noto Sans KR', sans-serif;"> <span class="colored_text" style="font-size:40px;">[</span>야생에서의 삶은 아이들에게 가혹합니다<span class="colored_text" style="font-size:40px;">]
           </span></h3>
-          <h5 class="mt-4 ms-2" style="font-family: 'Noto Sans KR', sans-serif;" >  매년 수 천 마리의 아이들이 가정에서 버려집니다. </h5>
-          <h6 style="font-family: 'Noto Sans KR', sans-serif;">  야생에서 아이들은 굶주림과 질병으로 인해 평균수명의 절반도 채 살지 못합니다. <br>
+          <h5 class="mt-4 ms-2 text-center" style="font-family: 'Noto Sans KR', sans-serif;" >매년 수 천 마리의 아이들이 가정에서 버려집니다. </h5>
+          <h6 class="ms-2 text-center" style="font-family: 'Noto Sans KR', sans-serif;">  야생에서 아이들은 굶주림과 질병으로 인해 평균수명의 절반도 채 살지 못합니다. <br>
           
           </h6>
-        </div>
+        
         
       </div>
 
     </div>
 
-    <div class="row mt-5 pt-3 cropped_2">
+    <div class="row mt-5 pt-3 cropped_2 d-flex align-items-center">
 
       <div class="col-6">
         <h3 class="text-center" style="font-family: 'Noto Sans KR', sans-serif;"> <span class="colored_text" style="font-size:40px;">[</span>아이들에게 손을 내밀어 주세요<span class="colored_text" style="font-size:40px;">]
         </span></h3>
-        <h5 class="mt-4" style="font-family: 'Noto Sans KR', sans-serif;" >  매년 수 천마리의 아이들이 가정에서 버려집니다. <br>
-          야생에서 아이들은 평균수명의 절반도 채 살지 못합니다. </h5>
+        <h5 class="mt-4 ms-2 text-center" style="font-family: 'Noto Sans KR', sans-serif;" >버려진 애완동물들은 야생에서 적응하기가 매우 어렵습니다.  </h5>
+          <h6 class="ms-2 text-center" style="font-family: 'Noto Sans KR', sans-serif;">  사람만을 바라보며 살아온 아이들에게 버팀목이 되어주세요. <br>
 
         
       </div>
@@ -74,7 +77,7 @@
 
     </div>
 
-    <div class="row mt-5 cropped_2">
+    <div class="row mt-5 cropped_2 d-flex align-items-center">
       <div class="col-6">
         <img src="{% static 'images/first_image_3.jpg' %}" style="width:648px; height:600px;"alt="">
       </div>
@@ -82,8 +85,8 @@
       <div class="col-6">
         <h3 class="text-center" style="font-family: 'Noto Sans KR', sans-serif;"> <span class="colored_text" style="font-size:40px;">[</span>평생을 함께 할 친구가 되어주세요<span class="colored_text" style="font-size:40px;">]
         </span></h3>
-        <h5 class="mt-4" style="font-family: 'Noto Sans KR', sans-serif;" >  매년 수 천마리의 아이들이 가정에서 버려집니다. <br>
-          야생에서 아이들은 평균수명의 절반도 채 살지 못합니다. </h5>
+        <h5 class="mt-4 ms-2 text-center" style="font-family: 'Noto Sans KR', sans-serif;" >아이들의 삶은 우리만큼 길지 않습니다. </h5>
+          <h6 class="ms-2 text-center" style="font-family: 'Noto Sans KR', sans-serif;">  짧다면 짧은 그들의 삶에 든든한 동반자가 되어주세요. <br>
 
         
       </div>
@@ -98,13 +101,13 @@
       <h1 class="main_image_text_10" style="font-size:100px">제공합니다</h1>
     </div>
 
-    <div class="row mt-5 cropped_2">
+    <div class="row mt-5 cropped_2 d-flex align-items-center">
 
-      <div class="col-6">
+      <div class="col-6 ">
         <h3 class="text-center" style="font-family: 'Noto Sans KR', sans-serif;"> <span class="colored_text" style="font-size:40px;">[</span>새 친구를 만들어 보세요<span class="colored_text" style="font-size:40px;">]
         </span></h3>
-        <h5 class="mt-4" style="font-family: 'Noto Sans KR', sans-serif;" >  매년 수 천마리의 아이들이 가정에서 버려집니다. <br>
-          야생에서 아이들은 평균수명의 절반도 채 살지 못합니다. </h5>
+        <h5 class="mt-4 ms-2 text-center" style="font-family: 'Noto Sans KR', sans-serif;" >내 주변 입양정보를 보고 입양을 신청해 보세요! </h5>
+          <h6 class="ms-2 text-center" style="font-family: 'Noto Sans KR', sans-serif;">  입양해듀오는 건전하고 적극적인 입양문화 조성을 지지합니다.<br>
 
         
       </div>
@@ -114,7 +117,7 @@
 
     </div>
       
-    <div class="row mt-5 cropped_2">
+    <div class="row mt-5 cropped_2 d-flex align-items-center">
       <div class="col-6">
         <img src="{% static 'images/first_image_5.jpg' %}" style="width:648px; height:600px;"alt="">
       </div>
@@ -122,21 +125,21 @@
       <div class="col-6">
         <h3 class="text-center" style="font-family: 'Noto Sans KR', sans-serif;"> <span class="colored_text" style="font-size:40px;">[</span>내 친구를 자랑해 보세요<span class="colored_text" style="font-size:40px;">]
         </span></h3>
-        <h5 class="mt-4" style="font-family: 'Noto Sans KR', sans-serif;" >  매년 수 천마리의 아이들이 가정에서 버려집니다. <br>
-          야생에서 아이들은 평균수명의 절반도 채 살지 못합니다. </h5>
+        <h5 class="mt-4 ms-2 text-center" style="font-family: 'Noto Sans KR', sans-serif;" >커뮤니티에 글을 쓰고 정보를 주고받아보세요! </h5>
+        <h6 class="ms-2 text-center" style="font-family: 'Noto Sans KR', sans-serif;">입양해듀오는 집사들 간의 활발한 커뮤니케이션을 적극 지원합니다.<br>
 
         
       </div>
 
     </div>
 
-    <div class="row mt-5 cropped_2">
+    <div class="row mt-5 cropped_2 d-flex align-items-center">
 
       <div class="col-6">
         <h3 class="text-center" style="font-family: 'Noto Sans KR', sans-serif;"> <span class="colored_text" style="font-size:40px;">[</span>자원봉사로 기쁨을 나눠보세요<span class="colored_text" style="font-size:40px;">]
         </span></h3>
-        <h5 class="mt-4" style="font-family: 'Noto Sans KR', sans-serif;" >  매년 수 천 마리의 아이들이 가정에서 버려집니다. <br>
-          야생에서 아이들은 굶주림과 질병으로 인해 평균수명의 절반도 채 살지 못합니다. </h5>
+        <h5 class="mt-4 ms-2 text-center" style="font-family: 'Noto Sans KR', sans-serif;" >나만이 할 수 있는 자원봉사를 통해 보람을 느껴보세요!</h5>
+          <h6 class="ms-2 text-center" style="font-family: 'Noto Sans KR', sans-serif;">입양해듀오를 통해 자원봉사 요청, 지원 글을 작성해 보세요.<br>
 
         
       </div>
@@ -204,7 +207,6 @@
     
 
       
-
 
     
 

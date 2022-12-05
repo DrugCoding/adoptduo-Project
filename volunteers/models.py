@@ -23,6 +23,7 @@ class Volunteer(models.Model):
     # 조회수
     hits = models.IntegerField(default=0)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    # name = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     # 견종
     breed = models.CharField(max_length=20)
     area = models.CharField(max_length=20)
