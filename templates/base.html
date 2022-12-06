@@ -22,10 +22,10 @@
 
   <body>
     <header>
-      <div>
+      <div class="">
         <!-- 1번째 navbar -->
         <nav class="navbar navbar-expand-xl p-0 top-nav navbar-small ">
-          <div class="container-fluid w-100 container">
+          <div class="container-fluid w-100 container ">
             <a class="navbar-brand top-nav-a mx-5 p-0" href="{% url 'articles:index' %}">입양해듀오</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -39,58 +39,57 @@
               <a class="nav-link ms-2 top-nav-accounts" href="{% url 'accounts:signup' %}">회원가입</a>
             {% endif %}
           </div>
-        </div>
-      </nav>
-      <div>
-        <!-- 2번째 navbar -->
-        <nav class="navbar navbar-expand-xl botton-nav p-0 navbar-small ">
-          <div class="container-fluid w-100 container">
-            <div class="small-collapse collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
-              <a href="{% url 'articles:index' %}">
-                <img src="{% static 'images/logo.png' %}" alt="" class="bottom-nav-logo">
-              </a>
-              <ul class="navbar-nav  mb-2 mb-lg-0">
-                <li class="nav-item">
-                  <a class="nav-link nav-font" href="{% url 'articles:introduction' %}">입양해듀오</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link nav-font" href="{% url 'articles:dog_index' %}">강아지</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link nav-font" href="{% url 'articles:cat_index' %}">고양이</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link nav-font" href="{% url 'articles:index' %}">스토리</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link nav-font" href="{% url 'volunteers:index' %}" style="font-size: 20px; color: black;">봉사자</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link nav-font" href="{% url 'articles:information' %}">분양절차</a>
-                </li>
-              </ul>
+        </nav>
+        <div>
+          <!-- 2번째 navbar -->
+          <nav class="navbar navbar-expand-xl botton-nav p-0 navbar-small ">
+            <div class="container-fluid w-100 container">
+              <div class="small-collapse collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+                <a href="{% url 'articles:index' %}">
+                  <img src="{% static 'images/logo.png' %}" alt="" class="bottom-nav-logo">
+                </a>
+                <ul class="navbar-nav  mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link nav-font" href="{% url 'articles:introduction' %}">입양해듀오</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link nav-font" href="{% url 'articles:dog_index' %}">강아지</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link nav-font" href="{% url 'articles:cat_index' %}">고양이</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link nav-font" href="{% url 'articles:index' %}">스토리</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link nav-font" href="{% url 'volunteers:index' %}">봉사자</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link nav-font" href="{% url 'articles:information' %}">분양절차</a>
+                  </li>
+                </ul>
+              </div>
             </div>
+          </nav>
+        </div>
+      </header>
+      {% block content %}{% endblock content %}
+      {% bootstrap_javascript %}
+      <footer class="text-center">
+        <div class="position-sticky bottom-0 w-100 d-flex justify-content-center mt-5 py-5" style="color:black; background-color: #FFCD00;">
+          <div class="py-2">
+            <p class="m-0 fw-0">
+              Copyright ⓒ 2022 입양해듀오.com, All Rights Reserved.
+              <br>
+              Made with 이주현 & 이동희 & 서민수 & 현지수 & 김교민 & 이종은 & 이현성
+            </p>
           </div>
         </div>
-      </nav>
-    </div>
-  </header>
-  {% block content %}{% endblock content %}
-  {% bootstrap_javascript %}
-  <footer class="text-center">
-    <div class="position-sticky bottom-0 w-100 d-flex justify-content-center mt-5 py-5" style="color:black; background-color: #FFCD00;">
-      <div class="py-2">
-        <p class="m-0 fw-0">
-          Copyright ⓒ 2022 입양해듀오.com, All Rights Reserved.
-          <br>
-          Made with 이주현 & 이동희 & 서민수 & 현지수 & 김교민 & 이종은 & 이현성
-        </p>
-      </div>
-    </div>
-  </footer>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-  {% block script %}{% endblock script %}
-</body>
+      </footer>
+      <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+      {% block script %}{% endblock script %}
+    </body>
 
-</html>
+  </html>
