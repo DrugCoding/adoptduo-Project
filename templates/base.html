@@ -32,6 +32,7 @@
             </button>
             <div class="small-collapse collapse navbar-collapse" id="navbarSupportedContent"></div>
             {% if request.user.is_authenticated %}
+              <a class="nav-link ms-2 top-nav-accounts" href="{% url 'notes:index' %}">쪽지함</a>
               <a class="nav-link ms-2 top-nav-accounts" href="{% url 'accounts:logout' %}">로그아웃</a>
               <a class="nav-link ms-2 top-nav-accounts" href="{% url 'accounts:detail' request.user.pk %}">마이페이지</a>
             {% else %}
