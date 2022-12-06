@@ -132,11 +132,9 @@ def comment_create(request, stories_pk):
 @login_required
 def comment_delete(request, stories_pk, storycomment_pk):
     comment = StoryComment.objects.get(pk=storycomment_pk)
-    comment.delete()
-    context = {
-        '1': 1
-    }
-    return JsonResponse(context)
+    if comment.user == request.user:
+        comment.delete()
+    return redirect('stories:detail', stories_pk)
     
 @login_required
 def likes(request, stories_pk):
@@ -157,6 +155,11 @@ def comment_likes(request, storycomment_pk):
     comment = get_object_or_404(StoryComment, pk=storycomment_pk)
     if comment.like.filter(pk=request.user.pk).exists():
         comment.like.remove(request.user)
+        is_liked = False
     else:
         comment.like.add(request.user)
-    return redirect("stories:detail", comment.stories.pk)
+        is_liked = True
+    context = {
+        "is_liked": is_liked,
+    }
+    return JsonResponse(context)
