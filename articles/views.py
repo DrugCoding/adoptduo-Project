@@ -331,13 +331,13 @@ def search(request):
     if 'searchs' in request.GET:
         query = request.GET.get('searchs')
         dogs = DogArticle.objects.all().filter(
-            Q(breed__icontains=query)
+            Q(dog_breed_id__icontains=query)
         )
         cats = CatArticle.objects.all().filter(
-            Q(breed__icontains=query)
+            Q(cat_breed_id__icontains=query)
         )
         stories = Stories.objects.all().filter(
-            Q(breed__icontains=query)|
+            # Q(breed__icontains=query)|
             Q(content__icontains=query)
         )
         # # 조회수 최다 강아지 분양글
