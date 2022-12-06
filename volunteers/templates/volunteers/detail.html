@@ -55,4 +55,107 @@
       <a href="{% url 'volunteers:update' v_article.pk %}" class="btn btn-primary detail_btn2 mx-2 my-3">글수정</a>
       <a href="{% url 'volunteers:delete' v_article.pk %}" class="btn btn-primary detail_btn2 mx-2 my-3">글삭제</a>
     {% endif %}
+    <span>
+      {% if request.user.is_authenticated %} 
+        {% if request.user in v_article.bookmarks.all %}
+          <i id="bookmark-btn" data-article-id="{{ v_article.pk }}" class="bi-bookmark-heart-fill"></i>
+        {% else %}
+          <i id="bookmark-btn" data-article-id="{{ v_article.pk }}" class="bi-bookmark-heart"></i>
+        {% endif %}
+        <span id="bookmark-count">{{ v_article.bookmarks.count }}</span>
+    </span>
+    {% endif %}  
+    <h4 class="mt-5">댓글</h4>
+    <form id="v-comment-form" data-article-id="{{ v_article.pk }}">
+        {% csrf_token %}
+        {% bootstrap_form v_comment_form %}
+        {% bootstrap_button content="ok" button_type="submit" button_class="btn-danger col-3" %}
+    </form>
+    <hr>
+    <h4 class="my-3">댓글</h4>
+    <form id="v-comment-form" data-article-id="{{ v_article.pk }}">
+      {% csrf_token %}
+      {% bootstrap_form v_comment_form layout='floating'%}
+      {% bootstrap_button button_type="submit" content="OK" %}
+    </form>
+    <hr>
+    <div id="v-comments">
+    {% for v_comment in v_comments %}
+    {% csrf_token %}
+    <div id="{{v_comment.pk}}">
+      <p> {{ v_comment.user.username }} | {{ v_comment.content }}</p>
+      <button data-comment-id="{{v_comment.pk}}" onclick="remove(event)">댓글 삭제</button>
+      <hr>
+    </div>
+    {% empty %}
+      <p>댓글이 없어요 ㅠ_ㅠ</p>
+    {% endfor %}
+    </div>
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.5.1.min.js"
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+  crossorigin="anonymous"></script>
+<script>
+  const commentForm = document.querySelector('#v-comment-form')
+  const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+  commentForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    axios({
+      method: 'post',
+      url: `/volunteers/${event.target.dataset.articleId}//comments/`,
+      headers: {'X-CSRFToken': csrftoken},
+      data: new FormData(commentForm) // 폼에 있는 정보를 data로 넘겨줄 수 있도록 변환
+    })
+    .then(response => {
+      console.log(response.data)
+      // 댓글을 추가하는 로직
+      const comments = document.querySelector('#v-comments')
+      const div = document.createElement('div')
+      div.id = response.data.v_pk
+      const p = document.createElement('p')
+      p.innerText = `${response.data.v_userName} | ${response.data.v_content}`
+      const hr = document.createElement('hr')
+      const btn = document.createElement('button')
+      btn.innerText = '댓글 삭제'
+      btn.dataset.commentId = response.data.v_pk
+      btn.onclick = remove;
+      div.appendChild(p)
+      div.appendChild(btn)
+      div.appendChild(hr)
+      comments.appendChild(div) 
+      commentForm.reset()
+    })
+  })
+</script>
+<script>
+  // (1) 좋아요 버튼
+  const likeBtn = document.querySelector('#like-btn')
+  // (2) 좋아요 버튼을 클릭하면, 함수 실행
+  likeBtn.addEventListener('click', function (event) {
+    // 서버로 비동기 요청을 하고 싶음
+    console.log(event.target.dataset)
+    axios({
+      method: 'get',
+      url: `/volunteers/${event.target.dataset.articleId}/like/`
+    })
+    .then(response => {
+      console.log(response)
+      console.log(response.data)
+      // event.target.classList.toggle('bi-heart')
+      // event.target.classList.toggle('bi-heart-fill')
+      if (response.data.isLiked === true) {
+        event.target.classList.add('bi-heart-fill')
+        event.target.classList.remove('bi-heart')
+      } else {
+        event.target.classList.add('bi-heart')
+        event.target.classList.remove('bi-heart-fill')
+      }
+      const likeCount = document.querySelector('#like-count')
+      likeCount.innerText = response.data.likeCount
+    })
+  })
+</script>
 {% endblock %}

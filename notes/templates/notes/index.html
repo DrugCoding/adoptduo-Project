@@ -2,50 +2,70 @@
 {% load django_bootstrap5 %}
 {% block content %}
 
-<div class="container fs-5 mt-4">
+  <div class="container fs-5 mt-4">
     <div class="d-flex justify-content-center">
-      <table class="list-table">
-            <thead>
+        <table class="table">
+          <thead>
             <th class="fs-2 fw-bold">받은 편지함</th>
-            <tr>
-                <th>보낸사람</th>
-                <th>제목</th>
-                <th>날짜</th>
-                <th>읽음</th>
-            </tr>
-            </thead>
+              <tr>
+                <th scope="col">보낸사람</th>
+                <th scope="col">제목</th>
+                <th scope="col">날짜</th>
+                <th scope="col">읽음여부</th>
+              </tr>
+          </thead>
             <tbody>
-            {% for note in notes %}
-                {% if note.read == 1 %}
+              {% for note in notes %}<!--사용자가 받은 편지함-->
                 <tr class="text-muted" id="{{note.pk}}">
-                        <td>
-                        {{ note.from_user.username }}
-                        </td> <!---보낸이 -->
-                        <td><a class="" style="text-decoration:none;" href="">{{ note.title }}</a></td> <!---제목 -->
-                        <td class="">{{ note.created_at|date:'o.m.d' }} {{ note.created_at|time:"H:i" }}</td> <!---보낸시간 -->
-                        {% if note.read == 1 %}
-                        <td>읽음</td> <!---읽음 -->
-                        {% else %}
-                        <td>안읽음</td> <!---읽음 -->
-                        {% endif %}
+                  <td>{{ note.from_user.username }}</td> <!---보낸이 -->
+                  <td><a class="text-muted" style="text-decoration:none;" href="{% url 'notes:detail' note.pk %}">{{ note.title }}</a></td> <!---제목 -->
+                  <td class="">{{ note.created_at|date:'o.m.d' }} {{ note.created_at|time:"H:i" }}</td> <!---보낸시간 -->
+                  {% if note.read == 1 %}
+                  <td>읽음</td> <!---읽음 -->
+                  {% else %}
+                  <td>안읽음</td> <!---읽음 -->
+                  {% endif %}
                 </tr>
-                {% else %}
-                <tr id="{{note.pk}}">
-                    <td>
-                      {{note.from_user.username}}
-                    </td> <!---보낸이 -->
-                    <td><a class="custom-link" style="text-decoration:none; color:black;" href="">{{ note.title }}</a></td> <!---제목 -->
-                    <td class="tc">{{ note.created_at|date:'o.m.d' }} {{ note.created_at|time:"H:i" }}</td> <!---보낸시간 -->
-                    {% if note.read == 1 %}
-                    <td>읽음</td> <!---읽음 -->
-                    {% else %}
-                    <td>안읽음</td> <!---읽음 -->
-                    {% endif %}
-                  </tr>
-                {% endif %}
-            {% endfor %}
+              {% endfor %}
             </tbody>
         </table>
     </div>
-</div>
+  </div>
+  
+  
+  <div class="container fs-5 mt-4">
+    <div id="" class="d-flex justify-content-center">
+      <table class="table">
+        <thead>
+          <th class="fs-2 fw-bold">보낸 편지함</th>
+            <tr>
+              <th scope="col">받는사람</th>
+              <th scope="col">제목</th>
+              <th scope="col">날짜</th>
+              <th scope="col">읽음여부</th>
+            </tr>
+        </thead>
+          <tbody>
+            {% for note in to_notes %}
+              <div id="">
+                <tr class="text-muted">
+                  <td>
+                    {{note.to_user.username}}
+                  </td> <!---보낸이 -->
+                  <td><a class="text-muted" style="text-decoration:none;" href="{% url 'notes:detail' note.pk %}">{{ note.title }}</a></td> <!---제목 -->
+                  <td class="">{{ note.created_at|date:'o.m.d' }} {{ note.created_at|time:"H:i" }}</td> <!---보낸시간 -->
+                  {% if note.read == 1 %}
+                  <td>읽음</td> <!---읽음 -->
+                  {% else %}
+                  <td>안읽음</td> <!---읽음 -->
+                  {% endif %}
+                  <td class=""></td>
+                </tr>
+              </div>
+            {% endfor %}
+          </tbody>
+      </table>
+    </div>
+  </div>
+  
 {% endblock %}
