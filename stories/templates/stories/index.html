@@ -5,52 +5,57 @@
 {% block css %}{% endblock css %}
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/story_index.css' %}">
-<div>
-  <div class="cropped d-flex justify-content-center">
-    <img class="cropped_img" src="{% static 'images/first_image_4.jpg' %}" alt="">
-    <h1 class="main_image_text" style="font-size:70px">Adopt Animals</h1>
-    <h1 class="main_image_text_2" style="font-size:70px">Adopt Family</h1>
-  </div>
-
-  <div class="main_logo">
-    {% comment %} <img src="{% static 'images/logo_white.png' %}" alt="" style="width:700px;"> {% endcomment %}
-  </div>
-</div>
-
-<div class="container">
-
-  {% if request.user.is_authenticated %}
+  <link rel="stylesheet" href="{% static 'css/story_index.css' %}">
   <div>
-    <button class="float-end btn btn-warning my-2">
-      <a href="{% url 'stories:create' %}" style="text-decoration: none; color:black">작성</a>
-    </button>
+    <div class="cropped d-flex justify-content-center">
+      <img class="cropped_img" src="{% static 'images/first_image_4.jpg' %}" alt="">
+      <h1 class="main_image_text" style="font-size:70px">Adopt Animals</h1>
+      <h1 class="main_image_text_2" style="font-size:70px">Adopt Family</h1>
+    </div>
+
   </div>
+
+  <div class="container">
+    <div class="d-flex justify-content-center mt-5">
+      <h1 style="font-family: 'NanumSquareNeo-Variable';">스토리</h1>
+    </div>
+    <hr class="center-hr m-0" style="width:15%;">
+
+    {% if request.user.is_authenticated %}
+      <div>
+        <button class="float-end btn btn-warning my-2">
+          <a href="{% url 'stories:create' %}" style="text-decoration: none; color:black">작성</a>
+        </button>
+      </div>
+    </div>
   {% endif %}
-</div>
-<div class="container">
-  <table class="table table-hover" style="border: 1px solid; border-color: #cccccc">
-    <thead class="px-2">
-      <tr>
-        <th scope="col">번호</th>
-        <th scope="col">제목</th>
-        <th scope="col">작성자</th>
-        <th scope="col">작성일</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for stories in stories %}
-      <tr>
-        <th scope="row">{{ stories.pk }}</th>
-        <td>
-          <a href="{% url 'stories:detail' stories.pk %}" style="text-decoration: none; color:black;">
-            {{ stories.title }}
-          </a>
-        </td>
-        <td>{{ stories.user }}</td>
-        <td>{{ stories.created_at|date:"Y.m.d" }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+  <div class="container">
+    <table class="table table-hover" style="border: 1px solid; border-color: #cccccc">
+      <thead class="px-2">
+        <tr>
+          <th scope="col">번호</th>
+          <th scope="col">제목</th>
+          <th scope="col">작성자</th>
+          <th scope="col">날짜</th>
+          <th scope="col">조회</th>
+          <th scope="col">추천</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider border-warning">
+        {% for stories in stories %}
+          <tr>
+            <th scope="row">{{ stories.pk }}</th>
+            <td>
+              <a href="{% url 'stories:detail' stories.pk %}" style="text-decoration: none; color:black;">
+                {{ stories.title }}
+              </a>
+            </td>
+            <td>{{ stories.user }}</td>
+            <td>{{ stories.created_at|date:"Y.m.d" }}</td>
+            <td>{{ stories.hits }}</td>
+            <td>{{ stories.like.count }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   {% endblock content %}

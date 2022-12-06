@@ -6,32 +6,40 @@
 {% endblock css %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/story_detail.css' %}">
 <div class="container" style="width: 50%;">
-  <div style="box-sizing:border-box; border-top: 1px solid; border-bottom: 1px solid;" class="mt-3">
+  <div style="box-sizing:border-box; border-bottom: 1px solid;" class="mt-3">
     <!-- title -->
-    <div style="border-bottom: 1px solid" class="pt-1">
-      <h2>{{ stories.title }}</h2>
+    <div style="border-bottom: 1px solid" class="pt-1 d-flex justify-content-between">
+      <h2 class="detail-font-title">{{ stories.title }}</h2>
+      <span class="detail-font-title">추천: {{ stories.like.count }}</span>
     </div>
     <!-- username, etc -->
-    <div style="align-items: center; display: flex; justify-content:space-between;" class="mx-2 mb-1">
-      <a href="{% url 'accounts:detail' stories.user.pk %}" style="text-decoration: none; color:black;">
-        <span style="font-size: 12px;">{{ stories.user.username }}</span>
-      </a>
+    <div style="align-items: center; display: flex; justify-content:space-between;" class="mx-2 ">
+      
+       {% if stories.user.image %}
+       <img src="{{ stories.user.image.url }}" alt="" style="width:200px;">
+        {% else %}
+        <img src="{% static 'images/unknown_image.jpg' %}" style="width:200px;" alt="">
+       {% endif %}
       <div>
-        <span style="font-size: 12px;">조회수: {{ stories.hits }}</span> |
-        <span style="font-size: 12px;">댓글: {{ stories.storycomment_set.count }}</span> |
-        <span style="font-size: 12px;">작성일: {{ stories.created_at|date:"Y.m.d H:i" }}</span> |
-        <span style="font-size: 12px;">글 수정일: {{ stories.updated_at|date:"Y.m.d H:i" }}</span>
+        <a href="{% url 'accounts:detail' stories.user.pk %}" style="text-decoration: none; color:black;">
+          <span class="detail-font-text">{{ stories.user.username }}</span></a>
+        <span class="detail-font-text">조회수: {{ stories.hits }}</span> |
+        <span class="detail-font-text">댓글: {{ stories.storycomment_set.count }}</span> |
+        <span class="detail-font-text">작성일: {{ stories.created_at|date:"Y.m.d H:i" }}</span>
+        
       </div>
     </div>
   </div>
   <div class="container my-3">
+        
     {% if stories.image %}
-    <img src="{{ stories.image.url }}" alt="{{ stories.image }}">
+    <img src="{{ stories.image.url }}" alt="{{ stories.image }}" >
     {% endif %}
-    <p>{{ stories.content }}</p>
+    <p class="detail-font-main-text">{{ stories.content }}</p>
   </div>
-  <div class="container" style="border-top: 1px solid; overflow:hidden;">
+  <div class="container px-0" style="border-top: 1px solid; overflow:hidden;">
     <span style="overflow:hidden;">
       {% if request.user == stories.user %}
       <button class="btn btn-warning d-flex justify-content-end mt-3" style="float: right;">
@@ -45,6 +53,7 @@
       <button class="btn btn-warning d-flex justify-content-end mt-3" style="float: right; margin-right:5px;">
         <a href="{% url 'stories:index' %}" style="text-decoration: none; color:black;">목록으로</a>
       </button>
+      {% else %}
       <!-- {% if request.user.is_authenticated %}
       <a href="{% url 'stories:likes' stories.pk %}" style="text-decoration: none;">
         {% if request.user in stories.like.all %}
@@ -61,20 +70,25 @@
       {% endif %} -->
       <!-- 좋아요 비동기 -->
       {% if request.user.is_authenticated %}
-      <div class="mt-3" style="float: right; margin-right:5px;">
-        {% if request.user in stories.like.all %}
-        <i class="bi bi-hand-thumbs-up-fill btn btn-danger" data-stories-id="{{ stories.pk }}" style="color: black;"
-          id="like-button"></i>
-        {% else %}
-        <i class="bi bi-hand-thumbs-up btn btn-warning" data-stories-id="{{ stories.pk }}" style="color: black;"
-          id="like-button"></i>
+      <div class="d-flex justify-content-between">
+        <div class="null">
+          <h1>&nbsp&nbsp&nbsp&nbsp&nbsp</h1>
+        </div>
+      <div class="mt-3 px-0">
+          {% if request.user in stories.like.all %}
+          <i class="bi bi-hand-thumbs-up-fill btn btn-danger" data-stories-id="{{ stories.pk }}" style="color: black;"
+            id="like-button"></i>
+          {% else %}
+          <i class="bi bi-hand-thumbs-up btn btn-warning" data-stories-id="{{ stories.pk }}" style="color: black;"
+            id="like-button"></i>
+          {% endif %}
+        </div>
         {% endif %}
+        
+        <button class="btn btn btn-warning mt-3 mx-2">
+          <a href="{% url 'stories:index' %}" style="text-decoration: none; color:black;">목록으로</a>
+        </button>
       </div>
-      {% endif %}
-      {% else %}
-      <button class="btn btn-warning d-flex justify-content-end mt-3" style="float: right; margin-right:5px;">
-        <a href="{% url 'stories:index' %}" style="text-decoration: none; color:black;">목록으로</a>
-      </button>
       {% endif %}
     </span>
   </div>
