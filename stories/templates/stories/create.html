@@ -2,23 +2,22 @@
 {% load static %}
 {% load django_bootstrap5 %}
 
-{% block css %}
-{% endblock css %}
+{% block css %}{% endblock css %}
 
 {% block content %}
-<div class="container" style="width:50%;">
-  <div style="box-sizing:border-box; border-bottom: 1px solid;" class="mt-3">
-    <div class="pt-1">
-      <h2>글 작성</h2>
+  <div class="container" style="width:50%;">
+    <div style="box-sizing:border-box; border-bottom: 1px solid;" class="mt-3">
+      <div class="pt-1">
+        <h2>글 작성</h2>
+      </div>
+    </div>
+    <div class="container py-2">
+      <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <input type="submit" class="btn btn-warning" value="글쓰기">
+        <a href="{% url 'stories:index' %}" class="btn btn-warning">뒤로</a>
+      </form>
     </div>
   </div>
-  <div class="container py-2">
-    <form action="" method="POST" enctype="multipart/form-data">
-      {% csrf_token %}
-      {% bootstrap_form form %}
-      <input type="submit" class="btn btn-success" value="글쓰기">
-      <a href="{% url 'stories:index' %}" class="btn btn-danger">뒤로</a>
-    </form>
-  </div>
-</div>
 {% endblock content %}
