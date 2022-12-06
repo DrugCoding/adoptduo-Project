@@ -4,16 +4,14 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
   <link rel="stylesheet" href="{% static 'css/adopt.css' %}">
 
-  <div class="bg-image w-100 d-flex flex-column align-items-center justify-content-center text-light" id="dog-banner">
-    <div class="text-center">
-      <h2 class="mb-4 text-white">건강한 반려문화의 시작</h2>
-      <p>평생을 함께해 주세요</p>
-    </div>
+  <div class="pet-banner-div d-flex justify-content-center">
+    <img class="pet-banner-img" src="{% static 'images/cat_banner.jpg' %}" alt="cat_banner">
+    <h1 class="pet-banner-text">건강한 반려문화의 시작</h1>
   </div>
   <section class="container my-5 d-flex justify-content-center">
     <div class="row">
       <div class="col-6 col-md-4">
-        <a class="btn btn-block btn-md u-btn-outline-primary g-py-10 g-py20--md g-my10 g-my-15--md" href="{% url 'articles:information' %}">
+        <a class="btn btn-block btn-md u-btn-outline-primary g-py-10 g-py20--md g-my10 g-my-15--md a-text" href="{% url 'articles:information' %}">
           <span class="material-symbols-outlined flight">
             flight
           </span>
@@ -22,7 +20,7 @@
         </a>
       </div>
       <div class="col-6 col-md-4">
-        <a class="btn btn-block btn-md u-btn-outline-primary g-py-10 g-py20--md g-my10 g-my-15--md" href="{% url 'articles:info_adopt' %}">
+        <a class="btn btn-block btn-md u-btn-outline-primary g-py-10 g-py20--md g-my10 g-my-15--md a-text" href="{% url 'articles:info_adopt' %}">
           <span class="material-symbols-outlined desc">
             description
           </span>
@@ -31,7 +29,7 @@
         </a>
       </div>
       <div class="col-6 col-md-4">
-        <a class="btn btn-block btn-md u-btn-outline-primary g-py-10 g-py20--md g-my10 g-my-15--md" href="{% url 'articles:info_declartation' %}">
+        <a class="btn btn-block btn-md u-btn-outline-primary g-py-10 g-py20--md g-my10 g-my-15--md a-text" href="{% url 'articles:info_declartation' %}">
           <span class="material-symbols-outlined smart">
             smartphone
           </span>
@@ -45,55 +43,55 @@
   <section class="container  g-mb-120">
     <div>
       <div class="d-flex justify-content-center my-3">
-        <h4>입양절차</h4>
+        <h4 class="main-title">입양절차</h4>
       </div>
       <div class="d-flex justify-content-center">
         <div class="g-rounded-50x circle-adobt ">
           <span class="d-inline-block text-center adobt-circle-text ">
-            입양신청서
+            분양자와의
             <br>
-            작성
+            연락
           </span>
         </div>
         <div class="g-rounded-50x circle-adobt ">
           <span class="d-inline-block text-center adobt-circle-text-1 ">
-            신청서
+            상호간의
             <br>
-            검토
+            합의
           </span>
         </div>
         <div class="g-rounded-50x circle-adobt ">
           <span class="d-inline-block text-center adobt-circle-text-2 ">
-            입양
+            입양·분양
             <br>
-            상담
+            확정
           </span>
         </div>
         <div class="g-rounded-50x circle-adobt ">
           <span class="d-inline-block text-center adobt-circle-text ">
             입양확정 후
             <br>
-            가정방문
+            사후관리
           </span>
         </div>
       </div>
       <div class="row d-flex justify-content-center my-5">
         <div class="col-lg-8">
-          <p class="text-center adopt-font">입양신청서 작성 후 입양상담까지는 약 2-4주가 소요됩니다.</p>
-          <p class="text-center">입양 상담은 선별된 분에 한하여 담당 활동가와 전화를 통해 진행되는 점 참고해 주세요.</p>
+          <p class="text-center adopt-font">상호간의 합의후에 꼭 입양·분양을 해주세요.</p>
+          <p class="text-center adopt-subfont">당사자들간의 만남이나 전화 등 검증이 필요한 부분은 꼭 확인하고 입양·분양을 해주세요</p>
         </div>
       </div>
-      <div>
-        <p class="text-center adopt-list">입양 전 확인해 주세요</p>
-        <ul>
-          <li>입양해듀오의 입양원칙을 따라야 합니다.</li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
+      <div class="adopt-list-div">
+        <p class=" adopt-list text-center">입양 전 확인해 주세요</p>
+      </div>
+      <div class="d-flex justify-content-center">
+        <ul class="list-text">
+          <li>1. 입양해듀오는 입양·분양에 생기는 갈등에 대해서 일체 책임을 지지 않습니다.</li>
+          <li>2. 분양자와 입양자는 상호간의 확인과 검증의 절차가 필요합니다.</li>
+          <li>3. 입양·분양중에 생기는 위법행위에 대해서는 증거를 남기시고 꼭 경찰서에 제출해주세요.</li>
+          <li>4. 입양시에는 가족 구성원 전체의 동의를 꼭 받고 입양을 해주세요.</li>
+          <li>5. 미성년자는 부모님과 동행하여 입양·분양을 진행해주세요.</li>
+          <li>6. 입양 후에는 분양자에게 반려동물들의 상태를 알려주시면 분양자님들이 더욱 더 좋아할거에요.</li>
         </ul>
       </div>
     </div>

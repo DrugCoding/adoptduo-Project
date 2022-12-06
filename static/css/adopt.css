@@ -1,3 +1,56 @@
+@font-face {
+  font-family: 'NanumSquareNeo-Variable';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+ font-family: 'NanumBarunGothic';
+ font-style: normal;
+ font-weight: 400;
+ src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
+ src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
+}
+
+.nanumbarungothic * {
+ font-family: 'NanumBarunGothic', sans-serif;
+}
+
+.main-title{
+  font-family: 'NanumSquareNeo-Variable';
+  font-weight: 700;
+}
+
+.a-text{
+  font-family: 'NanumSquareNeo-Variable';
+}
+
+.pet-banner-div {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+}
+.pet-banner-img {
+  position: absolute;
+  object-fit: fill;
+  width: 100%;
+  height: auto;
+  filter: brightness(50%);
+  top: -80px;
+}
+.pet-banner-text {
+  position: absolute;
+  top: 39%;
+  right: 32%;
+  filter: brightness(100%);
+  color: white;
+}
+
+ul {
+  list-style: none;
+}
+
 #dog-banner {
   background-image: url("/static/images/dog_banner.jpg");
   background-repeat: no-repeat;
@@ -54,20 +107,23 @@
   left: 2rem;
   top: 3.3rem;
   font-size:17px;
+  font-family: 'NanumBarunGothic';
 }
 
 .adobt-circle-text-1{
   position: relative; 
-  left: 3rem;
+  left: 2.6rem;
   top: 3.3rem;
   font-size:17px;
+  font-family: 'NanumBarunGothic';
 }
 
 .adobt-circle-text-2{
   position: relative; 
-  left: 3.5rem;
+  left: 2.5rem;
   top: 3.3rem;
   font-size:17px;
+  font-family: 'NanumBarunGothic';
 }
 
 
@@ -81,9 +137,23 @@
 
 .adopt-font{
   font-weight: bold;
+  font-family: 'NanumSquareNeo-Variable';
 }
 
+.adopt-subfont{
+  font-family: 'NanumBarunGothic';
+}
 
 .adopt-list{
   font-weight: bold;
+  font-family: 'NanumSquareNeo-Variable';
+}
+
+.adopt-list-div{
+display: flex;
+justify-content: center;
+}
+
+.list-text{
+  font-family: 'NanumBarunGothic';
 }

@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
   <link rel="stylesheet" href="{% static 'css/index.css' %}">
-  <div class="">
+  <div class="container">
     <div class="search-section d-flex container">
       <div class="search-title">
         <h4 id="tagline">가족이 되어주세요</h4>
@@ -31,10 +31,10 @@
         <div class="row row-cols-5">
           {% for dog in dog_articles %}
             <div class="col  ">
-              <a style="text-decoration:none;" href="">
+              <a style="text-decoration:none;" href="{% url 'articles:dog_detail' dog.pk  %}">
                 <div class="card h-100">
                   <img src="{{ dog.image.url }}" class="card-img-top post-img" alt="...">
-                  <div class="card-body">
+                  <div class="card-body" style="height:auto">
                     <h5 class="post-title">{{ dog.title }}</h5>
                   </div>
                 </div>
@@ -91,10 +91,10 @@
                   </div>
                   <div class="col-md-8">
                     <div class="card-body">
-                      <h5 class="card-title">{{ stories.title }}</h5>
-                      <p class="card-text">{{ stories.content }}</p>
+                      <h5 class="card-title story-title">{{ stories.title }}</h5>
+                      <p class="card-text story-title1">{{ stories.content }}</p>
                       <p class="card-text">
-                        <small class="text-muted">{{ stories.created_at }}</small>
+                        <small class="text-muted story-title2">{{ stories.created_at }}</small>
                       </p>
                     </div>
                   </div>
