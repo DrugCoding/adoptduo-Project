@@ -25,7 +25,6 @@ def index(request):
         "dog_articles" : dog_articles,
         "cat_articles" : cat_articles,
         "stories" : stories,
-        "story": story,
         "vol": vol,
         "user": user,
     }
