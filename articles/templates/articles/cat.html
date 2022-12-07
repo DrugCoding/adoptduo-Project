@@ -33,48 +33,47 @@
       </li>
       <li class="hover1 nav-item mt-2">
         <a href="{% url "articles:cat_category" 5 %}" class="nav-link active text-dark">브리티쉬숏헤어</a>
-      </li> 
+      </li>
       <li class="hover1 nav-item mt-2">
         <a href="{% url "articles:cat_category" 6 %}" class="nav-link active text-dark">러시안블루</a>
-      </li> 
+      </li>
       <li class="hover1 nav-item mt-2">
         <a href="{% url "articles:cat_category" 7 %}" class="nav-link active text-dark">아메리칸숏헤어</a>
       </li>
       <li class="hover1 nav-item mt-2">
         <a href="{% url "articles:cat_category" 8 %}" class="nav-link active text-dark">뱅갈</a>
-      </li> 
+      </li>
       <li class="hover1 nav-item mt-2">
         <a href="{% url "articles:cat_category" 9 %}" class="nav-link active text-dark">렉돌</a>
-      </li>  
+      </li>
     </ul>
   </div>
-
 
   {% for category_article in category_articles %}
     <div class="container text-center">
       <div class="row row-cols-1 row-cols-md-3">
-          <div class="col">
-            <a href="{% url 'articles:cat_detail' category_article.pk %}" class="card-link">
-              <div class="card">
-                <img src="{{ category_article.image.url }}" class="card-img-top" alt="cat_image">
-                <div class="card-body text-dark">
-                  <h5 class="card-title">{{ category_article.name }}
-                    /
-                    {{ category_article.age }}살 /
-                    {% if category_article.gender == '암컷' %}
-                      <span>공주님</span>
-                    {% else %}
-                      <span>왕자님</span>
-                    {% endif %}
-                  </h5>
-                  <p class="card-text" id="dog-card-text">{{ category_article.memo }}
-                    <br>
-                    조회수:
-                    {{ category_article.hits }}</p>
-                </div>
+        <div class="col">
+          <a href="{% url 'articles:cat_detail' category_article.pk %}" class="card-link">
+            <div class="card">
+              <img src="{{ category_article.image.url }}" class="card-img-top" alt="cat_image">
+              <div class="card-body text-dark">
+                <h5 class="card-title">{{ category_article.name }}
+                  /
+                  {{ category_article.age }}살 /
+                  {% if category_article.gender == '암컷' %}
+                    <span>공주님</span>
+                  {% else %}
+                    <span>왕자님</span>
+                  {% endif %}
+                </h5>
+                <p class="card-text" id="dog-card-text">{{ category_article.memo }}
+                  <br>
+                  조회수:
+                  {{ category_article.hits }}</p>
               </div>
-            </a>
-          </div>
+            </div>
+          </a>
+        </div>
       </div>
     </div>
   {% endfor %}

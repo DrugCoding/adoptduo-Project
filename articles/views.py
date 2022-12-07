@@ -30,9 +30,9 @@ def index(request):
     vol = Volunteer.objects.all()
     user = User.objects.all()
     context = {
-        "dog_articles": dog_articles,
-        "cat_articles": cat_articles,
-        "stories": stories,
+        "dog_articles" : dog_articles,
+        "cat_articles" : cat_articles,
+        "stories" : stories,
         "vol": vol,
         "user": user,
     }
@@ -347,12 +347,24 @@ def search(request):
     dogs = None
     cats = None
     stories = None
-    if "searchs" in request.GET:
-        query = request.GET.get("searchs")
-        dogs = DogArticle.objects.all().filter(Q(breed__icontains=query))
-        cats = CatArticle.objects.all().filter(Q(breed__icontains=query))
+    if 'searchs' in request.GET:
+        query = request.GET.get('searchs')
+        dogs = DogArticle.objects.all().filter(
+            Q(title__icontains=query) |
+            Q(content__icontains=query) |
+            Q(dog_breed__name__icontains=query) 
+         )
+
+        cats = CatArticle.objects.all().filter(
+            Q(title__icontains=query) |
+            Q(content__icontains=query) |
+            Q(cat_breed__name__icontains=query) 
+        )
+
         stories = Stories.objects.all().filter(
-            Q(breed__icontains=query) | Q(content__icontains=query)
+            Q(title__icontains=query)|
+            Q(content__icontains=query) |
+            Q(breed__icontains=query)
         )
         # # 조회수 최다 강아지 분양글
         # most_dog = DogArticle.objects.order_by('-hits')[:4]
