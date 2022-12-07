@@ -24,8 +24,7 @@ def index(request):
     context = {
         "dog_articles" : dog_articles,
         "cat_articles" : cat_articles,
-        "stories" : stories,
-        "story": story,
+        "stories" : stories, 
         "vol": vol,
         "user": user,
     }
