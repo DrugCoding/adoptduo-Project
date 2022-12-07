@@ -12,45 +12,19 @@
 
   <div class="container-cards mt-5">
     <div class="post-row">
+      {% for vv_article in vv_articles %}
       <div class="card my-3 mx-3" style="width: 18rem;">
-        <img src="../static/images/volunteer_img.png" class="card-img-top" alt="...">
+        {% if user.image %}
+        <a href="{% url 'accounts:detail' vv_article.pk %}"><img src="{{ vv_article.user.image.url }}" class="card-img-top" alt="..."></a>
+        {% else %}
+        <img src="https://dummyimage.com/300x300/000/454545" class="card-img-top" alt="...">
+        {% endif %}
         <div class="card-body">
-          <h5 class="card-text text-center">봉사자 이름</h5>
+          <h5 class="card-text text-center">{{ vv_article.user.name }}</h5>
         </div>
       </div>
-      <div class="card my-3 mx-3" style="width: 18rem;">
-        <img src="../static/images/volunteer_img.png" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-text text-center">봉사자 이름</h5>
-        </div>
-      </div>
-      <div class="card my-3 mx-3" style="width: 18rem;">
-        <img src="../static/images/volunteer_img.png" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-text text-center">봉사자 이름</h5>
-        </div>
-      </div>
+      {% endfor %}
     </div>
-    <div class="post-row">
-      <div class="card my-3 mx-3" style="width: 18rem;">
-        <img src="../static/images/volunteer_img.png" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-text text-center">봉사자 이름</h5>
-        </div>
-      </div>
-      <div class="card my-3 mx-3" style="width: 18rem;">
-        <img src="../static/images/volunteer_img.png" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-text text-center">봉사자 이름</h5>
-        </div>
-      </div>
-      <div class="card my-3 mx-3" style="width: 18rem;">
-        <img src="../static/images/volunteer_img.png" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-text text-center">봉사자 이름</h5>
-        </div>
-      </div>
-    </div>  
   </div>
   <div class="container">
     <table class="table table-hover" style="border: 1px solid; border-color: #cccccc">
@@ -84,9 +58,15 @@
   </div>
     <!-- 글작성 버튼 -->
     <div class="d-flex justify-content-center">
+      {% if request.user.is_authenticated %}
       <a href="{% url 'volunteers:create' %}">
         <button>글작성</button>
       </a>
+      {% else %}
+      <a href="{% url 'accounts:login' %}">
+        <button>글작성</button>
+      </a>
+      {% endif %}
     </div>
     <nav aria-label="Page navigation example" class="nav-page mt-5 mb-2">
       <ul class="pagination">

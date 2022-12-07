@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
-
+{% load static %}
 {% block content %}
-  <h1>회원정보 수정하기</h1>
-  <form action="" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {% bootstrap_form form %}
-    {% bootstrap_button button_type="submit" content="수정완료" %}
-  </form>
+
+<link rel="stylesheet" href="{% static 'css/accounts_update.css' %}">
+<h1 class="text-center my-5 fw-bold">회원정보 수정하기</h1>
+<form action="" method="POST" enctype="multipart/form-data" style="width:40%; margin:0 auto">
+  {% csrf_token %}
+  {% bootstrap_form form %}
+  <div class="text-center">{% bootstrap_button button_type="submit" content="수정완료" %}</div>
+</form>
 {% endblock content %}

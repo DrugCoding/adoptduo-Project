@@ -1,12 +1,17 @@
 from django.shortcuts import render, redirect
 from .models import Volunteer, VolunteerComment
 from .forms import VolunteerForm, VolunteerCommentForm
+from django.http import JsonResponse
 
 # Create your views here.
 
 def index(request):
     v_articles = Volunteer.objects.order_by('-pk')
-    context ={'v_articles': v_articles}
+    vv_articles = Volunteer.objects.order_by('pk')
+    context ={
+        'v_articles': v_articles,
+        'vv_articles': vv_articles,
+        }
     return render(request, 'volunteers/index.html', context)
 
 def create(request):
@@ -30,26 +35,59 @@ def detail(request, pk):
     context = {
         "v_article": v_article,
         'v_comments': v_article.volunteercomment_set.all(),
-        "v_comment_form": v_comment_form
+        "v_comment_form": v_comment_form,
     }
     return render(request, "volunteers/detail.html", context)
     
-def update(request):
-    pass
+def update(request, pk):
+    v_article = Volunteer.objects.get(pk=pk)
+    if request.method == "POST":
+        v_form = VolunteerForm(request.POST, instance=v_article)
+        if v_form.is_valid():
+            v_form.save()
+            return redirect("volunteers:detail", v_article.pk)
+    else:
+        v_form = VolunteerForm(instance=v_article)
+    context = {
+        "v_form": v_form,
+    }
+    return render(request, "volunteers/update.html", context)
 
 def delete(request, pk):
     v_article = Volunteer.objects.get(pk=pk)
     v_article.delete()
     return redirect("volunteers:index")
 
-def create_comment(request):
-    pass
+def comment_create(request, pk):
+    v_article = Volunteer.objects.get(pk=pk)
+    v_comment_form = VolunteerCommentForm(request.POST)
+    if v_comment_form.is_valid():
+        v_comment = v_comment_form.save(commit=False)
+        v_comment.v_article = v_article # 게시글은 입력 받은 댓글의 게시글
+        v_comment.user = request.user # 로그인한 유저가 댓글작성자(커멘트의 유저)임!
+        v_comment.save()
+        context = {
+            'v_content': v_comment.content,
+            'v_userName': v_comment.user.username,
+            'v_pk': v_comment.pk,
+        }
+        return JsonResponse(context)
 
-def delete_comment(request):
-    # v_article = Volunteer.objects.get(pk)
-    # v_article.delete()
-    # return redirect("volunteers:index")
-    pass
+def comment_delete(request, v_article_pk, pk):
+    v_comment = VolunteerComment.objects.get(pk=pk)
+    v_comment.delete()
+    context = {
+        '1': 1
+    }
+    return JsonResponse(context)
 
-def bookmark(request):
-    pass
+def bookmark(request, pk):
+    v_article = Volunteer.objects.get(pk=pk)
+    if request.user in v_article.bookmarks.all(): 
+        v_article.bookmarks.remove(request.user)
+        is_bookmarked = False
+    else:
+        v_article.bookmarks.add(request.user)
+        is_bookmarked = True
+    context = {'isbookmarked': is_bookmarked, 'bookmarkcount': v_article.bookmarks.count()}
+    return JsonResponse(context)
