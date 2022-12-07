@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from .models import Volunteer, VolunteerComment
 from .forms import VolunteerForm, VolunteerCommentForm
 from django.http import JsonResponse
+from django.db.models import Count
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -14,13 +16,14 @@ def index(request):
         }
     return render(request, 'volunteers/index.html', context)
 
+@login_required
 def create(request):
     if request.method == 'POST':
         v_form = VolunteerForm(request.POST)
         if v_form.is_valid():
-            v_form = v_form.save(commit=False)
-            v_form.user = request.user
-            v_form.save()
+            v_article = v_form.save(commit=False)
+            v_article.user = request.user
+            v_article.save()
             return redirect('volunteers:index')
     else:
         v_form = VolunteerForm()
@@ -34,11 +37,12 @@ def detail(request, pk):
     v_comment_form = VolunteerCommentForm()
     context = {
         "v_article": v_article,
-        'v_comments': v_article.volunteercomment_set.all(),
+        "v_comments": v_article.volunteercomment_set.all(),
         "v_comment_form": v_comment_form,
     }
     return render(request, "volunteers/detail.html", context)
-    
+
+@login_required    
 def update(request, pk):
     v_article = Volunteer.objects.get(pk=pk)
     if request.method == "POST":
@@ -63,7 +67,7 @@ def comment_create(request, pk):
     v_comment_form = VolunteerCommentForm(request.POST)
     if v_comment_form.is_valid():
         v_comment = v_comment_form.save(commit=False)
-        v_comment.v_article = v_article # 게시글은 입력 받은 댓글의 게시글
+        v_comment.volunteer = v_article # 게시글은 입력 받은 댓글의 게시글
         v_comment.user = request.user # 로그인한 유저가 댓글작성자(커멘트의 유저)임!
         v_comment.save()
         context = {
@@ -73,8 +77,8 @@ def comment_create(request, pk):
         }
         return JsonResponse(context)
 
-def comment_delete(request, v_article_pk, pk):
-    v_comment = VolunteerComment.objects.get(pk=pk)
+def comments_delete(request, v_article_pk, v_comment_pk):
+    v_comment = VolunteerComment.objects.get(pk=v_comment_pk)
     v_comment.delete()
     context = {
         '1': 1
@@ -89,5 +93,8 @@ def bookmark(request, pk):
     else:
         v_article.bookmarks.add(request.user)
         is_bookmarked = True
-    context = {'isbookmarked': is_bookmarked, 'bookmarkcount': v_article.bookmarks.count()}
+    context = {
+        'isbookmarked': is_bookmarked,
+        'bookmarkcount': v_article.bookmarks.count()
+        }
     return JsonResponse(context)

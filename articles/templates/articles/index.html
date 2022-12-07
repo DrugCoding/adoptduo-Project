@@ -75,7 +75,8 @@
       <h3 class="story-font">스토리</h3>
       <div class="story-stroke"></div>
       {% for story in stories %}
-        <a href="{% url 'stories:detail' story.pk %}">
+        <a href="{% url 'stories:detail' story.pk %}" style="text-decoration:none;">
+
           <!-- 클릭 시 링크 설정 -->
           <div class="card story-card">
             <!-- 카드 헤더 -->
@@ -127,22 +128,26 @@
       <div class="volunteers-stroke"></div>
       <div class="volunteers-post-subsection">
         <p></p>
-        <div class="row row-cols-5">
-          <div class="animated-title">
-            <div class="col track ">
-              <a style="text-decoration:none;" href="">
-                <div class="card h-100 content">
-                  {% if user.volunteer_c == "가능" %}
-                    {% if user.image %}
-                      <img src="{{ user.image.url }}" class="card-img-top" alt="...">
-                    {% endif %}
-                  {% endif %}
+        <marquee behavior="scroll" scrolldelay="60" direction="" loop="-1">
+          <div class="d-flex row row-cols-5 container">
+            {% for use in user %}
+              <div class="animated-title">
+                <div class="col track ">
+                  <a style="text-decoration:none;" href="{% url 'accounts:detail' use.pk %}">
+                    <div class="card h-100 content " id="animatedBackground">
+                      {% if use.volunteer_c == "가능" %}
+                        {% if use.image %}
+                          <img src="{{ use.image.url }}" class="card-img-top" alt="...">
+                        {% endif %}
+                      {% endif %}
+                    </div>
+                  </a>
                 </div>
-              </a>
-            </div>
-          </div>
+              </div>
+            {% endfor %}
+          </div>                                                                                                                                   
         </div>
-      </div>
+      </marquee>
     </div>
   </div>
 {% endblock content %}
