@@ -27,10 +27,15 @@
 
 .btn:hover {
     background-color: white;
-    color: #d7ac00;
+    color: #d7ac00 !important;
     border-style: solid;
     border-width: 2px;
     border-color: #d7ac00;
     border-radius: 3rem;
     height: 3rem;
+}
+
+.a:hover {
+    text-decoration: none;
+    color: #d7ac00;
 }

@@ -3,7 +3,9 @@
 {% load static %}
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/login.css' %}">
+<link rel="stylesheet" href="{% static 'css/account_detail.css' %}">
+
+
 <!-- 프로필-->
 <div class="text-center">
   {% if user.image %}
@@ -11,7 +13,7 @@
   {% else %}
   <img src="https://cdn.discordapp.com/attachments/1044493548071948309/1049236425708666940/review_default_profile_image.jpg">
   {% endif %}
-  <h1>{{ user.name }}님의 프로필</h1>
+  <h1 class="fw-bold mb-5">{{ user.name }}님의 프로필</h1>
   <p>팔로우 : <a href="#">{{ user.followings.count }}명</a> | 팔로워 : <a href="#">{{ user.followers.count }}명</a></p>
   <p>거주지 : {{ user.area }}</p>
   <p>이동봉사 : {{ user.volunteer_c }}</p>
@@ -27,7 +29,7 @@
   </a>
   {% endif %}
 
-  <h3>강아지 북마크 누른 글</h3>
+  <h3 class="mt-5">강아지 북마크 누른 글</h3>
   <p class="text-muted">{{ user.dogarticle_bookmark.count }}개</p>
   {% for dog_article in user.dogarticle_bookmark.all %}
   <p>
@@ -37,7 +39,7 @@
   </p>
   {% endfor %}
 
-  <h3>고양이 북마크 누른 글</h3>
+  <h3 class="mt-3">고양이 북마크 누른 글</h3>
   <p class="text-muted">{{ user.catarticle_bookmark.count }}개</p>
   {% for cat_article in user.catarticle_bookmark.all %}
   <p>
@@ -48,16 +50,16 @@
   {% endfor %}
 
 
-  <div class="row mx-auto">
+  <section class="row d-flex justify-content-center">
     <div class="col-7">
-      <button class="btn" style="width: 15%;"><a class="text-decoration-none text-white"
-          href="{% url 'accounts:delete' %}">탈퇴</a></button>
       <button class="btn" style="width: 15%;"><a class="text-decoration-none text-white"
           href="{% url 'accounts:update' %}">수정</a></button>
       <button class="btn" style="width: 25%;"><a class="text-decoration-none text-white"
-          href="{% url 'accounts:change_password' %}">비밀번호수정</a></button>
+          href="{% url 'accounts:change_password' %}">비밀번호 수정</a></button>
+      <button class="btn" style="width: 15%;"><a class="text-decoration-none text-white"
+          href="{% url 'accounts:delete' %}">탈퇴</a></button>
     </div>
-  </div>
+  </section>
 </div>
 
 {% endblock content %}

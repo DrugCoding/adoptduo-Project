@@ -3,11 +3,13 @@ from .models import DogArticle, CatArticle, DogArticleComment, CatArticleComment
 from .forms import DogArticleForm, CatArticleForm, DogCommentForm, CatCommentForm
 from stories.models import Stories
 from volunteers.models import Volunteer
+from accounts.models import User
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.db.models import Count
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
+from accounts.models import User
 
 # Create your views here.
 
@@ -18,11 +20,14 @@ def index(request):
     storie = stor.annotate(like_count=Count("like"))
     stories = storie.order_by('-like_count')[0:3]
     vol = Volunteer.objects.all()
+    user = User.objects.all()
     context = {
         "dog_articles" : dog_articles,
         "cat_articles" : cat_articles,
         "stories" : stories,
+        "story": story,
         "vol": vol,
+        "user": user,
     }
     return render(request,"articles/index.html", context)
 
@@ -331,13 +336,13 @@ def search(request):
     if 'searchs' in request.GET:
         query = request.GET.get('searchs')
         dogs = DogArticle.objects.all().filter(
-            Q(dog_breed_id__icontains=query)
+            Q(breed__icontains=query)
         )
         cats = CatArticle.objects.all().filter(
-            Q(cat_breed_id__icontains=query)
+            Q(breed__icontains=query)
         )
         stories = Stories.objects.all().filter(
-            # Q(breed__icontains=query)|
+            Q(breed__icontains=query)|
             Q(content__icontains=query)
         )
         # # 조회수 최다 강아지 분양글
