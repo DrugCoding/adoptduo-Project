@@ -12,7 +12,9 @@
   <div class="container mt-4">
     <h2>{{ dog_article.title }}</h2>
     <a href="{% url 'accounts:detail' dog_article.user.pk %}">{{ dog_article.user.username }}</a>
-    <a href="{% url 'notes:send' dog_article.user.pk %}">{{ dog_article.user.username }}</a>
+    {% if request.user.pk != dog_article.user.pk  %}
+    <a href="{% url 'notes:send' dog_article.user.pk %}">{{ dog_article.user.username }}에게 쪽지보내기</a>
+    {% endif %}
     <hr id="divider">
   </div>
   <div class="container">

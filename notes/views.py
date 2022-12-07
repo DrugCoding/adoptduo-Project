@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Notes
+from articles.models import DogArticle, CatArticle
 from .form import NotesForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -19,6 +20,8 @@ def index(request):
 
 def send(request, pk): # 보내는 로직
     to_user = get_user_model().objects.get(pk=pk)
+    note = Notes.objects.get(pk=pk)
+    # cat_article = CatArticle.objects.get(id=cat_article_pk)
     form = NotesForm(request.POST or None)
     if form.is_valid():
         temp = form.save(commit=False)
@@ -30,6 +33,8 @@ def send(request, pk): # 보내는 로직
     context = {
         "form": form,
         "to_user": to_user,
+        "note":note,
+        # "cat_article":cat_article
     }
     return render(request, "notes/send.html", context)
 
