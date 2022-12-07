@@ -3,6 +3,7 @@ from .models import DogArticle, CatArticle, DogArticleComment, CatArticleComment
 from .forms import DogArticleForm, CatArticleForm, DogCommentForm, CatCommentForm
 from stories.models import Stories
 from volunteers.models import Volunteer
+from accounts.models import User
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.db.models import Count
@@ -19,12 +20,14 @@ def index(request):
     storie = stor.annotate(like_count=Count("like"))
     stories = storie.order_by('-like_count')[0:3]
     vol = Volunteer.objects.all()
+    user = User.objects.all()
     context = {
         "dog_articles" : dog_articles,
         "cat_articles" : cat_articles,
         "stories" : stories,
         "story": story,
         "vol": vol,
+        "user": user,
     }
     return render(request,"articles/index.html", context)
 
