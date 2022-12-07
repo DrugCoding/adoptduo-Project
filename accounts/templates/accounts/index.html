@@ -1,24 +1,26 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
+{% load static %}
 
 {% block content %}
-  <h1>회원목록</h1>
-  {% for account in accounts %}
-  <p>{{ account.username }} | {{ account.name }} | {{ account.area }} | {{ account.volunteer_c }}</p>
-  {% endfor %}
-  {% if request.user.is_authenticated %}
-    <li class="my-navitem">
-      <a href="{% url 'accounts:detail' request.user.pk %}">MyPage</a>
-    </li>
-    <li class="my-navitem">
-      <a href="{% url 'accounts:logout' %}">LogOut</a>
-    </li>
-    {% else %}
-    <li class="my-navitem">
-      <a href="{% url 'accounts:signup' %}">SignUp</a>
-    </li>
-    <li class="my-navitem">
-      <a href="{% url 'accounts:login' %}">LogIn</a>
-    </li>
-  {% endif %}
+<link rel="stylesheet" href="{% static 'css/account_index.css' %}">
+<h1 class="text-center my-5 fw-bold">회원목록</h1>
+{% for account in accounts %}
+<p class="text-center">{{ account.username }} | {{ account.name }} | {{ account.area }} | {{ account.volunteer_c }}</p>
+{% endfor %}
+{% if request.user.is_authenticated %}
+<li class="my-navitem">
+  <a href="{% url 'accounts:detail' request.user.pk %}">MyPage</a>
+</li>
+<li class="my-navitem">
+  <a href="{% url 'accounts:logout' %}">LogOut</a>
+</li>
+{% else %}
+<li class="my-navitem">
+  <a href="{% url 'accounts:signup' %}">SignUp</a>
+</li>
+<li class="my-navitem">
+  <a href="{% url 'accounts:login' %}">LogIn</a>
+</li>
+{% endif %}
 {% endblock content %}
