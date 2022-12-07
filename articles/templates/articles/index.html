@@ -131,21 +131,21 @@
         <marquee behavior="scroll" scrolldelay="60" direction="" loop="-1">
           <div class="d-flex row row-cols-5 container">
             {% for use in user %}
-              <div class="animated-title">
-                <div class="col track ">
-                  <a style="text-decoration:none;" href="{% url 'accounts:detail' use.pk %}">
-                    <div class="card h-100 content " id="animatedBackground">
-                      {% if use.volunteer_c == "가능" %}
+              {% if use.volunteer_c == "가능" %}
+                <div class="animated-title">
+                  <div class="col track ">
+                    <a style="text-decoration:none;" href="{% url 'accounts:detail' use.pk %}">
+                      <div class="card h-100 content " id="animatedBackground">
                         {% if use.image %}
                           <img src="{{ use.image.url }}" class="card-img-top" alt="...">
                         {% endif %}
-                      {% endif %}
-                    </div>
-                  </a>
+                      </div>
+                    </a>
+                  </div>
                 </div>
-              </div>
+              {% endif %}
             {% endfor %}
-          </div>                                                                                                                                   
+          </div>
         </div>
       </marquee>
     </div>
