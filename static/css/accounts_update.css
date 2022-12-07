@@ -10,12 +10,26 @@
     border-width: 2px;
     border-radius: 1rem;
     height: 3rem;
+    align-items: middle;
+}
+
+.form-select {
+    border-style: solid;
+    border-color: darkgrey;
+    border-width: 2px;
+    border-radius: 1rem;
+    height: 3rem;
+}
+
+.form-file {
+    height: 3rem;
 }
 
 .btn {
     font-size: larger;
     font-weight: bold;
     margin: 1rem auto;
+    min-width: 20%;
     background-color: #FFCD00;
     color: black;
     border-style: solid;

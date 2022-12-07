@@ -2,14 +2,14 @@
 {% load django_bootstrap5 %}
 {% load static %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/signup.css' %}">
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
 
 <div class="container">
   <h1 class="my-5 mx-5 fw-bold text-center">회원가입</h1>
   <form action="" method="POST" enctype="multipart/form-data" style="width:40%; margin:0 auto">
     {% csrf_token %}
     {% bootstrap_form form %}
-    <div class="text-center">{% bootstrap_button button_type="submit" content="회원가입" %}</div>
+    <div class="mt-4">{% bootstrap_button button_type="submit" content="회원가입" %}</div>
 
   </form>
 </div>
