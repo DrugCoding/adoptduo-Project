@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Volunteer, VolunteerComment
 from .forms import VolunteerForm, VolunteerCommentForm
+from accounts.models import User
 from django.http import JsonResponse
 from django.db.models import Count
 from django.contrib.auth.decorators import login_required
@@ -8,11 +9,13 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def index(request):
+    user = User.objects.all()
     v_articles = Volunteer.objects.order_by('-pk')
     vv_articles = Volunteer.objects.order_by('pk')
     context ={
         'v_articles': v_articles,
         'vv_articles': vv_articles,
+        'user':user,
         }
     return render(request, 'volunteers/index.html', context)
 

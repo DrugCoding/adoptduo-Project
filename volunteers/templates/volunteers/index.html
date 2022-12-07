@@ -2,100 +2,109 @@
 {% load static %}
 {% block content %}
   <link rel="stylesheet" href="{% static 'css/volunteers.css' %}">
-
-  <div class="volunteers-banner opacity-75">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..21,100..700,0..1,-50..200"/>
+  {% comment %} <div class="volunteers-banner opacity-75">
     <div class="banner-text">
       <h2>건강한 반려문화의 시작</h2>
       <p>평생을 함께해 주세요</p>
     </div>
-  </div>
-
-  <div class="container-cards mt-5">
-    <div class="post-row">
-      {% for vv_article in vv_articles %}
-      <div class="card my-3 mx-3" style="width: 18rem;">
-        {% if user.image %}
-        <a href="{% url 'accounts:detail' vv_article.pk %}"><img src="{{ vv_article.user.image.url }}" class="card-img-top" alt="..."></a>
-        {% else %}
-        <img src="https://dummyimage.com/300x300/000/454545" class="card-img-top" alt="...">
-        {% endif %}
-        <div class="card-body">
-          <h5 class="card-text text-center">{{ vv_article.user.name }}</h5>
-        </div>
-      </div>
-      {% endfor %}
+  </div> {% endcomment %}
+  <div class="layout" >
+    <div>
+      <main id="wrap" class="wrap-list">
+        <section class="container">
+          <div role="main" class="contents">
+            <div class="articles-list">
+              {% for vol in v_articles %}
+                <div class="articles-list-pre ">
+                  <div class="title">
+                    <h3>
+                      <a href="">
+                        {{ vol.title }}
+                      </a>
+                    </h3>
+                    <p>
+                      <a href="">
+                        {{ vol.content}}
+                      </a>
+                    </p>
+                  </div>
+                  <div class="sub">
+                    <p class="name">
+                      <a href="">
+                        {{ vol.user.username }}
+                      </a>
+                    </p>
+                    <div class="wrap-info">
+                      <a href="" class="view">
+                        <i class="blind">
+                          <span class="material-symbols-outlined">
+                            visibility
+                          </span>
+                        </i>
+                        {{ vol.hits }}
+                      </a>
+                      <a class="like" href="">
+                        <i class="icon icon-comments_count">
+                          <span class="material-symbols-outlined">
+                            thumb_up
+                          </span>
+                        </i>
+                        {{ vol.like.all | length }}
+                      </a> 
+                        <a href="">
+                          {{ vol.created_at | date }}
+                        </a>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </section>
+      </main>
     </div>
   </div>
-  <div class="container">
-    <table class="table table-hover" style="border: 1px solid; border-color: #cccccc">
-      <thead class="px-2">
-        <tr>
-          <th scope="col">번호</th>
-          <th scope="col">제목</th>
-          <th scope="col">작성자</th>
-          <th scope="col">출발지역</th>
-          <th scope="col">도착지역</th>
-          <th scope="col">출발날짜</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for v_article in v_articles %}
-        <tr>
-          <th scope="row">{{ v_article.pk }}</th>
-          <td>
-            <a href="{% url 'volunteers:detail' v_article.pk %}" style="text-decoration: none; color:black;">
-              {{ v_article.title }}
-            </a>
-          </td>
-          <td>{{ v_article.user.name }}</td>
-          <td>{{ v_article.area }}</td>
-          <td>{{ v_article.adopt_location }}</td>
-          <td>{{ v_article.adopt_date }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
-    <!-- 글작성 버튼 -->
-    <div class="d-flex justify-content-center">
-      {% if request.user.is_authenticated %}
+  <!-- 글작성 버튼 -->
+  <div class="d-flex justify-content-center">
+    {% if request.user.is_authenticated %}
       <a href="{% url 'volunteers:create' %}">
         <button>글작성</button>
       </a>
-      {% else %}
+    {% else %}
       <a href="{% url 'accounts:login' %}">
         <button>글작성</button>
       </a>
-      {% endif %}
-    </div>
-    <nav aria-label="Page navigation example" class="nav-page mt-5 mb-2">
-      <ul class="pagination">
-        <li class="page-item">
-          <a class="page-link text-black-50" href="#" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-          </a>
-        </li>
-        <li class="page-item">
-          <a class="page-link text-black-50" href="#">1</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link text-black-50" href="#">2</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link text-black-50" href="#">3</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link text-black-50" href="#">4</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link text-black-50" href="#">5</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link text-black-50" href="#" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
+    {% endif %}
   </div>
+  <nav aria-label="Page navigation example" class="nav-page mt-5 mb-2">
+    <ul class="pagination">
+      <li class="page-item">
+        <a class="page-link text-black-50" href="#" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li class="page-item">
+        <a class="page-link text-black-50" href="#">1</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link text-black-50" href="#">2</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link text-black-50" href="#">3</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link text-black-50" href="#">4</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link text-black-50" href="#">5</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link text-black-50" href="#" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
 {% endblock content %}
