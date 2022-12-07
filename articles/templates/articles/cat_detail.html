@@ -14,7 +14,11 @@
   </div>
 
   <div class="container mt-4">
-    <h2>글제목{{ cat_article.title }}</h2>
+    <h2>{{ cat_article.title }}</h2>
+    <a href="{% url 'accounts:detail' cat_article.user.pk %}">{{ cat_article.user.username }}</a>
+    {% if request.user.pk != cat_article.user.pk  %}
+    <a href="{% url 'notes:send' cat_article.user.pk %}">{{ cat_article.user.username }}에게 쪽지보내기</a>
+    {% endif %}
     <hr id="divider"/>
   </div>
   <div class="container">
