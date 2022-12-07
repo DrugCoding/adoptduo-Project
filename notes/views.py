@@ -20,7 +20,7 @@ def index(request):
 
 def send(request, pk): # 보내는 로직
     to_user = get_user_model().objects.get(pk=pk)
-    note = Notes.objects.get(pk=pk)
+    # note = Notes.objects.get(pk=pk)
     # cat_article = CatArticle.objects.get(id=cat_article_pk)
     form = NotesForm(request.POST or None)
     if form.is_valid():
@@ -33,7 +33,7 @@ def send(request, pk): # 보내는 로직
     context = {
         "form": form,
         "to_user": to_user,
-        "note":note,
+        # "note":note,
         # "cat_article":cat_article
     }
     return render(request, "notes/send.html", context)
