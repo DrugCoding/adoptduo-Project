@@ -321,14 +321,9 @@ body{
 position: relative;
 
 left:33%;
-}  
-
-.center-hr_3 {
-position: relative;
-right:0%;
-}  
 
 
+    }  
 .undered_link{
     position: absolute;
 }
