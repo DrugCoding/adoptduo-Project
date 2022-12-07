@@ -13,7 +13,7 @@
     <h1>강아지</h1>
     <ul id="puppy-ul" class="nav my-4">
       <li class="nav-item mt-2">
-        <a href="{% url "articles:dog_index" %}"class="nav-link active text-dark">전체</a>
+        <a href="{% url "articles:dog_index" %}" class="nav-link active text-dark">전체</a>
       </li>
       <li class="nav-item mt-2">
         <a href="{% url "articles:dog_category" 1 %}" class="nav-link active text-dark">요크셔테리어</a>
@@ -46,79 +46,89 @@
         <a href="{% url "articles:dog_category" 10 %}" class="nav-link active text-dark">시츄</a>
       </li>
       <li class="nav-item mt-2">
-        <a href"{% url "articles:dog_category" 11 %}" class="nav-link active text-dark">보더콜리</a>
+        <a href="{% url "articles:dog_category" 11 %}" class="nav-link active text-dark">보더콜리</a>
       </li>
     </ul>
   </div>
 
   {% for category_article in category_articles %}
-      <div class="container text-center">
-        <div class="row row-cols-1 row-cols-md-3">
-              <div class="col">
-                  <a href="{% url 'articles:dog_detail' category_article.pk %}" class="card-link">
-                    <div class="card">
-                      <img src="{{ category_article.image.url }}" class="card-img-top" alt="dog">
-                      <div class="card-body text-dark">
-                        <h5 class="card-title">
-                          {{ category_article.name }} / {{ category_article.age }} /
-                          {% if category_article.gender == '암컷' %}
-                            <span>공주님</span>
-                          {% else%}
-                            <span>왕자님</span>
-                          {% endif %}
-                        </h5>
-                        <p class="card-text" id="dog-card-text">{{ category_article.memo }} <br> 조회수: {{ category_article.hits }}</p>
-                      </div> 
-                    </div>
-                  </a>
+    <div class="container text-center">
+      <div class="row row-cols-1 row-cols-md-3">
+        <div class="col">
+          <a href="{% url 'articles:dog_detail' category_article.pk %}" class="card-link">
+            <div class="card">
+              <img src="{{ category_article.image.url }}" class="card-img-top" alt="dog">
+              <div class="card-body text-dark">
+                <h5 class="card-title">
+                  {{ category_article.name }}
+                  /
+                  {{ category_article.age }}
+                  /
+                  {% if category_article.gender == '암컷' %}
+                    <span>공주님</span>
+                    {% else%}
+                    <span>왕자님</span>
+                  {% endif %}
+                </h5>
+                <p class="card-text" id="dog-card-text">{{ category_article.memo }}
+                  <br>
+                  조회수:
+                  {{ category_article.hits }}</p>
               </div>
-            {% endfor %}
+            </div>
+          </a>
         </div>
-      </div>
+      {% endfor %}
+    </div>
+  </div>
 
-      <div class="container text-center">
-        <div class="row row-cols-1 row-cols-md-3">
-           {% for i in page_obj %}
-                <div class="col">
-                    <a href="{% url 'articles:dog_detail' i.pk %}" class="card-link">
-                      <div class="card">
-                        <img src="{{ i.image.url }}" class="card-img-top" alt="dog">
-                        <div class="card-body text-dark">
-                          <h5 class="card-title">
-                            {{ i.name }} / {{ i.age }} /
-                            {% if i.gender == '암컷' %}
-                              <span>공주님</span>
-                            {% else%}
-                              <span>왕자님</span>
-                            {% endif %}
-                          </h5>
-                          <p class="card-text" id="dog-card-text">{{ i.memo }} <br> 조회수: {{ i.hits }}</p>
-                        </div> 
-                      </div>
-                    </a>
-                </div>
-            {% endfor %}
+  <div class="container text-center">
+    <div class="row row-cols-1 row-cols-md-3">
+      {% for i in page_obj %}
+        <div class="col">
+          <a href="{% url 'articles:dog_detail' i.pk %}" class="card-link">
+            <div class="card">
+              <img src="{{ i.image.url }}" class="card-img-top" alt="dog">
+              <div class="card-body text-dark">
+                <h5 class="card-title">
+                  {{ i.name }}
+                  /
+                  {{ i.age }}
+                  /
+                  {% if i.gender == '암컷' %}
+                    <span>공주님</span>
+                    {% else%}
+                    <span>왕자님</span>
+                  {% endif %}
+                </h5>
+                <p class="card-text" id="dog-card-text">{{ i.memo }}
+                  <br>
+                  조회수:
+                  {{ i.hits }}</p>
+              </div>
+            </div>
+          </a>
         </div>
-      </div>
+      {% endfor %}
+    </div>
+  </div>
 
-      <div class="container text-center">
-        <ul id="pagination" class="d-flex my-5 d-flex justify-content-center p-5">
-          <li class="mx-2 rounded">
-            <a class="border border-0 text-muted" href="?page=1">1</a>
-          </li>
-          <li class="mx-2 rounded">
-            <a class="border border-0 text-muted" href="?page=2">2</a>
-          </li>
-          <li class="mx-2 rounded">
-            <a class="border border-0 text-muted" href="?page=3">3</a>
-          </li>
-          <li class="mx-2 rounded">
-            <a class="border border-0 text-muted" href="?page=4">4</a>
-          </li>
-        </ul>
-        <a href="{% url 'articles:dog_create' %}" class="hover1 cat-create btn text-center">강아지 글작성</a>
-      </div>
-
-  
+  <div class="container text-center">
+    <ul id="pagination" class="d-flex my-5 d-flex justify-content-center p-5">
+      <li class="mx-2 rounded">
+        <a class="border border-0 text-muted" href="?page=1">1</a>
+      </li>
+      <li class="mx-2 rounded">
+        <a class="border border-0 text-muted" href="?page=2">2</a>
+      </li>
+      <li class="mx-2 rounded">
+        <a class="border border-0 text-muted" href="?page=3">3</a>
+      </li>
+      <li class="mx-2 rounded">
+        <a class="border border-0 text-muted" href="?page=4">4</a>
+      </li>
+    </ul>
+    <a href="{% url 'articles:dog_create' %}" class="hover1 cat-create btn text-center">강아지 글작성</a>
+  </div>
 
 {% endblock content %}
