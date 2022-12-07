@@ -7,6 +7,7 @@ from django.http import JsonResponse
 from django.db.models import Count
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
+from accounts.models import User
 
 # Create your views here.
 
@@ -23,6 +24,7 @@ def index(request):
         "cat_articles" : cat_articles,
         "stories" : stories,
         "story": story,
+        "volunteers": volunteers,
     }
     return render(request,"articles/index.html", context)
 
@@ -331,13 +333,13 @@ def search(request):
     if 'searchs' in request.GET:
         query = request.GET.get('searchs')
         dogs = DogArticle.objects.all().filter(
-            Q(dog_breed_id__icontains=query)
+            Q(breed__icontains=query)
         )
         cats = CatArticle.objects.all().filter(
-            Q(cat_breed_id__icontains=query)
+            Q(breed__icontains=query)
         )
         stories = Stories.objects.all().filter(
-            # Q(breed__icontains=query)|
+            Q(breed__icontains=query)|
             Q(content__icontains=query)
         )
         # # 조회수 최다 강아지 분양글
