@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <link rel="stylesheet" href="{% static 'css/index.css' %}">
   <div class="container">
     <div class="search-section d-flex container">
@@ -17,18 +19,18 @@
         </form>
       </div>
     </div>
-    <div class="adopted-post-section container">
-      <h3 class="adopted-font">입양정보</h3>
-      <div class="adopted-stroke"></div>
+    <div class="adopted-post-section container work">
+      <h3 class="adopted-font work-dog">입양정보</h3>
+      <div class="adopted-stroke work-dog"></div>
       <div class="adopted-post-subsection">
         <div class="adopted-post-meta">
-          <span class="category">🐶&nbsp;강아지</span>
+          <span class="category work-dog">🐶&nbsp;강아지</span>
           <a href="{% url 'articles:dog_index' %}">
-            <span class="see-more">더보기</span>
+            <span class="see-more work-dog">더보기</span>
           </a>
         </div>
         <p></p>
-        <div class="row row-cols-5">
+        <div class="row row-cols-5 work-dog">
           {% for dog in dog_articles %}
             <div class="col  ">
               <a style="text-decoration:none;" href="{% url 'articles:dog_detail' dog.pk  %}">
@@ -46,18 +48,18 @@
       <div class="adopted-post-section">
         <div class="adopted-post-subsection">
           <div class="adopted-post-meta">
-            <span class="category">🐱&nbsp;고양이</span>
+            <span class="category work-cat work">🐱&nbsp;고양이</span>
             <a href="{% url 'articles:cat_index' %}">
-              <span class="see-more">더보기</span>
+              <span class="see-more work-cat work">더보기</span>
             </a>
           </div>
           <p></p>
-          <div class="row row-cols-5">
+          <div class="row row-cols-5 work">
             {% for cat in cat_articles %}
               <div class="col ">
                 <a style="text-decoration:none;" href="">
                   <div class="card h-100">
-                    <img src="{{ cat.image }}" class="card-img-top post-img" alt="...">
+                    <img src="{{ cat.image.url }}" class="card-img-top post-img" alt="...">
                     <div class="card-body">
                       <h5 class="post-title">{{ cat.title }}</h5>
                     </div>
@@ -69,39 +71,70 @@
         </div>
       </div>
     </div>
-    <div class="story-post-section container">
+    <div class="story-post-section container work">
       <h3 class="story-font">스토리</h3>
       <div class="story-stroke"></div>
-      <div class="story-post-subsection d-flex my-3 ">
-        {% for story in stories %}
-          <a href="{% url 'stories:detail' story.pk %}">
-            <div class="main-story card ">
-              <img class="main-story-img" src="{{ story.image.url }}" alt="">
+      {% for story in stories %}
+      <a href="{% url 'stories:detail' story.pk %}"> <!-- 클릭 시 링크 설정 -->
+        <div class="card story-card">
+          <!-- 카드 헤더 -->
+          <div class="card-header story-card-image" >
+            <img class="story-card-image story-image "src="{{ story.image.url }}" alt="">
+          </div>
+          <!--  카드 바디 -->
+          <div class="card-body-1">
+            <!--  카드 바디 헤더 -->
+            <div class="card-body-header">
+              <h1>{{ story.title }}</h1>
+              <p class="card-body-hashtag">#{{ story.breed }}</p>
+               <p class="card-body-nickname"> 
+                                      작성자: {{ story.user.username }}
+                              </p>
             </div>
-          </a>
+            <p class="card-body-description"> 
+              {{ story.content }}
+            </p>
+            <!--  카드 바디 본문 -->
+      
+            <!--  카드 바디 푸터 -->
+            <div class="card-body-footer">
+              <hr style="margin-bottom: 8px; opacity: 0.5; border-color: #EF5A31">
+              <i class="icon icon-view_count">
+                <span class="material-symbols-outlined">
+                visibility
+                </span>
+              </i>&nbsp;조회 {{ story.hits }}회
+              <i class="icon icon-comments_count">
+                <span class="material-symbols-outlined">
+                  thumb_up
+                  </span>
+              </i>좋아요 {{ story.like.all | length }}
+              <i class="reg_date"> {{ story.created_at }} </i>     
+            </div>       
+          </div>            
+        </div>
         {% endfor %}
-        <div class="">
-          {% for stories in story %}
-
-            <a style="text-decoration:none; color:black;" href="{% url 'stories:detail' stories.pk %}">
-              <div class="card mb-3 stories-post" style="max-width: 540px;">
-                <div class="row g-0">
-                  <div class="col-md-4">
-                    <img src="{{ stories.image.url }}" class="img-fluid rounded-start stories-img" alt="...">
+        </a>
+    </div>
+    <div class="volunteers-post-section container work">
+      <h3 class="volunteers-font">봉사자</h3>
+      <div class="volunteers-stroke"></div>
+      <div class="volunteers-post-subsection">
+        <p></p>
+        <div class="row row-cols-5">
+          {% comment %} {% for dog in dog_articles %} {% endcomment %}
+            <div class="animated-title wrap">
+              <div class="col track ">
+                <a style="text-decoration:none;" href="volunteers:index" >
+                  <div class="card h-100 content">
+                    {% if user.volunteer_c == "가능" %}
+                      <img src="{{ user.image.url }}" class="card-img-top" alt="...">
+                    {% endif %}
                   </div>
-                  <div class="col-md-8">
-                    <div class="card-body">
-                      <h5 class="card-title story-title">{{ stories.title }}</h5>
-                      <p class="card-text story-title1">{{ stories.content }}</p>
-                      <p class="card-text">
-                        <small class="text-muted story-title2">{{ stories.created_at }}</small>
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                </a>>
               </div>
-            </a>
-          {% endfor %}
+            </div>
+          {% comment %} {% endfor %} {% endcomment %}
         </div>
       </div>
     </div>
@@ -113,19 +146,19 @@
   <div class="volunteers-post-subsection">
     <p></p>
     <div class="row row-cols-5">
-      {% for dog in dog_articles %}
-        <div class="animated-title">
-          <div class="col track ">
-            <a style="text-decoration:none;" href="">
-              <div class="card h-100 content">
-                {% if user.volunteer_c == "가능" %}
+      <div class="animated-title">
+        <div class="col track ">
+          <a style="text-decoration:none;" href="">
+            <div class="card h-100 content">
+              {% if user.volunteer_c == "가능" %}
+                {% if user.image %}
                   <img src="{{ user.image.url }}" class="card-img-top" alt="...">
                 {% endif %}
-              </div>
-            </a>
-          </div>
+              {% endif %}
+            </div>
+          </a>
         </div>
-      {% endfor %}
+      </div>
     </div>
   </div>
 </div>

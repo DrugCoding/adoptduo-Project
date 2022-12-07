@@ -14,7 +14,7 @@ class Stories(models.Model):
     content = models.TextField()
     image = ProcessedImageField(
         blank=True,
-        processors=[ResizeToFill(200, 300)],
+        processors=[ResizeToFill(900, 600)],
         format="JPEG",
         options={"quality": 80},
     )

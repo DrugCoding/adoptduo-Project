@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import DogArticle, CatArticle, DogArticleComment, CatArticleComment, CatCategory, DogCategory
 from .forms import DogArticleForm, CatArticleForm, DogCommentForm, CatCommentForm
 from stories.models import Stories
+from volunteers.models import Volunteer
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.db.models import Count
@@ -15,14 +16,13 @@ def index(request):
     cat_articles = CatArticle.objects.all()[0:5]
     stor = Stories.objects.all()
     storie = stor.annotate(like_count=Count("like"))
-    stories = storie.order_by('-like_count')[0:1]
-    sto = stor.annotate(like_count=Count("like"))
-    story = sto.order_by('-like_count')[1:3]
+    stories = storie.order_by('-like_count')[0:3]
+    vol = Volunteer.objects.all()
     context = {
         "dog_articles" : dog_articles,
         "cat_articles" : cat_articles,
         "stories" : stories,
-        "story": story,
+        "vol": vol,
     }
     return render(request,"articles/index.html", context)
 
@@ -331,13 +331,13 @@ def search(request):
     if 'searchs' in request.GET:
         query = request.GET.get('searchs')
         dogs = DogArticle.objects.all().filter(
-            Q(breed__icontains=query)
+            Q(dog_breed_id__icontains=query)
         )
         cats = CatArticle.objects.all().filter(
-            Q(breed__icontains=query)
+            Q(cat_breed_id__icontains=query)
         )
         stories = Stories.objects.all().filter(
-            Q(breed__icontains=query)|
+            # Q(breed__icontains=query)|
             Q(content__icontains=query)
         )
         # # 조회수 최다 강아지 분양글

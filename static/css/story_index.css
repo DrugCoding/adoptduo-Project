@@ -35,3 +35,20 @@
     font-family: 'Gothic A1', sans-serif;   
     color: white;   
     }
+
+.center-hr {
+    position: relative;
+    left:550px;
+    background-color: #FFCD00;
+    border: 1.5px solid #ffcd00;
+    
+} 
+
+#tagline {
+font-size: 1.2vw;
+font-weight: 600;
+color: #707070;
+margin-left: 1.7rem;
+font-family: 'MICEGothic Bold';
+}
+
