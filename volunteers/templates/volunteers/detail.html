@@ -76,9 +76,9 @@
     <div id="v-comments">
       {% for v_comment in v_comments %}
       {% csrf_token %}
-      <div id="{{v_comment.pk}}">
+      <div id="{{ v_comment.pk }}">
         <p> {{ v_comment.user.username }} | {{ v_comment.content }}</p>
-        <button data-comment-id="{{v_comment.pk}}" onclick="remove(event)">댓글 삭제</button>
+        <button data-comment-id="{{ v_comment.pk }}" onclick="remove(event)">댓글 삭제</button>
         <hr>
       </div>
       {% empty %}
@@ -99,7 +99,7 @@
         event.preventDefault();
         axios({
           method: 'post',
-          url: `/${event.target.dataset.articleId}/comments/`,
+          url: `/volunteers/${event.target.dataset.articleId}/comments/`,
           headers: {'X-CSRFToken': csrftoken},
           data: new FormData(commentForm) // 폼에 있는 정보를 data로 넘겨줄 수 있도록 변환
         }) 
@@ -131,7 +131,7 @@
         if (delete_warning === true) {
           axios({
             method: 'post',
-            url: `/${commentForm.dataset.articleId}/comments/${event.target.dataset.commentId}/delete/`,
+            url: `/volunteers/${commentForm.dataset.articleId}/comments/${event.target.dataset.commentId}/delete/`,
             headers: {'X-CSRFToken': csrftoken},
           })
           .then(response => { 
@@ -145,7 +145,7 @@
         console.log(event.target.dataset)
         axios({
             method: 'get',
-            url: `/${event.target.dataset.articleId}/bookmark/` //서버에 요청 보냈고, 
+            url: `/volunteers/${event.target.dataset.articleId}/bookmark/` //서버에 요청 보냈고,
         })
         .then(context => {
             console.log(context)
@@ -160,6 +160,6 @@
             const bookmarkCount = document.querySelector('#bookmark-count')
             bookmarkCount.innerText = context.data.bookmarkcount
         }) // 돌아오면 어떤걸 하고 싶은가?
-    })   
+    })
 </script>
 {% endblock %}
