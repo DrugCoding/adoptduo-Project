@@ -4,7 +4,7 @@
   <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
   <link rel="stylesheet" href="{% static 'css/index.css' %}">
-  <div class="container">
+  <div class="">
     <div class="search-section d-flex container">
       <div class="search-title">
         <h4 id="tagline">가족이 되어주세요</h4>
@@ -138,6 +138,8 @@
                       <div class="card h-100 content " id="animatedBackground">
                         {% if use.image %}
                           <img src="{{ use.image.url }}" class="card-img-top" alt="...">
+                          {% else %}
+                          <img src="{% static 'images/unknown_image.jpg' %}" style="border-radius: 10px;" alt="">
                         {% endif %}
                       </div>
                     </a>
