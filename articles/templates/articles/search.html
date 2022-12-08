@@ -2,75 +2,259 @@
 {% load django_bootstrap5 %}
 {% load static %}
 {% block content %}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..21,100..700,0..1,-50..200"/>
 <link rel="stylesheet" href="{% static 'css/search.css' %}">
 {% comment %} 검색 바 {% endcomment %}
 <section class="container my-5">
-<div>
-  <div class="search-form-section">
-    <form role="search" method="GET" action="{% url 'articles:search' %}" class="search-form" id="searchform">
-      <input name="searchs" id="s" class="search-field" type="text" placeholder="검색어를 입력해주세요" aria-label="Search">
-      <button class="search-submit" type="submit">
-        <img class="img-search" src="{% static 'images/search.png' %}" alt="">
-      </button>
-    </form>
+  <div class="">
+    <div class="search-form-section my-5">
+      <form role="search" method="GET" action="{% url 'articles:search' %}" class="search-form" id="searchform">
+        <input name="searchs" id="s" class="search-field" type="text" placeholder="검색어를 입력해주세요" aria-label="Search">
+        <button class="search-submit" type="submit">
+          <img class="img-search" src="{% static 'images/search.png' %}" alt="">
+        </button>
+      </form>
+    </div>
   </div>
-</div>
-<hr>
-{% comment %} 강아지 검색 {% endcomment %}
-<div>
+
+  {% comment %} 강아지 검색 {% endcomment %}
+  <h3 style="margin-left:128px;">강아지</h3>
   {% if not dogs %}
-    <p class="no-search title-font">"{{ query }}" 검색결과가 없습니다.</p>
+    <p style="margin-left:128px;" class="no-search title-font">"{{ query }}" 검색결과가 없습니다.</p>
   {% else %}
-  <ul>
-    {% for dog in dogs %}
-    <li>
-      {% if dog.image %}
-        <img src="{{ dog.image.url }}"> 
-      {% else %}
-        <img src="https://dummyimage.com/200x200/000/454545">
-      {% endif %}
-      <a href="{% url 'articles:dog_detail' dog.pk %}"><h5>{{ dog.title }}</h5></a>
-      <p>{{ dog.name}} | {{ dog.breed }} | {{ dog.age }}</p>
-    {% endfor %}
+    <div class="layout" >
+      <div>
+        <main id="wrap" class="wrap-list">
+          <section class="container">
+            <div role="main" class="contents">
+              <div class="articles-list">
+                {% for dog in dogs %}
+                  <div class="articles-list-pre ">
+                    <div class="title">
+                      <h3>
+                        <a href="{% url 'articles:dog_detail' dog.pk %}">
+                          {{ dog.title }}
+                        </a>
+                      </h3>
+                      <p>
+                        <a href="{% url 'articles:dog_detail' dog.pk %}">
+                          {{ dog.content |truncatechars:40 |safe }}
+                        </a>
+                      </p>
+                      <p>
+                        <a class="memo" href="">
+                        특이사항: {{ dog.memo }}
+                        </a>
+                      </p>
+                      <span>
+                        <img style="width:150px;margin-top:-200px; margin-left:300px;" class="attach-img" src="{{ dog.image.url }}" alt="">
+                      </span>
+                    </div>
+                    <div class="sub1">
+                      <p>
+                        <a class="sub-content" href="">
+                          #{{ dog.location}} #{{ dog.age }} #{{ dog.gender }} #{{ dog.dog_breed }}
+                        </a>
+                      </p>
+                      <p class="name ">
+                        <a href="{% url 'articles:dog_detail' dog.pk %}">
+                          {{ dog.user.username }}
+                        </a>
+                      </p>
+                      <div class="wrap-info">
+                        <a href="{% url 'articles:dog_detail' dog.pk %}" class="view">
+                          <i class="blind">
+                            <span class="material-symbols-outlined">
+                              visibility
+                            </span>
+                          </i>
+                          {{ dog.hits }}
+                        </a>
+                        <a class="like" href="{% url 'articles:dog_detail' dog.pk %}">
+                          <i class="icon icon-comments_count">
+                            <span class="material-symbols-outlined">
+                              thumb_up
+                            </span>
+                          </i>
+                          {{ dog.like.all | length }}
+                        </a> 
+                        <span class="text-end">
+                          <a  href="{% url 'articles:dog_detail' dog.pk %}">
+                            {{ dog.created_at | timesince }}
+                          </a>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </section> 
+          <a href="{% url 'articles:dog_index' %}">
+          <p style="margin-left:15px;">더 보기</p>
+          </a>
+        </main>
+      </div>
+    </div>
   {% endif %}
-    </li>
-  </ul>
-</div>
-<hr>
-{% comment %} 고양이 검색 {% endcomment %}
-<div>
-  <h3>고양이</h3>
+
+
+  {% comment %} 고양이 검색 {% endcomment %}
+  <h3 style="margin-left:128px;">고양이</h3>
   {% if not cats %}
-    <p class="no-search title-font">"{{ query }}" 검색결과가 없습니다.</p>
+    <p style="margin-left:128px;" class="no-search title-font">"{{ query }}" 검색결과가 없습니다.</p>
   {% else %}
-    {% for cat in cats %}
-      {% if cat.image %}
-        <img src="{{ cat.image.url }}"> 
-      {% else %}
-        <img src="https://dummyimage.com/200x200/000/454545">
-      {% endif %}
-      <a href="{% url 'articles:cat_detail' cat.pk %}"><h5>{{ cat.title }}</h5></a>
-      <p>{{ cat.name}} | {{ cat.breed }} | {{ cat.age }}</p>
-    {% endfor %}
+    <div class="layout" >
+      <div>
+        <main id="wrap" class="wrap-list">
+          <section class="container">
+            <div role="main" class="contents">
+              <div class="articles-list">
+                {% for cat in cats %}
+                  <div class="articles-list-pre ">
+                    <div class="title">
+                      <h3>
+                        <a href="{% url 'articles:cat_detail' cat.pk %}">
+                          {{ cat.title }}
+                        </a>
+                      </h3>
+                      <p>
+                        <a href="{% url 'articles:cat_detail' cat.pk %}">
+                          {{ cat.content |truncatechars:40 |safe }}
+                        </a>
+                      </p>
+                      <p>
+                        <a class="memo" href="">
+                        특이사항: {{ cat.memo }}
+                        </a>
+                      </p>
+                      <span>
+                        <img style="width:150px;margin-top:-200px; margin-left:300px;" class="attach-img" src="{{ cat.image.url }}" alt="">
+                      </span>
+                    </div>
+                    <div class="sub1">
+                      <p>
+                        <a class="sub-content" href="">
+                          #{{ cat.location}} #{{ cat.age }} #{{ cat.gender }} #{{ cat.cat_breed }}
+                        </a>
+                      </p>
+                      <p class="name ">
+                        <a href="{% url 'articles:cat_detail' cat.pk %}">
+                          {{ cat.user.username }}
+                        </a>
+                      </p>
+                      <div class="wrap-info">
+                        <a href="{% url 'articles:cat_detail' cat.pk %}" class="view">
+                          <i class="blind">
+                            <span class="material-symbols-outlined">
+                              visibility
+                            </span>
+                          </i>
+                          {{ cat.hits }}
+                        </a>
+                        <a class="like" href="{% url 'articles:cat_detail' cat.pk %}">
+                          <i class="icon icon-comments_count">
+                            <span class="material-symbols-outlined">
+                              thumb_up
+                            </span>
+                          </i>
+                          {{ cat.like.all | length }}
+                        </a> 
+                        <span class="text-end">
+                          <a href="{% url 'articles:cat_detail' cat.pk %}">
+                            {{ cat.created_at | timesince }}
+                          </a>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </section> 
+            <a href="{% url 'articles:cat_index' %}">
+          <p style="margin-left:15px;">더 보기</p>
+          </a>
+        </main>
+      </div>
+    </div>
   {% endif %}
-</div>
-<hr>
-{% comment %} 스토리 검색 {% endcomment %}
-<div>
-  <h3>스토리 </h3>
+
+
+  {% comment %} 스토리 검색 {% endcomment %}
+  <h3 style="margin-left:128px;">스토리</h3>
   {% if not stories %}
-    <p class="no-search title-font">"{{ query }}" 검색결과가 없습니다.</p>
+    <p style="margin-left:128px;" class="no-search title-font">"{{ query }}" 검색결과가 없습니다.</p>
   {% else %}
-    {% for story in stories %}
-      {% if story.image %}
-        <img src="{{ story.image.url }}"> 
-      {% else %}
-        <img src="https://dummyimage.com/200x200/000/454545">
-      {% endif %}
-      <a href="{% url 'stories:detail' story.pk %}"><h5>{{ story.title }}</h5></a>
-      <p> {{ story.name }} | {{ story.breed }}</p>
-    {% endfor %}
+    <div class="layout" >
+      <div>
+        <main id="wrap" class="wrap-list">
+          <section class="container">
+            <div role="main" class="contents">
+              <div class="articles-list">
+                {% for story in stories %}
+                  <div class="articles-list-pre ">
+                    <div class="title">
+                      <h3>
+                        <a href="{% url 'stories:detail' story.pk %}">
+                          {{ story.title }}
+                        </a>
+                      </h3>
+                      <p>
+                        <a href="{% url 'stories:detail' story.pk %}">
+                          {{ story.content |truncatechars:40 |safe}}
+                        </a>
+                      </p>
+                      <span>
+                        <img style="width:170px;margin-top:-100px; margin-left:300px;" class="attach-img" src="{{ story.image.url }}" alt="">
+                      </span>
+                    </div>
+                    <div class="sub">
+                        <p>
+                        <a class="sub-content" href="">
+                          #{{ story.breed }} #{{ story.gender }} 
+                        </a>
+                      </p>
+                      <p class="name1 ">
+                        <a href="{% url 'stories:detail' story.pk %}">
+                          {{ story.user.username }}
+                        </a>
+                      </p>
+                      <div class="wrap-info">
+                        <a href="{% url 'stories:detail' story.pk %}" class="view">
+                          <i class="blind">
+                            <span class="material-symbols-outlined">
+                              visibility
+                            </span>
+                          </i>
+                          {{ story.hits }}
+                        </a>
+                        <a class="like" href="{% url 'stories:detail' story.pk %}">
+                          <i class="icon icon-comments_count">
+                            <span class="material-symbols-outlined">
+                              thumb_up
+                            </span>
+                          </i>
+                          {{ story.like.all | length }}
+                        </a> 
+                        <span class="text-end">
+                          <a href="{% url 'stories:detail' story.pk %}">
+                            {{ story.created_at | timesince }}
+                          </a>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </section> 
+          <a href="{% url 'stories:index' %}">
+          <p style="margin-left:15px;">더 보기</p>
+          </a>
+        </main>
+      </div>
+    </div>
   {% endif %}
-</div>
 </section>
 {% endblock content %}

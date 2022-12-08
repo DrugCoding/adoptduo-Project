@@ -68,7 +68,7 @@ button.search-submit {
   border-radius: unset;
   height: 63.6px;
   border: 2px solid #FFCD00 ;
-  margin-left: 30.72px;
+  margin-left: 32px;
   margin-top:0px;
  
 }
@@ -137,9 +137,9 @@ h3.adopted-font{
 .post-img{
   object-fit: cover;
   display: block;
-  max-height: 200px;
-  height:140px;
-  border-radius: 15px;
+  max-height: 210px;
+  height:200px;
+  border-radius: 15px 15px 0 0;
   width: 100%;
 } 
 

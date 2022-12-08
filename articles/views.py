@@ -352,20 +352,20 @@ def search(request):
         dogs = DogArticle.objects.all().filter(
             Q(title__icontains=query) |
             Q(content__icontains=query) |
-            Q(dog_breed__name__icontains=query) 
-         )
+            Q(dog_breed__name__icontains=query)
+         )[0:6]
 
         cats = CatArticle.objects.all().filter(
             Q(title__icontains=query) |
             Q(content__icontains=query) |
             Q(cat_breed__name__icontains=query) 
-        )
+        )[0:6]
 
         stories = Stories.objects.all().filter(
             Q(title__icontains=query)|
             Q(content__icontains=query) |
             Q(breed__icontains=query)
-        )
+        )[0:6]
         # # 조회수 최다 강아지 분양글
         # most_dog = DogArticle.objects.order_by('-hits')[:4]
         # # 조회수 최다 고양이 분양글

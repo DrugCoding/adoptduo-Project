@@ -1,6 +1,6 @@
 from django import forms
 from .models import Volunteer, VolunteerComment
-
+from django_summernote.widgets import SummernoteWidget
 class VolunteerForm(forms.ModelForm):
     class Meta:
         model = Volunteer
@@ -37,12 +37,7 @@ class VolunteerForm(forms.ModelForm):
                     'placeholder': 'yyyy-mm-dd'
                 }
             ),
-            'content': forms.TextInput(
-                attrs={
-                    'class': 'form-control',
-                    'placeholder': '100글자 제한'
-                }
-            )
+            'content': SummernoteWidget(),
         }
 
 class VolunteerCommentForm(forms.ModelForm):
