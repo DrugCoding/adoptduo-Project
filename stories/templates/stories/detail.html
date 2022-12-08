@@ -9,9 +9,6 @@
 <link rel="stylesheet" href="{% static 'css/story_detail.css' %}">
 <div class="container" style="width: 50%;">
   <div style="box-sizing:border-box; " class="mt-5 border-bottom border-opacity-50">
-    <!-- title -->
-   
-    <!-- username, etc -->
     <div style="align-items: center; display: flex; justify-content:space-between;">
       <div>
         <b class="detail-font-title">{{ stories.title }}</b>
@@ -32,13 +29,12 @@
       </div>
       {% if stories.user.image %}
        <img src="{{ stories.user.image.url }}" alt="" style="width:200px;">
-        {% else %}
+      {% else %}
         <img src="{% static 'images/unknown_image.jpg' %}" style="width:200px;" alt="">
-       {% endif %}
+      {% endif %}
     </div>
   </div>
   <div class="container my-3">
-        
     {% if stories.image %}
     <img src="{{ stories.image.url }}" alt="{{ stories.image }}" >
     {% endif %}
@@ -61,21 +57,19 @@
         {% endif %}
       </a>
       {% else %}
-      {% endif %} -->
+      {% endif %}
       <!-- 좋아요 비동기 -->
       {% if request.user.is_authenticated %}
-      <div class="d-flex justify-content-center">  
-      <div class="mt-3 px-0">
+        <div class="d-flex justify-content-center">  
+        <div class="mt-3 px-0">
           {% if request.user in stories.like.all %}
-          <i class="bi bi-hand-thumbs-up-fill btn btn-outline-warning" data-stories-id="{{ stories.pk }}" style="color: black;"
-            id="like-button"></i>
+            <i class="bi bi-hand-thumbs-up-fill btn btn-outline-warning" data-stories-id="{{ stories.pk }}" style="color: black;"
+              id="like-button"></i>
           {% else %}
-          <i class="bi bi-hand-thumbs-up btn btn-outline-warning" data-stories-id="{{ stories.pk }}" style="color: black;"
-            id="like-button"></i>
+            <i class="bi bi-hand-thumbs-up btn btn-outline-warning" data-stories-id="{{ stories.pk }}" style="color: black;"
+              id="like-button"></i>
           {% endif %}
         </div>
-        {% endif %} 
-      </div>
       {% endif %}
     </span>
   </div>
