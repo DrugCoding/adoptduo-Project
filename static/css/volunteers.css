@@ -3,22 +3,23 @@
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
-  }
-  
-  @font-face {
-   font-family: 'NanumBarunGothic';
-   font-style: normal;
-   font-weight: 400;
-   src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
-   src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
-  }
+}
 
-a{
+@font-face {
+    font-family: 'NanumBarunGothic';
+    font-style: normal;
+    font-weight: 400;
+    src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
+    src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
+}
+
+a {
     text-decoration: none;
     color: black;
     cursor: pointer;
 }
-a:hover{
+
+a:hover {
     color: black;
 }
 
@@ -45,23 +46,23 @@ div {
     display: block;
 }
 
-main{
+main {
     display: block;
 }
 
-section{
+section {
     display: block;
 }
 
-.layout{
+.layout {
     display: flex;
-    margin-left: 110px;
+    margin-left: 300px;
 }
 
 
-p{
+p {
     font-family: 'NanumBarunGothic';
-    line-height: 1.25em;
+    line-height: 1.6em;
     word-wrap: break-word;
     font-size: 16px;
     margin-top: 8px;
@@ -72,9 +73,9 @@ p{
     margin-inline-end: 0px;
 }
 
-h3{
+h3 {
     font-family: 'NanumSquareNeo-Variable';
-    line-height: 1.25em;
+    line-height: 1.6em;
     word-wrap: break-word;
     font-size: 18px;
     font-weight: 600;
@@ -86,66 +87,69 @@ h3{
 }
 
 @media screen and (min-width: 1100px) {
-    .articles-list .articles-list-pre:nth-child(2n+1){
+    .articles-list .articles-list-pre:nth-child(1n) {
         width: 50%;
         padding-right: 20px;
-        border-right: 1px solid #eee;
+        border: 1px solid #eee;
+        height: 330px;
+
     }
-    
+
 }
 
 @media screen and (min-width: 1100px) {
-    .articles-list .articles-list-pre{
+    .articles-list .articles-list-pre {
         width: 50%;
         margin: 0;
         box-sizing: border-box;
-        padding-top:39px;
+        padding-top: 39px;
         padding-bottom: 79px;
+        height: 330px;
     }
-    
+
 }
 
-.container .wrapped {
-   display: flex;
-   flex-direction: column;
-   max-width: 1140px;
-   box-sizing: border-box;
-   margin: 0 auto;
-   border-top: 1px solid #d4d4d4;
+.container .wrap-list {
+    display: flex;
+    flex-direction: column;
+    max-width: 1340px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    border-top: 1px solid #d4d4d4;
 }
+
 
 .articles-list {
     overflow: hidden;
     display: flex;
     flex-wrap: wrap;
-    
+
 }
 
-.articles-list .articles-list-pre{
+.articles-list .articles-list-pre {
     position: relative;
     width: 565px;
     margin: 0 0px;
-    padding: 24px 30px ;
-    
+    padding: 24px 30px;
     border-bottom: 1px solid #eee;
 }
 
-.articles-list .article-list-pre .attach-img-pre .title{
+.articles-list .article-list-pre .attach-img-pre .title {
     min-height: 0px;
 }
 
-.article-list .article-list-pre .title{
+.article-list .article-list-pre .title {
     position: relative;
 }
 
 
-.article-list .article-list-pre{
+.article-list .article-list-pre {
     position: relative;
 }
 
 @media screen and (min-width: 1100px) {
-    .articles-list .articles-list-pre .sub{
-        
+    .articles-list .articles-list-pre .sub {
+
         bottom: 24px;
         width: 100%;
         min-height: 1px;
@@ -154,25 +158,54 @@ h3{
     }
 }
 
-.wrap-info span, .wrap-info a{
+
+.sub {
+    position: absolute;
+}
+
+.wrap-info span,
+.wrap-info a {
     color: #94969b;
 }
 
-.name{
+.name {
     font-size: 15px;
     position: relative;
-    top: 20px;
+    top: 35px;
+    color: #94969b;
 }
 
-.material-symbols-outlined{
+.material-symbols-outlined {
     position: relative;
     top: 6px;
 }
 
-.veiw{
+.veiw {
     font-family: 'NanumBarunGothic';
 }
 
-.like{
+.like {
     font-family: 'NanumBarunGothic';
+}
+
+.area {
+    position: relative;
+    top: 50px;
+    left: 0px;
+
+}
+
+.area-font {
+    color: #2478FF;
+    font-size: 13px;
+}
+
+.adobt-font {
+    color: #2478FF;
+    font-size: 13px;
+}
+
+.title-p {
+    position: relative;
+    top: 30px;
 }

@@ -1,6 +1,5 @@
 from django import forms
 from .models import DogArticle, CatArticle, DogArticleComment, CatArticleComment
-
 class DogArticleForm(forms.ModelForm):
     gender_list = [
         ('암컷', '암컷'),
