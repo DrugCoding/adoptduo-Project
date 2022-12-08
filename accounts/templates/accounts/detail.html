@@ -7,7 +7,7 @@
 
 
 <!-- 프로필-->
-<div class="text-center">
+<!-- <div class="text-center">
 
   <section class="mx-auto my-5 row d-flex justify-content-center">
     <div class="col-7">
@@ -31,8 +31,8 @@
     <p>거주지 : {{ user.area }}</p>
     <p>이동봉사 : {{ user.volunteer_c }}</p>
     <p>E-mail : {{ user.email }}</p>
-    <!-- 팔로우 버튼-->
-    {% if request.user != user %}
+    <-- 팔로우 버튼-->
+<!-- {% if request.user != user %}
     <a href="{% url 'accounts:follow' user.pk %}">
       {% if request.user in user.followers.all %}
       팔로우 취소
@@ -60,16 +60,77 @@
       <a href="{% url 'articles:cat_detail' cat_article.pk %}">{{ cat_article.title }}</a>
       <img src="{{ cat_article.image.url }}" class="" alt="dog">
     </p>
-    {% endfor %}
+    {% endfor %} -->
 
 
-    <!-- <section class="mx-auto row d-flex justify-content-center">
-      <div class="col-7">
-        <button class="btn" style="width: 15%;" href="{% url 'accounts:update' %}">
-          수정
-        </button>
-        <button class="btn" style="width: 25%;" href="{% url 'accounts:change_password' %}">비밀번호 수정</button>
-        <button class="btn" style="width: 15%;" href="{% url 'accounts:delete' %}">탈퇴</button>
+<div style="background-color: rgb(247, 247, 247); height:500px; padding: 40px 0">
+  <div class="detail-grid" style="max-width: 1080px; max-height: 400px; background-color: white;">
+    <div class="m-3 p-3">
+      <div class="d-flex justify-content-center mb-3">
+        {% if user.image %}
+        <img src="{{ user.image.url }}" style='width: 180px; height: 180px; border-radius: 2rem; object-fit: cover;'
+          alt="">
+        {% else %}
+        <img
+          src="https://cdn.discordapp.com/attachments/1044493548071948309/1049236425708666940/review_default_profile_image.jpg"
+          style='width: 180px; height: 180px; border-radius: 2rem; object-fit: cover;' alt="더미프사">
+        {% endif %}
       </div>
-    </section> -->
-    {% endblock content %}
+      <h4 class="text-center fw-bold my-4">
+        {{ user.name }}님의 프로필</h4>
+      <div class="row mb-3">
+        <div class="col" style="height: 60px;">
+          <p class="mb-1 text-center" style="color: grey">팔로워</p>
+          <p class="fw-bold text-center">{{ user.followers.count }}</p>
+        </div>
+        <div class="col border-start" style="height: 60px;">
+          <p class="mb-1 text-center" style=" color: grey">팔로잉</p>
+          <p class="fw-bold text-center">{{ user.followings.count }}</p>
+        </div>
+      </div>
+      <button class="btn" style="width: 100%; margin:0 auto;" href="{% url 'accounts:update' %}">
+        프로필 수정
+      </button>
+    </div>
+  </div>
+</div>
+
+<section class="d-flex flex-column" style="gap: 4px">
+  <div class="d-flex d-grid" style="width: 100%; height: 200px; gap: 4px;">
+    <div style="width:212px; height:200px; background-color: white; padding: 26px 0 30px 30px;">
+      <p class="m-0">거주지</p>
+      <p class="m-0" style="font-size: 20px; color:#d7ac00; font-weight: 600;">
+        {{ user.area }}
+      </p>
+    </div>
+    <div style="width:212px; height:200px; background-color: white; padding: 26px 0 30px 30px;">
+      <p class="m-0">이동봉사
+      </p>
+      <p class="m-0" style="font-size: 20px; color:#d7ac00; font-weight: 600;">
+        {{ user.volunteer_c }}
+      </p>
+    </div>
+    <div style="width:212px; height:200px; background-color: white; padding: 26px 0 30px 30px;">
+      <p class="m-0">이메일</p>
+      <p class="m-0" style="font-size: 20px; color:#d7ac00; font-weight: 600;">
+        {{ user.email }}
+    </div>
+  </div>
+  <div class="d-flex d-grid" style="width: 100%; height: 100%; gap: 4px;">
+    <div class="d-flex flex-column justify-content-center"
+      style="width:50%; height:100%; background-color: white; padding: 20px 30px;">
+      <p class="m-0">작성글</p>
+
+    </div>
+    <div class="d-flex flex-column justify-content-center"
+      style="width:50%; height:100%; background-color: white; padding: 20px 30px;">
+      <p class="m-0">작성댓글</p>
+
+    </div>
+  </div>
+</section>
+</div>
+</div>
+
+
+{% endblock content %}
