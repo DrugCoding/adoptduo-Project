@@ -47,10 +47,10 @@
         <div class="d-flex justify-content-center">  
         <div class="mt-3 px-0">
           {% if request.user in stories.like.all %}
-            <i class="bi bi-hand-thumbs-up-fill btn btn-outline-warning" data-stories-id="{{ stories.pk }}" style="color: black;"
+            <i class="bi bi-hand-thumbs-up-fill fa-5x" data-stories-id="{{ stories.pk }}" style="color:#FFCD00;"
               id="like-button"></i>
           {% else %}
-            <i class="bi bi-hand-thumbs-up btn btn-outline-warning" data-stories-id="{{ stories.pk }}" style="color: black;"
+            <i class="bi bi-hand-thumbs-up fa-5x" data-stories-id="{{ stories.pk }}" style="color:#FFCD00;"
               id="like-button"></i>
           {% endif %}
         </div>

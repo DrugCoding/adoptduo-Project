@@ -110,6 +110,8 @@ def dog_detail(request, dog_article_pk):
         "dog_comments": dog_article.dogarticlecomment_set.all(),  # 도그 게시물의 모든 댓글 출력하기
         "dog_comment_form": dog_comment_form,
     }
+    dog_article.hits +=1
+    dog_article.save()
 
     return render(request, "articles/dog_detail.html", context)
 
@@ -201,6 +203,8 @@ def cat_detail(request, cat_article_pk):
         "cat_comments": cat_article.catarticlecomment_set.all(),  # 도그 게시물의 모든 댓글 출력하기
         "cat_comment_form": cat_comment_form,
     }
+    cat_article.hits +=1
+    cat_article.save()
 
     return render(request, "articles/cat_detail.html", context)
 
@@ -343,29 +347,33 @@ def dog_category(request, dog_category_pk):
 
 # 검색
 def search(request):
-    query = None
-    dogs = None
-    cats = None
-    stories = None
-    if 'searchs' in request.GET:
-        query = request.GET.get('searchs')
-        dogs = DogArticle.objects.all().filter(
-            Q(title__icontains=query) |
-            Q(content__icontains=query) |
-            Q(dog_breed__name__icontains=query) 
-         )
+    query = ""
+    dogs = ""
+    cats = ""
+    stories = ""
 
-        cats = CatArticle.objects.all().filter(
-            Q(title__icontains=query) |
-            Q(content__icontains=query) |
-            Q(cat_breed__name__icontains=query) 
-        )
+    if 'searchs' in request.GET: # 요청한 값에 검색어가 있다면
+        query = request.GET.get('searchs') # 요청한 검색어를 쿼리에 넣음
+        if query == "": # 쿼리가 공백일 때
+            return redirect("articles:search") # search 페이지를 보여준다.
+        else: 
+            dogs = DogArticle.objects.all().filter(
+                Q(title__icontains=query) |
+                Q(content__icontains=query) |
+                Q(dog_breed__name__icontains=query) 
+            )[0:6]
 
-        stories = Stories.objects.all().filter(
-            Q(title__icontains=query)|
-            Q(content__icontains=query) |
-            Q(breed__icontains=query)
-        )
+            cats = CatArticle.objects.all().filter(
+                Q(title__icontains=query) |
+                Q(content__icontains=query) |
+                Q(cat_breed__name__icontains=query) 
+            )[0:6]
+
+            stories = Stories.objects.all().filter(
+                Q(title__icontains=query)|
+                Q(content__icontains=query) |
+                Q(breed__icontains=query)
+            )[0:6]
         # # 조회수 최다 강아지 분양글
         # most_dog = DogArticle.objects.order_by('-hits')[:4]
         # # 조회수 최다 고양이 분양글
@@ -382,3 +390,4 @@ def search(request):
         #     'most_like': most_like
     }
     return render(request, "articles/search.html", context)
+   

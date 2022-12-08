@@ -1,6 +1,5 @@
 from django import forms
 from .models import DogArticle, CatArticle, DogArticleComment, CatArticleComment
-
 class DogArticleForm(forms.ModelForm):
     gender_list = [
         ('암컷', '암컷'),
@@ -34,6 +33,11 @@ class CatArticleForm(forms.ModelForm):
         widget=forms.RadioSelect(
         ),
     )
+    # title = forms.TextInput(
+    #     widget=forms.TextInput
+    #     attrs={'placeholder': '제목을 입력해주세요',
+    #     }
+    # )
 
     class Meta:
         model = CatArticle
