@@ -42,6 +42,20 @@
   font-family: "NanumSquareNeo-Variable";
   text-align: left;
 }
+.article-upd-del > a:first-child {
+  background-color: #ffec83;
+}
+.article-upd-del > a:first-child:hover {
+  background-color: #ffcd00;
+  font-weight: bold;
+}
+.article-upd-del > a:nth-child(2) {
+  background-color: #ff9899;
+}
+.article-upd-del > a:nth-child(2):hover {
+  background-color: #ff4c4f;
+  font-weight: bold;
+}
 
 .Nanum {
   font-family: "NanumSquareNeo-Variable";

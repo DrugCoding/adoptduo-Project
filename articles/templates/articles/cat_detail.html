@@ -9,21 +9,44 @@
       <p>평생을 함께해 주세요</p>
     </div>
   </div>
-  <div class="container mt-4">
-    <h2>{{ cat_article.title }}</h2>
-    <a href="{% url 'accounts:detail' cat_article.user.pk %}">{{ cat_article.user.username }}</a>
-    {% if request.user.pk != cat_article.user.pk  %}
-    <a href="{% url 'notes:send' cat_article.user.pk %}">{{ cat_article.user.username }}에게 쪽지보내기</a>
-    {% endif %}
+  <div class="container mt-4 text-start">
+    <div class="d-flex">
+      <h2 class="my-auto me-auto">{{ cat_article.title }}</h2>
+
+      <div class="title-info d-flex justify-content-between">
+        <h6 class="my-auto">🐈분류: {{ cat_article.cat_breed }}</h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <h6 class="my-auto">👤작성자: <a href="{% url 'accounts:detail' cat_article.user.pk %}" class="text-decoration-none text-dark">{{ cat_article.user.username }}</a> <button type="button" class="btn btn-sm mt-1 p-0" data-bs-toggle="popover" title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?">➕</button></h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <h6 class="my-auto">👁️‍🗨️조회수: {{ cat_article.hits }}회</h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <h6 class="my-auto"><span>🔖즐겨찾기 수: 
+          {% if request.user.is_authenticated %} 
+            {% if request.user in cat_article.bookmarks.all %}
+              <i id="bookmark-btn" data-article-id="{{ cat_article.pk }}" class="bi-bookmark-heart-fill"></i>
+            {% else %}
+              <i id="bookmark-btn" data-article-id="{{ cat_article.pk }}" class="bi-bookmark-heart"></i>
+            {% endif %}
+            <span id="bookmark-count">{{ cat_article.bookmarks.count }}</span>
+        </span>
+        {% endif %} </h6>
+        {% if request.user.pk != cat_article.user.pk  %}
+          <a href="{% url 'notes:send' cat_article.user.pk %}">{{ cat_article.user.username }}에게 쪽지보내기</a>
+        {% endif %}
+      </div>
+    </div>
     <hr id="divider">
   </div>
   <div class="container">
+    <div class="article-upd-del text-end">
+        <a href="{% url 'articles:cat_update' cat_article.pk %}" class="btn detail_btn2 mx-2 my-3">글수정</a>
+        <a href="{% url 'articles:cat_delete' cat_article.pk %}" class="btn detail_btn2 my-3">글삭제</a>
+    </div>
     <h2 class="text-center mb-3">입양동물정보</h2>
     <div class="text-center">
       {% comment %} DB에서 가져와서 이미지 삽입예정 {% endcomment %}
       {% comment %} <img id="cat-detail-img" class="mb-4 w-25 rounded" src="{{ cat_article.image }}" alt="cat_article.image"> {% endcomment %}
       <img id="pet-detail-img" class="mb-4 w-25 rounded" src="{{ cat_article.image.url }}" alt="cat_article.image">   
+      <div class="d-flex justify-content-center"><p class="text-start w-50">lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem {{ cat_article.content }}</p></div>
     </div>
+    
     <div class="row">
       <div id="pet-info-var-div" class="col-1 text-center py-3">이름</div>
       <div id="pet-info-div" class="col-5 text-center py-3">{{ cat_article.name }}</div>
@@ -58,18 +81,8 @@
       <div id="pet-info-div" class="col-5 text-center py-3">{{ cat_article.memo }}</div>
     </div>
   </div>
-  <div class="container text-center mt-4">
-    <div class="row d-flex justify-content-center">
-      <div id="pet-info-var-div" class="col-1 py-3">Content</div>
-      <div id="pet-info-div" class="col-5 py-3">{{ cat_article.content }}</div>
-    </div>
-  </div>
   <div class="container text-center">
-  {% if request.user == cat_article.user %}
-    <a href="{% url 'articles:cat_update' cat_article.pk %}" class="btn btn-primary detail_btn2 mx-2 my-3">글수정</a>
-    <a href="{% url 'articles:cat_delete' cat_article.pk %}" class="btn btn-primary detail_btn2 my-3">글삭제</a>
-  {% endif %}
-    <span>
+    {% comment %} <span>
       {% if request.user.is_authenticated %} 
         {% if request.user in cat_article.bookmarks.all %}
           <i id="bookmark-btn" data-article-id="{{ cat_article.pk }}" class="bi-bookmark-heart-fill"></i>
@@ -78,14 +91,14 @@
         {% endif %}
         <span id="bookmark-count">{{ cat_article.bookmarks.count }}</span>
     </span>
-    {% endif %} 
+    {% endif %}  {% endcomment %}
     <div id="cat-comments">
       <h4 class="mt-5"><span style="color:red">{{ cat_comments.count }}개</span>의 댓글이 있습니다.</h4>
       {% for cat_comment in cat_comments %}
       {% csrf_token %}
       <div class="my-4 d-flex" id="{{cat_comment.pk}}">
         <div class="comment-info flex-fill">
-          <span>{{ cat_comment.user.username }}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;작성일자: 2022-12-07&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;IP: 121.4945</span>
+          <span>{{ cat_comment.user.username }}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;작성일자: {{ cat_comment.created_at }}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;IP: 121.4945</span>
           <div class="comment-txt mt-3">
             <span>{{ cat_comment.content }}</span>
           </div>
@@ -114,6 +127,10 @@
   integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
   crossorigin="anonymous"></script>
 <script>
+    {% comment %} var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+      return new bootstrap.Popover(popoverTriggerEl)
+    }) {% endcomment %}
     const commentForm = document.querySelector('#cat-comment-form')
     const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     commentForm.addEventListener('submit', function(event){
