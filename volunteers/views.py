@@ -70,7 +70,7 @@ def comment_create(request, pk):
     v_comment_form = VolunteerCommentForm(request.POST)
     if v_comment_form.is_valid():
         v_comment = v_comment_form.save(commit=False)
-        v_comment.volunteer = v_article # 게시글은 입력 받은 댓글의 게시글
+        v_comment.article = v_article # 게시글은 입력 받은 댓글의 게시글
         v_comment.user = request.user # 로그인한 유저가 댓글작성자(커멘트의 유저)임!
         v_comment.save()
         context = {
@@ -80,8 +80,8 @@ def comment_create(request, pk):
         }
         return JsonResponse(context)
 
-def comments_delete(request, v_article_pk, v_comment_pk):
-    v_comment = VolunteerComment.objects.get(pk=v_comment_pk)
+def comment_delete(request, pk, c_pk):
+    v_comment = VolunteerComment.objects.get(pk=c_pk)
     v_comment.delete()
     context = {
         '1': 1

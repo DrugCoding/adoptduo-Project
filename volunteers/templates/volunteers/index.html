@@ -68,13 +68,17 @@
   <!-- 글작성 버튼 -->
   <div class="d-flex justify-content-center">
     {% if request.user.is_authenticated %}
-      <a href="{% url 'volunteers:create' %}">
-        <button>글작성</button>
-      </a>
+      {% if request.user.volunteer_c == '가능' %}
+        <a href="{% url 'volunteers:create' %}">
+          <button>글작성</button>
+        </a>
+      {% else %}
+        <p>이동봉사 지원자만 글을 작성할 수 있습니다</p>
+      {% endif %}
     {% else %}
-      <a href="{% url 'accounts:login' %}">
-        <button>글작성</button>
-      </a>
+    <a href="{% url 'accounts:login' %}">
+      <button>글작성</button>
+    </a>
     {% endif %}
   </div>
   <nav aria-label="Page navigation example" class="nav-page mt-5 mb-2">
