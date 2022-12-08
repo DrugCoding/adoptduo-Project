@@ -3,13 +3,17 @@ from .models import Stories, StoryComment
 from .forms import StoriesForm, Stories_CommentForm
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
+from django.core.paginator import Paginator
 
 # Create your views here.
 
 def index(request):
-    stories = Stories.objects.order_by("-pk")
+    stories = Stories.objects.order_by("-created_at")
+    page = request.GET.get('page', '1')
+    paginator = Paginator(stories, 10)
+    page_obj = paginator.get_page(page)
     context = {
-        "stories": stories,
+        "stories": page_obj,
     }
     return render(request, "stories/index.html", context)
 
@@ -72,13 +76,7 @@ def comment_create(request, stories_pk):
         comment.stories = stories
         comment.user = request.user
         comment.save()
-        context = {
-            'content': comment.content,
-            'user':comment.user.username,
-            'comment_pk': comment.pk,
-            'user_pk':comment.user.pk,
-        }
-    return JsonResponse(context)
+        return redirect('stories:detail', stories_pk)
 
 @login_required
 def comment_delete(request, stories_pk, storycomment_pk):
