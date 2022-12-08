@@ -39,6 +39,21 @@ a {
 .cat-create {
   background-color: #fff08b;
 }
+h3.cat-font {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-size: 35px;
+  font-weight: 800;
+  font-family: "NanumSquareNeo-Variable";
+}
+.cat-stroke {
+  display: flex;
+  margin-top: -20px;
+  background-color: #ffcd00;
+  border: 1px solid #ffcd00;
+  width: 70px;
+}
 
 #puppy-ul {
   list-style: none;
