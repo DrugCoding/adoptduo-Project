@@ -9,8 +9,12 @@
   <div>
     <div class="cropped d-flex justify-content-center">
       <img class="cropped_img" src="{% static 'images/first_image_4.jpg' %}" alt="">
-      <h1 class="main_image_text" style="font-size:70px">Adopt Animals</h1>
-      <h1 class="main_image_text_2" style="font-size:70px">Adopt Family</h1>
+      <h1 class="main_image_text" style="font-size:70px">Adopt
+        <span class="colored_text">
+          Animals</span></h1>
+      <h1 class="main_image_text_2" style="font-size:70px">Adopt
+        <span class="colored_text">
+          Family</span></h1>
     </div>
 
   </div>
@@ -58,5 +62,24 @@
         {% endfor %}
       </tbody>
     </table>
+
+    <div class="container text-center">
+      <ul id="pagination" class="d-flex my-5 d-flex justify-content-center p-5 list-unstyled">
+        <li class="mx-2 rounded">
+          <a class="border border-0 text-muted" href="?page=1">1</a>
+        </li>
+        <li class="mx-2 rounded">
+          <a class="border border-0 text-muted" href="?page=2">2</a>
+        </li>
+        <li class="mx-2 rounded">
+          <a class="border border-0 text-muted" href="?page=3">3</a>
+        </li>
+        <li class="mx-2 rounded">
+          <a class="border border-0 text-muted" href="?page=4">4</a>
+        </li>
+      </ul>
+
+      <a href="{% url 'articles:cat_create' %}" class="hover1 cat-create btn text-center">글쓰기</a>
+    </div>
 
   {% endblock content %}
