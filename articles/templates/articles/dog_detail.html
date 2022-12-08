@@ -3,12 +3,16 @@
 {% load static %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/dog_cat_detail.css' %}">
-  <div class="bg-image w-100 d-flex flex-column align-items-center justify-content-center text-light" id="dog-banner">
-    <div class="text-center">
-      <h2 class="mb-4">건강한 반려문화의 시작</h2>
-      <p>평생을 함께해 주세요</p>
-    </div>
+<div>
+  <div class="cropped d-flex justify-content-center">
+    <img class="cropped_img" src="{% static 'images/dog_test_banner.jpg' %}" alt="">
+    <h1 class="main_image_text" style="font-size:60px">건강한
+      <span class="colored_text">반려문화</span>의 시작</h1>
+    <h1 class="main_image_text_2" style="font-size:40px">평생을
+      <span class="colored_text">함께</span>해 주세요</h1>
   </div>
+
+</div>
   <div class="container mt-4">
     <h2>{{ dog_article.title }}</h2>
     <a href="{% url 'accounts:detail' dog_article.user.pk %}">{{ dog_article.user.username }}</a>
