@@ -72,9 +72,9 @@
     <span>
       {% if request.user.is_authenticated %} 
         {% if request.user in cat_article.bookmarks.all %}
-          <i id="bookmark-btn" data-article-id="{{ cat_article.pk }}" class="bi-bookmark-heart-fill"></i>
+          <i id="bookmark-btn" data-article-id="{{ cat_article.pk }}" class="bi-bookmark-heart-fill fs-1"></i>
         {% else %}
-          <i id="bookmark-btn" data-article-id="{{ cat_article.pk }}" class="bi-bookmark-heart"></i>
+          <i id="bookmark-btn" data-article-id="{{ cat_article.pk }}" class="bi-bookmark-heart fs-1"></i>
         {% endif %}
         <span id="bookmark-count">{{ cat_article.bookmarks.count }}</span>
     </span>
