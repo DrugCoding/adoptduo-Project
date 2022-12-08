@@ -3,18 +3,20 @@
 {% block content %}
   <link rel="stylesheet" href="{% static 'css/dog_cat.css' %}"/>
 
-  <div class="pet-banner-div d-flex justify-content-center">
-    <img class="pet-banner-img" src="{% static 'images/cat_banner.jpg' %}" alt="cat_banner">
-    <h1 class="pet-banner-text">건강한 반려문화의 시작</h1>
-    <p class="pet-banner-text_2 text-center">평생을 함께해 주세요. 반려동물의 삶을 환하게 비춰주세요.</p>
-    <div class="banner-logo">
-      <img src="{% static 'images/logo_white.png' %}" alt="banner_logo" style="width:300px">
+  <div>
+    <div class="cropped d-flex justify-content-center">
+      <img class="cropped_img" src="{% static 'images/cat_test_banner.jpg' %}" alt="">
+      <h1 class="main_image_text" style="font-size:60px">건강한
+        <span class="colored_text">반려문화</span>의 시작</h1>
+      <h1 class="main_image_text_2" style="font-size:40px">평생을
+        <span class="colored_text">함께</span>해 주세요</h1>
     </div>
+
   </div>
 
   <div class="container text-center mt-5">
-    <hr class="py-2 justify-content-center align-items-center" id="divider"/>
-    <h1>고양이</h1>
+    <h3 class="cat-font">고양이</h3>
+    <div class="cat-stroke container"></div>
     <ul id="puppy-ul" class="nav my-4">
       <li class="hover1 nav-item mt-2">
         <a href="{% url "articles:cat_index" %}" class="nav-link active text-dark">전체</a>

@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "django_summernote",
     "imagekit",
     "django_bootstrap5",
     "django_extensions",
