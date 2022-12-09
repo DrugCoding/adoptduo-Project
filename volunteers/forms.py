@@ -37,7 +37,12 @@ class VolunteerForm(forms.ModelForm):
                     'placeholder': 'yyyy-mm-dd'
                 }
             ),
-            'content': SummernoteWidget(),
+            'content': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': '내용'
+                }
+            )
         }
 
 class VolunteerCommentForm(forms.ModelForm):
