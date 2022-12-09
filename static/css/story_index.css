@@ -1,58 +1,92 @@
 .cropped {
     position: relative;
-    
+
     height: 500px;
     overflow: hidden;
-    
-  
-    }
-    
+
+
+}
+
 .cropped_img {
-    position: absolute; 
-   	 
+    position: absolute;
+
     left: 100;
-    width: 100%; 
+    width: 100%;
     height: 1280px;
-    top:-250px;
-    filter:brightness(50%)
-    
-    
-    }
+    top: -250px;
+    filter: brightness(50%)
+}
 
 .main_image_text {
     position: absolute;
     top: 39%;
     right: 5%;
-    filter:brightness(100%);
+    filter: brightness(100%);
     color: white;
-    font-family: 'Gothic A1', sans-serif;   
-    }
+    font-family: 'Gothic A1', sans-serif;
+}
 
 .main_image_text_2 {
     position: absolute;
     top: 51%;
     right: 5%;
-    font-family: 'Gothic A1', sans-serif;   
-    color: white;   
-    }
-
-.center-hr {
-    position: relative;
-    left:550px;
-    background-color: #FFCD00;
-    border: 1.5px solid #ffcd00;
-    
-} 
-
-#tagline {
-font-size: 1.2vw;
-font-weight: 600;
-color: #707070;
-margin-left: 1.7rem;
-font-family: 'MICEGothic Bold';
+    font-family: 'Gothic A1', sans-serif;
+    color: white;
 }
 
+.dog-stroke {
+    display: flex;
+    margin-top: -20px;
+    background-color: #ffcd00;
+    border: 1px solid #ffcd00;
+    width: 70px;
+}
+
+#tagline {
+    font-size: 1.2vw;
+    font-weight: 600;
+    color: #707070;
+    margin-left: 1.7rem;
+    font-family: 'MICEGothic Bold';
+}
+
+.colored_text {
+    color: #FFCD00;
+    font-family: 'Gothic A1', sans-serif;
+}
+
+.story-font {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 35px;
+    font-weight: 800;
+    font-family: "NanumSquareNeo-Variable";
+}
+
+.hover1:hover {
+    box-shadow: 200px 0 0 0 #ffcd00 inset;
+}
+
+.cat-create {
+    background-color: #fff08b;
+    display: flex;
+    margin-right: 6.5%;
+}
 .colored_text{
     color:#FFCD00;
     font-family: 'Gothic A1', sans-serif;  
     }
+
+.article-upd-del > a:first-child {
+background-color: #ffec83;
+}
+.article-upd-del > a:first-child:hover {
+background-color: #ffcd00;
+font-weight: bold;
+}
+
+
+.story-content {
+    word-break: break-all;
+}

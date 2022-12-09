@@ -2,129 +2,154 @@
 {% load static %}
 {% load django_bootstrap5 %}
 
-{% block css %}
-{% endblock css %}
+{% block css %}{% endblock css %}
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/story_detail.css' %}">
-<div class="container" style="width: 50%;">
-  <div style="box-sizing:border-box; " class="mt-5 border-bottom border-opacity-50">
-    <div style="align-items: center; display: flex; justify-content:space-between;">
-      <div>
-        <b class="detail-font-title">{{ stories.title }}</b>
+  <link rel="stylesheet" href="{% static 'css/story_detail.css' %}">
+  <div class="container" style="width: 50%;">
+    <div style="box-sizing:border-box; " class="mt-5 border-bottom border-opacity-50">
+      <div style="align-items: center; display: flex; justify-content:space-between;">
         <div>
+          <b class="detail-font-title">{{ stories.title }}</b>
           <div>
-            <a href="{% url 'accounts:detail' stories.user.pk %}" style="text-decoration: none; color:black;"> <br>
-              <span class="detail-font-text" style="font-size:15px;">{{ stories.user.username }}</span></a>
-          </div><br>
-              <span class="detail-font-text"><i class="bi bi-eye"></i> {{ stories.hits }}</span>&nbsp;
-              <span class="detail-font-text"><i class="bi bi-chat"></i> {{ stories.storycomment_set.count }}</span>&nbsp;
-              <span class="detail-font-text"><i class="bi bi-clock"></i> {{ stories.created_at|date:"Y.m.d H:i" }}</span>&nbsp;
-              <span class="detail-font-text"><i class="bi bi-hand-thumbs-up"></i> {{ stories.like.count }}</span>&nbsp;
-              {% if request.user == stories.user %}
-                <a href="{% url 'stories:update' stories.pk %}" style="text-decoration: none; color:black;"><i class="bi bi-pencil"></i></a>
-                <a href="{% url 'stories:delete' stories.pk %}" style="text-decoration: none; color:black;"><i class="bi bi-trash3"></i></a> 
-              {% endif %}
+            <div>
+              <a href="{% url 'accounts:detail' stories.user.pk %}" style="text-decoration: none; color:black;">
+                <br>
+                <span class="detail-font-text" style="font-size:15px;">{{ stories.user.username }}</span></a>
+            </div><br>
+            <span class="detail-font-text">
+              <i class="bi bi-eye"></i>
+              {{ stories.hits }}</span>&nbsp;
+            <span class="detail-font-text">
+              <i class="bi bi-chat"></i>
+              {{ stories.storycomment_set.count }}</span>&nbsp;
+            <span class="detail-font-text">
+              <i class="bi bi-clock"></i>
+              {{ stories.created_at|date:"Y.m.d H:i" }}</span>&nbsp;
+            <span class="detail-font-text">
+              <i class="bi bi-hand-thumbs-up"></i>
+              {{ stories.like.count }}</span>&nbsp;
+            {% if request.user == stories.user %}
+              <a href="{% url 'stories:update' stories.pk %}" style="text-decoration: none; color:black;">
+                <i class="bi bi-pencil"></i>
+              </a>
+              <a href="{% url 'stories:delete' stories.pk %}" style="text-decoration: none; color:black;">
+                <i class="bi bi-trash3"></i>
+              </a>
+            {% endif %}
+          </div>
         </div>
+        {% if stories.user.image %}
+          <img src="{{ stories.user.image.url }}" alt="" style="width:200px;">
+        {% else %}
+          <img src="{% static 'images/unknown_image.jpg' %}" style="width:200px;" alt="">
+        {% endif %}
       </div>
-      {% if stories.user.image %}
-       <img src="{{ stories.user.image.url }}" alt="" style="width:200px;">
-      {% else %}
-        <img src="{% static 'images/unknown_image.jpg' %}" style="width:200px;" alt="">
-      {% endif %}
     </div>
-  </div>
-  <div class="container my-3">
-    {% if stories.image %}
-    <img src="{{ stories.image.url }}" alt="{{ stories.image }}" >
-    {% endif %}
-    <p class="detail-font-main-text">{{ stories.content }}</p>
-  </div>
-  <div class="container px-0" style=" overflow:hidden;">
-    <span style="overflow:hidden;">
-      <!-- 좋아요 비동기 -->
-      {% if request.user.is_authenticated %}
-        <div class="d-flex justify-content-center">  
-        <div class="mt-3 px-0">
-          {% if request.user in stories.like.all %}
-            <i class="bi bi-hand-thumbs-up-fill fa-5x" data-stories-id="{{ stories.pk }}" style="color:#FFCD00;"
-              id="like-button"></i>
-          {% else %}
-            <i class="bi bi-hand-thumbs-up fa-5x" data-stories-id="{{ stories.pk }}" style="color:#FFCD00;"
-              id="like-button"></i>
-          {% endif %}
-        </div>
+    <div class="container my-3">
+      {% if stories.image %}
+        <img src="{{ stories.image.url }}" alt="{{ stories.image }}">
       {% endif %}
-    </span>
-  </div>
-  <div style="box-sizing:border-box;" class="py-2 my-3 border-top border-opacity-50">
-    <h4 class="detail-font-text" style="font-size:25px;">댓글 {{ stories.storycomment_set.count }}</h4>
-    <form action="{% url 'stories:comment_create' stories.pk %}" method="POST">
-      {% csrf_token %}
-      {% bootstrap_form comment_form layout="inline" %}
-      <div class="d-flex justify-content-end">
-        <input type="submit" class="btn btn-warning mt-3 mx-2" value="댓글쓰기">
-      </div>
-    </form>
-  </div>
-  <div>
-    {% for comment in comments %}
-      <div class="mb-3 border-bottom border-opacity-50">
-        {% csrf_token %}
-        <div class="" id = "{{ comment.pk }}">
-          {% if comment.user == stories.user %}
-          <p class="ms-2 mt-2 detail-font-text">{{ comment.user.username }} <span style="font-size:11px; color:red;">&nbsp작성자</span></p>
-          {% else %}
-          <p class="ms-2 mt-2 detail-font-text">{{ comment.user.username }}</p>
-          {% endif %}
-        </div>
-        <div class="detail-font-main-text mx-2">
-          {{ comment.content }}  
-        </div>
-        <div>
-          <span class="detail-font-text"><i class="bi bi-clock"></i> {{ comment.created_at|date:"Y.m.d H:i" }}</span>&nbsp;
-          <span class="detail-font-text"><i class="bi bi-hand-thumbs-up"></i> {{ comment.like.count }}</span>&nbsp;
-        </div>
-        <span class="d-flex align-items-end my-3">
-          {% if comment.user == request.user %}
-            <button class="btn btn-light mx-2">
-              <a href="{% url 'stories:comment_delete' stories.pk comment.pk %}" class="text-decoration-none text-black">삭제</a>
-            </button>
-          {% endif %}
-          {% if request.user.is_authenticated %}
-            <a class="mx-2" href="{% url 'stories:comment_likes' comment.pk %}">
-              {% if request.user in comment.like.all %}
-              <i class="bi bi-hand-thumbs-up-fill btn btn-outline-warning text-black"></i>
+      <p class="detail-font-main-text">{{ stories.content }}</p>
+    </div>
+    <div class="container px-0" style=" overflow:hidden;">
+      <span style="overflow:hidden;">
+        <!-- 좋아요 비동기 -->
+        {% if request.user.is_authenticated %}
+          <div class="d-flex justify-content-center align-items-baseline">
+            <div class="mt-3 px-0">
+              {% if request.user in stories.like.all %}
+                <i class="bi bi-hand-thumbs-up-fill  btn btn-outline-warning" data-stories-id="{{ stories.pk }}" style="color:#FFCD00;" id="like-button"></i>
               {% else %}
-              <i class="bi bi-hand-thumbs-up btn btn-outline-warning text-black"></i>
+                <i class="bi bi-hand-thumbs-up  btn btn-outline-warning" data-stories-id="{{ stories.pk }}" style="color:#FFCD00;" id="like-button"></i>
               {% endif %}
-            </a>
-          {% endif %}
+            </div>
+            {% endif %}
+           
+          </div>
         </span>
       </div>
-    {% endfor %}
-  </div>
-</div>
-{% endblock content %}
+      <div style="box-sizing:border-box;" class="py-2 my-3 border-top border-opacity-50">
+        <h4 class="detail-font-text" style="font-size:25px;">댓글
+          {{ stories.storycomment_set.count }}</h4>
+        <form action="{% url 'stories:comment_create' stories.pk %}" method="POST">
+          {% csrf_token %}
+          {% bootstrap_form comment_form layout="inline" %}
+          <div class=" text-end d-flex justify-content-end">
+            <input type="submit" class="article-upd-del btn detail_btn2 mx-2 my-3" value="✍️댓글쓰기">
+          </div>
+        </form>
+      </div>
+      <div>
+        {% for comment in comments %}
+          <div class="mb-3 border-bottom border-opacity-50">
+            {% csrf_token %}
+            <div class="" id="{{ comment.pk }}">
+              {% if comment.user == stories.user %}
+                <p class="ms-2 mt-2 detail-font-text">{{ comment.user.username }}
+                  <span style="font-size:11px; color:red;">&nbsp작성자</span></p>
+              {% else %}
+                <p class="ms-2 mt-2 detail-font-text">{{ comment.user.username }}</p>
+              {% endif %}
+            </div>
+            <div class="detail-font-main-text mx-2">
+              {{ comment.content }}
+            </div>
+            <div class="d-flex justify-content-between">
+              <div>
+                <span class="detail-font-text">
+                  <i class="bi bi-clock"></i>
+                  {{ comment.created_at|date:"Y.m.d H:i" }}</span>&nbsp;
+                <span class="detail-font-text">
+                  {% if request.user.is_authenticated %}
+                  <a style="text-decoration: none;" href="{% url 'stories:comment_likes' comment.pk %}">
+                    {% if request.user in comment.like.all %}
+                      <i class="bi bi-hand-thumbs-up-fill text-black"></i>
+                    {% else %}
+                      <i class="bi bi-hand-thumbs-up text-black"></i>
+                    {% endif %}
+                  </a>
+                {% endif %}
+                  {{ comment.like.count }}</span>&nbsp;
+              </div>
+                <span class="d-flex align-items-end justify-content-end">
+                  {% if comment.user == request.user %}
+                    <button class="btn btn-light">
+                      <a href="{% url 'stories:comment_delete' stories.pk comment.pk %}" class="text-decoration-none text-black">삭제</a>
+                    </button>
+                  {% endif %}
+                </span>
+            </div>
+           
+              
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endblock content %}
 
-{% block script %}
-<!-- 좋아요 -->
-<script>
-  const likeBtn = document.querySelector('#like-button')
-  likeBtn.addEventListener('click', function (event) {
-    axios({
-      method: 'get',
-      url: `/stories/${event.target.dataset.storiesId}/likes/`
-    })
-    .then(context => {
-      if (context.data.is_liked === true) {
-        likeBtn.classList.remove('bi', 'bi-hand-thumbs-up', 'btn', 'btn-outline-warning')
-        likeBtn.classList.add('bi', 'bi-hand-thumbs-up-fill', 'btn', 'btn-outline-warning')
-      } else {
-        likeBtn.classList.remove('bi', 'bi-hand-thumbs-up-fill', 'btn', 'btn-outline-warning')
-        likeBtn.classList.add('bi', 'bi-hand-thumbs-up', 'btn', 'btn-outline-warning')
-      }
-    })
-  })
-</script>
-{% endblock script %}
+  {% block script %}
+    <!-- 좋아요 -->
+    <script>
+      const likeBtn = document.querySelector('#like-button')
+      likeBtn.addEventListener('click', function (event) {
+        axios({method: 'get', url: `/stories/${event.target.dataset.storiesId}/likes/`}).then(context => {
+          if (context.data.is_liked === true) {
+            likeBtn
+              .classList
+              .remove('bi', 'bi-hand-thumbs-up',)
+            likeBtn
+              .classList
+              .add('bi', 'bi-hand-thumbs-up-fill',)
+          } else {
+            likeBtn
+              .classList
+              .remove('bi', 'bi-hand-thumbs-up-fill',)
+            likeBtn
+              .classList
+              .add('bi', 'bi-hand-thumbs-up',)
+          }
+        })
+      })
+    </script>
+  {% endblock script %}

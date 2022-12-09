@@ -15,3 +15,11 @@ font-size: 15px;
 color: black;
 font-family: 'NanumSquareNeo-Variable';
 }
+
+.article-upd-del  {
+background-color: #ffec83;
+}
+.article-upd-del:hover {
+background-color: #ffcd00;
+font-weight: bold;
+}

@@ -4,10 +4,23 @@
 {% block content %}
 
 <link rel="stylesheet" href="{% static 'css/accounts_update.css' %}">
-<h1 class="text-center my-5 fw-bold">회원정보 수정하기</h1>
+<!-- 버튼 -->
+<div class="text-center">
+  <section class="mx-auto my-5 row d-flex justify-content-center">
+    <div class="col-7">
+      <a href="{% url 'accounts:update' %}"><button class="btn-yellow" style="width: 15%;">
+          프로필 수정
+        </button></a>
+      <a href="{% url 'accounts:change_password' %}"><button class="btn-white" style="width: 25%;">비밀번호 수정</button></a>
+      <a href="{% url 'accounts:delete' %}"><button class="btn-white" style="width: 15%;">탈퇴</button></a>
+    </div>
+  </section>
+</div>
+
+<!-- <h1 class="text-center my-5 fw-bold">프로필 수정</h1> -->
 <form action="" method="POST" enctype="multipart/form-data" style="width:40%; margin:0 auto">
   {% csrf_token %}
   {% bootstrap_form form %}
-  <div class="text-center">{% bootstrap_button button_type="submit" content="수정완료" %}</div>
+  <div class="text-center">{% bootstrap_button button_type="submit" content="수정 완료" %}</div>
 </form>
 {% endblock content %}

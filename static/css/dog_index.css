@@ -13,50 +13,6 @@
     src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
 }
 
-a {
-    text-decoration: none;
-    color: black;
-    cursor: pointer;
-}
-
-a:hover {
-    color: black;
-}
-
-.volunteers-banner {
-    min-width: 100%;
-    height: 400px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-image: url(/static/images/volunteers_banner.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    position: relative;
-}
-
-.banner-text {
-    position: absolute;
-    color: white;
-    text-align: center;
-}
-
-@font-face {
-    font-family: 'NanumSquareNeo-Variable';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'NanumBarunGothic';
-    font-style: normal;
-    font-weight: 400;
-    src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
-    src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
-}
-
 /* search form */
 .search-section {
     padding: 10px;
@@ -324,49 +280,6 @@ h3 {
 
 .attach-img {
     position: relative;
-    top: 30px;
-}
-.cropped {
-    position: relative;
-    
-    height: 500px;
-    overflow: hidden;
-    
-  
-    }
-    
-.cropped_img {
-    position: absolute; 
-   	 
-    left: 100;
-    width: 100%; 
-    height: 1280px;
-    top:-250px;
-    filter:brightness(50%)
-    
-    
-    }
-
-.main_image_text {
-    position: absolute;
-    top: 39%;
-    right: 5%;
-    filter:brightness(100%);
-    color: white;
-    font-family: 'Gothic A1', sans-serif;   
-    }
-
-.main_image_text_2 {
-    position: absolute;
-    top: 51%;
-    right: 5%;
-    font-family: 'Gothic A1', sans-serif;   
-    color: white;   
-    }
-
-.colored_text{
-color:#FFCD00;
-font-family: 'Gothic A1', sans-serif;  
     top: 3rem;
     width: 100%;
     height: 100%;
@@ -385,7 +298,7 @@ font-family: 'Gothic A1', sans-serif;
     font-size: 12px;
     color: #2478FF;
     position: absolute;
-    top: -2.3rem;
+    top: -2.9rem;
 }
 
 .sub1 {
@@ -395,41 +308,5 @@ font-family: 'Gothic A1', sans-serif;
 
 .wrap-info {
     position: relative;
-
-}
-
-.hover1:hover {
-    box-shadow: 200px 0 0 0 #ffcd00 inset;
-}
-
-.cat-create {
-    background-color: #fff08b;
-    display: flex;
-    margin-right: 6.5%;
-}
-
-.story-font {
-    margin-top: 20px;
-    margin-bottom: 30px;
-    text-align: center;
-    font-size: 35px;
-    font-weight: 800;
-    font-family: "NanumSquareNeo-Variable";
-}
-
-.dog-stroke {
-    display: flex;
-    margin-top: -20px;
-    background-color: #ffcd00;
-    border: 1px solid #ffcd00;
-    width: 60px;
-}
-
-.dog-stroke1 {
-    display: flex;
-    margin-top: -20px;
-    background-color: #ffcd00;
-    border: 1px solid #ffcd00;
-    width: 120px;
 
 }

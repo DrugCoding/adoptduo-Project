@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
   <link rel="stylesheet" href="{% static 'css/dog_cat.css' %}"/>
-
+  <link rel="stylesheet" href="{% static 'css/cat_index.css' %}">
   <div>
     <div class="cropped d-flex justify-content-center">
       <img class="cropped_img" src="{% static 'images/cat_test_banner.jpg' %}" alt="">
@@ -17,7 +17,7 @@
   <div class="container text-center mt-5">
     <h3 class="cat-font">고양이</h3>
     <div class="cat-stroke container"></div>
-    <ul id="puppy-ul" class="nav my-4">
+    <ul id="puppy-ul" class="font-nanum nav my-4">
       <li class="hover1 nav-item mt-2">
         <a href="{% url "articles:cat_index" %}" class="nav-link active text-dark">전체</a>
       </li>
@@ -50,66 +50,142 @@
       </li>
     </ul>
   </div>
-
-  {% for category_article in category_articles %}
-    <div class="container text-center">
-      <div class="row row-cols-1 row-cols-md-3">
-        <div class="col">
-          <a href="{% url 'articles:cat_detail' category_article.pk %}" class="card-link">
-            <div class="card">
-              <img src="{{ category_article.image.url }}" class="card-img-top" alt="cat_image">
-              <div class="card-body text-dark">
-                <h5 class="card-title">{{ category_article.name }}
-                  /
-                  {{ category_article.age }}살 /
-                  {% if category_article.gender == '암컷' %}
-                    <span>공주님</span>
-                  {% else %}
-                    <span>왕자님</span>
-                  {% endif %}
-                </h5>
-                <p class="card-text" id="dog-card-text">{{ category_article.memo }}
-                  <br>
-                  조회수:
-                  {{ category_article.hits }}</p>
+  <div class="container d-flex justify-content-end my-3" style="">
+    <a href="{% url 'articles:cat_create' %}" class="hover1 cat-create btn text-center">고양이 글작성</a>
+  </div>
+      <div  class="layout container" >
+      <div class="d-flex justify-content-center">
+        <main id="wrap" class="wrap-list">
+          <section class="container">
+            <div role="main" class="contents">
+              <div class="articles-list">
+                {% for cat in category_articles %}
+                  <div class="articles-list-pre ">
+                    <div class="title">
+                      <h3>
+                        <a href="{% url 'articles:cat_detail' cat.pk %}">
+                          {{ cat.title |truncatechars:15 }}
+                        </a>
+                      </h3>
+                      <p>
+                        <a href="{% url 'articles:cat_detail' cat.pk %}">
+                          {{ cat.content |truncatechars:20 }}
+                        </a>
+                      </p>
+                      <p>
+                        <a class="memo" href="">
+                        특이사항: {{ cat.memo }}
+                        </a>
+                      </p>
+                      <span>
+                        <img style="width:150px;margin-top:-200px; margin-left:300px;" class="attach-img" src="{{ cat.image.url }}" alt="">
+                      </span>
+                    </div>
+                    <div class="sub1">
+                      <p>
+                        <a class="sub-content" href="">
+                          #{{ cat.location}} #{{ cat.age }} #{{ cat.gender }} #{{ cat.cat_breed }}
+                        </a>
+                      </p>
+                      <p class="name ">
+                        <a href="{% url 'articles:cat_detail' cat.pk %}">
+                          {{ cat.user.username }}
+                        </a>
+                      </p>
+                      <div class="wrap-info">
+                        <a href="{% url 'articles:cat_detail' cat.pk %}" class="view">
+                          <i class="blind">
+                            <span class="material-symbols-outlined">
+                              visibility
+                            </span>
+                          </i>
+                          {{ cat.hits }}
+                        </a>
+                        <a class="like" href="{% url 'articles:cat_detail' cat.pk %}">
+                          <i class="bi bi-hand-thumbs-up text-black"></i>
+                          {{ cat.like.all | length }}
+                         
+                        </a> 
+                        <span class="text-end">
+                          <a  href="{% url 'articles:cat_detail' cat.pk %}">
+                            {{ cat.created_at | timesince }}
+                          </a>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
               </div>
             </div>
-          </a>
-        </div>
+          </section> 
+        </main>
       </div>
     </div>
-  {% endfor %}
-
-  <div class="container text-center">
-    <div class="row row-cols-1 row-cols-md-3">
-      {% for object in page_obj %}
-        <div class="col">
-          <a href="{% url 'articles:cat_detail' object.pk %}" class="card-link">
-            <div class="card">
-              <img src="{{ object.image.url }}" class="card-img-top" alt="cat_image">
-              <div class="card-body text-dark">
-                <h5 class="card-title">{{ object.name }}
-                  /
-                  {{ object.age }}살 /
-                  {% if object.gender == '암컷' %}
-                    <span>공주님</span>
-                  {% else %}
-                    <span>왕자님</span>
-                  {% endif %}
-                </h5>
-                <p class="card-text" id="dog-card-text">{{ i.memo }}
-                  <br>
-                  조회수:
-                  {{ object.hits }}</p>
+    <div  class="layout container" >
+      <div class="d-flex justify-content-center">
+        <main id="wrap" class="wrap-list">
+          <section class="container">
+            <div role="main" class="contents">
+              <div class="articles-list">
+                {% for cat in page_obj %}
+                  <div class="articles-list-pre ">
+                    <div class="title">
+                      <h3>
+                        <a href="{% url 'articles:cat_detail' cat.pk %}">
+                          {{ cat.title |truncatechars:15  }}
+                        </a>
+                      </h3>
+                      <p>
+                        <a href="{% url 'articles:cat_detail' cat.pk %}">
+                          {{ cat.content |truncatechars:20  }}
+                        </a>
+                      </p>
+                      <p>
+                        <a class="memo" href="">
+                        특이사항: {{ cat.memo }}
+                        </a>
+                      </p>
+                      <span>
+                        <img style="width:150px;margin-top:-200px; margin-left:300px;" class="attach-img" src="{{ cat.image.url }}" alt="">
+                      </span>
+                    </div>
+                    <div class="sub1">
+                      <p>
+                        <a class="sub-content" href="">
+                          #{{ cat.location}} #{{ cat.age }} #{{ cat.gender }} #{{ cat.cat_breed }}
+                        </a>
+                      </p>
+                      <p class="name ">
+                        <a href="{% url 'articles:cat_detail' cat.pk %}">
+                          {{ cat.user.username }}
+                        </a>
+                      </p>
+                      <div class="wrap-info">
+                        <a href="{% url 'articles:cat_detail' cat.pk %}" class="view">
+                          <i class="bi bi-eye"></i>
+                          {{ cat.hits }}
+                        </a>
+                        <a class="like" href="{% url 'articles:cat_detail' cat.pk %}">
+                          <i class="bi bi-hand-thumbs-up"></i>
+                          
+                          {{ cat.like.all | length }}
+                        </a>    
+                          <a href="{% url 'articles:cat_detail' cat.pk %}">
+                            {{ cat.created_at | timesince }}전
+                          </a>
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
               </div>
             </div>
-          </a>
-        </div>
-      {% endfor %}
+          </section> 
+        </main>
+      </div>
     </div>
-  </div>
 
-  <div class="container text-center">
+
+  <div class="font-nanum container text-center">
     <ul id="pagination" class="d-flex my-5 d-flex justify-content-center p-5 list-unstyled">
       <li class="mx-2 rounded">
         <a class="border border-0 text-muted" href="?page=1">1</a>
@@ -124,8 +200,6 @@
         <a class="border border-0 text-muted" href="?page=4">4</a>
       </li>
     </ul>
-
-    <a href="{% url 'articles:cat_create' %}" class="hover1 cat-create btn text-center">글쓰기</a>
   </div>
 
 {% endblock content %}

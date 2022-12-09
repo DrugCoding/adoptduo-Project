@@ -81,21 +81,25 @@
           <div class="card story-card">
             <!-- 카드 헤더 -->
             <div class="card-header story-card-image">
+              {% if story.image %}
               <img class="story-card-image story-image " src="{{ story.image.url }}" alt="">
+              {% else %}
+              <img class="story-card-image story-image " src="{% static 'images/index_story.png' %}" alt="">
+              {% endif %}
             </div>
             <!-- 카드 바디 -->
             <div class="card-body-1">
               <!-- 카드 바디 헤더 -->
               <div class="card-body-header">
-                <h1>{{ story.title }}</h1>
-                <p class="card-body-hashtag">#{{ story.breed }}</p>
+                <h1>{{ story.title |truncatechars:15}}</h1>
+                <p class="card-body-hashtag">#{{ story.breed |truncatechars:15 }}</p>
                 <p class="card-body-nickname">
                   작성자:
-                  {{ story.user.username }}
+                  {{ story.user.username |truncatechars:15 }}
                 </p>
               </div>
               <p class="card-body-description">
-                {{ story.content }}
+                {{ story.content |truncatechars:60 }}
               </p>
               <!-- 카드 바디 본문 -->
 
@@ -138,7 +142,7 @@
                       <div class="card h-100 content " id="animatedBackground">
                         {% if use.image %}
                           <img src="{{ use.image.url }}" class="card-img-top" alt="...">
-                          {% else %}
+                        {% else %}
                           <img src="{% static 'images/unknown_image.jpg' %}" style="border-radius: 10px;" alt="">
                         {% endif %}
                       </div>
