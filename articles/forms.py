@@ -1,14 +1,15 @@
 from django import forms
 from .models import DogArticle, CatArticle, DogArticleComment, CatArticleComment
 class DogArticleForm(forms.ModelForm):
-    # gender_list = [
-    #     ('암컷', '암컷'),
-    #     ('수컷', '수컷'), 
-    # ]
-    # gender = forms.ChoiceField(choices=gender_list, 
-    #     widget=forms.RadioSelect(
-    #     ),
-    # )
+    gender_list = [
+        ('암컷', '암컷'),
+        ('수컷', '수컷'), 
+    ]
+    gender = forms.ChoiceField(choices=gender_list, 
+        label='⚤성별',
+        widget=forms.RadioSelect(
+        ),
+    )
 
     
     class Meta:
@@ -70,12 +71,12 @@ class DogArticleForm(forms.ModelForm):
                     "class": "hover-control",
                     "placeholder": "나이를 입력해주세요.",
                 }),
-            "gender": forms.RadioSelect(
-                choices = [
-                    ('암컷', '암컷'),
-                    ('수컷', '수컷'),
-                ],
-            ),
+            # "gender": forms.RadioSelect(
+            #     choices = [
+            #         ('암컷', '암컷'),
+            #         ('수컷', '수컷'),
+            #     ],
+            # ),
             "memo": forms.TextInput(
                 attrs={
                     "class": "hover-control",
@@ -86,14 +87,15 @@ class DogArticleForm(forms.ModelForm):
  
 
 class CatArticleForm(forms.ModelForm):
-    # gender_list = [
-    #     ('암컷', '암컷'),
-    #     ('수컷', '수컷'), 
-    # ]
-    # 성별 = forms.ChoiceField(choices=gender_list, 
-    #     widget=forms.RadioSelect(
-    #     ),
-    # )
+    gender_list = [
+        ('암컷', '암컷'),
+        ('수컷', '수컷'), 
+    ]
+    gender = forms.ChoiceField(choices=gender_list, 
+        label='⚤성별',
+        widget=forms.RadioSelect(
+        ),
+    )
 
     class Meta:
         model = CatArticle
@@ -154,12 +156,12 @@ class CatArticleForm(forms.ModelForm):
                     "class": "hover-control",
                     "placeholder": "나이를 입력해주세요.",
                 }),
-            "gender": forms.RadioSelect(
-                choices = [
-                    ('암컷', '암컷'),
-                    ('수컷', '수컷'),
-                ],
-            ),
+            # "gender": forms.RadioSelect(
+            #     choices = [
+            #         ('암컷', '암컷'),
+            #         ('수컷', '수컷'),
+            #     ],
+            # ),
             "memo": forms.TextInput(
                 attrs={
                     "class": "hover-control",
