@@ -10,7 +10,7 @@ class StoriesForm(forms.ModelForm):
             "title": "🗒️제목",
             "content": "📝내용",
             "image": "📸사진",
-
+        }
         widgets = {
             "title": forms.TextInput(
                 attrs={
