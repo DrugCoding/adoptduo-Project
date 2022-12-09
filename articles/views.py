@@ -17,7 +17,7 @@ from django.db.models import Count
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from accounts.models import User
-
+import json
 # Create your views here.
 
 
@@ -84,6 +84,12 @@ def dog_create(request):
                 commit=False
             )  # 저장하기 전에 잠깐 멈추기 위해 commit=false사용
             dog_article.user = request.user  # product.user와 요청한 user가 같다를 정의
+            lat1 = request.POST.get('lat')
+            print(lat1)
+            lng1 = request.POST.get('lon')
+            print(lng1)
+            dog_article.lat = lat1
+            dog_article.lng = lng1
             dog_article.save()  # 위에 요청 받은 폼을 저장, 값을 만들고 저장하는 용도고 값을 보내줄 것이 없으니까 redirect를 사용
             return redirect(
                 "articles:dog_index"
@@ -91,6 +97,7 @@ def dog_create(request):
     else:
         dog_article_form = DogArticleForm()  # post 요청이 아니면(제출 버튼을 안누르면) 빈 폼을 보여줌
 
+    
     context = {
         "dog_article_form": dog_article_form  # 유효하지 않을 때, 사용자의 인풋을 다 받아서, 검증까지 해서 에러메시지를 저장한 product_form(템플릿 내에서 부트스트랩 폼에 사용)
         # post일 때는 post의 product_form이 여기에 해당 되고, 해당 페이지 접속일 (글생성 x)때는 else의 product_form이 들어감
@@ -99,16 +106,24 @@ def dog_create(request):
     return render(
         request, "articles/form.html", context
     )  # 제출에 이슈가 있다면 값을 보내며 다시 폼으로 돌아가기
+    
 
 
 def dog_detail(request, dog_article_pk):
     dog_article = DogArticle.objects.get(id=dog_article_pk)
     dog_comment_form = DogCommentForm()
 
+    latlngdict = {
+        'lat' : dog_article.lat,
+        'lng' : dog_article.lng
+    }
+    latlngjson = json.dumps(latlngdict)
+
     context = {
         "dog_article": dog_article,
         "dog_comments": dog_article.dogarticlecomment_set.all(),  # 도그 게시물의 모든 댓글 출력하기
         "dog_comment_form": dog_comment_form,
+        "latlngjson" : latlngjson
     }
     dog_article.hits +=1
     dog_article.save()

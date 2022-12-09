@@ -40,8 +40,10 @@
   </div>
   <div class="container">
     <div class="article-upd-del text-end">
+      {% if request.user == cat_article.user %}
         <a href="{% url 'articles:cat_update' cat_article.pk %}" class="btn detail_btn2 mx-2 my-3">글수정</a>
         <a href="{% url 'articles:cat_delete' cat_article.pk %}" class="btn detail_btn2 my-3">글삭제</a>
+      {% endif %}
     </div>
     <h2 class="text-center mb-3">입양동물정보</h2>
     <div class="text-center">
