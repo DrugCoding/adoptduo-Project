@@ -3,6 +3,7 @@
 {% load static %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/dog_cat_detail.css' %}">
+
 <div>
   <div class="cropped d-flex justify-content-center">
     <img class="cropped_img" src="{% static 'images/dog_test_banner.jpg' %}" alt="">
@@ -12,21 +13,59 @@
       <span class="colored_text">함께</span>해 주세요</h1>
   </div>
 
-</div>
-  <div class="container mt-4">
-    <h2>{{ dog_article.title }}</h2>
-    <a href="{% url 'accounts:detail' dog_article.user.pk %}">{{ dog_article.user.username }}</a>
-    {% if request.user.pk != dog_article.user.pk  %}
-    <a href="{% url 'notes:send' dog_article.user.pk %}">{{ dog_article.user.username }}에게 쪽지보내기</a>
-    {% endif %}
+  <div class="container mt-4 text-start">
+    <div class="d-flex">
+      <h2 class="my-auto me-auto">{{ dog_article.title }}</h2>
+
+      <div class="title-info d-flex justify-content-between">
+        <h6 class="my-auto">🐕분류: {{ dog_article.dog_breed }}</h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <h6 class="my-auto">👤작성자: 
+          <a href="{% url 'accounts:detail' dog_article.user.pk %}" class="text-decoration-none text-dark">{{ dog_article.user.username }}</a>
+          {% comment %} 열람자와 작성자가 같지 않을 때만 버튼 활성화 {% endcomment %}
+          <button type="button" 
+          class="btn btn-sm mt-1 p-0" 
+          data-bs-toggle="popover"
+          data-bs-content=
+            {% if request.user.pk != dog_article.user.pk  %}
+            "<a role='button' class='text-decoration-none' href='{% url 'notes:send' dog_article.user.pk %}'>✉️메시지보내기</a><br/>
+            <a role='button' class='text-decoration-none' href='{% url 'notes:send' dog_article.user.pk %}'>👀팔로우하기</a><br/>
+            <a role='button' class='text-decoration-none' href='{% url 'notes:send' dog_article.user.pk %}'>📝추가기능2</a>
+            "
+            {% else %}
+            "✅자기 자신입니다!"
+            {% endif %}
+          data-bs-html="true">➕
+          </button>
+        </h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <h6 class="my-auto">👁️‍🗨️조회수: {{ dog_article.hits }}회</h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <h6 class="my-auto"><span>🔖즐겨찾기 수: 
+          {% if request.user.is_authenticated %} 
+            {% if request.user in dog_article.bookmarks.all %}
+              <i id="bookmark-btn" data-article-id="{{ dog_article.pk }}" class="bi-bookmark-heart-fill"></i>
+            {% else %}
+              <i id="bookmark-btn" data-article-id="{{ dog_article.pk }}" class="bi-bookmark-heart"></i>
+            {% endif %}
+            <span id="bookmark-count">{{ dog_article.bookmarks.count }}</span>
+        </span>
+        {% endif %} </h6>
+      </div>
+    </div>
+
     <hr id="divider">
   </div>
   <div class="container">
+    <div class="article-upd-del text-end">
+      <a href="#" class="btn detail_btn2 mx-2 my-3">🔖즐겨찾기 추가</a>
+      <a href="{% url 'articles:dog_update' dog_article.pk %}" class="btn detail_btn2 mx-2 my-3">✍️글수정</a>
+      <a href="{% url 'articles:dog_delete' dog_article.pk %}" class="btn detail_btn2 mx-2 my-3">🗑️글삭제</a>
+    </div>
     <h2 class="text-center mb-3">입양동물정보</h2>
     <div class="text-center">
-      {% comment %} DB에서 가져와서 이미지 삽입예정 {% endcomment %}
-      {% comment %} <img id="dog-detail-img" class="mb-4 w-25 rounded" src="{{ dog_article.image }}" alt="dog_article.image"> {% endcomment %}
       <img id="pet-detail-img" class="mb-4 w-25 rounded" src="{{ dog_article.image.url }}" alt="dog_article.image">   
+      <div class="d-flex justify-content-center"><p class="text-start w-50">{{ dog_article.content }}</p></div>
     </div>
     <div class="row">
       <div id="pet-info-var-div" class="col-1 text-center py-3">이름</div>
@@ -62,52 +101,41 @@
       <div id="pet-info-div" class="col-5 text-center py-3">{{ dog_article.memo }}</div>
     </div>
   </div>
-  <div class="container text-center mt-4">
-    <div class="row d-flex justify-content-center">
-      <div id="pet-info-var-div" class="col-1 py-3">Content</div>
-      <div id="pet-info-div" class="col-5 py-3">{{ dog_article.content }}</div>
-    </div>
-  </div>
   <div class="container text-center">
-  {% if request.user == dog_article.user %}
-    <a href="{% url 'articles:dog_update' dog_article.pk %}" class="btn btn-primary detail_btn2 mx-2 my-3">글수정</a>
-    <a href="{% url 'articles:dog_delete' dog_article.pk %}" class="btn btn-primary detail_btn2 my-3">글삭제</a>
-  {% endif %}
-    <span>
+    {% comment %} <span>
       {% if request.user.is_authenticated %} 
-        {% if request.user in dog_article.bookmarks.all %}
-          <i id="bookmark-btn" data-article-id="{{ dog_article.pk }}" class="bi-bookmark-heart-fill fs-1"></i>
+        {% if request.user in cat_article.bookmarks.all %}
+          <i id="bookmark-btn" data-article-id="{{ cat_article.pk }}" class="bi-bookmark-heart-fill fs-1"></i>
         {% else %}
-          <i id="bookmark-btn" data-article-id="{{ dog_article.pk }}" class="bi-bookmark-heart fs-1"></i>
+          <i id="bookmark-btn" data-article-id="{{ cat_article.pk }}" class="bi-bookmark-heart fs-1"></i>
         {% endif %}
-        <span id="bookmark-count">{{ dog_article.bookmarks.count }}</span>
+        <span id="bookmark-count">{{ cat_article.bookmarks.count }}</span>
     </span>
-    {% endif %} 
-    <h4 class="mt-5">댓글</h4>
-    <form id="dog-comment-form" data-article-id="{{ dog_article.pk }}">
-        {% csrf_token %}
-        {% bootstrap_form dog_comment_form %}
-        {% bootstrap_button content="ok" button_type="submit" button_class="btn-danger col-3" %}
-    </form>
-    <hr>
-    <p>{{ dog_comments.count }}개의 댓글이 있습니다.</p>
-    <div id="dog-comments">
+    {% endif %}  {% endcomment %}
+    <div>
+      <h4 class="mt-5"><span style="color:red">{{ dog_comments.count }}개</span>의 댓글이 있습니다.</h4>
       {% for dog_comment in dog_comments %}
       {% csrf_token %}
-      <div id="{{dog_comment.pk}}">
-        <p> {{ dog_comment.user.username }} | {{ dog_comment.content }}</p>
-        <button data-comment-id="{{dog_comment.pk}}" onclick="remove(event)">댓글 삭제</button>
-        <hr>    
+      <div class="my-4 d-flex" id="{{dog_comment.pk}}">
+        <div class="comment-info flex-fill">
+          <span>{{ dog_comment.user.username }}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;작성일자: {{ dog_comment.created_at }}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;IP: 121.4945</span>
+          <div class="comment-txt mt-3">
+            <span>{{ dog_comment.content }}</span>
+          </div>
+        </div>
+        <span class="comment-delete mx-5 my-4 align-items-center"><button class="comment-del-btn Nanum" data-comment-id="{{dog_comment.pk}}" onclick="remove(event)">댓글삭제</button></span>
       </div>
       {% empty %}
         <p>댓글이 없어요! </p>
       {% endfor %}
     </div>
+    <form data-article-id="{{ dog_article.pk }}">
+        {% csrf_token %}
+        {% bootstrap_form dog_comment_form %}
+        {% bootstrap_button content="ok" button_type="submit" button_class="btn-danger col-3" %}
+    </form>
+    <hr>
   </div>
-
-
-
-
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script
@@ -115,6 +143,9 @@
   integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
   crossorigin="anonymous"></script>
 <script>
+    $(document).ready(function(){ //팝오버 작동하게 하기
+      $('[data-bs-toggle="popover"]').popover();
+    });
     const commentForm = document.querySelector('#dog-comment-form')
     const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     commentForm.addEventListener('submit', function(event){

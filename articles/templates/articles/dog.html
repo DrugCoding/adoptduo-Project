@@ -13,49 +13,49 @@
 
   </div>
   <div class="container text-center mt-5">
-    <hr class="py-2 justify-content-center align-items-center" id="divider">
-    <h1>강아지</h1>
-    <ul id="puppy-ul" class="nav my-4">
-      <li class="nav-item mt-2">
+    <h3 class="cat-font">강아지</h3>
+    <div class="cat-stroke container"></div>
+    <ul id="puppy-ul" class="font-nanum nav my-4">
+      <li class="hover1 nav-item mt-2">
         <a href="{% url "articles:dog_index" %}" class="nav-link active text-dark">전체</a>
       </li>
-      <li class="nav-item mt-2">
+      <li class="hover1 nav-item mt-2">
         <a href="{% url "articles:dog_category" 1 %}" class="nav-link active text-dark">요크셔테리어</a>
       </li>
-      <li class="nav-item mt-2">
+      <li class="hover1 nav-item mt-2">
         <a href="{% url "articles:dog_category" 2 %}" class="nav-link active text-dark">푸들</a>
       </li>
-      <li class="nav-item mt-2">
+      <li class="hover1 nav-item mt-2">
         <a href="{% url "articles:dog_category" 3 %}" class="nav-link active text-dark">시바견</a>
       </li>
-      <li class="nav-item mt-2">
+      <li class="hover1 nav-item mt-2">
         <a href="{% url "articles:dog_category" 4 %}" class="nav-link active text-dark">이탈리안그레이하운드</a>
       </li>
-      <li class="nav-item mt-2">
+      <li class="hover1 nav-item mt-2">
         <a href="{% url "articles:dog_category" 5 %}" class="nav-link active text-dark">포메라니안</a>
       </li>
-      <li class="nav-item mt-2">
+      <li class="hover1 nav-item mt-2">
         <a href="{% url "articles:dog_category" 6 %}" class="nav-link active text-dark">비숑프리제</a>
       </li>
-      <li class="nav-item mt-2">
+      <li class="hover1 nav-item mt-2">
         <a href="{% url "articles:dog_category" 7 %}" class="nav-link active text-dark">골든 리트리버</a>
       </li>
-      <li class="nav-item mt-2">
+      <li class="hover1 nav-item mt-2">
         <a href="{% url "articles:dog_category" 8 %}" class="nav-link active text-dark">말티즈</a>
       </li>
-      <li class="nav-item mt-2">
+      <li class="hover1 nav-item mt-2">
         <a href="{% url "articles:dog_category" 9 %}" class="nav-link active text-dark">웰시코기</a>
       </li>
-      <li class="nav-item mt-2">
+      <li class="hover1 nav-item mt-2">
         <a href="{% url "articles:dog_category" 10 %}" class="nav-link active text-dark">시츄</a>
       </li>
-      <li class="nav-item mt-2">
+      <li class="hover1 nav-item mt-2">
         <a href="{% url "articles:dog_category" 11 %}" class="nav-link active text-dark">보더콜리</a>
       </li>
     </ul>
   </div>
 
-  {% for category_article in category_articles %}
+  {% comment %} {% for category_article in category_articles %}
     <div class="container text-center">
       <div class="row row-cols-1 row-cols-md-3">
         <div class="col">
@@ -84,31 +84,31 @@
         </div>
       {% endfor %}
     </div>
-  </div>
+  </div> {% endcomment %}
 
   <div class="container text-center">
     <div class="row row-cols-1 row-cols-md-3">
-      {% for i in page_obj %}
+      {% for object in page_obj %}
         <div class="col">
-          <a href="{% url 'articles:dog_detail' i.pk %}" class="card-link">
-            <div class="card">
-              <img src="{{ i.image.url }}" class="card-img-top" alt="dog">
+          <a href="{% url 'articles:dog_detail' object.pk %}" class="card-link">
+            <div class="font-nanum card">
+              <img src="{{ object.image.url }}" class="card-img-top" alt="dog_image">
               <div class="card-body text-dark">
                 <h5 class="card-title">
-                  {{ i.name }}
+                  {{ object.name }}
                   /
-                  {{ i.age }}
+                  {{ object.age }}살
                   /
-                  {% if i.gender == '암컷' %}
+                  {% if object.gender == '암컷' %}
                     <span>공주님</span>
-                    {% else%}
+                  {% else%}
                     <span>왕자님</span>
                   {% endif %}
                 </h5>
-                <p class="card-text" id="dog-card-text">{{ i.memo }}
+                <p class="card-text">{{ object.memo }}
                   <br>
                   조회수:
-                  {{ i.hits }}</p>
+                  {{ object.hits }}회</p>
               </div>
             </div>
           </a>
@@ -117,8 +117,8 @@
     </div>
   </div>
 
-  <div class="container text-center">
-    <ul id="pagination" class="d-flex my-5 d-flex justify-content-center p-5">
+  <div class="font-nanum container text-center">
+    <ul id="pagination" class="d-flex my-5 d-flex justify-content-center p-5 list-unstyled">
       <li class="mx-2 rounded">
         <a class="border border-0 text-muted" href="?page=1">1</a>
       </li>
@@ -132,7 +132,7 @@
         <a class="border border-0 text-muted" href="?page=4">4</a>
       </li>
     </ul>
-    <a href="{% url 'articles:dog_create' %}" class="hover1 cat-create btn text-center">강아지 글작성</a>
+    <a href="{% url 'articles:dog_create' %}" class="hover1 cat-create btn text-center">글쓰기</a>
   </div>
 
 {% endblock content %}

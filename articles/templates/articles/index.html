@@ -57,7 +57,7 @@
           <div class="row row-cols-5 work">
             {% for cat in cat_articles %}
               <div class="col ">
-                <a style="text-decoration:none;" href="">
+                <a style="text-decoration:none;" href="{% url 'articles:cat_detail' cat.pk %}">
                   <div class="card h-100">
                     <img src="{{ cat.image.url }}" class="card-img-top post-img" alt="...">
                     <div class="card-body">
@@ -138,7 +138,7 @@
                       <div class="card h-100 content " id="animatedBackground">
                         {% if use.image %}
                           <img src="{{ use.image.url }}" class="card-img-top" alt="...">
-                          {% else %}
+                        {% else %}
                           <img src="{% static 'images/unknown_image.jpg' %}" style="border-radius: 10px;" alt="">
                         {% endif %}
                       </div>

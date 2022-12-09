@@ -17,7 +17,7 @@
   <div class="container text-center mt-5">
     <h3 class="cat-font">고양이</h3>
     <div class="cat-stroke container"></div>
-    <ul id="puppy-ul" class="nav my-4">
+    <ul id="puppy-ul" class="font-nanum nav my-4">
       <li class="hover1 nav-item mt-2">
         <a href="{% url "articles:cat_index" %}" class="nav-link active text-dark">전체</a>
       </li>
@@ -51,7 +51,7 @@
     </ul>
   </div>
 
-  {% for category_article in category_articles %}
+  {% comment %} {% for category_article in category_articles %}
     <div class="container text-center">
       <div class="row row-cols-1 row-cols-md-3">
         <div class="col">
@@ -78,14 +78,14 @@
         </div>
       </div>
     </div>
-  {% endfor %}
+  {% endfor %} {% endcomment %}
 
   <div class="container text-center">
     <div class="row row-cols-1 row-cols-md-3">
       {% for object in page_obj %}
         <div class="col">
           <a href="{% url 'articles:cat_detail' object.pk %}" class="card-link">
-            <div class="card">
+            <div class="font-nanum card">
               <img src="{{ object.image.url }}" class="card-img-top" alt="cat_image">
               <div class="card-body text-dark">
                 <h5 class="card-title">{{ object.name }}
@@ -97,10 +97,10 @@
                     <span>왕자님</span>
                   {% endif %}
                 </h5>
-                <p class="card-text" id="dog-card-text">{{ i.memo }}
+                <p class="card-text">{{ object.memo }}
                   <br>
                   조회수:
-                  {{ object.hits }}</p>
+                  {{ object.hits }}회</p>
               </div>
             </div>
           </a>
@@ -109,7 +109,7 @@
     </div>
   </div>
 
-  <div class="container text-center">
+  <div class="font-nanum container text-center">
     <ul id="pagination" class="d-flex my-5 d-flex justify-content-center p-5 list-unstyled">
       <li class="mx-2 rounded">
         <a class="border border-0 text-muted" href="?page=1">1</a>
