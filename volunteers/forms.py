@@ -12,35 +12,41 @@ class VolunteerForm(forms.ModelForm):
             'content',
         ]
         labels = {
-            'title': '제목',
-            'area': '출발지역',
-            'adopt_location': '도착지역',
-            'adopt_date': '이동날짜',
-            'content': '추가내용',
+            'title': '🗒️제목',
+            'area': '✈출발지역',
+            'adopt_location': '✈도착지역',
+            'adopt_date': '📅이동날짜',
+            'content': '📝추가내용',
         }
         widgets = {
+             'title': forms.TextInput(
+                attrs={
+                    'class': 'hover-control',
+                    'placeholder': '제목을 입력해주세요.'
+                }
+            ),
             'area': forms.TextInput(
                 attrs={
-                    'class': 'form-control',
-                    'placeholder': '출발하는 지역'
+                    'class': 'hover-control',
+                    'placeholder': '출발하는 지역을 입력해주세요.'
                 }
             ),
             'adopt_location': forms.TextInput(
                 attrs={
-                    'class': 'form-control',
-                    'placeholder': '도착하는 지역'
+                    'class': 'hover-control',
+                    'placeholder': '도착하는 지역을 입력해주세요.'
                 }
             ),
             'adopt_date': forms.TextInput(
                 attrs={
-                    'class': 'form-control',
-                    'placeholder': 'yyyy-mm-dd'
+                    'class': 'hover-control',
+                    'placeholder': '날짜를 입력해주세요.'
                 }
             ),
             'content': forms.TextInput(
                 attrs={
-                    'class': 'form-control',
-                    'placeholder': '내용'
+                    'class': 'hover-control',
+                    'placeholder': '내용을 입력해주세요.'
                 }
             )
         }

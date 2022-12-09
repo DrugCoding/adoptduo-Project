@@ -85,12 +85,12 @@ button.search-submit {
   font-weight: 600;
   color: #707070;
   margin-left: 1.7rem;
-  font-family: 'MICEGothic Bold';
+  font-family: 'NanumSquareNeo-Variable';
 }
 
 #brand {
   font-size: 2.5vw;
-  font-family: 'MICEGothic Bold';
+  font-family: 'NanumSquareNeo-Variable';
   color: black;
   margin-left: 1.6rem;
 
@@ -332,10 +332,10 @@ h3.volunteers-font {
 .volunteers-stroke {
   display: flex;
   margin-top: -20px;
-  margin-left: 616px;
+  margin-left: 618px;
   background-color: #FFCD00;
-  border: 1.0 px solid #ffcd00;
-  width: 65px;
+  border: 1px solid #ffcd00;
+  width: 60px;
 }
 
 

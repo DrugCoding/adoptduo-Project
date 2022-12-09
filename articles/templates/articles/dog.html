@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
   <link rel="stylesheet" href="{% static 'css/dog_cat.css' %}">
+  <link rel="stylesheet" href="{% static 'css/dog_index.css' %}">
   <div>
     <div class="cropped d-flex justify-content-center">
       <img class="cropped_img" src="{% static 'images/dog_test_banner.jpg' %}" alt="">
@@ -12,127 +14,219 @@
     </div>
 
   </div>
-  <div class="container text-center mt-5">
-    <hr class="py-2 justify-content-center align-items-center" id="divider">
-    <h1>강아지</h1>
-    <ul id="puppy-ul" class="nav my-4">
-      <li class="nav-item mt-2">
-        <a href="{% url "articles:dog_index" %}" class="nav-link active text-dark">전체</a>
-      </li>
-      <li class="nav-item mt-2">
-        <a href="{% url "articles:dog_category" 1 %}" class="nav-link active text-dark">요크셔테리어</a>
-      </li>
-      <li class="nav-item mt-2">
-        <a href="{% url "articles:dog_category" 2 %}" class="nav-link active text-dark">푸들</a>
-      </li>
-      <li class="nav-item mt-2">
-        <a href="{% url "articles:dog_category" 3 %}" class="nav-link active text-dark">시바견</a>
-      </li>
-      <li class="nav-item mt-2">
-        <a href="{% url "articles:dog_category" 4 %}" class="nav-link active text-dark">이탈리안그레이하운드</a>
-      </li>
-      <li class="nav-item mt-2">
-        <a href="{% url "articles:dog_category" 5 %}" class="nav-link active text-dark">포메라니안</a>
-      </li>
-      <li class="nav-item mt-2">
-        <a href="{% url "articles:dog_category" 6 %}" class="nav-link active text-dark">비숑프리제</a>
-      </li>
-      <li class="nav-item mt-2">
-        <a href="{% url "articles:dog_category" 7 %}" class="nav-link active text-dark">골든 리트리버</a>
-      </li>
-      <li class="nav-item mt-2">
-        <a href="{% url "articles:dog_category" 8 %}" class="nav-link active text-dark">말티즈</a>
-      </li>
-      <li class="nav-item mt-2">
-        <a href="{% url "articles:dog_category" 9 %}" class="nav-link active text-dark">웰시코기</a>
-      </li>
-      <li class="nav-item mt-2">
-        <a href="{% url "articles:dog_category" 10 %}" class="nav-link active text-dark">시츄</a>
-      </li>
-      <li class="nav-item mt-2">
-        <a href="{% url "articles:dog_category" 11 %}" class="nav-link active text-dark">보더콜리</a>
-      </li>
-    </ul>
-  </div>
-
-  <div class="container text-center">
-    <div class="row row-cols-1 row-cols-md-3">
-        {% for category_article in category_articles %}
-        <div class="col">
-          <a href="{% url 'articles:dog_detail' category_article.pk %}" class="card-link">
-            <div class="card">
-              <img src="{{ category_article.image.url }}" class="card-img-top" alt="dog">
-              <div class="card-body text-dark">
-                <h5 class="card-title">
-                  {{ category_article.name }}
-                  /
-                  {{ category_article.age }}
-                  /
-                  {% if category_article.gender == '암컷' %}
-                    <span>공주님</span>
-                    {% else%}
-                    <span>왕자님</span>
-                  {% endif %}
-                </h5>
-                <p class="card-text" id="dog-card-text">{{ category_article.memo }}
-                  <br>
-                  조회수:
-                  {{ category_article.hits }}</p>
-              </div>
-            </div>
-          </a>
-        </div>
-      {% endfor %}
+  <div class="container mt-5 ">
+    <h3 class="dog-font text-center">강아지</h3>
+    <div class="dog-stroke container "></div>
+    <div class="d-flex justify-content-center">
+      <ul id="puppy-ul" class="nav my-4">
+        <li class="nav-item mt-2">
+          <a href="{% url "articles:dog_index" %}" class="nav-link active text-dark">전체</a>
+        </li>
+        <li class="nav-item mt-2">
+          <a href="{% url "articles:dog_category" 1 %}" class="nav-link active text-dark">요크셔테리어</a>
+        </li>
+        <li class="nav-item mt-2">
+          <a href="{% url "articles:dog_category" 2 %}" class="nav-link active text-dark">푸들</a>
+        </li>
+        <li class="nav-item mt-2">
+          <a href="{% url "articles:dog_category" 3 %}" class="nav-link active text-dark">시바견</a>
+        </li>
+        <li class="nav-item mt-2">
+          <a href="{% url "articles:dog_category" 4 %}" class="nav-link active text-dark">이탈리안그레이하운드</a>
+        </li>
+        <li class="nav-item mt-2">
+          <a href="{% url "articles:dog_category" 5 %}" class="nav-link active text-dark">포메라니안</a>
+        </li>
+        <li class="nav-item mt-2">
+          <a href="{% url "articles:dog_category" 6 %}" class="nav-link active text-dark">비숑프리제</a>
+        </li>
+        <li class="nav-item mt-2">
+          <a href="{% url "articles:dog_category" 7 %}" class="nav-link active text-dark">골든 리트리버</a>
+        </li>
+        <li class="nav-item mt-2">
+          <a href="{% url "articles:dog_category" 8 %}" class="nav-link active text-dark">말티즈</a>
+        </li>
+        <li class="nav-item mt-2">
+          <a href="{% url "articles:dog_category" 9 %}" class="nav-link active text-dark">웰시코기</a>
+        </li>
+        <li class="nav-item mt-2">
+          <a href="{% url "articles:dog_category" 10 %}" class="nav-link active text-dark">시츄</a>
+        </li>
+        <li class="nav-item mt-2">
+          <a href="{% url "articles:dog_category" 11 %}" class="nav-link active text-dark">보더콜리</a>
+        </li>
+      </ul>
     </div>
   </div>
-
-  <div class="container text-center">
-    <div class="row row-cols-1 row-cols-md-3">
-      {% for i in page_obj %}
-        <div class="col">
-          <a href="{% url 'articles:dog_detail' i.pk %}" class="card-link">
-            <div class="card">
-              <img src="{{ i.image.url }}" class="card-img-top" alt="dog">
-              <div class="card-body text-dark">
-                <h5 class="card-title">
-                  {{ i.name }}
-                  /
-                  {{ i.age }}
-                  /
-                  {% if i.gender == '암컷' %}
-                    <span>공주님</span>
-                    {% else%}
-                    <span>왕자님</span>
-                  {% endif %}
-                </h5>
-                <p class="card-text" id="dog-card-text">{{ i.memo }}
-                  <br>
-                  조회수:
-                  {{ i.hits }}</p>
-              </div>
-            </div>
-          </a>
-        </div>
-      {% endfor %}
-    </div>
-  </div>
-
-  <div class="container text-center">
-    <ul id="pagination" class="d-flex my-5 d-flex justify-content-center p-5">
-      <li class="mx-2 rounded">
-        <a class="border border-0 text-muted" href="?page=1">1</a>
-      </li>
-      <li class="mx-2 rounded">
-        <a class="border border-0 text-muted" href="?page=2">2</a>
-      </li>
-      <li class="mx-2 rounded">
-        <a class="border border-0 text-muted" href="?page=3">3</a>
-      </li>
-      <li class="mx-2 rounded">
-        <a class="border border-0 text-muted" href="?page=4">4</a>
-      </li>
-    </ul>
+  <div class="container d-flex justify-content-end my-3" style="">
     <a href="{% url 'articles:dog_create' %}" class="hover1 cat-create btn text-center">강아지 글작성</a>
+  </div>
+
+    <div  class="layout container" >
+      <div class="d-flex justify-content-center">
+        <main id="wrap" class="wrap-list">
+          <section class="container">
+            <div role="main" class="contents">
+              <div class="articles-list">
+                {% for dog in category_articles %}
+                  <div class="articles-list-pre ">
+                    <div class="title">
+                      <h3>
+                        <a href="{% url 'articles:dog_detail' dog.pk %}">
+                          {{ dog.title }}
+                        </a>
+                      </h3>
+                      <p>
+                        <a href="{% url 'articles:dog_detail' dog.pk %}">
+                          {{ dog.content |truncatechars:40 |safe }}
+                        </a>
+                      </p>
+                      <p>
+                        <a class="memo" href="">
+                        특이사항: {{ dog.memo }}
+                        </a>
+                      </p>
+                      <span>
+                        <img style="width:150px;margin-top:-200px; margin-left:300px;" class="attach-img" src="{{ dog.image.url }}" alt="">
+                      </span>
+                    </div>
+                    <div class="sub1">
+                      <p>
+                        <a class="sub-content" href="">
+                          #{{ dog.location}} #{{ dog.age }} #{{ dog.gender }} #{{ dog.dog_breed }}
+                        </a>
+                      </p>
+                      <p class="name ">
+                        <a href="{% url 'articles:dog_detail' dog.pk %}">
+                          {{ dog.user.username }}
+                        </a>
+                      </p>
+                      <div class="wrap-info">
+                        <a href="{% url 'articles:dog_detail' dog.pk %}" class="view">
+                          <i class="blind">
+                            <span class="material-symbols-outlined">
+                              visibility
+                            </span>
+                          </i>
+                          {{ dog.hits }}
+                        </a>
+                        <a class="like" href="{% url 'articles:dog_detail' dog.pk %}">
+                          <i class="bi bi-hand-thumbs-up text-black"></i>
+                          {{ dog.like.all | length }}
+                         
+                        </a> 
+                        <span class="text-end">
+                          <a  href="{% url 'articles:dog_detail' dog.pk %}">
+                            {{ dog.created_at | timesince }}
+                          </a>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </section> 
+        </main>
+      </div>
+    </div>
+
+
+    <div  class="layout container" >
+      <div class="d-flex justify-content-center">
+        <main id="wrap" class="wrap-list">
+          <section class="container">
+            <div role="main" class="contents">
+              <div class="articles-list">
+                {% for dog in page_obj %}
+                  <div class="articles-list-pre ">
+                    <div class="title">
+                      <h3>
+                        <a href="{% url 'articles:dog_detail' dog.pk %}">
+                          {{ dog.title |truncatechars:15  }}
+                        </a>
+                      </h3>
+                      <p>
+                        <a href="{% url 'articles:dog_detail' dog.pk %}">
+                          {{ dog.content |truncatechars:20  }}
+                        </a>
+                      </p>
+                      <p>
+                        <a class="memo" href="">
+                        특이사항: {{ dog.memo }}
+                        </a>
+                      </p>
+                      <span>
+                        <img style="width:150px;margin-top:-200px; margin-left:300px;" class="attach-img" src="{{ dog.image.url }}" alt="">
+                      </span>
+                    </div>
+                    <div class="sub1">
+                      <p>
+                        <a class="sub-content" href="">
+                          #{{ dog.location}} #{{ dog.age }} #{{ dog.gender }} #{{ dog.dog_breed }}
+                        </a>
+                      </p>
+                      <p class="name ">
+                        <a href="{% url 'articles:dog_detail' dog.pk %}">
+                          {{ dog.user.username }}
+                        </a>
+                      </p>
+                      <div class="wrap-info">
+                        <a href="{% url 'articles:dog_detail' dog.pk %}" class="view">
+                          <i class="bi bi-eye"></i>
+                          {{ dog.hits }}
+                        </a>
+                        <a class="like" href="{% url 'articles:dog_detail' dog.pk %}">
+                          <i class="bi bi-hand-thumbs-up"></i>
+                          
+                          {{ dog.like.all | length }}
+                        </a>    
+                          <a href="{% url 'articles:dog_detail' dog.pk %}">
+                            {{ dog.created_at | timesince }}전
+                          </a>
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </section> 
+        </main>
+      </div>
+    </div>
+
+  <div class="container text-center my-5">
+        <ul class="pagination d-flex justify-content-center">
+      {% if page_obj.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">이전</a>
+      </li>
+      {% else %}
+      <li class="page-item disabled">
+        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">이전</a>
+      </li>
+      {% endif %}
+      {% for page_number in page_obj.paginator.page_range %}
+        {% if page_number >= page_obj.number|add:-5 and page_number <= page_obj.number|add:5 %}
+          {% if page_number == page_obj.number %}
+            <li class="page-item active" aria-current="page">
+              <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+            </li>
+          {% else %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a></li>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+      {% if page_obj.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.next_page_number }}">다음</a>
+      </li>
+      {% else %}
+      <li class="page-item disabled">
+        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">다음</a>
+      </li>
+      {% endif %}
+    </ul>
   </div>
 
 {% endblock content %}
