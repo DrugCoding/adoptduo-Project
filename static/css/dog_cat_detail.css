@@ -153,3 +153,29 @@
   color: #ffcd00;
   font-family: "Gothic A1", sans-serif;
 }
+
+.article-upd-del  {
+background-color: #ffec83;
+}
+.article-upd-del:hover {
+background-color: #ffcd00;
+font-weight: bold;
+}
+
+.detail-font-title{
+  font-size: 24px;
+  color: black;
+  font-family: 'NanumSquareNeo-Variable';
+}
+
+.detail-font-text{
+font-size: 13px;
+color: black;
+font-family: 'NanumSquareNeo-Variable';
+}
+
+.detail-font-main-text{
+font-size: 15px;
+color: black;
+font-family: 'NanumSquareNeo-Variable';
+}
