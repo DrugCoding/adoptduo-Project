@@ -173,7 +173,7 @@ class DogCommentForm(forms.ModelForm):
         model = DogArticleComment 
         fields = ['content',]
         labels = {
-            "content": "댓글입력",
+            "content": " ",
         }
         widgets = {
             "content": forms.Textarea(attrs={"rows": 1, "cols": 10}),
