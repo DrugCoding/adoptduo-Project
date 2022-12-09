@@ -56,3 +56,12 @@ font-family: 'MICEGothic Bold';
     color:#FFCD00;
     font-family: 'Gothic A1', sans-serif;  
     }
+
+.article-upd-del > a:first-child {
+background-color: #ffec83;
+}
+.article-upd-del > a:first-child:hover {
+background-color: #ffcd00;
+font-weight: bold;
+}
+

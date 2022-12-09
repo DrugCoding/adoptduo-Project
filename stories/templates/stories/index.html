@@ -23,11 +23,9 @@
     </div>
     <hr class="center-hr m-0" style="width:15%;">
     {% if request.user.is_authenticated %}
-      <div>
-        <button class="float-end btn btn-warning my-2">
-          <a href="{% url 'stories:create' %}" style="text-decoration: none; color:black">작성</a>
-        </button>
-      </div>
+    <div class="article-upd-del text-end">
+      <a href="{% url 'stories:create' %}" class="btn detail_btn2 mx-2 my-3">✍️글작성</a>
+    </div>
     {% endif %}
   </div>
   <div class="container">
@@ -61,34 +59,36 @@
     </table>
     <ul class="pagination d-flex justify-content-center">
       {% if stories.has_previous %}
-      <li class="page-item">
-        <a class="page-link" href="?page={{ stories.previous_page_number }}">이전</a>
-      </li>
+        <li class="page-item">
+          <a class="page-link" href="?page={{ stories.previous_page_number }}">이전</a>
+        </li>
       {% else %}
-      <li class="page-item disabled">
-        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">이전</a>
-      </li>
+        <li class="page-item disabled">
+          <a class="page-link" href="#" tabindex="-1" aria-disabled="true">이전</a>
+        </li>
       {% endif %}
       {% for page_number in stories.paginator.page_range %}
-        {% if page_number >= stories.number|add:-5 and page_number <= stories.number|add:5 %}
+      {% if page_number >= stories.number|add:-5 and page_number <= stories.number|add:5 %}
           {% if page_number == stories.number %}
             <li class="page-item active" aria-current="page">
               <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
             </li>
           {% else %}
-            <li class="page-item"><a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a></li>
+            <li class="page-item">
+              <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+            </li>
           {% endif %}
         {% endif %}
       {% endfor %}
       {% if stories.has_next %}
-      <li class="page-item">
-        <a class="page-link" href="?page={{ stories.next_page_number }}">다음</a>
-      </li>
+        <li class="page-item">
+          <a class="page-link" href="?page={{ stories.next_page_number }}">다음</a>
+        </li>
       {% else %}
-      <li class="page-item disabled">
-        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">다음</a>
-      </li>
+        <li class="page-item disabled">
+          <a class="page-link" href="#" tabindex="-1" aria-disabled="true">다음</a>
+        </li>
       {% endif %}
     </ul>
   </div>
-  {% endblock content %}
+{% endblock content %}

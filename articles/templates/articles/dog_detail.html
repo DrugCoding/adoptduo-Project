@@ -68,7 +68,7 @@
       <div id="pet-info-div" class="col-5 py-3">{{ dog_article.content }}</div>
     </div>
   </div>
-  <div class="container text-center">
+  <div class="container">
   {% if request.user == dog_article.user %}
     <a href="{% url 'articles:dog_update' dog_article.pk %}" class="btn btn-primary detail_btn2 mx-2 my-3">글수정</a>
     <a href="{% url 'articles:dog_delete' dog_article.pk %}" class="btn btn-primary detail_btn2 my-3">글삭제</a>
@@ -83,27 +83,44 @@
         <span id="bookmark-count">{{ dog_article.bookmarks.count }}</span>
     </span>
     {% endif %} 
-    <h4 class="mt-5">댓글</h4>
+    <hr>
+    <h4 class="detail-font-text" style="font-size:25px;">댓글
+      {{ dog_comments.count }}</h4>
     <form id="dog-comment-form" data-article-id="{{ dog_article.pk }}">
         {% csrf_token %}
         {% bootstrap_form dog_comment_form %}
-        {% bootstrap_button content="ok" button_type="submit" button_class="btn-danger col-3" %}
+        <div class=" text-end d-flex justify-content-end">
+          <input type="submit" class="article-upd-del btn detail_btn2 mx-2 my-3" value="✍️댓글쓰기">
+        </div>
     </form>
-    <hr>
-    <p>{{ dog_comments.count }}개의 댓글이 있습니다.</p>
+    
+  
     <div id="dog-comments">
       {% for dog_comment in dog_comments %}
       {% csrf_token %}
       <div id="{{dog_comment.pk}}">
-        <p> {{ dog_comment.user.username }} | {{ dog_comment.content }}</p>
-        <button data-comment-id="{{dog_comment.pk}}" onclick="remove(event)">댓글 삭제</button>
+        <p class="ms-2 mt-2 detail-font-text"> {{ dog_comment.user.username }}</p>
+        <div class="detail-font-main-text mx-2">
+          {{ dog_comment.content }}
+        </div>
+        <div class="d-flex justify-content-between">
+          <div>
+            <span class="detail-font-text">
+              <i class="bi bi-clock"></i>
+              {{ dog_comment.created_at|date:"Y.m.d H:i" }}</span>
+          </div>
+
+        <div>
+          <button data-comment-id="{{dog_comment.pk}}" class="btn btn-light" onclick="remove(event)">삭제</button>
+        </div>
         <hr>    
       </div>
-      {% empty %}
-        <p>댓글이 없어요! </p>
+      
       {% endfor %}
     </div>
   </div>
+
+  
 
 
 
