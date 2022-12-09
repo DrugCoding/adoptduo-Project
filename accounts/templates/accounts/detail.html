@@ -88,9 +88,9 @@
           <p class="fw-bold text-center">{{ user.followings.count }}</p>
         </div>
       </div>
-      <button class="btn" style="width: 100%; margin:0 auto;" href="{% url 'accounts:update' %}">
-        프로필 수정
-      </button>
+      <div>
+      <a href="{% url 'accounts:update' %}"><button class="btn" style="width: 100%; margin:0 auto;">프로필 수정</button></a>
+      </div>     
     </div>
   </div>
 </div>
