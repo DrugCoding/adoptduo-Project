@@ -3,6 +3,7 @@
 {% load static %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/dog_cat_detail.css' %}">
+
 <div>
   <div class="cropped d-flex justify-content-center">
     <img class="cropped_img" src="{% static 'images/dog_test_banner.jpg' %}" alt="">
@@ -12,21 +13,59 @@
       <span class="colored_text">함께</span>해 주세요</h1>
   </div>
 
-</div>
-  <div class="container mt-4">
-    <h2>{{ dog_article.title }}</h2>
-    <a href="{% url 'accounts:detail' dog_article.user.pk %}">{{ dog_article.user.username }}</a>
-    {% if request.user.pk != dog_article.user.pk  %}
-    <a href="{% url 'notes:send' dog_article.user.pk %}">{{ dog_article.user.username }}에게 쪽지보내기</a>
-    {% endif %}
+  <div class="container mt-4 text-start">
+    <div class="d-flex">
+      <h2 class="my-auto me-auto">{{ dog_article.title }}</h2>
+
+      <div class="title-info d-flex justify-content-between">
+        <h6 class="my-auto">🐕분류: {{ dog_article.dog_breed }}</h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <h6 class="my-auto">👤작성자: 
+          <a href="{% url 'accounts:detail' dog_article.user.pk %}" class="text-decoration-none text-dark">{{ dog_article.user.username }}</a>
+          {% comment %} 열람자와 작성자가 같지 않을 때만 버튼 활성화 {% endcomment %}
+          <button type="button" 
+          class="btn btn-sm mt-1 p-0" 
+          data-bs-toggle="popover"
+          data-bs-content=
+            {% if request.user.pk != dog_article.user.pk  %}
+            "<a role='button' class='text-decoration-none' href='{% url 'notes:send' dog_article.user.pk %}'>✉️메시지보내기</a><br/>
+            <a role='button' class='text-decoration-none' href='{% url 'notes:send' dog_article.user.pk %}'>👀팔로우하기</a><br/>
+            <a role='button' class='text-decoration-none' href='{% url 'notes:send' dog_article.user.pk %}'>📝추가기능2</a>
+            "
+            {% else %}
+            "✅자기 자신입니다!"
+            {% endif %}
+          data-bs-html="true">➕
+          </button>
+        </h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <h6 class="my-auto">👁️‍🗨️조회수: {{ dog_article.hits }}회</h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <h6 class="my-auto"><span>🔖즐겨찾기 수: 
+          {% if request.user.is_authenticated %} 
+            {% if request.user in dog_article.bookmarks.all %}
+              <i id="bookmark-btn" data-article-id="{{ dog_article.pk }}" class="bi-bookmark-heart-fill"></i>
+            {% else %}
+              <i id="bookmark-btn" data-article-id="{{ dog_article.pk }}" class="bi-bookmark-heart"></i>
+            {% endif %}
+            <span id="bookmark-count">{{ dog_article.bookmarks.count }}</span>
+        </span>
+        {% endif %} </h6>
+      </div>
+    </div>
+
     <hr id="divider">
   </div>
   <div class="container">
+    <div class="article-upd-del text-end">
+      <a href="#" class="btn detail_btn2 mx-2 my-3">🔖즐겨찾기 추가</a>
+      <a href="{% url 'articles:dog_update' dog_article.pk %}" class="btn detail_btn2 mx-2 my-3">✍️글수정</a>
+      <a href="{% url 'articles:dog_delete' dog_article.pk %}" class="btn detail_btn2 mx-2 my-3">🗑️글삭제</a>
+    </div>
     <h2 class="text-center mb-3">입양동물정보</h2>
     <div class="text-center">
-      {% comment %} DB에서 가져와서 이미지 삽입예정 {% endcomment %}
-      {% comment %} <img id="dog-detail-img" class="mb-4 w-25 rounded" src="{{ dog_article.image }}" alt="dog_article.image"> {% endcomment %}
       <img id="pet-detail-img" class="mb-4 w-25 rounded" src="{{ dog_article.image.url }}" alt="dog_article.image">   
+      <div class="d-flex justify-content-center"><p class="text-start w-50">{{ dog_article.content }}</p></div>
     </div>
     <div class="row">
       <div id="pet-info-var-div" class="col-1 text-center py-3">이름</div>
@@ -62,76 +101,53 @@
       <div id="pet-info-div" class="col-5 text-center py-3">{{ dog_article.memo }}</div>
     </div>
   </div>
-  <div class="container text-center mt-4">
-    <div class="row d-flex justify-content-center">
-      <div id="pet-info-var-div" class="col-1 py-3">Content</div>
-      <div id="pet-info-div" class="col-5 py-3">{{ dog_article.content }}</div>
-    </div>
-  </div>
-  <div class="container">
-  {% if request.user == dog_article.user %}
-    <a href="{% url 'articles:dog_update' dog_article.pk %}" class="btn btn-primary detail_btn2 mx-2 my-3">글수정</a>
-    <a href="{% url 'articles:dog_delete' dog_article.pk %}" class="btn btn-primary detail_btn2 my-3">글삭제</a>
-  {% endif %}
-    <span>
+  <div class="container text-center">
+    {% comment %} <span>
       {% if request.user.is_authenticated %} 
-        {% if request.user in dog_article.bookmarks.all %}
-          <i id="bookmark-btn" data-article-id="{{ dog_article.pk }}" class="bi-bookmark-heart-fill fs-1"></i>
+        {% if request.user in cat_article.bookmarks.all %}
+          <i id="bookmark-btn" data-article-id="{{ cat_article.pk }}" class="bi-bookmark-heart-fill fs-1"></i>
         {% else %}
-          <i id="bookmark-btn" data-article-id="{{ dog_article.pk }}" class="bi-bookmark-heart fs-1"></i>
+          <i id="bookmark-btn" data-article-id="{{ cat_article.pk }}" class="bi-bookmark-heart fs-1"></i>
         {% endif %}
-        <span id="bookmark-count">{{ dog_article.bookmarks.count }}</span>
+        <span id="bookmark-count">{{ cat_article.bookmarks.count }}</span>
     </span>
-    {% endif %} 
-    <hr>
-    <h4 class="detail-font-text" style="font-size:25px;">댓글
-      {{ dog_comments.count }}</h4>
-    <form id="dog-comment-form" data-article-id="{{ dog_article.pk }}">
-        {% csrf_token %}
-        {% bootstrap_form dog_comment_form %}
-        <div class=" text-end d-flex justify-content-end">
-          <input type="submit" class="article-upd-del btn detail_btn2 mx-2 my-3" value="✍️댓글쓰기">
-        </div>
-    </form>
-    
-  
-    <div id="dog-comments">
+    {% endif %}  {% endcomment %}
+    <div>
+      <h4 class="mt-5"><span style="color:red">{{ dog_comments.count }}개</span>의 댓글이 있습니다.</h4>
       {% for dog_comment in dog_comments %}
       {% csrf_token %}
-      <div id="{{dog_comment.pk}}">
-        <p class="ms-2 mt-2 detail-font-text"> {{ dog_comment.user.username }}</p>
-        <div class="detail-font-main-text mx-2">
-          {{ dog_comment.content }}
-        </div>
-        <div class="d-flex justify-content-between">
-          <div>
-            <span class="detail-font-text">
-              <i class="bi bi-clock"></i>
-              {{ dog_comment.created_at|date:"Y.m.d H:i" }}</span>
+      <div class="my-4 d-flex" id="{{dog_comment.pk}}">
+        <div class="comment-info flex-fill">
+          <span>{{ dog_comment.user.username }}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;작성일자: {{ dog_comment.created_at }}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;IP: 121.4945</span>
+          <div class="comment-txt mt-3">
+            <span>{{ dog_comment.content }}</span>
           </div>
-
-        <div>
-          <button data-comment-id="{{dog_comment.pk}}" class="btn btn-light" onclick="remove(event)">삭제</button>
         </div>
-        <hr>    
+        <span class="comment-delete mx-5 my-4 align-items-center"><button class="comment-del-btn Nanum" data-comment-id="{{dog_comment.pk}}" onclick="remove(event)">댓글삭제</button></span>
       </div>
       
       {% endfor %}
     </div>
+    <form data-article-id="{{ dog_article.pk }}">
+        {% csrf_token %}
+        {% bootstrap_form dog_comment_form %}
+        {% bootstrap_button content="ok" button_type="submit" button_class="btn-danger col-3" %}
+    </form>
+    <hr>
   </div>
-
-  
-
-
-
-
-
+  <div id="map" style="width:100%;height:350px;"></div>
+  <p><em>지도를 클릭해주세요!</em></p> 
+  <div id="clickLatlng"></div>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e6496a8841e6155cd7af237e16b93602&libraries=services"></script>
 <script
   src="https://code.jquery.com/jquery-3.5.1.min.js"
   integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
   crossorigin="anonymous"></script>
 <script>
+    $(document).ready(function(){ //팝오버 작동하게 하기
+      $('[data-bs-toggle="popover"]').popover();
+    });
     const commentForm = document.querySelector('#dog-comment-form')
     const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     commentForm.addEventListener('submit', function(event){
@@ -200,5 +216,109 @@
             bookmarkCount.innerText = context.data.bookmarkcount
         }) // 돌아오면 어떤걸 하고 싶은가?
     }) 
+    var latlng = JSON.parse("{{ latlngjson|escapejs }}")
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = { 
+        center: new kakao.maps.LatLng(latlng['lat'], latlng['lng']), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
+
+    var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+    // 지도를 클릭한 위치에 표출할 마커입니다
+    var marker = new kakao.maps.Marker({ 
+        // 지도 중심좌표에 마커를 생성합니다 
+        position: map.getCenter() 
+    }); 
+    // 지도에 마커를 표시합니다
+    marker.setMap(map);
+
+    // 지도에 클릭 이벤트를 등록합니다
+    // 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
+    kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
+        
+        // 클릭한 위도, 경도 정보를 가져옵니다 
+        var latlng = mouseEvent.latLng; 
+        
+        // 마커 위치를 클릭한 위치로 옮깁니다
+        marker.setPosition(latlng);
+        
+        var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
+        message += '경도는 ' + latlng.getLng() + ' 입니다';
+        
+        var resultDiv = document.getElementById('clickLatlng'); 
+        resultDiv.innerHTML = message;
+        
+    }); 
+    {% comment %} var latlng = JSON.parse("{{ latlngjson|escapejs }}")
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+        mapOption = {
+            center: new kakao.maps.LatLng(latlng['lat'], latlng['lng']), // 지도의 중심좌표
+            level: 1 // 지도의 확대 레벨
+        };  
+
+    // 지도를 생성합니다    
+    var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+    // 주소-좌표 변환 객체를 생성합니다
+    var geocoder = new kakao.maps.services.Geocoder();
+
+    var marker = new kakao.maps.Marker(), // 클릭한 위치를 표시할 마커입니다
+        infowindow = new kakao.maps.InfoWindow({zindex:1}); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
+    // 현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다
+    searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+
+    // 지도를 클릭했을 때 클릭 위치 좌표에 대한 주소정보를 표시하도록 이벤트를 등록합니다
+    kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
+        searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
+            if (status === kakao.maps.services.Status.OK) {
+                var detailAddr = !!result[0].road_address ? '<div>도로명주소 : ' + result[0].road_address.address_name + '</div>' : '';
+                detailAddr += '<div>지번 주소 : ' + result[0].address.address_name + '</div>';
+                
+                var content = '<div class="bAddr">' +
+                                '<span class="title">법정동 주소정보</span>' + 
+                                detailAddr + 
+                            '</div>';
+
+                // 마커를 클릭한 위치에 표시합니다 
+                marker.setPosition(mouseEvent.latLng);
+                marker.setMap(map);
+
+                // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
+                infowindow.setContent(content);
+                infowindow.open(map, marker);
+            }   
+        });
+    });
+    // 중심 좌표나 확대 수준이 변경됐을 때 지도 중심 좌표에 대한 주소 정보를 표시하도록 이벤트를 등록합니다
+    kakao.maps.event.addListener(map, 'idle', function() {
+      searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+    });
+
+    function searchAddrFromCoords(coords, callback) {
+      // 좌표로 행정동 주소 정보를 요청합니다
+      geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
+    }
+
+    function searchDetailAddrFromCoords(coords, callback) {
+      // 좌표로 법정동 상세 주소 정보를 요청합니다
+      geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+    }
+
+    // 지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수입니다
+    function displayCenterInfo(result, status) {
+      if (status === kakao.maps.services.Status.OK) {
+          var infoDiv = document.getElementById('centerAddr');
+
+          for(var i = 0; i < result.length; i++) {
+              // 행정동의 region_type 값은 'H' 이므로
+              if (result[i].region_type === 'H') {
+                  infoDiv.innerHTML = result[i].address_name;
+                  break;
+              }
+          }
+      }    
+    } {% endcomment %}
+
 </script>
 {% endblock %}

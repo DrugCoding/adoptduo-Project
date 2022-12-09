@@ -43,6 +43,8 @@ class DogArticle(models.Model):
     neutered = models.BooleanField("중성화 했나요?", default=False)
     # 접종 여부
     vaccination = models.BooleanField("예방접종 했나요?", default=False)
+    lat = models.FloatField(null=True)
+    lng = models.FloatField(null=True)
 
 class DogArticleComment(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -86,6 +88,9 @@ class CatArticle(models.Model):
     neutered = models.BooleanField("중성화 했나요?", default=False)
     # 접종 여부
     vaccination = models.BooleanField("예방접종 했나요?", default=False)
+    lat = models.FloatField(null=True)
+    lng = models.FloatField(null=True)
+  
 
 
 class CatArticleComment(models.Model):

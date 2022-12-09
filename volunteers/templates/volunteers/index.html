@@ -35,123 +35,132 @@
           {% endif %}
         {% endfor %}
       </div>
+    </marquee>
+  </div>
+
+    <div class="container my-5">
+      <div class="d-flex justify-content-center mt-5">
+          <h3 class="story-font" >봉사자</h3>
+      </div>
+      <div class="dog-stroke container "></div>
     </div>
-  </marquee>
-</div>
-<!-- 글작성 버튼 -->
-<div class="d-flex container justify-content-end my-3">
-  {% if request.user.is_authenticated %}
-    {% if request.user.volunteer_c == '가능' %}
-      <a href="{% url 'volunteers:create' %}">
-        <button class=" btn btn-outline-warning">글작성</button>
-      </a>
+    <!-- 글작성 버튼 -->
+  <div class=" container  ">
+    {% if request.user.is_authenticated %}
+      {% if request.user.volunteer_c == '가능' %}
+         <div class="container d-flex justify-content-end my-3" style="">
+        <a href="{% url 'volunteers:create' %}" class="hover1 cat-create btn text-center">봉사자 글작성</a>
+         </div>
+      {% else %}
+        <p>이동봉사 지원자만 글을 작성할 수 있습니다</p>
+      {% endif %}
     {% else %}
-      <p>이동봉사 지원자만 글을 작성할 수 있습니다</p>
+      <div class="container d-flex justify-content-end my-3" style="">
+        <a href="{% url 'volunteers:create' %}" class="hover1 cat-create btn text-center">봉사자 글작성</a>
+      </div>
     {% endif %}
-  {% else %}
-    <a href="{% url 'accounts:login' %}">
-      <button class=" btn btn-outline-warning">글작성</button>
-    </a>
-  {% endif %}
-</div>
-
-<div class="layout">
-  <div>
-    <main id="wrap" class="wrap-list">
-      <section class="container">
-        <div role="main" class="contents">
-          <div class="articles-list">
-            {% for vol in v_articles %}
-              <div class="articles-list-pre ">
-                <div class="title">
-                  <h3>
-                    <a href="{% url 'volunteers:detail' vol.pk %}">
-                      {{ vol.title | truncatechars:30 }}
-                    </a>
-                  </h3>
-                  <p>
-                    <a href="{% url 'volunteers:detail' vol.pk %}">
-                      {{ vol.content | safe | truncatechars:80 }}
-                    </a>
-                  </p>
-                </div>
-                <div class="sub">
-                  <span class="text-end area">
-                    <a href="" class="area-font">
-                      #{{ vol.area }}
-                      ~
-                      {{ vol.adopt_location }}
-                    </a>
-                    <a href="" class="adobt-font">
-                      #{{ vol.adopt_date }}
-                    </a>
-                  </span>
-                  <p class="name ">
-                    <a href="{% url 'volunteers:detail' vol.pk %}">
-                      {{ vol.user.username }}
-                    </a>
-                  </p>
-                  <div class="wrap-info">
-                    <a href="{% url 'volunteers:detail' vol.pk %}" class="view">
-                      <i class="blind">
-                        <span class="material-symbols-outlined">
-                          visibility
-                        </span>
-                      </i>
-                      {{ vol.hits }}
-                    </a>
-                    <a class="like" href="{% url 'volunteers:detail' vol.pk %}">
-                      <i class="icon icon-comments_count">
-                        <span class="material-symbols-outlined">
-                          thumb_up
-                        </span>
-                      </i>
-                      {{ vol.like.all | length }}
-                    </a>
-                    <span class="text-end" style="font-size:13px;">
-                      <a href="{% url 'volunteers:detail' vol.pk %}">
-                        {{ vol.created_at | time }}
-                      </a>
-                    </span>
+  </div>
+     <div  class="layout container" >
+      <div class="d-flex justify-content-center">
+        <main id="wrap" class="wrap-list">
+          <section class="container">
+            <div role="main" class="contents">
+              <div class="articles-list">
+                {% for vol in v_articles %}
+                  <div class="articles-list-pre ">
+                    <div class="title">
+                      <h3>
+                        <a href="{% url 'volunteers:detail' vol.pk %}">
+                           {% if vol.image %}
+                            {{ vol.title |truncatechars:15  }}
+                           {% else %}
+                            {{ vol.title |truncatechars:30  }}
+                          {% endif %}
+                        </a>
+                      </h3>
+                      <p>
+                        <a href="{% url 'volunteers:detail' vol.pk %}">
+                          {% if vol.image %}
+                          {{ vol.content |truncatechars:20 }}
+                          {% else %}
+                          {{ vol.content |truncatechars:70 }}
+                          {% endif %}
+                        </a>
+                      </p>
+                      <span>
+                          {% if vol.image %}
+                           <img style="width:180px;margin-top:-200px; margin-left:290px;" class="attach-img" src="{{ vol.image.url }}" alt="">
+                          {% else %}
+                          <img src="" alt="">
+                          {% endif %}
+                      </span>
+                    </div>
+                    <div class="sub1">
+                      <p>
+                        <a class="sub-content" href="">
+                          #{{ vol.area}} #{{ vol.adopt_date }} #{{ vol.area }} ~ {{ vol.adopt_location }}
+                        </a>
+                      </p>
+                      <p class="name ">
+                        <a href="{% url 'volunteers:detail' vol.pk %}">
+                          {{ vol.user.username }}
+                        </a>
+                      </p>
+                      <div class="wrap-info">
+                        <a href="{% url 'volunteers:detail' vol.pk %}" class="view">
+                          <i class="bi bi-eye"></i>
+                          {{ vol.hits }}
+                        </a>
+                        <a class="like" href="{% url 'volunteers:detail' vol.pk %}">
+                          <i class="bi bi-hand-thumbs-up"></i>
+                          
+                          {{ vol.like.all | length }}
+                        </a>    
+                          <a href="{% url 'volunteers:detail' vol.pk %}">
+                            {{ vol.created_at | timesince }}전
+                          </a>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                {% endfor %}
               </div>
-            {% endfor %}
-          </div>
-        </div>
-      </section>
-      <nav aria-label="Page navigation example" class="nav-page mt-5 mb-2">
-
-        <ul class="pagination">
-          <li class="page-item">
-            <a class="page-link text-black-50" href="#" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-          </li>
-          <li class="page-item">
-            <a class="page-link text-black-50" href="#">1</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link text-black-50" href="#">2</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link text-black-50" href="#">3</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link text-black-50" href="#">4</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link text-black-50" href="#">5</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link text-black-50" href="#" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </main>
+            </div>
+          </section> 
+        </main>
+      </div>
+    </div>
+        <nav aria-label="Page navigation example" class="nav-page mt-5 mb-2">
+      
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link text-black-50" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li class="page-item">
+              <a class="page-link text-black-50" href="#">1</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link text-black-50" href="#">2</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link text-black-50" href="#">3</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link text-black-50" href="#">4</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link text-black-50" href="#">5</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link text-black-50" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </main>
+    </div>
   </div>
 </div>
-
 {% endblock content %}

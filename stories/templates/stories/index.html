@@ -6,6 +6,7 @@
 
 {% block content %}
   <link rel="stylesheet" href="{% static 'css/story_index.css' %}">
+  <link rel="stylesheet" href="{% static 'css/story_index1.css' %}">
   <div>
     <div class="cropped d-flex justify-content-center">
       <img class="cropped_img" src="{% static 'images/first_image_4.jpg' %}" alt="">
@@ -17,46 +18,87 @@
           Family</span></h1>
     </div>
   </div>
-  <div class="container">
+  <div class="container my-5">
     <div class="d-flex justify-content-center mt-5">
-      <h1 style="font-family: 'NanumSquareNeo-Variable';">스토리</h1>
+      <h3 class="story-font" >스토리</h3>
     </div>
-    <hr class="center-hr m-0" style="width:15%;">
-    {% if request.user.is_authenticated %}
-    <div class="article-upd-del text-end">
-      <a href="{% url 'stories:create' %}" class="btn detail_btn2 mx-2 my-3">✍️글작성</a>
-    </div>
-    {% endif %}
+    <div class="dog-stroke container "></div>
   </div>
-  <div class="container">
-    <table class="table table-hover" style="border: 1px solid; border-color: #cccccc">
-      <thead class="px-2">
-        <tr>
-          <th scope="col">번호</th>
-          <th scope="col">제목</th>
-          <th scope="col">작성자</th>
-          <th scope="col">날짜</th>
-          <th scope="col">조회</th>
-          <th scope="col">추천</th>
-        </tr>
-      </thead>
-      <tbody class="table-group-divider border-warning">
-        {% for stories in stories %}
-          <tr>
-            <th scope="row">{{ stories.pk }}</th>
-            <td>
-              <a href="{% url 'stories:detail' stories.pk %}" style="text-decoration: none; color:black;">
-                {{ stories.title }}
-              </a>
-            </td>
-            <td>{{ stories.user }}</td>
-            <td>{{ stories.created_at|date:"Y.m.d" }}</td>
-            <td>{{ stories.hits }}</td>
-            <td>{{ stories.like.count }}</td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+      {% if request.user.is_authenticated %}
+      <div class="container d-flex justify-content-end my-3" style="">
+        <a href="{% url 'stories:create' %}" class="hover1 cat-create btn text-center">스토리 글작성</a>
+      </div>
+      {% endif %}
+     <div  class="layout container" >
+      <div class="d-flex justify-content-center">
+        <main id="wrap" class="wrap-list">
+          <section class="container">
+            <div role="main" class="contents">
+              <div class="articles-list">
+                {% for story in stories %}
+                  <div class="articles-list-pre ">
+                    <div class="title">
+                      <h3>
+                        <a href="{% url 'stories:detail' story.pk %}">
+                           {% if story.image %}
+                            {{ story.title |truncatechars:15  }}
+                           {% else %}
+                            {{ story.title |truncatechars:50  }}
+                          {% endif %}
+                        </a>
+                      </h3>
+                      <p class="">
+                        <a href="{% url 'stories:detail' story.pk %}">
+                          {% if story.image %}
+                          {{ story.content |truncatechars:20 }}
+                          {% else %}
+                          {{ story.content |truncatechars:35 }}
+                          {% endif %}
+                        </a>
+                      </p>
+                      <span>
+                          {% if story.image %}
+                           <img style="width:180px;margin-top:-200px; margin-left:290px;" class="attach-img" src="{{ story.image.url }}" alt="">
+                          {% else %}
+                          <img src="" alt="">
+                          {% endif %}
+                      </span>
+                    </div>
+                    <div class="sub1">
+                      <p>
+                        <a class="sub-content" href="">
+                          #{{ story.name}} #{{ story.breed }}
+                        </a>
+                      </p>
+                      <p class="name ">
+                        <a href="{% url 'stories:detail' story.pk %}">
+                          {{ story.user.username }}
+                        </a>
+                      </p>
+                      <div class="wrap-info">
+                        <a href="{% url 'stories:detail' story.pk %}" class="view">
+                          <i class="bi bi-eye"></i>
+                          {{ story.hits }}
+                        </a>
+                        <a class="like" href="{% url 'stories:detail' story.pk %}">
+                          <i class="bi bi-hand-thumbs-up"></i>
+                          
+                          {{ story.like.all | length }}
+                        </a>    
+                          <a href="{% url 'stories:detail' story.pk %}">
+                            {{ story.created_at | timesince }}전
+                          </a>
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </section> 
+        </main>
+      </div>
+    </div>
+
     <ul class="pagination d-flex justify-content-center">
       {% if stories.has_previous %}
         <li class="page-item">
@@ -90,5 +132,4 @@
         </li>
       {% endif %}
     </ul>
-  </div>
 {% endblock content %}
