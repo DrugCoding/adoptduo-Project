@@ -18,26 +18,18 @@ class DogArticleForm(forms.ModelForm):
             "hits",
             "user",
         )
+        
  
-
-
-
-
 
 class CatArticleForm(forms.ModelForm):
     gender_list = [
         ('암컷', '암컷'),
         ('수컷', '수컷'), 
     ]
-    gender = forms.ChoiceField(choices=gender_list, 
+    성별 = forms.ChoiceField(choices=gender_list, 
         widget=forms.RadioSelect(
         ),
     )
-    # title = forms.TextInput(
-    #     widget=forms.TextInput
-    #     attrs={'placeholder': '제목을 입력해주세요',
-    #     }
-    # )
 
     class Meta:
         model = CatArticle
@@ -46,9 +38,58 @@ class CatArticleForm(forms.ModelForm):
             "hits",
             "user",
         )
-        # fields = {
-        #     "title", "cat_breed"
-        # }
+        fields = (
+            "title",
+            "name",
+            "location",
+            "content",
+            "image",
+            "age",
+            "cat_breed",
+            "memo",
+        )
+        labels = {
+            "title": "🗒️게시글",
+            "name": "🏷️이름",
+            "location": "🌏지역",
+            "content": "🖋️게시물 내용",
+            "image": "📷사진",
+            "age": "🔢나이",
+            "cat_breed": "😺묘종",
+            "memo": "📝특이사항",
+        }
+        widgets = {
+            "title": forms.TextInput(
+                attrs={
+                    "class": "hover-control",
+                    "placeholder": "게시글 제목을 입력해주세요.",
+                }),
+            "name": forms.TextInput(
+                attrs={
+                    "class": "hover-control",
+                    "placeholder": "고양이의 이름을 입력해주세요.",
+                }),
+            "location": forms.TextInput(
+                attrs={
+                    "class": "hover-control",
+                    "placeholder": "지역을 입력해주세요.",
+                }),
+            "content": forms.TextInput(
+                attrs={
+                    "class": "hover-control",
+                    "placeholder": "게시물의 내용을 작성해주세요.",
+                }),
+            "age": forms.TextInput(
+                attrs={
+                    "class": "hover-control",
+                    "placeholder": "나이를 입력해주세요.",
+                }),
+            "memo": forms.TextInput(
+                attrs={
+                    "class": "hover-control",
+                    "placeholder": "특이사항을 입력해주세요.",
+                }),
+        }
 
 
 class DogCommentForm(forms.ModelForm):
