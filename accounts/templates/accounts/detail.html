@@ -5,132 +5,150 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/login.css' %}">
 
+<div style="background-color: rgb(247, 247, 247); height:500px;">
+  <div class="container d-flex flex-row justify-content-center py-5">
+    <div class="col-4" style="max-width: 1080px; max-height: 404px; margin-right:4px; background-color: white;">
+      <!-- 프로필 -->
+      <div class="p-3">
+        <!-- 프사 -->
+        <div class="d-flex justify-content-center mb-3">
+          {% if user.image %}
+          <img src="{{ user.image.url }}" style='width: 180px; height: 180px; border-radius: 2rem; object-fit: cover;'
+            alt="">
+          {% else %}
+          <img
+            src="https://cdn.discordapp.com/attachments/1044493548071948309/1049236425708666940/review_default_profile_image.jpg"
+            style='width: 180px; height: 180px; border-radius: 2rem; object-fit: cover;' alt="더미프사">
+          {% endif %}
+        </div>
+        <h4 class="text-center fw-bold my-4">{{ user.name }}님의 프로필</h4>
+        <!-- 팔로잉 팔로워 -->
+        <div class="row mb-3">
+          <div class="col" style="height: 60px;">
+            <p class="mb-1 text-center" style="color: grey">팔로워</p>
+            <p class="fw-bold text-center">{{ user.followers.count }}</p>
+          </div>
+          <div class="col border-start" style="height: 60px;">
+            <p class="mb-1 text-center" style=" color: grey">팔로잉</p>
+            <p class="fw-bold text-center">{{ user.followings.count }}</p>
+          </div>
+        </div>
+        <!-- 버튼 -->
+        <div>
+          {% if request.user != user %}
+          <a href="{% url 'accounts:follow' user.pk %}">
+            {% if request.user in user.followers.all %}
+            <button class="btn" style="width: 100%; margin:0 auto;">팔로우 취소</button>
+            {% else %}
+            <button class="btn" style="width: 100%; margin:0 auto;">팔로우</button>
+            {% endif %}
+          </a>
+          {% else %}
+          <a href="{% url 'accounts:update' %}"><button class="btn" style="width: 100%; margin:0 auto;">프로필
+              수정</button></a>
+          {% endif %}
+        </div>
 
-<!-- 프로필-->
-<!-- <div class="text-center">
-
-  <section class="mx-auto my-5 row d-flex justify-content-center">
-    <div class="col-7">
-      <button class="btn" style="width: 15%;" href="{% url 'accounts:update' %}">
-        수정
-      </button>
-      <button class="btn" style="width: 25%;" href="{% url 'accounts:change_password' %}">비밀번호 수정</button>
-      <button class="btn" style="width: 15%;" href="{% url 'accounts:delete' %}">탈퇴</button>
+      </div>
     </div>
-  </section>
-
-  {% if user.image %}
-  <div class="text-center">
-    <img src="{{ user.image.url }}">
-    {% else %}
-    <img
-      src="https://cdn.discordapp.com/attachments/1044493548071948309/1049236425708666940/review_default_profile_image.jpg">
-    {% endif %}
-    <h1 class="fw-bold my-5">{{ user.name }}님의 프로필</h1>
-    <p>팔로우 : <a href="#">{{ user.followings.count }}명</a> | 팔로워 : <a href="#">{{ user.followers.count }}명</a></p>
-    <p>거주지 : {{ user.area }}</p>
-    <p>이동봉사 : {{ user.volunteer_c }}</p>
-    <p>E-mail : {{ user.email }}</p>
-    <-- 팔로우 버튼-->
-<!-- {% if request.user != user %}
-    <a href="{% url 'accounts:follow' user.pk %}">
-      {% if request.user in user.followers.all %}
-      팔로우 취소
-      {% else %}
-      팔로우
-      {% endif %}
-    </a>
-    {% endif %}
-
-    <h3 class="mt-5">강아지 북마크 누른 글</h3>
-    <p class="text-muted">{{ user.dogarticle_bookmark.count }}개</p>
-    {% for dog_article in user.dogarticle_bookmark.all %}
-    <p>
-      {{ forloop.counter }}
-      <a href="{% url 'articles:dog_detail' dog_article.pk %}">{{ dog_article.title }}</a>
-      <img src="{{ dog_article.image.url }}" class="" alt="dog">
-    </p>
-    {% endfor %}
-
-    <h3 class="mt-3">고양이 북마크 누른 글</h3>
-    <p class="text-muted">{{ user.catarticle_bookmark.count }}개</p>
-    {% for cat_article in user.catarticle_bookmark.all %}
-    <p>
-      {{ forloop.counter }}
-      <a href="{% url 'articles:cat_detail' cat_article.pk %}">{{ cat_article.title }}</a>
-      <img src="{{ cat_article.image.url }}" class="" alt="dog">
-    </p>
-    {% endfor %} -->
-
-
-<div style="background-color: rgb(247, 247, 247); height:500px; padding: 40px 0">
-  <div class="detail-grid" style="max-width: 1080px; max-height: 400px; background-color: white;">
-    <div class="m-3 p-3">
-      <div class="d-flex justify-content-center mb-3">
-        {% if user.image %}
-        <img src="{{ user.image.url }}" style='width: 180px; height: 180px; border-radius: 2rem; object-fit: cover;'
-          alt="">
-        {% else %}
-        <img
-          src="https://cdn.discordapp.com/attachments/1044493548071948309/1049236425708666940/review_default_profile_image.jpg"
-          style='width: 180px; height: 180px; border-radius: 2rem; object-fit: cover;' alt="더미프사">
-        {% endif %}
-      </div>
-      <h4 class="text-center fw-bold my-4">
-        {{ user.name }}님의 프로필</h4>
-      <div class="row mb-3">
-        <div class="col" style="height: 60px;">
-          <p class="mb-1 text-center" style="color: grey">팔로워</p>
-          <p class="fw-bold text-center">{{ user.followers.count }}</p>
+    <div class="col-9">
+      <section class="d-flex flex-column" style="gap: 4px">
+        <div class="d-flex d-grid" style="width: 100%; height: 100%; gap: 4px;">
+          <div style="width:320px; height:200px; background-color: white; padding:30px 30px;">
+            <p class="m-0">거주지</p>
+            <p class="m-0" style="font-size: 20px; color:#d7ac00; font-weight: 600;">
+              {{ user.area }}
+            </p>
+          </div>
+          <div style="width:320px; height:200px; background-color: white; padding:30px 30px;">
+            <p class="m-0">이동봉사
+            </p>
+            <p class="m-0" style="font-size: 20px; color:#d7ac00; font-weight: 600;">
+              {{ user.volunteer_c }}
+            </p>
+          </div>
+          <div style="width:320px; height:200px; background-color: white; padding:30px 30px;">
+            <p class="m-0">이메일</p>
+            <p class="m-0" style="font-size: 20px; color:#d7ac00; font-weight: 600;">
+              {{ user.email }}
+          </div>
         </div>
-        <div class="col border-start" style="height: 60px;">
-          <p class="mb-1 text-center" style=" color: grey">팔로잉</p>
-          <p class="fw-bold text-center">{{ user.followings.count }}</p>
+        <div class="d-flex d-grid" style="width: 100%; height: 100%; gap: 4px;">
+          <div class="d-flex flex-column"
+            style="width:482px; height:200PX; background-color: white; padding: 30px 30px;">
+            <p class="m-0">작성글</p>
+            {% if user.article_set %}
+            <p class="m-0" style="font-size: 22px; color:#d7ac00; font-weight: 600;">
+              {{ user.article_set.count }}
+              <span style="font-size: 1rem;">개</span>
+            </p>
+            {% else %}
+            <p class="m-0" style="font-size: 22px; color:#d7ac00; font-weight: 600;">
+              0<span style="font-size: 1rem;">개</span>
+            </p>
+            {% endif %}
+          </div>
+          <div class="d-flex flex-column"
+            style="width:482px; height:200PX; background-color: white; padding: 30px 30px;">
+            <p class="m-0">작성댓글</p>
+            {% if user.comment_set %}
+            <p class="m-0" style="font-size: 22px; color:#d7ac00; font-weight: 600;">
+              {{ user.comment_set.count }}
+              <span style="font-size: 1rem;">개</span>
+            </p>
+            {% else %}
+            <p class="m-0" style="font-size: 22px; color:#d7ac00; font-weight: 600;">
+              0<span style="font-size: 1rem;">개</span>
+            </p>
+            {% endif %}
+          </div>
         </div>
-      </div>
+      </section>
+    </div>
+  </div>
+
+
+</div>
+
+{% if request.user != user %}
+<div></div>
+
+{% else %}
+<div class="d-flex flex-column justify-content-center align-items-center my-5">
+  <div class="d-flex flex-column justify-content-center align-items-center my-5">
+    <h4 class="fw-bold">🐶 북마크한 강아지 글 🐶</h4>
+    <div class="mt-3">
+      {% for dog_article in user.dogarticle_bookmark.all %}
       <div>
-      <a href="{% url 'accounts:update' %}"><button class="btn" style="width: 100%; margin:0 auto;">프로필 수정</button></a>
-      </div>     
+        <!-- {{ forloop.counter }} -->
+        <a class="text-decoration-none" href="{% url 'articles:dog_detail' dog_article.pk %}">
+          <div class="card d-flex flex-row align-items-center">
+            <div class="card-body">
+              <div class="d-flex flex-column" style="width: 400px;">
+                <h5 class="card-text fw-bold text-black">{{ dog_article.title }}</h5>
+                <div class="card-text m-3 text-black">{{ dog_article.content }}</div>
+              </div>
+            </div>
+            <img src="{{ dog_article.image.url }}" class="card-body" style="width: 200px; height: 200px;" alt="dog">
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="d-flex flex-column justify-content-center align-items-center my-5">
+    <h4 class="fw-bold">😺 북마크한 고양이 글 😺</h4>
+    <div>
+      {% for cat_article in user.catarticle_bookmark.all %}
+      <p>
+        {{ forloop.counter }}
+        <a href="{% url 'articles:cat_detail' cat_article.pk %}">{{ cat_article.title }}</a>
+        <img src="{{ cat_article.image.url }}" class="" alt="dog">
+      </p>
+      {% endfor %}
     </div>
   </div>
 </div>
-
-<section class="d-flex flex-column" style="gap: 4px">
-  <div class="d-flex d-grid" style="width: 100%; height: 200px; gap: 4px;">
-    <div style="width:212px; height:200px; background-color: white; padding: 26px 0 30px 30px;">
-      <p class="m-0">거주지</p>
-      <p class="m-0" style="font-size: 20px; color:#d7ac00; font-weight: 600;">
-        {{ user.area }}
-      </p>
-    </div>
-    <div style="width:212px; height:200px; background-color: white; padding: 26px 0 30px 30px;">
-      <p class="m-0">이동봉사
-      </p>
-      <p class="m-0" style="font-size: 20px; color:#d7ac00; font-weight: 600;">
-        {{ user.volunteer_c }}
-      </p>
-    </div>
-    <div style="width:212px; height:200px; background-color: white; padding: 26px 0 30px 30px;">
-      <p class="m-0">이메일</p>
-      <p class="m-0" style="font-size: 20px; color:#d7ac00; font-weight: 600;">
-        {{ user.email }}
-    </div>
-  </div>
-  <div class="d-flex d-grid" style="width: 100%; height: 100%; gap: 4px;">
-    <div class="d-flex flex-column justify-content-center"
-      style="width:50%; height:100%; background-color: white; padding: 20px 30px;">
-      <p class="m-0">작성글</p>
-
-    </div>
-    <div class="d-flex flex-column justify-content-center"
-      style="width:50%; height:100%; background-color: white; padding: 20px 30px;">
-      <p class="m-0">작성댓글</p>
-
-    </div>
-  </div>
-</section>
-</div>
-</div>
-
+{% endif %}
 
 {% endblock content %}

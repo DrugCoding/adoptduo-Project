@@ -1,16 +1,15 @@
 .form-label {
+    margin-top: 1rem;
     font-size: larger;
     font-weight: bold;
 }
 
 .form-control {
-    margin-bottom: 2rem;
     border-style: solid;
     border-color: darkgrey;
     border-width: 2px;
     border-radius: 1rem;
     height: 3rem;
-    align-items: middle;
 }
 
 .form-select {
@@ -21,11 +20,31 @@
     height: 3rem;
 }
 
-.form-file {
+.btn {
+    font-size: larger;
+    font-weight: bold;
+    margin: 1rem auto;
+    min-width: 30%;
+    background-color: #FFCD00;
+    color: black;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #d7ac00;
+    border-radius: 3rem;
     height: 3rem;
 }
 
-.btn {
+.btn:hover {
+    background-color: white;
+    color: #d7ac00 !important;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #d7ac00;
+    border-radius: 3rem;
+    height: 3rem;
+}
+
+.btn-yellow {
     font-size: larger;
     font-weight: bold;
     margin: 1rem auto;
@@ -39,9 +58,23 @@
     height: 3rem;
 }
 
-.btn:hover {
+.btn-white {
+    font-size: larger;
+    font-weight: bold;
+    margin: 1rem auto;
+    min-width: 20%;
     background-color: white;
-    color: #d7ac00 !important;
+    color: #d7ac00;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #d7ac00;
+    border-radius: 3rem;
+    height: 3rem;
+}
+
+.btn-white:hover {
+    background-color: #FFCD00;
+    color: black;
     border-style: solid;
     border-width: 2px;
     border-color: #d7ac00;

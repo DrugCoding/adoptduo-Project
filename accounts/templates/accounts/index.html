@@ -3,24 +3,42 @@
 {% load static %}
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/account_index.css' %}">
-<h1 class="text-center my-5 fw-bold">회원목록</h1>
-{% for account in accounts %}
-<p class="text-center">{{ account.username }} | {{ account.name }} | {{ account.area }} | {{ account.volunteer_c }}</p>
-{% endfor %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+
 {% if request.user.is_authenticated %}
-<li class="my-navitem">
-  <a href="{% url 'accounts:detail' request.user.pk %}">MyPage</a>
-</li>
-<li class="my-navitem">
-  <a href="{% url 'accounts:logout' %}">LogOut</a>
-</li>
+
+<h1 class="text-center fw-bold mt-5">내 계정</h1>
+{% for account in accounts %}
+<h5 class="text-center fw-bold my-4">
+  {{ account.username }} | {{ account.name }} | {{ account.area }} | {{ account.volunteer_c }}
+</h5>
+{% endfor %}
+
+<div class="text-center mb-5">
+  <a href="{% url 'accounts:detail' request.user.pk %}"><button class="btn" style="width: 15%;">
+      마이 페이지
+    </button></a>
+
+  <a href="{% url 'accounts:logout' %}"><button class="btn" style="width: 15%;">
+      로그아웃
+    </button></a>
+</div>
+
+
 {% else %}
-<li class="my-navitem">
-  <a href="{% url 'accounts:signup' %}">SignUp</a>
-</li>
-<li class="my-navitem">
-  <a href="{% url 'accounts:login' %}">LogIn</a>
-</li>
+
+<h1 class="text-center my-5 fw-bold mt-5">🐾 탈퇴 완료되었습니다 🐾</h1>
+<h5 class="text-center fw-bold">입양해듀오를 이용해주셔서 감사합니다.</h5>
+<div class="text-center mb-5">
+  <a href="{% url 'accounts:signup' %}"><button class="btn" style="width: 15%;">
+      회원가입
+    </button></a>
+
+  <a href="{% url 'accounts:login' %}"><button class="btn" style="width: 15%;">
+      로그인
+    </button></a>
+</div>
+
+
 {% endif %}
 {% endblock content %}
