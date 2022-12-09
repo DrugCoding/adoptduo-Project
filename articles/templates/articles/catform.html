@@ -1,19 +1,27 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
-
+{% load static %}
 {% block content %}
-
-  {% comment %} {% if request.resolver_match.url_name == 'create' %} {% endcomment %}
+  <link rel="stylesheet" href="{% static 'css/dog_cat_form.css' %}">
+  <div class="container my-5 rounded">
+    <h1 class="text-center my-5 mx-auto fw-bold">고양이 글 작성</h1>
+    <form action="" method="POST" enctype="multipart/form-data" style="width:40%; margin:0 auto">
+      {% csrf_token %}
+      {% bootstrap_form cat_article_form %}
+      {% bootstrap_button button_type="submit" button_class="detail_btn btn-lg container mt-3" content="작성완료"%}
+    </form>
+  </div>
+  {% comment %} {% if request.resolver_match.url_name == 'create' %}
     <!--resolver_match = 어떤 url을 통해서 왔는지 검사하는 인스턴스, 따라서 create url로 왔는지 여부를 검사 -->
     <p class="text-center fw-bold mb-3" style="color: white; font-family: 'Jost', sans-serif; font-size:70px;">Put Yours</p>
-  {% comment %} {% else %} {% endcomment %}
+
     <p class="text-center fw-bold mb-3" style="color: white; font-family: 'Jost', sans-serif; font-size:70px;">Update Yours</p>
-  {% comment %} {% endif %} {% endcomment %}
+
   <div class="d-flex justify-content-center align-items-center m-auto mt-5">
     <form action="" method="POST" enctype="multipart/form-data">
       {% csrf_token %}
       {% bootstrap_form cat_article_form %}
       {% bootstrap_button button_type="submit" button_class="detail_btn w-100" content="OK"%}
     </form>
-  </div>
+  </div> {% endcomment %}
 {% endblock %}
