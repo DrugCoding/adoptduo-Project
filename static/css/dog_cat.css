@@ -2,11 +2,13 @@ a {
   text-decoration: none;
   padding: 10px;
 }
+
 .pet-banner-div {
   position: relative;
   height: 300px;
   overflow: hidden;
 }
+
 .pet-banner-img {
   position: absolute;
   object-fit: fill;
@@ -15,6 +17,7 @@ a {
   filter: brightness(50%);
   top: -80px;
 }
+
 .pet-banner-text {
   position: absolute;
   top: 39%;
@@ -22,23 +25,29 @@ a {
   filter: brightness(100%);
   color: white;
 }
+
 .pet-banner-text_2 {
   position: absolute;
   top: 73%;
   right: 38%;
   color: white;
 }
+
 .banner-logo {
   position: absolute;
   left: 32%;
 }
+
 .hover1:hover {
   box-shadow: 200px 0 0 0 #ffcd00 inset;
 }
 
 .cat-create {
   background-color: #fff08b;
+  display: flex;
+  margin-right: 6.5%;
 }
+
 h3.cat-font {
   margin-top: 20px;
   margin-bottom: 30px;
@@ -47,6 +56,7 @@ h3.cat-font {
   font-weight: 800;
   font-family: "NanumSquareNeo-Variable";
 }
+
 .cat-stroke {
   display: flex;
   margin-top: -20px;
@@ -58,13 +68,33 @@ h3.cat-font {
   font-family: "NanumSquareNeo-Variable";
 }
 
+.dog-stroke {
+  display: flex;
+  margin-top: -20px;
+  background-color: #ffcd00;
+  border: 1px solid #ffcd00;
+  width: 70px;
+}
+
+
+.dog-font {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-size: 35px;
+  font-weight: 800;
+  font-family: "NanumSquareNeo-Variable";
+}
+
 #puppy-ul {
   list-style: none;
   margin: 0;
   padding: 0;
+  display: flex;
+  justify-content: center;
 }
 
-#puppy-ul > li {
+#puppy-ul>li {
   margin: 0 0 0 4px;
   padding: 0 0 0 0;
   border: 0;
@@ -100,7 +130,8 @@ h3.cat-font {
 
 .cropped {
   position: relative;
-
+  height: 500px;
+  overflow: hidden;
   height: 500px;
   overflow: hidden;
 }

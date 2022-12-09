@@ -17,6 +17,8 @@ class DogArticleForm(forms.ModelForm):
             "bookmarks",
             "hits",
             "user",
+            "lat",
+            "lng",
         )
         fields = (
             "title",
@@ -99,6 +101,8 @@ class CatArticleForm(forms.ModelForm):
             "bookmarks",
             "hits",
             "user",
+            "lat",
+            "lng",
         )
         fields = (
             "title",
