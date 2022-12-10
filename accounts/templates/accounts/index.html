@@ -7,7 +7,7 @@
 
 {% if request.user.is_authenticated %}
 
-<h1 class="text-center fw-bold mt-5">내 계정</h1>
+<h1 class="text-center fw-bold mt-5" style="font-family: 'NanumSquareNeo-Variable';">내 계정</h1>
 {% for account in accounts %}
 <h5 class="text-center fw-bold my-4">
   {{ account.username }} | {{ account.name }} | {{ account.area }} | {{ account.volunteer_c }}
@@ -27,8 +27,8 @@
 
 {% else %}
 
-<h1 class="text-center my-5 fw-bold mt-5">🐾 탈퇴 완료되었습니다 🐾</h1>
-<h5 class="text-center fw-bold">입양해듀오를 이용해주셔서 감사합니다.</h5>
+<h1 class="text-center my-5 fw-bold mt-5" style="font-family: 'NanumSquareNeo-Variable';">🐾 탈퇴 완료되었습니다 🐾</h1>
+<h5 class="text-center fw-bold" style="font-family: 'NanumSquareNeo-Variable';">입양해듀오를 이용해주셔서 감사합니다.</h5>
 <div class="text-center mb-5">
   <a href="{% url 'accounts:signup' %}"><button class="btn" style="width: 15%;">
       회원가입
