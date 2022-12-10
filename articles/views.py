@@ -347,14 +347,20 @@ def cat_bookmark(request, cat_article_pk):
 
 
 def cat_category(request, cat_category_pk):
-    category = CatCategory.objects.get(pk=cat_category_pk)
+    try:
+        category = CatCategory.objects.get(pk=cat_category_pk)
+    except CatCategory.DoesNotExist:
+        category = None
     category_articles = CatArticle.objects.filter(cat_breed=category)
     context = {"category": category, "category_articles": category_articles}
     return render(request, "articles/cat.html", context)
 
 
 def dog_category(request, dog_category_pk):
-    category = DogCategory.objects.get(pk=dog_category_pk)
+    try:
+        category = DogCategory.objects.get(pk=dog_category_pk)
+    except DogCategory.DoesNotExist:
+        category = None
     category_articles = DogArticle.objects.filter(dog_breed=category)
     context = {"category": category, "category_articles": category_articles}
     return render(request, "articles/dog.html", context)
