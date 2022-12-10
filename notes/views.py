@@ -17,6 +17,17 @@ def index(request):
 
     return render(request, "notes/index.html", context)
 
+def index2(request):
+    notes = request.user.user_to.order_by("-created_at") #사용자의 받은쪽지들을 최신순으로 
+    to_notes = request.user.user_from.order_by("-created_at") # 사용자의 보낸쪽지들 최신순으로
+    context = {
+        "notes": notes,
+        "to_notes": to_notes
+    }
+
+    return render(request, "notes/index2.html", context)
+
+
 
 def send(request, pk): # 보내는 로직
     to_user = get_user_model().objects.get(pk=pk)
