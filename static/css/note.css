@@ -1,0 +1,81 @@
+.cropped {
+    position: relative;
+
+    height: 500px;
+    overflow: hidden;
+
+
+}
+
+.cropped_img {
+    position: absolute;
+
+    left: 100;
+    width: 100%;
+    height: 1280px;
+    top: -500px;
+    filter: brightness(50%)
+}
+
+.main_image_text {
+    position: absolute;
+    top: 39%;
+    right: 5%;
+    filter: brightness(100%);
+    color: white;
+    font-family: 'Gothic A1', sans-serif;
+}
+
+.main_image_text_2 {
+    position: absolute;
+    top: 51%;
+    right: 5%;
+    font-family: 'Gothic A1', sans-serif;
+    color: white;
+}
+
+.colored_text {
+    color: #FFCD00;
+    font-family: 'Gothic A1', sans-serif;
+}
+
+.detail-font-title{
+    font-size: 24px;
+    color: black;
+    font-family: 'NanumSquareNeo-Variable';
+  }
+
+.detail-font-text{
+font-size: 13px;
+color: black;
+font-family: 'NanumSquareNeo-Variable';
+}
+
+.detail-font-main-text{
+font-size: 15px;
+color: black;
+font-family: 'NanumSquareNeo-Variable';
+}
+
+
+.article-upd-del > a:first-child {
+background-color: #b3dfb1;
+}
+.article-upd-del > a:first-child:hover {
+background-color: #85c18b;
+font-weight: bold;
+}
+.article-upd-del > a:nth-child(2) {
+background-color: #ffec83;
+}
+.article-upd-del > a:nth-child(2):hover {
+background-color: #ffcd00;
+font-weight: bold;
+}
+.article-upd-del > a:nth-child(3) {
+background-color: #ff9899;
+}
+.article-upd-del > a:nth-child(3):hover {
+background-color: #ff4c4f;
+font-weight: bold;
+}
