@@ -1,6 +1,6 @@
 from distutils.text_file import TextFile
 from random import choices
-from imagekit.models import ProcessedImageField
+from imagekit.models import ProcessedImageField, ImageSpecField
 from imagekit.processors import ResizeToFill
 from multiselectfield import MultiSelectField
 from django.db import models
@@ -12,12 +12,16 @@ class Stories(models.Model):
     # 반려동물 이름
     name = models.CharField(max_length=20)
     content = models.TextField()
-    image = ProcessedImageField(
-        blank=True,
-        processors=[ResizeToFill(900, 600)],
-        format="JPEG",
-        options={"quality": 80},
-    )
+    # image = ProcessedImageField(
+    #     blank=True,
+    #     processors=[ResizeToFill(900, 600)],
+    #     format="JPEG",
+    #     options={"quality": 80},
+    # )
+    # image_thumbnail = ImageSpecField(source='image',
+    #                             processors=[ResizeToFill(200, 200)],
+    #                             format='JPEG',
+    #                             options={'quality': 60})
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     # 좋아요
@@ -36,3 +40,15 @@ class StoryComment(models.Model):
     content = models.TextField()
     like = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='comment_like')
     stories = models.ForeignKey(Stories, on_delete=models.CASCADE)
+
+
+class Image(models.Model):
+    articles = models.ForeignKey(Stories, on_delete=models.CASCADE, related_name='stories_image')
+    image = ProcessedImageField(blank=True,
+                                processors=[ResizeToFill(1200, 960)],
+                                format='JPEG',
+                                options={'quality': 80})
+    image_thumbnail = ImageSpecField(source='image',
+                                processors=[ResizeToFill(200, 200)],
+                                format='JPEG',
+                                options={'quality': 60})

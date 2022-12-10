@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Stories, StoryComment
-from .forms import StoriesForm, Stories_CommentForm
+from .models import Stories, StoryComment, Image
+from .forms import StoriesForm, Stories_CommentForm, ImageForm
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.core.paginator import Paginator
@@ -9,11 +9,14 @@ from django.core.paginator import Paginator
 
 def index(request):
     stories = Stories.objects.order_by("-created_at")
+    image = Image.objects.order_by("-pk")
     page = request.GET.get('page', '1')
     paginator = Paginator(stories, 10)
     page_obj = paginator.get_page(page)
     context = {
         "stories": page_obj,
+        "story": stories,
+        "image":image
     }
     return render(request, "stories/index.html", context)
 
@@ -21,10 +24,18 @@ def index(request):
 def create(request):
     if request.method == "POST":
         form = StoriesForm(request.POST, request.FILES)
-        if form.is_valid():
+        image_form = ImageForm(request.POST, request.FILES)
+        images = request.FILES.getlist('image')
+        if form.is_valid() and image_form.is_valid():
             stories = form.save(commit=False)
-            stories.user = request.user
-            stories.save()
+            stories.user = request.user 
+            if len(images):
+                for image in images:
+                    image_instance = Image(articles=stories, image=image)
+                    stories.save()
+                    image_instance.save()
+            else:
+                stories.save()
             return redirect("stories:index")
     else:
         form = StoriesForm()
