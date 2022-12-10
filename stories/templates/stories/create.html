@@ -15,6 +15,7 @@
       <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {% bootstrap_form form %}
+        <input type="file" name="image" style="cursor:pointer;" multiple >
         <input type="submit" class="btn btn-warning" value="글쓰기">
         <a href="{% url 'stories:index' %}" class="btn btn-warning">뒤로</a>
       </form>
