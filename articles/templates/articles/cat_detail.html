@@ -30,17 +30,30 @@
           title="" 
           data-bs-content=
           {% if request.user.pk != cat_article.user.pk  %}
-          "<a href='#' role='button' class='text-decoration-none' href='{% url 'notes:send' cat_article.user.pk %}'>✉️메시지보내기</a><br/>"
+
+            "<a role='button' class='text-decoration-none' href='{% url 'notes:send' cat_article.user.pk %}'>✉️메시지보내기</a><br/>
+
+            {% if request.user != cat_article.user %}
+              {% if request.user in cat_article.user.followers.all %}
+              <a role='button' class='text-decoration-none' href='{% url 'accounts:follow' cat_article.user.pk %}'>🖐️팔로우취소</a><br/>
+              {% else %}
+              <a role='button' class='text-decoration-none' href='{% url 'accounts:follow' cat_article.user.pk %}'>👀팔로우하기</a><br/>
+              {% endif %}
+            {% endif %}"
+
           {% else %}
-          "👤자기자신입니다!"
-          data-bs-html="true"
-          {% endif %}>➕</button>
+            "✅자기자신입니다!"
+          {% endif %}➕
+          data-bs-html="true">➕
+          </button>
         </h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
         <h6 class="my-auto">👁️‍🗨️조회수: {{ cat_article.hits }}회</h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
         <h6 class="my-auto"><span>🔖즐겨찾기 수: 
-          {% if request.user.is_authenticated %} 
+          <span id="bookmark-count">{{ cat_article.bookmarks.count }}</span>
+        </span></h6>
+          {% comment %} {% if request.user.is_authenticated %} 
             {% if request.user in cat_article.bookmarks.all %}
               <i id="bookmark-btn" data-article-id="{{ cat_article.pk }}" class="bi-bookmark-heart-fill"></i>
             {% else %}
@@ -48,7 +61,7 @@
             {% endif %}
             <span id="bookmark-count">{{ cat_article.bookmarks.count }}</span>
         </span>
-        {% endif %} </h6>
+        {% endif %} </h6> {% endcomment %}
       </div>
     </div>
 
@@ -56,16 +69,26 @@
   </div>
   <div class="container">
     <div class="article-upd-del text-end">
-      <a href="#" class="btn detail_btn2 mx-2 my-3">🔖즐겨찾기 추가</a>
-      <a href="{% url 'articles:cat_update' cat_article.pk %}" class="btn detail_btn2 mx-2 my-3">✍️글수정</a>
-      <a href="{% url 'articles:cat_delete' cat_article.pk %}" class="btn detail_btn2 mx-2 my-3">🗑️글삭제</a>
+      {% if request.user.is_authenticated %}
+        {% if request.user in cat_article.bookmarks.all %}
+          <a data-article-id="{{ cat_article.pk }}" id="bookmark-btn" class="btn detail_btn2 mx-2 my-3">✅즐겨찾기 완료</a>
+        {% else %}
+          <a data-article-id="{{ cat_article.pk }}" id="bookmark-btn" class="btn detail_btn2 mx-2 my-3">🔖즐겨찾기 추가</a>
+        {% endif %}
+      {% endif %}
+
+      {% if request.user.pk == cat_article.user.pk  %}
+        <a href="{% url 'articles:cat_update' cat_article.pk %}" class="btn detail_btn2 mx-2 my-3">✍️글수정</a>
+        <a href="{% url 'articles:cat_delete' cat_article.pk %}" class="btn detail_btn2 mx-2 my-3">🗑️글삭제</a>
+      {% endif %}
+
     </div>
     <h2 class="text-center mb-3">입양동물정보</h2>
     <div class="text-center">
       {% comment %} DB에서 가져와서 이미지 삽입예정 {% endcomment %}
       {% comment %} <img id="cat-detail-img" class="mb-4 w-25 rounded" src="{{ cat_article.image }}" alt="cat_article.image"> {% endcomment %}
       <img id="pet-detail-img" class="mb-4 w-25 rounded" src="{{ cat_article.image.url }}" alt="cat_article.image">   
-      <div class="d-flex justify-content-center"><p class="text-start w-50">lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem {{ cat_article.content }}</p></div>
+      <div class="d-flex justify-content-center"><p class="text-center w-50">{{ cat_article.content }}</p></div>
     </div>
     
     <div class="row">
@@ -115,12 +138,12 @@
       {% csrf_token %}
       <div class="my-4 d-flex" id="{{cat_comment.pk}}">
         <div class="comment-info flex-fill">
-          <span>{{ cat_comment.user.username }}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;작성일자: {{ cat_comment.created_at }}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;IP: 121.4945</span>
+          <span>{{ cat_comment.user.username }}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;작성일자: {{ cat_comment.created_at }}</span>
           <div class="comment-txt mt-3">
             <span>{{ cat_comment.content }}</span>
           </div>
         </div>
-        <span class="comment-delete mx-5 my-4 align-items-center"><button class="comment-del-btn Nanum" data-comment-id="{{cat_comment.pk}}" onclick="remove(event)">댓글삭제</button></span>
+        <span class="comment-delete mx-auto my-auto align-items-center"><button class="comment-del-btn Nanum" data-comment-id="{{cat_comment.pk}}" onclick="remove(event)">댓글삭제</button></span>
       </div>
       {% empty %}
         <p>댓글이 없어요! </p>
@@ -129,9 +152,8 @@
     <form id="cat-comment-form" data-article-id="{{ cat_article.pk }}">
         {% csrf_token %}
         {% bootstrap_form cat_comment_form %}
-        {% bootstrap_button content="ok" button_type="submit" button_class="btn-danger col-3" %}
+        {% bootstrap_button content="댓글작성" button_type="submit" button_class="comment-post-btn col-3" %}
     </form>
-    <hr>
   </div>
   <div id="map" style="width:100%;height:350px;"></div>
   <p><em>지도를 클릭해주세요!</em></p> 
@@ -205,12 +227,17 @@
         .then(context => {
             console.log(context)
             console.log(context.data)
+            const btnElement = document.getElementById('bookmark-btn')
             if (context.data.isbookmarked === true) {
-              event.target.classList.add('bi-bookmark-heart-fill')
-              event.target.classList.remove('bi-bookmark-heart')
+              btnElement.innerText = '✅즐겨찾기 완료'
+              //event.target.classList.add('bi-bookmark-heart-fill')
+              //event.target.classList.remove('bi-bookmark-heart')
+              //var bookmark = document.getElementById("bookmark-add");
             } else {
-              event.target.classList.add('bi-bookmark-heart')
-              event.target.classList.remove('bi-bookmark-heart-fill')
+              btnElement.innerText = '🔖즐겨찾기 추가'
+              //event.target.classList.add('bi-bookmark-heart')
+              //event.target.classList.remove('bi-bookmark-heart-fill')
+              //var bookmark = document.getElementById("bookmark-done");
             }
             const bookmarkCount = document.querySelector('#bookmark-count')
             bookmarkCount.innerText = context.data.bookmarkcount

@@ -73,7 +73,7 @@
   background-color: #ff9899;
   border-radius: 10px;
   width: 100px;
-  height: 50px;
+  height: 100px;
 }
 .comment-del-btn:hover {
   box-shadow: 200px 0 0 0 #ff4c4f inset;
@@ -154,28 +154,32 @@
   font-family: "Gothic A1", sans-serif;
 }
 
-.article-upd-del  {
-background-color: #ffec83;
-}
-.article-upd-del:hover {
-background-color: #ffcd00;
-font-weight: bold;
+.btn-hover:hover {
+  background-color: #ffcd00;
+  font-weight: bold;
 }
 
-.detail-font-title{
+.detail-font-title {
   font-size: 24px;
   color: black;
-  font-family: 'NanumSquareNeo-Variable';
+  font-family: "NanumSquareNeo-Variable";
 }
 
-.detail-font-text{
-font-size: 13px;
-color: black;
-font-family: 'NanumSquareNeo-Variable';
+.detail-font-text {
+  font-size: 13px;
+  color: black;
+  font-family: "NanumSquareNeo-Variable";
 }
 
-.detail-font-main-text{
-font-size: 15px;
-color: black;
-font-family: 'NanumSquareNeo-Variable';
+.detail-font-main-text {
+  font-size: 15px;
+  color: black;
+  font-family: "NanumSquareNeo-Variable";
+}
+.comment-post-btn {
+  background-color: #ffec83;
+}
+.comment-post-btn:hover {
+  background-color: #ffcd00;
+  font-weight: bold;
 }
