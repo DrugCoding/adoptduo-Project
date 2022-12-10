@@ -1,3 +1,18 @@
+@font-face {
+    font-family: 'NanumSquareNeo-Variable';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'NanumBarunGothic';
+    font-style: normal;
+    font-weight: 400;
+    src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
+    src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
+}
+
 .detail-grid {
     display: grid;
     grid-template-columns: 400px auto;
@@ -39,4 +54,40 @@
     border-color: #d7ac00;
     border-radius: 3rem;
     height: 3rem;
+}
+
+.bookmark-list {
+    display: flex;
+    flex-wrap: wrap;
+    min-width: 1200px;
+    max-width: 1200px;
+}
+
+.bookmark-card {
+    display: block;
+    width: 600px;
+    min-height: 150px;
+    padding: 30px;
+    border: 1px solid #eee;
+}
+
+.bookmark-content {
+    display: flex;
+    justify-content: space-between;
+    text-decoration: none;
+}
+
+p {
+    font-family: 'NanumBarunGothic';
+    word-wrap: break-word;
+    font-size: 16px;
+    display: block;
+}
+
+h3 {
+    font-family: 'NanumSquareNeo-Variable';
+    word-wrap: break-word;
+    font-size: 18px;
+    font-weight: 600;
+    display: block;
 }
