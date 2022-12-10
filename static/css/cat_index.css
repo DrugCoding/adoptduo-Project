@@ -137,7 +137,7 @@ section {
 
 .layout {
     display: flex;
-    margin-left: 18.7%;
+    margin-left: 18.6%;
 }
 
 
@@ -248,7 +248,7 @@ h3 {
 .name {
     font-size: 15px;
     position: absolute;
-    top: -2rem;
+    top: -1rem;
     color: #94969b;
 }
 
@@ -298,7 +298,7 @@ h3 {
     font-size: 12px;
     color: #2478FF;
     position: absolute;
-    top: -2.9rem;
+    top: -2.5rem;
 }
 
 .sub1 {
@@ -307,6 +307,54 @@ h3 {
 }
 
 .wrap-info {
-    position: relative;
+    position: absolute;
+    top: 20px;
 
+}
+
+.bi-hand-thumbs-up{
+    position: absolute;
+    left: 2.8rem;
+    top: 0.2rem;
+}
+
+.created_at{
+    position: relative;
+    left: -1rem;
+    top: 0.1rem;
+}
+
+.page-link {
+  color: #000; 
+  background-color: white;
+  border: 1px solid #ccc; 
+}
+
+.page-item.active .page-link {
+ z-index: 1;
+ color: white;
+ font-weight:bold;
+ background-color: #FFCD00;
+ border-color: #FFCD00;
+ 
+}
+
+.page-link:focus, .page-link:hover {
+  color: white;
+  background-color: #FFCD00; 
+  border-color: #FFCD00;
+}
+.hit-text{
+    position: relative;
+    top: 0.08rem;
+}
+
+.like-text{
+     position: relative;
+    top: 0.08rem;
+}
+
+.bi-eye{
+    position: relative;
+    top: 0.1rem;
 }

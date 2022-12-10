@@ -115,10 +115,13 @@
                           <i class="bi bi-hand-thumbs-up"></i>
                           
                           {{ vol.like.all | length }}
-                        </a>    
-                          <a href="{% url 'volunteers:detail' vol.pk %}">
-                            {{ vol.created_at | timesince }}전
-                          </a>
+                        </a>  
+                          <span class="created_at">  
+                            <a class="mx-1" href="{% url 'volunteers:detail' vol.pk %}">
+                              <i class="bi bi-clock"></i>
+                              {{ vol.created_at | timesince }}전
+                            </a>
+                          </span>
                       </div>
                     </div>
                   </div>
@@ -129,38 +132,38 @@
         </main>
       </div>
     </div>
-        <nav aria-label="Page navigation example" class="nav-page mt-5 mb-2">
-      
-          <ul class="pagination">
-            <li class="page-item">
-              <a class="page-link text-black-50" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-              </a>
-            </li>
-            <li class="page-item">
-              <a class="page-link text-black-50" href="#">1</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link text-black-50" href="#">2</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link text-black-50" href="#">3</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link text-black-50" href="#">4</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link text-black-50" href="#">5</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link text-black-50" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </main>
+<div class="container text-center my-5">
+          <ul class="pagination d-flex justify-content-center">
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.previous_page_number }}">이전</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+          <a class="page-link" href="#" tabindex="-1" aria-disabled="true">이전</a>
+        </li>
+        {% endif %}
+        {% for page_number in page_obj.paginator.page_range %}
+          {% if page_number >= page_obj.number|add:-5 and page_number <= page_obj.number|add:5 %}
+            {% if page_number == page_obj.number %}
+              <li class="page-item active" aria-current="page">
+                <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+              </li>
+            {% else %}
+              <li class="page-item"><a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a></li>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.next_page_number }}">다음</a>
+
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+          <a class="page-link" href="#" tabindex="-1" aria-disabled="true">다음</a>
+        </li>
+        {% endif %}
+      </ul>
     </div>
-  </div>
-</div>
 {% endblock content %}

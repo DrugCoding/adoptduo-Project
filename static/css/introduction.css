@@ -331,3 +331,9 @@ left:33%;
 
 
 
+.hideme
+{
+     opacity:0;
+    margin-left:-300px;    
+    max-width:100%;
+}

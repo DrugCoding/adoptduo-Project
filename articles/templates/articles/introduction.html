@@ -2,9 +2,8 @@
 {% load static %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/introduction.css' %}">
-
-
- 
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> 
+ <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
  <div>
     <div class="cropped d-flex justify-content-center">
@@ -22,16 +21,16 @@
  
 
  
-  <div class="container mt-5 pt-3">
+  <div class="container  mt-5 pt-3">
       <hr>
-    <h1 class="d-flex justify-content-center" style="font-size:88px; font-family: 'Inter', sans-serif;">
+    <h1 class="d-flex  justify-content-center" style="font-size:88px; font-family: 'Inter', sans-serif;">
       About Us
     </h1>
     <h6 class="d-flex justify-content-center mt-4" style="font-size:22px; font-family: 'Inter', sans-serif;">회사소개</h6>
 
     <hr class='center-hr ' style="width:20%;"/>
 
-    <div class="cropped d-flex justify-content-center mt-5 ">
+    <div class="cropped d-flex  justify-content-center mt-5 " data-aos="fade-up">
       <img class="cropped_img" src="{% static 'images/first_main.jpg' %}" alt="">
       <h1 class="main_image_text_3" style="font-size:100px">입양해듀오는</h1>
       <h1 class="main_image_text_4" style="font-size:100px">사지않고</h1>
@@ -39,12 +38,12 @@
       <h1 class="main_image_text_6" style="font-size:100px">만듭니다</h1>
     </div>
 
-    <div class="row mt-5 cropped_2 d-flex align-items-center" >
-      <div class="col-6">
+    <div class="row mt-5 cropped_2 d-flex align-items-center" data-aos="fade-up" >
+      <div class="col-6"  >
         <img class="cropped_img_2"src="{% static 'images/first_image.jpg' %}" style="width:648px;"alt="">
       </div>
 
-      <div class="col-6">
+      <div class="col-6" >
 
         
           <h3 class="text-center" style="font-family: 'Noto Sans KR', sans-serif;"> <span class="colored_text" style="font-size:40px;">[</span>야생에서의 삶은 아이들에게 가혹합니다<span class="colored_text" style="font-size:40px;">]
@@ -59,7 +58,7 @@
 
     </div>
 
-    <div class="row mt-5 pt-3 cropped_2 d-flex align-items-center">
+    <div class="row mt-5 pt-3 cropped_2 d-flex  align-items-center" data-aos="fade-up">
 
       <div class="col-6">
         <h3 class="text-center" style="font-family: 'Noto Sans KR', sans-serif;"> <span class="colored_text" style="font-size:40px;">[</span>아이들에게 손을 내밀어 주세요<span class="colored_text" style="font-size:40px;">]
@@ -77,7 +76,7 @@
 
     </div>
 
-    <div class="row mt-5 cropped_2 d-flex align-items-center">
+    <div class="row mt-5 cropped_2 d-flex align-items-center" data-aos="fade-up">
       <div class="col-6">
         <img src="{% static 'images/first_image_3.jpg' %}" style="width:648px; height:600px;"alt="">
       </div>
@@ -93,7 +92,7 @@
 
     </div>
 
-    <div class="cropped d-flex justify-content-center mt-5">
+    <div class="cropped d-flex justify-content-center mt-5" data-aos="fade-up">
       <img class="cropped_img" src="{% static 'images/first_main_2.jpg' %}" alt="">
       <h1 class="main_image_text_7" style="font-size:100px">입양해듀오는</h1>
       <h1 class="main_image_text_8" style="font-size:100px"><span class="colored_text">만남</span>과</h1>
@@ -101,7 +100,7 @@
       <h1 class="main_image_text_10" style="font-size:100px">제공합니다</h1>
     </div>
 
-    <div class="row mt-5 cropped_2 d-flex align-items-center">
+    <div class="row mt-5 cropped_2 d-flex align-items-center" data-aos="fade-up">
 
       <div class="col-6 ">
         <h3 class="text-center" style="font-family: 'Noto Sans KR', sans-serif;"> <span class="colored_text" style="font-size:40px;">[</span>새 친구를 만들어 보세요<span class="colored_text" style="font-size:40px;">]
@@ -117,7 +116,7 @@
 
     </div>
       
-    <div class="row mt-5 cropped_2 d-flex align-items-center">
+    <div class="row mt-5 cropped_2 d-flex align-items-center" data-aos="fade-up">
       <div class="col-6">
         <img src="{% static 'images/first_image_5.jpg' %}" style="width:648px; height:600px;"alt="">
       </div>
@@ -133,7 +132,7 @@
 
     </div>
 
-    <div class="row mt-5 cropped_2 d-flex align-items-center">
+    <div class="row mt-5 cropped_2 d-flex align-items-center" data-aos="fade-up">
 
       <div class="col-6">
         <h3 class="text-center" style="font-family: 'Noto Sans KR', sans-serif;"> <span class="colored_text" style="font-size:40px;">[</span>자원봉사로 기쁨을 나눠보세요<span class="colored_text" style="font-size:40px;">]
@@ -150,7 +149,7 @@
     </div>
 
     <hr>
-    <h1 class="d-flex justify-content-center" style="font-size:88px; font-family: 'Inter', sans-serif;">
+    <h1 class="d-flex justify-content-center" style="font-size:88px; font-family: 'Inter', sans-serif;" >
       입양해듀오
     </h1>
     <h6 class="d-flex justify-content-center mt-4" style="font-size:22px; font-family: 'Inter', sans-serif;">바로가기</h6>
@@ -158,7 +157,7 @@
     <hr class="center-hr_2" style="width:450px;">
 
     <div>
-      <div class="undered ">
+      <div class="undered " data-aos="fade-up">
         <a href="{% url 'articles:dog_index' %}">
         <img class="undered_img" src="{% static 'images/under_image.jpg' %}" alt="">
         <h1 class="undered_text" style="font-size:70px">&nbsp;&nbsp;&nbsp;&nbsp;강아지 <br>
@@ -168,7 +167,7 @@
     </div>
 
     <div>
-      <div class="undered">
+      <div class="undered" data-aos="fade-up">
         <a href="{% url 'articles:cat_index' %}">
         <img class="undered_img_2" src="{% static 'images/under_image_2.jpg' %}" alt="">
         <h1 class="undered_text" style="font-size:70px">&nbsp;&nbsp;&nbsp;&nbsp;고양이 <br>
@@ -178,7 +177,7 @@
     </div>
 
     <div>
-      <div class="undered ">
+      <div class="undered " data-aos="fade-up">
         <a href="{% url 'volunteers:index' %}">
         <img class="undered_img_3" src="{% static 'images/under_image_3.jpg' %}" alt="">
         <h1 class="undered_text" style="font-size:70px">&nbsp;&nbsp;자원봉사 <br>
@@ -188,7 +187,7 @@
     </div>
 
     <div>
-      <div class="undered ">
+      <div class="undered " data-aos="fade-up">
         <a href="{% url 'articles:information' %}">
         <img class="undered_img_4" src="{% static 'images/under_image_4.jpg' %}" alt="">
         <h1 class="undered_text" style="font-size:70px">&nbsp;&nbsp;입양절차 <br>
@@ -202,14 +201,9 @@
     
   </div>
 
-
-
-    
-
-      
-
-    
-
+<script>
+  AOS.init();
+</script>
   {% comment %} <video class="main-box mt-5" src="{% static 'images/main page.mp4' %}" muted="muted" controls="controls" autoplay="autoplay" loop="loop"></video> {% endcomment %}
 
 {% endblock %}
