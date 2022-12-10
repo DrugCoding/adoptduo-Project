@@ -192,6 +192,10 @@ def cat_create(request):
                 commit=False
             )  # 저장하기 전에 잠깐 멈추기 위해 commit=false사용
             cat_article.user = request.user  # product.user와 요청한 user가 같다를 정의
+            lat1 = request.POST.get('lat')
+            lng1 = request.POST.get('lon')
+            cat_article.lat = lat1
+            cat_article.lng = lng1
             cat_article.save()  # 위에 요청 받은 폼을 저장, 값을 만들고 저장하는 용도고 값을 보내줄 것이 없으니까 redirect를 사용
             return redirect(
                 "articles:cat_index"
@@ -213,10 +217,19 @@ def cat_detail(request, cat_article_pk):
     cat_article = CatArticle.objects.get(id=cat_article_pk)
     cat_comment_form = CatCommentForm()
 
+    latlngdict = {
+        'lat' : cat_article.lat,
+        'lng' : cat_article.lng
+    }
+    latlngjson = json.dumps(latlngdict)
+
+
+
     context = {
         "cat_article": cat_article,
         "cat_comments": cat_article.catarticlecomment_set.all(),  # 도그 게시물의 모든 댓글 출력하기
         "cat_comment_form": cat_comment_form,
+        "latlngjson" : latlngjson
     }
     cat_article.hits +=1
     cat_article.save()
