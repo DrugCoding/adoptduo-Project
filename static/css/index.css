@@ -338,6 +338,32 @@ h3.volunteers-font {
   width: 60px;
 }
 
+.bi-eye{
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+}
+
+.bi-hand-thumbs-up{
+    position: absolute;
+  top: 0.1rem;
+  left: 0rem;
+}
+
+.icon-comments_count{
+  position: relative;
+}
+
+.bi-text{
+  position: absolute;
+  left: 7rem;
+}
+
+.bi-img{
+  position: absolute;
+  left: 9.4rem;
+
+}
 
 /* .animated-title {  
    position: relative; 

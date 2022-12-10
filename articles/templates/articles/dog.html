@@ -63,22 +63,22 @@
   </div>
 
     <div  class="layout container" >
-      <div class="d-flex justify-content-center">
+      <div class="">
         <main id="wrap" class="wrap-list">
-          <section class="container">
+          <section class="container ">
             <div role="main" class="contents">
-              <div class="articles-list">
+              <div class="articles-list ">
                 {% for dog in category_articles %}
                   <div class="articles-list-pre ">
                     <div class="title">
                       <h3>
                         <a href="{% url 'articles:dog_detail' dog.pk %}">
-                          {{ dog.title }}
+                          {{ dog.title |truncatechars:15  }}
                         </a>
                       </h3>
                       <p>
                         <a href="{% url 'articles:dog_detail' dog.pk %}">
-                          {{ dog.content |truncatechars:40 |safe }}
+                          {{ dog.content |truncatechars:20  }}
                         </a>
                       </p>
                       <p>
@@ -103,23 +103,19 @@
                       </p>
                       <div class="wrap-info">
                         <a href="{% url 'articles:dog_detail' dog.pk %}" class="view">
-                          <i class="blind">
-                            <span class="material-symbols-outlined">
-                              visibility
-                            </span>
-                          </i>
-                          {{ dog.hits }}
+                          <i class="bi bi-eye"></i>
+                         <span class="hit-text"> {{ dog.hits }} </span>
                         </a>
                         <a class="like" href="{% url 'articles:dog_detail' dog.pk %}">
-                          <i class="bi bi-hand-thumbs-up text-black"></i>
-                          {{ dog.like.all | length }}
-                         
-                        </a> 
-                        <span class="text-end">
-                          <a  href="{% url 'articles:dog_detail' dog.pk %}">
-                            {{ dog.created_at | timesince }}
+                          <i class="bi bi-hand-thumbs-up"></i>
+                          
+                          <span class="like-text">{{ dog.like.all | length }} </span>
+                        </a>    
+                          <a href="{% url 'articles:dog_detail' dog.pk %}">
+                           <span class="created_at">
+                            <i class="bi bi-clock"></i>
+                            {{ dog.created_at | timesince }} </span>
                           </a>
-                        </span>
                       </div>
                     </div>
                   </div>
@@ -131,7 +127,7 @@
       </div>
     </div>
     <div  class="layout container" >
-      <div class="d-flex justify-content-center">
+      <div class="">
         <main id="wrap" class="wrap-list">
           <section class="container">
             <div role="main" class="contents">
@@ -172,15 +168,17 @@
                       <div class="wrap-info">
                         <a href="{% url 'articles:dog_detail' dog.pk %}" class="view">
                           <i class="bi bi-eye"></i>
-                          {{ dog.hits }}
+                         <span class="hit-text"> {{ dog.hits }} </span>
                         </a>
                         <a class="like" href="{% url 'articles:dog_detail' dog.pk %}">
                           <i class="bi bi-hand-thumbs-up"></i>
                           
-                          {{ dog.like.all | length }}
+                          <span class="like-text">{{ dog.like.all | length }} </span>
                         </a>    
                           <a href="{% url 'articles:dog_detail' dog.pk %}">
-                            {{ dog.created_at | timesince }}전
+                           <span class="created_at">
+                            <i class="bi bi-clock"></i>
+                            {{ dog.created_at | timesince }} </span>
                           </a>
                       </div>
                     </div>

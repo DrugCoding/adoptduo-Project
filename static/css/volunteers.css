@@ -181,7 +181,7 @@ section {
 
 .layout {
     display: flex;
-    margin-left: 18.7%;
+    margin-left: 18.3%;
 }
 
 
@@ -292,7 +292,7 @@ h3 {
 .name {
     font-size: 15px;
     position: absolute;
-    top: -2rem;
+    top: -1rem;
     color: #94969b;
 }
 
@@ -394,7 +394,8 @@ font-family: 'Gothic A1', sans-serif;
 }
 
 .wrap-info {
-    position: relative;
+    position: absolute;
+    top: 20px;
 
 }
 
@@ -432,4 +433,30 @@ font-family: 'Gothic A1', sans-serif;
     border: 1px solid #ffcd00;
     width: 120px;
 
+}
+
+.page-link {
+  color: #000; 
+  background-color: white;
+  border: 1px solid #ccc; 
+}
+
+.page-item.active .page-link {
+ z-index: 1;
+ color: white;
+ font-weight:bold;
+ background-color: #FFCD00;
+ border-color: #FFCD00;
+ 
+}
+
+.page-link:focus, .page-link:hover {
+  color: white;
+  background-color: #FFCD00; 
+  border-color: #FFCD00;
+}
+.created_at{
+    position: relative;
+    left: 0rem;
+    top: 0rem;
 }

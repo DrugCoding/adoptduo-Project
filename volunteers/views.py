@@ -5,19 +5,25 @@ from accounts.models import User
 from django.http import JsonResponse
 from django.db.models import Count
 from django.contrib.auth.decorators import login_required
-
+from django.core.paginator import Paginator
 # Create your views here.
+
 
 def index(request):
     user = User.objects.all()
     v_articles = Volunteer.objects.order_by('-pk')
     vv_articles = Volunteer.objects.order_by('pk')
-    context ={
+    paginator = Paginator(v_articles, 10)  # 정렬을 9개까지 보여줌
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    context = {
         'v_articles': v_articles,
         'vv_articles': vv_articles,
-        'user':user,
-        }
+        'user': user,
+        'page_obj': page_obj,
+    }
     return render(request, 'volunteers/index.html', context)
+
 
 @login_required
 def create(request):
@@ -35,6 +41,7 @@ def create(request):
     }
     return render(request, 'volunteers/create.html', context)
 
+
 def detail(request, pk):
     v_article = Volunteer.objects.get(pk=pk)
     v_comment_form = VolunteerCommentForm()
@@ -45,7 +52,8 @@ def detail(request, pk):
     }
     return render(request, "volunteers/detail.html", context)
 
-@login_required    
+
+@login_required
 def update(request, pk):
     v_article = Volunteer.objects.get(pk=pk)
     if request.method == "POST":
@@ -60,18 +68,20 @@ def update(request, pk):
     }
     return render(request, "volunteers/update.html", context)
 
+
 def delete(request, pk):
     v_article = Volunteer.objects.get(pk=pk)
     v_article.delete()
     return redirect("volunteers:index")
+
 
 def comment_create(request, pk):
     v_article = Volunteer.objects.get(pk=pk)
     v_comment_form = VolunteerCommentForm(request.POST)
     if v_comment_form.is_valid():
         v_comment = v_comment_form.save(commit=False)
-        v_comment.article = v_article # 게시글은 입력 받은 댓글의 게시글
-        v_comment.user = request.user # 로그인한 유저가 댓글작성자(커멘트의 유저)임!
+        v_comment.article = v_article  # 게시글은 입력 받은 댓글의 게시글
+        v_comment.user = request.user  # 로그인한 유저가 댓글작성자(커멘트의 유저)임!
         v_comment.save()
         context = {
             'v_content': v_comment.content,
@@ -79,6 +89,7 @@ def comment_create(request, pk):
             'v_pk': v_comment.pk,
         }
         return JsonResponse(context)
+
 
 def comment_delete(request, pk, c_pk):
     v_comment = VolunteerComment.objects.get(pk=c_pk)
@@ -88,9 +99,10 @@ def comment_delete(request, pk, c_pk):
     }
     return JsonResponse(context)
 
+
 def bookmark(request, pk):
     v_article = Volunteer.objects.get(pk=pk)
-    if request.user in v_article.bookmarks.all(): 
+    if request.user in v_article.bookmarks.all():
         v_article.bookmarks.remove(request.user)
         is_bookmarked = False
     else:
@@ -99,5 +111,5 @@ def bookmark(request, pk):
     context = {
         'isbookmarked': is_bookmarked,
         'bookmarkcount': v_article.bookmarks.count()
-        }
+    }
     return JsonResponse(context)

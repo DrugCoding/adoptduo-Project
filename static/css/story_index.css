@@ -90,3 +90,24 @@ font-weight: bold;
 .story-content {
     word-break: break-all;
 }
+
+.page-link {
+  color: #000; 
+  background-color: white;
+  border: 1px solid #ccc; 
+}
+
+.page-item.active .page-link {
+ z-index: 1;
+ color: white;
+ font-weight:bold;
+ background-color: #FFCD00;
+ border-color: #FFCD00;
+ 
+}
+
+.page-link:focus, .page-link:hover {
+  color: white;
+  background-color: #FFCD00; 
+  border-color: #FFCD00;
+}

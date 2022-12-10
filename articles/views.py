@@ -30,9 +30,9 @@ def index(request):
     vol = Volunteer.objects.all()
     user = User.objects.all()
     context = {
-        "dog_articles" : dog_articles,
-        "cat_articles" : cat_articles,
-        "stories" : stories,
+        "dog_articles": dog_articles,
+        "cat_articles": cat_articles,
+        "stories": stories,
         "vol": vol,
         "user": user,
     }
@@ -59,7 +59,7 @@ def dog_index(request):
     dog_articles = DogArticle.objects.all()
 
     dog_article_item = DogArticle.objects.order_by("pk")  # pk 순으로 정렬(등록한 것부터)
-    paginator = Paginator(dog_article_item, 9)  # 정렬을 9개까지 보여줌
+    paginator = Paginator(dog_article_item, 10)  # 정렬을 9개까지 보여줌
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 
@@ -97,16 +97,15 @@ def dog_create(request):
     else:
         dog_article_form = DogArticleForm()  # post 요청이 아니면(제출 버튼을 안누르면) 빈 폼을 보여줌
 
-    
     context = {
-        "dog_article_form": dog_article_form  # 유효하지 않을 때, 사용자의 인풋을 다 받아서, 검증까지 해서 에러메시지를 저장한 product_form(템플릿 내에서 부트스트랩 폼에 사용)
+        # 유효하지 않을 때, 사용자의 인풋을 다 받아서, 검증까지 해서 에러메시지를 저장한 product_form(템플릿 내에서 부트스트랩 폼에 사용)
+        "dog_article_form": dog_article_form
         # post일 때는 post의 product_form이 여기에 해당 되고, 해당 페이지 접속일 (글생성 x)때는 else의 product_form이 들어감
     }
 
     return render(
         request, "articles/form.html", context
     )  # 제출에 이슈가 있다면 값을 보내며 다시 폼으로 돌아가기
-    
 
 
 def dog_detail(request, dog_article_pk):
@@ -114,8 +113,8 @@ def dog_detail(request, dog_article_pk):
     dog_comment_form = DogCommentForm()
 
     latlngdict = {
-        'lat' : dog_article.lat,
-        'lng' : dog_article.lng
+        'lat': dog_article.lat,
+        'lng': dog_article.lng
     }
     latlngjson = json.dumps(latlngdict)
 
@@ -123,9 +122,9 @@ def dog_detail(request, dog_article_pk):
         "dog_article": dog_article,
         "dog_comments": dog_article.dogarticlecomment_set.all(),  # 도그 게시물의 모든 댓글 출력하기
         "dog_comment_form": dog_comment_form,
-        "latlngjson" : latlngjson
+        "latlngjson": latlngjson
     }
-    dog_article.hits +=1
+    dog_article.hits += 1
     dog_article.save()
 
     return render(request, "articles/dog_detail.html", context)
@@ -147,10 +146,12 @@ def dog_update(request, dog_article_pk):
                 "articles:dog_detail", dog_article_pk
             )  # 몇번 상품의 디테일 페이지에 보내줄껀지?
     else:
-        dog_article_form = DogArticleForm(instance=dog_article)  # 기존 모델에 저장 되어있는 값을 보여줌
+        dog_article_form = DogArticleForm(
+            instance=dog_article)  # 기존 모델에 저장 되어있는 값을 보여줌
 
     context = {
-        "dog_article_form": dog_article_form  # 유효하지 않을 때는 요청 받은 product_form, 제출 안눌렀을 때는 바로위의 폼
+        # 유효하지 않을 때는 요청 받은 product_form, 제출 안눌렀을 때는 바로위의 폼
+        "dog_article_form": dog_article_form
     }
 
     return render(
@@ -171,11 +172,12 @@ def cat_index(request):
     form = CatArticleForm()
 
     cat_article_item = CatArticle.objects.order_by("pk")  # pk 순으로 정렬(등록한 것부터)
-    paginator = Paginator(cat_article_item, 9)  # 정렬을 9개까지 보여줌
+    paginator = Paginator(cat_article_item, 10)  # 정렬을 9개까지 보여줌
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 
-    context = {"cat_articles": cat_articles, "page_obj": page_obj, "form": form}
+    context = {"cat_articles": cat_articles,
+               "page_obj": page_obj, "form": form}
     return render(
         request, "articles/cat.html", context
     )  # 템플릿 네임 적어주고, 이쪽으로 context 값을 넘겨줌
@@ -200,7 +202,8 @@ def cat_create(request):
         cat_article_form = CatArticleForm()  # post 요청이 아니면(제출 버튼을 안누르면) 빈 폼을 보여줌
 
     context = {
-        "cat_article_form": cat_article_form  # 유효하지 않을 때, 사용자의 인풋을 다 받아서, 검증까지 해서 에러메시지를 저장한 product_form(템플릿 내에서 부트스트랩 폼에 사용)
+        # 유효하지 않을 때, 사용자의 인풋을 다 받아서, 검증까지 해서 에러메시지를 저장한 product_form(템플릿 내에서 부트스트랩 폼에 사용)
+        "cat_article_form": cat_article_form
         # post일 때는 post의 product_form이 여기에 해당 되고, 해당 페이지 접속일 (글생성 x)때는 else의 product_form이 들어감
     }
 
@@ -218,7 +221,7 @@ def cat_detail(request, cat_article_pk):
         "cat_comments": cat_article.catarticlecomment_set.all(),  # 도그 게시물의 모든 댓글 출력하기
         "cat_comment_form": cat_comment_form,
     }
-    cat_article.hits +=1
+    cat_article.hits += 1
     cat_article.save()
 
     return render(request, "articles/cat_detail.html", context)
@@ -239,10 +242,12 @@ def cat_update(request, cat_article_pk):
                 "articles:cat_detail", cat_article_pk
             )  # 몇번 상품의 디테일 페이지에 보내줄껀지?
     else:
-        cat_article_form = CatArticleForm(instance=cat_article)  # 기존 모델에 저장 되어있는 값을 보여줌
+        cat_article_form = CatArticleForm(
+            instance=cat_article)  # 기존 모델에 저장 되어있는 값을 보여줌
 
     context = {
-        "cat_article_form": cat_article_form  # 유효하지 않을 때는 요청 받은 product_form, 제출 안눌렀을 때는 바로위의 폼
+        # 유효하지 않을 때는 요청 받은 product_form, 제출 안눌렀을 때는 바로위의 폼
+        "cat_article_form": cat_article_form
     }
 
     return render(
@@ -367,25 +372,25 @@ def search(request):
     cats = ""
     stories = ""
 
-    if 'searchs' in request.GET: # 요청한 값에 검색어가 있다면
-        query = request.GET.get('searchs') # 요청한 검색어를 쿼리에 넣음
-        if query == "": # 쿼리가 공백일 때
-            return redirect("articles:search") # search 페이지를 보여준다.
-        else: 
+    if 'searchs' in request.GET:  # 요청한 값에 검색어가 있다면
+        query = request.GET.get('searchs')  # 요청한 검색어를 쿼리에 넣음
+        if query == "":  # 쿼리가 공백일 때
+            return redirect("articles:search")  # search 페이지를 보여준다.
+        else:
             dogs = DogArticle.objects.all().filter(
                 Q(title__icontains=query) |
                 Q(content__icontains=query) |
-                Q(dog_breed__name__icontains=query) 
+                Q(dog_breed__name__icontains=query)
             )[0:6]
 
             cats = CatArticle.objects.all().filter(
                 Q(title__icontains=query) |
                 Q(content__icontains=query) |
-                Q(cat_breed__name__icontains=query) 
+                Q(cat_breed__name__icontains=query)
             )[0:6]
 
             stories = Stories.objects.all().filter(
-                Q(title__icontains=query)|
+                Q(title__icontains=query) |
                 Q(content__icontains=query) |
                 Q(breed__icontains=query)
             )[0:6]
@@ -405,4 +410,3 @@ def search(request):
         #     'most_like': most_like
     }
     return render(request, "articles/search.html", context)
-   

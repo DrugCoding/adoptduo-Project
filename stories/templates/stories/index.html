@@ -66,9 +66,7 @@
                     </div>
                     <div class="sub1">
                       <p>
-                        <a class="sub-content" href="">
-                          #{{ story.name}} #{{ story.breed }}
-                        </a>
+                        　
                       </p>
                       <p class="name ">
                         <a href="{% url 'stories:detail' story.pk %}">
@@ -85,7 +83,8 @@
                           
                           {{ story.like.all | length }}
                         </a>    
-                          <a href="{% url 'stories:detail' story.pk %}">
+                          <a class="mx-1" href="{% url 'stories:detail' story.pk %}">
+                            <i class="bi bi-clock"></i>
                             {{ story.created_at | timesince }}전
                           </a>
                       </div>
@@ -99,7 +98,7 @@
       </div>
     </div>
 
-    <ul class="pagination d-flex justify-content-center">
+    <ul class="pagination d-flex justify-content-center my-5">
       {% if stories.has_previous %}
         <li class="page-item">
           <a class="page-link" href="?page={{ stories.previous_page_number }}">이전</a>
