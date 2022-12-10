@@ -47,9 +47,10 @@
       </div>
     </div>
     <div class="container my-3">
-      {% if stories.image %}
-        <img src="{{ stories.image.url }}" alt="{{ stories.image }}">
-      {% endif %}
+        {% for i in stories.stories_image.all %}
+          {% comment %} <div class="numbertext">{{ forloop.counter }} / {{ stories.stories_image.count }}</div> {% endcomment %}
+          <img src="{{ i.image.url }}" alt="{{ i.image }}">
+        {% endfor %}
       <p class="detail-font-main-text">{{ stories.content }}</p>
     </div>
     <div class="container px-0" style=" overflow:hidden;">

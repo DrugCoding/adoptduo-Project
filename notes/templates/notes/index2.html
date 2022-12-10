@@ -43,10 +43,12 @@
               </tr>
             </thead>
             <tbody>
-              {% for note in notes %}
-                <!--사용자가 받은 편지함-->
-                <tr class="text-muted" id="{{note.pk}}">
-                  <td class="detail-font-main-text">{{ note.from_user.username }}</td>
+              {% for note in to_notes %}
+
+                <tr class="text-muted ">
+                  <td class="detail-font-main-text">
+                    {{note.to_user.username}}
+                  </td>
                   <!---보낸이 -->
                   <td class="detail-font-main-text">
                     <a class="text-muted" style="text-decoration:none;" href="{% url 'notes:detail' note.pk %}">{{ note.title }}</a>
@@ -62,6 +64,7 @@
                     <td class="detail-font-main-text">안읽음</td>
                     <!---읽음 -->
                   {% endif %}
+
                 </tr>
               {% endfor %}
             </tbody>
@@ -72,4 +75,5 @@
     </div>
 
   </div>
+
 {% endblock %}
