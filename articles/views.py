@@ -369,8 +369,15 @@ def cat_category(request, cat_category_pk):
         category = CatCategory.objects.get(pk=cat_category_pk)
     except CatCategory.DoesNotExist:
         category = None
+    
     category_articles = CatArticle.objects.filter(cat_breed=category)
-    context = {"category": category, "category_articles": category_articles}
+
+    paginator = Paginator(category_articles, 10)
+    page_number = request.GET.get("page")
+    page_category = paginator.get_page(page_number)
+
+
+    context = {"category": category, "category_articles": category_articles, "page_category":page_category}
     return render(request, "articles/cat.html", context)
 
 
@@ -380,7 +387,8 @@ def dog_category(request, dog_category_pk):
     except DogCategory.DoesNotExist:
         category = None
     category_articles = DogArticle.objects.filter(dog_breed=category)
-    context = {"category": category, "category_articles": category_articles}
+
+    context = {"category": category, "category_articles": category_articles, }
     return render(request, "articles/dog.html", context)
 
 
