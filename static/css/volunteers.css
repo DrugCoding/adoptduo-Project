@@ -407,6 +407,7 @@ font-family: 'Gothic A1', sans-serif;
     background-color: #fff08b;
     display: flex;
     margin-right: 6.5%;
+    font-family: "NanumSquareNeo-Variable";
 }
 
 .story-font {
@@ -459,4 +460,8 @@ font-family: 'Gothic A1', sans-serif;
     position: relative;
     left: 0rem;
     top: 0rem;
+}
+
+.font-nanum{
+    font-family: "NanumSquareNeo-Variable";
 }

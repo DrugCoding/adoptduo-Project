@@ -111,3 +111,7 @@ font-weight: bold;
   background-color: #FFCD00; 
   border-color: #FFCD00;
 }
+
+.font-nanum{
+    font-family: "NanumSquareNeo-Variable";
+}

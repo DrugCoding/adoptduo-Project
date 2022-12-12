@@ -130,6 +130,8 @@
       <div id="pet-info-var-div" class="col-1 text-center py-3">특이사항</div>
       <div id="pet-info-div" class="col-5 text-center py-3">{{ dog_article.memo }}</div>
     </div>
+    <div id="map" class="mt-4 mx-auto" style="width:50%;height:350px;"></div>
+    <p class="text-center mt-3"><em class="mx-auto">지도를 클릭해주세요!</em></p>
   </div>
   <div class="container text-center">
     <div id="dog-comments">
@@ -154,9 +156,7 @@
         {% bootstrap_form dog_comment_form %}
         {% bootstrap_button content="댓글작성" button_type="submit" button_class="comment-post-btn col-3" %}
     </form>
-  </div>
-  <div id="map" class="mt-4 mx-auto" style="width:50%;height:350px;"></div>
-  <p class="text-center mt-3"><em class="mx-auto">지도를 클릭해주세요!</em></p> 
+  </div> 
 
 
 

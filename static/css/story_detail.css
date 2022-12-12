@@ -23,3 +23,7 @@ background-color: #ffec83;
 background-color: #ffcd00;
 font-weight: bold;
 }
+
+.font-nanum {
+  font-family: "NanumSquareNeo-Variable";
+}
