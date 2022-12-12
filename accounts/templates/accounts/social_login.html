@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+<div class="social-login mt-4">
+  <button class="button bg-gray-700 text-white">
+    <a href="{% url 'users:github-login' %}">
+      <i class="fab fa-github mr-2"></i>Login with Github
+    </a>
+  </button>
+  <button class="button bg-yellow-300 text-yellow-900 mt-2">
+    <a href="{% url 'users:kakao-login' %}">
+      <i class="fas fa-comment mr-2"></i>Login with Kakao
+    </a>
+  </button>
+</div>
+{% endblock content %}
