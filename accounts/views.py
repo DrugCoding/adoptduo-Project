@@ -12,6 +12,7 @@ from accounts.exception import SocialLoginException, KakaoException
 import requests
 import datetime
 from .models import User
+import os
 
 def index(request):
     accounts = get_user_model().objects.order_by("-pk")
@@ -59,7 +60,7 @@ def kakao_login(request):
     try:
         if request.user.is_authenticated:
             raise SocialLoginException("User already logged in")
-        client_id = '06c4cb15bfd5667fb4b0b1df8cba5fe2'
+        client_id = os.getenv("REACT_APP_KAKAO_REST_API_KEY")
         redirect_uri = "http://localhost:8000/accounts/login/kakao/callback/"
 
         return redirect(
@@ -79,9 +80,9 @@ def kakao_login_callback(request):
         code = request.GET.get("code", None)
         if code is None:
             KakaoException("Can't get code")
-        client_id = '06c4cb15bfd5667fb4b0b1df8cba5fe2'
+        client_id = os.getenv("REACT_APP_KAKAO_REST_API_KEY")
         redirect_uri = "http://localhost:8000/accounts/login/kakao/callback/"
-        client_secret = 'lQlWoTYHOa3jgVMlr6ukfXAkzx7CHgCE'
+        client_secret = os.getenv("REACT_APP_KAKAO_CLIENT_API_KEY")
         request_access_token = requests.post(
             f"https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id={client_id}&redirect_uri={redirect_uri}&code={code}&client_secret={client_secret}",
             headers={"Accept": "application/json"},
