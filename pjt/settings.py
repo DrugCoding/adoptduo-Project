@@ -25,7 +25,9 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1",
+                "localhost",
+                "adoptduo-env.eba-mwfvzn6n.ap-northeast-2.elasticbeanstalk.com/",]
 
 
 # Application definition
@@ -89,12 +91,15 @@ WSGI_APPLICATION = "pjt.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
+
+
+
 
 
 # Password validation
@@ -134,8 +139,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATICFILES_DIRS = [BASE_DIR / "static/"]  # static 파일들이 어디에 있는지를 쓰는 곳
-STATIC_ROOT = "/static/"  # static 파일들이 어디로 모일지를 쓰는 곳
-
+STATIC_ROOT = "staticfiles"  # static 파일들이 어디로 모일지를 쓰는 곳
+STATIC_URL = "/static/"
 # MEDIA_ROOT = BASE_DIR / "media"
 # MEDIA_URL = "/media/"
 
@@ -151,11 +156,28 @@ STATIC_ROOT = "/static/"  # static 파일들이 어디로 모일지를 쓰는 �
 #     AWS_REGION,
 # )
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "adoptduo", # 코드 블럭 아래 이미지 참고하여 입력
+#         "USER": "postgres",
+#         "PASSWORD": "ljhrrt0626!", # 데이터베이스 생성 시 작성한 패스워드
+#         "HOST": "adoptduo.cf1gfqfu5tmz.ap-northeast-2.rds.amazonaws.com", # 코드 블럭 아래 이미지 참고하여 입력
+#         "PORT": "5432",
+#     }
+# }
+
 DEBUG = os.getenv("DEBUG") == "True"
 
 if DEBUG: 
     MEDIA_URL = "/media/"
     MEDIA_ROOT = BASE_DIR / "media"
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+                 }
+    }
 
 else:   
     DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
@@ -169,6 +191,16 @@ else:
         AWS_STORAGE_BUCKET_NAME,
         AWS_REGION,
     )
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": os.getenv("DATABASE_NAME"), # .env 파일에 value 작성
+            "USER": "postgres",
+            "PASSWORD": os.getenv("DATABASE_PASSWORD"), # .env 파일에 value 작성
+            "HOST": os.getenv("DATABASE_HOST"), # .env 파일에 value 작성
+            "PORT": "5432",
+        }
+    }
 
 
 STATIC_URL = "/static/"
