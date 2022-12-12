@@ -17,7 +17,7 @@
   </div>
 
   <div class="container text-center mt-5">
-    <h3 class="cat-font">고양이!</h3>
+    <h3 class="cat-font">고양이</h3>
     <div class="cat-stroke container"></div>
     <ul id="puppy-ul" class="font-nanum nav my-4">
       <li class="hover1 nav-item mt-2">
@@ -53,149 +53,163 @@
     </ul>
   </div>
   <div class="container d-flex justify-content-end my-3" style="">
-    <a href="{% url 'articles:cat_create' %}" class="hover1 cat-create btn text-center">고양이 글작성</a>
+    <a href="{% url 'articles:cat_create' %}" class="hover1 font-nanum cat-create btn text-center">고양이 글작성</a>
   </div>
-      <div  class="layout container" >
-      <div class="d-flex justify-content-center">
-        <main id="wrap" class="wrap-list">
-          <section class="container">
-            <div role="main" class="contents">
-              <div class="articles-list">
-                {% for cat in page_category %}
-                  <div class="articles-list-pre ">
-                    <div class="title">
-                      <h3>
-                        <a href="{% url 'articles:cat_detail' cat.pk %}">
-                          {{ cat.title |truncatechars:15 }}
-                        </a>
-                      </h3>
-                      <p>
-                        <a href="{% url 'articles:cat_detail' cat.pk %}">
-                          {{ cat.content |truncatechars:20 }}
-                        </a>
-                      </p>
-                      <p>
-                        <a class="memo" href="">
-                        특이사항: {{ cat.memo }}
-                        </a>
-                      </p>
-                      <span>
-                        <img style="width:150px;margin-top:-200px; margin-left:300px;" class="attach-img" src="{{ cat.image.url }}" alt="">
-                      </span>
-                    </div>
-                    <div class="sub1">
-                      <p>
-                        <a class="sub-content" href="">
-                          #{{ cat.location}} #{{ cat.age }} #{{ cat.gender }} #{{ cat.cat_breed }}
-                        </a>
-                      </p>
-                      <p class="name ">
-                        <a href="{% url 'articles:cat_detail' cat.pk %}">
-                          {{ cat.user.username }}
-                        </a>
-                      </p>
-                      <div class="wrap-info">
-                        <a href="{% url 'articles:cat_detail' cat.pk %}" class="view">
-                          <i class="blind">
-                            <i class="bi bi-eye"></i>
-                          </i>
-                          {{ cat.hits }}
-                        </a>
-                        <a class="like" href="{% url 'articles:cat_detail' cat.pk %}">
-                          <i class="bi bi-hand-thumbs-up "></i>
-                          {{ cat.like.all | length }}
-                         
-                        </a> 
-                        <span class="text-end">
-                          <a  href="{% url 'articles:cat_detail' cat.pk %}">
-                           <span class="created_at"> {{ cat.created_at | timesince }} </span>
-                          </a>
-                        </span>
-                      </div>
-                    </div>
+  <div class="layout container">
+    <div class="d-flex justify-content-center">
+      <main id="wrap" class="wrap-list">
+        <section class="container">
+          <div role="main" class="contents">
+            <div class="articles-list">
+              {% for cat in page_category %}
+                <div class="articles-list-pre ">
+                  <div class="title">
+                    <h3>
+                      <a href="{% url 'articles:cat_detail' cat.pk %}">
+                        {{ cat.title |truncatechars:15 }}
+                      </a>
+                    </h3>
+                    <p>
+                      <a href="{% url 'articles:cat_detail' cat.pk %}">
+                        {{ cat.content |truncatechars:20 }}
+                      </a>
+                    </p>
+                    <p>
+                      <a class="memo" href="">
+                        특이사항:
+                        {{ cat.memo }}
+                      </a>
+                    </p>
+                    <span>
+                      <img style="width:150px;margin-top:-200px; margin-left:300px;" class="attach-img" src="{{ cat.image.url }}" alt="">
+                    </span>
                   </div>
-                {% endfor %}
-              </div>
-            </div>
-          </section> 
-        </main>
-      </div>
-    </div>
-    <div  class="layout container" >
-      <div class="d-flex justify-content-center">
-        <main id="wrap" class="wrap-list">
-          <section class="container">
-            <div role="main" class="contents">
-              <div class="articles-list">
-                {% for cat in page_obj %}
-                  <div class="articles-list-pre ">
-                    <div class="title">
-                      <h3>
-                        <a href="{% url 'articles:cat_detail' cat.pk %}">
-                          {{ cat.title |truncatechars:15  }}
-                        </a>
-                      </h3>
-                      <p>
-                        <a href="{% url 'articles:cat_detail' cat.pk %}">
-                          {{ cat.content |truncatechars:20  }}
-                        </a>
-                      </p>
-                      <p>
-                        <a class="memo" href="">
-                        특이사항: {{ cat.memo }}
-                        </a>
-                      </p>
-                      <span>
-                        <img style="width:150px;margin-top:-200px; margin-left:300px;" class="attach-img" src="{{ cat.image.url }}" alt="">
-                      </span>
-                    </div>
-                    <div class="sub1">
-                      <p>
-                        <a class="sub-content" href="">
-                          #{{ cat.location}} #{{ cat.age }} #{{ cat.gender }} #{{ cat.cat_breed }}
-                        </a>
-                      </p>
-                      <p class="name ">
-                        <a href="{% url 'articles:cat_detail' cat.pk %}">
-                          {{ cat.user.username }}
-                        </a>
-                      </p>
-                      <div class="wrap-info">
-                        <a href="{% url 'articles:cat_detail' cat.pk %}" class="view">
+                  <div class="sub1">
+                    <p>
+                      <a class="sub-content" href="">
+                        #{{ cat.location}}
+                        #{{ cat.age }}
+                        #{{ cat.gender }}
+                        #{{ cat.cat_breed }}
+                      </a>
+                    </p>
+                    <p class="name ">
+                      <a href="{% url 'articles:cat_detail' cat.pk %}">
+                        {{ cat.user.username }}
+                      </a>
+                    </p>
+                    <div class="wrap-info">
+                      <a href="{% url 'articles:cat_detail' cat.pk %}" class="view">
+                        <i class="blind">
                           <i class="bi bi-eye"></i>
-                         <span class="hit-text"> {{ cat.hits }} </span>
+                        </i>
+                        {{ cat.hits }}
+                      </a>
+                      <a class="like" href="{% url 'articles:cat_detail' cat.pk %}">
+                        <i class="bi bi-hand-thumbs-up "></i>
+                        {{ cat.like.all | length }}
+
+                      </a>
+                      <span class="text-end">
+                        <a href="{% url 'articles:cat_detail' cat.pk %}">
+                          <span class="created_at">
+                            {{ cat.created_at | timesince }}
+                          </span>
                         </a>
-                        <a class="like" href="{% url 'articles:cat_detail' cat.pk %}">
-                          <i class="bi bi-hand-thumbs-up"></i>
-                          
-                          <span class="like-text">{{ cat.like.all | length }} </span>
-                        </a>    
-                          <a href="{% url 'articles:cat_detail' cat.pk %}">
-                           <span class="created_at">
-                            <i class="bi bi-clock"></i>
-                            {{ cat.created_at | timesince }} </span>
-                          </a>
-                      </div>
+                      </span>
                     </div>
                   </div>
-                {% endfor %}
-              </div>
+                </div>
+              {% endfor %}
             </div>
-          </section> 
-        </main>
-      </div>
+          </div>
+        </section>
+      </main>
     </div>
+  </div>
+  <div class="layout container">
+    <div class="d-flex justify-content-center">
+      <main id="wrap" class="wrap-list">
+        <section class="container">
+          <div role="main" class="contents">
+            <div class="articles-list">
+              {% for cat in page_obj %}
+                <div class="articles-list-pre ">
+                  <div class="title">
+                    <h3>
+                      <a href="{% url 'articles:cat_detail' cat.pk %}">
+                        {{ cat.title |truncatechars:15  }}
+                      </a>
+                    </h3>
+                    <p>
+                      <a href="{% url 'articles:cat_detail' cat.pk %}">
+                        {{ cat.content |truncatechars:20  }}
+                      </a>
+                    </p>
+                    <p>
+                      <a class="memo" href="">
+                        특이사항:
+                        {{ cat.memo }}
+                      </a>
+                    </p>
+                    <span>
+                      <img style="width:150px;margin-top:-200px; margin-left:300px;" class="attach-img" src="{{ cat.image.url }}" alt="">
+                    </span>
+                  </div>
+                  <div class="sub1">
+                    <p>
+                      <a class="sub-content" href="">
+                        #{{ cat.location}}
+                        #{{ cat.age }}
+                        #{{ cat.gender }}
+                        #{{ cat.cat_breed }}
+                      </a>
+                    </p>
+                    <p class="name ">
+                      <a href="{% url 'articles:cat_detail' cat.pk %}">
+                        {{ cat.user.username }}
+                      </a>
+                    </p>
+                    <div class="wrap-info">
+                      <a href="{% url 'articles:cat_detail' cat.pk %}" class="view">
+                        <i class="bi bi-eye"></i>
+                        <span class="hit-text">
+                          {{ cat.hits }}
+                        </span>
+                      </a>
+                      <a class="like" href="{% url 'articles:cat_detail' cat.pk %}">
+                        <i class="bi bi-hand-thumbs-up"></i>
+
+                        <span class="like-text">{{ cat.like.all | length }}
+                        </span>
+                      </a>
+                      <a href="{% url 'articles:cat_detail' cat.pk %}">
+                        <span class="created_at">
+                          <i class="bi bi-clock"></i>
+                          {{ cat.created_at | timesince }}
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
   {% if cat_articles %}
-  <div class="container text-center my-5  ">
-          <ul class="pagination d-flex justify-content-center">
+    <div class="container text-center my-5  ">
+      <ul class="pagination d-flex justify-content-center">
         {% if page_obj.has_previous %}
-        <li class="page-item">
-          <a class="page-link" href="?page={{ page_obj.previous_page_number }}">이전</a>
-        </li>
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">이전</a>
+          </li>
         {% else %}
-        <li class="page-item disabled">
-          <a class="page-link" href="#" tabindex="-1" aria-disabled="true">이전</a>
-        </li>
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">이전</a>
+          </li>
         {% endif %}
         {% for page_number in page_obj.paginator.page_range %}
           {% if page_number >= page_obj.number|add:-5 and page_number <= page_obj.number|add:5 %}
@@ -204,61 +218,63 @@
                 <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
               </li>
             {% else %}
-              <li class="page-item"><a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a></li>
+              <li class="page-item">
+                <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+              </li>
             {% endif %}
           {% endif %}
         {% endfor %}
         {% if page_obj.has_next %}
-        <li class="page-item">
-          <a class="page-link" href="?page={{ page_obj.next_page_number }}">다음</a>
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}">다음</a>
 
-        </li>
+          </li>
         {% else %}
-        <li class="page-item disabled">
-          <a class="page-link" href="#" tabindex="-1" aria-disabled="true">다음</a>
-        </li>
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">다음</a>
+          </li>
         {% endif %}
       </ul>
     </div>
   {% endif %}
 
   {% if category_articles %}
-  <div class="container text-center my-5  ">
-    <ul class="pagination d-flex justify-content-center">
-      {% if page_category.has_previous %}
-      <li class="page-item">
-        <a class="page-link" href="?page={{ page_category.previous_page_number }}">이전</a>
-      </li>
-      {% else %}
-      <li class="page-item disabled">
-        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">이전</a>
-      </li>
-      {% endif %}
-      {% for page_number in page_category.paginator.page_range %}
-        {% if page_number >= page_category.number|add:-5 and page_number <= page_category.number|add:5 %}
-          {% if page_number == page_category.number %}
-            <li class="page-item active" aria-current="page">
-              <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
-            </li>
-          {% else %}
-            <li class="page-item"><a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a></li>
-          {% endif %}
+    <div class="container text-center my-5  ">
+      <ul class="pagination d-flex justify-content-center">
+        {% if page_category.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_category.previous_page_number }}">이전</a>
+          </li>
+        {% else %}
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">이전</a>
+          </li>
         {% endif %}
-      {% endfor %}
-      {% if page_category.has_next %}
-      <li class="page-item">
-        <a class="page-link" href="?page={{ page_category.next_page_number }}">다음</a>
+        {% for page_number in page_category.paginator.page_range %}
+          {% if page_number >= page_category.number|add:-5 and page_number <= page_category.number|add:5 %}
+            {% if page_number == page_category.number %}
+              <li class="page-item active" aria-current="page">
+                <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+              </li>
+            {% else %}
+              <li class="page-item">
+                <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+              </li>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+        {% if page_category.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_category.next_page_number }}">다음</a>
 
-      </li>
-      {% else %}
-      <li class="page-item disabled">
-        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">다음</a>
-      </li>
-      {% endif %}
-    </ul>
-  </div>
+          </li>
+        {% else %}
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">다음</a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
   {% endif %}
-
-
 
 {% endblock content %}

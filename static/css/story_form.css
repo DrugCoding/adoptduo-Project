@@ -1,0 +1,20 @@
+*{
+    font-family: "NanumSquareNeo-Variable";
+}
+.hover-control:hover {
+    background-color: #ffec83;
+}
+.write_btn {
+    background-color: #ffec83;
+  }
+.write_btn:hover {
+    background-color: #ffcd00;
+    font-weight: bold;
+}
+.back_btn {
+    background-color: #ff9899;
+}
+.back_btn:hover{
+    background-color: #ff4c4f;
+    font-weight: bold;
+}
