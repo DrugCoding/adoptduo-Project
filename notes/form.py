@@ -7,8 +7,19 @@ class  NotesForm(forms.ModelForm):
         model = Notes
         fields = ("title", "content")
         labels = {
-            "title": "제목",
-            "content": "내용",
+            "title": "🗒️제목",
+            "content": "🖋️쪽지 내용",
         }
+        widgets = {
+            "title": forms.TextInput(
+                attrs={
+                    "class": "hover-control",
+                    "placeholder": "제목을 입력해주세요.",
+                }),
+            "content": forms.TextInput(
+                attrs={
+                    "class": "hover-control",
+                    "placeholder": "쪽지를 작성해주세요.",
+                }),}
 
  

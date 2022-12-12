@@ -6,7 +6,7 @@
 
 {% block content %}
   <link rel="stylesheet" href="{% static 'css/story_detail.css' %}">
-  <div class="container" style="width: 50%;">
+  <div class="container" style="width: 100%;">
     <div style="box-sizing:border-box; " class="mt-5 border-bottom border-opacity-50">
       <div style="align-items: center; display: flex; justify-content:space-between;">
         <div>
@@ -46,7 +46,7 @@
         {% endif %}
       </div>
     </div>
-    <div class="container my-3">
+    <div class="container my-3 text-center">
         {% for i in stories.stories_image.all %}
           {% comment %} <div class="numbertext">{{ forloop.counter }} / {{ stories.stories_image.count }}</div> {% endcomment %}
           <img src="{{ i.image.url }}" alt="{{ i.image }}">

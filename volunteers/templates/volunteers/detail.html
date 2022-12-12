@@ -4,12 +4,15 @@
 {% block content %}
   <link rel="stylesheet" href="{% static 'css/dog_cat_detail.css' %}"/>
 
-  <div class="pet-banner-div d-flex justify-content-center">
-    <img class="pet-banner-img" src="{% static 'images/cat_banner.jpg' %}" alt="cat_banner">
-    <h1 class="pet-banner-text">건강한 반려문화의 시작</h1>
-    <p class="pet-banner-text_2 text-center">평생을 함께해 주세요. 반려동물의 삶을 환하게 비춰주세요.</p>
-    <div class="banner-logo">
-      <img src="{% static 'images/logo_white.png' %}" alt="banner_logo" style="width:300px">
+  <div>
+    <div class="cropped_ d-flex justify-content-center">
+      <img class="cropped_img_" src="{% static 'images/volunteer_banner.jpg' %}" alt="">
+      <h1 class="main_image_text_" style="font-size:70px">Adopt
+        <span class="colored_text_">
+          Animals</span></h1>
+      <h1 class="main_image_text_2_" style="font-size:70px">Adopt
+        <span class="colored_text_">
+          Family</span></h1>
     </div>
   </div>
 
@@ -19,11 +22,11 @@
   </div>
   <div class="container">
     <h2 class="text-center mb-3">봉사자 정보</h2>
-    <div class="text-center">   
+    <div class="text-center">
       {% if v_article.user.image %}
-      <a href="{% url 'accounts:detail' v_article.user.pk %}"><img class="mb-4 w-25 rounded" src="{{ v_article.user.image.url }}" alt="cat_article.image"/></a>
+        <a href="{% url 'accounts:detail' v_article.user.pk %}"><img class="mb-4 w-25 rounded" src="{{ v_article.user.image.url }}" alt="cat_article.image"/></a>
       {% else %}
-      <a href="{% url 'accounts:detail' v_article.user.pk %}"><img src="{% static 'images/unknown_image.jpg' %}" style="width:200px;" alt=""></a>
+        <a href="{% url 'accounts:detail' v_article.user.pk %}"><img src="{% static 'images/unknown_image.jpg' %}" style="width:200px;" alt=""></a>
       {% endif %}
     </div>
     <div class="row">
@@ -60,54 +63,58 @@
       <a href="{% url 'volunteers:delete' v_article.pk %}" class="btn btn-primary detail_btn2 mx-2 my-3">글삭제</a>
     {% endif %}
     <span>
-      {% if request.user.is_authenticated %} 
+      {% if request.user.is_authenticated %}
         {% if request.user in v_article.bookmarks.all %}
           <i id="bookmark-btn" data-article-id="{{ v_article.pk }}" class="bi-bookmark-heart-fill"></i>
         {% else %}
           <i id="bookmark-btn" data-article-id="{{ v_article.pk }}" class="bi-bookmark-heart"></i>
         {% endif %}
         <span id="bookmark-count">{{ v_article.bookmarks.count }}</span>
-    </span>
-    {% endif %}  
+      </span>
+    {% endif %}
     <h4 class="mt-5">댓글</h4>
     <form id="v-comment-form" data-article-id="{{ v_article.pk }}">
-        {% csrf_token %}
-        {% bootstrap_form v_comment_form %}
-        {% bootstrap_button content="ok" button_type="submit" button_class="btn-danger col-3" %}
+      {% csrf_token %}
+      {% bootstrap_form v_comment_form %}
+      {% bootstrap_button content="ok" button_type="submit" button_class="btn-danger col-3" %}
     </form>
     <hr>
     <p>{{ v_comments.count }}개의 댓글이 있습니다.</p>
     <div id="v-comments">
       {% for v_comment in v_comments %}
-      {% csrf_token %}
-      <div id="{{ v_comment.pk }}">
-        <p> {{ v_comment.user.username }} | {{ v_comment.content }}</p>
-        <button data-comment-id="{{ v_comment.pk }}" onclick="remove(event)">댓글 삭제</button>
-        <hr>
-      </div>
-      {% empty %}
+        {% csrf_token %}
+        <div id="{{ v_comment.pk }}">
+          <p>
+            {{ v_comment.user.username }}
+            |
+            {{ v_comment.content }}</p>
+          <button data-comment-id="{{ v_comment.pk }}" onclick="remove(event)">댓글 삭제</button>
+          <hr>
+        </div>
+        {% empty %}
         <p>댓글이 없어요 ㅠ_ㅠ</p>
       {% endfor %}
     </div>
   </div>
 
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script
-  src="https://code.jquery.com/jquery-3.5.1.min.js"
-  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-  crossorigin="anonymous"></script>
-<script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script>
     const commentForm = document.querySelector('#v-comment-form')
-    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
-    commentForm.addEventListener('submit', function(event) {
+    const csrftoken = document
+      .querySelector('[name=csrfmiddlewaretoken]')
+      .value
+      commentForm
+      .addEventListener('submit', function (event) {
         event.preventDefault();
         axios({
           method: 'post',
           url: `/volunteers/${event.target.dataset.articleId}/comments/`,
-          headers: {'X-CSRFToken': csrftoken},
+          headers: {
+            'X-CSRFToken': csrftoken
+          },
           data: new FormData(commentForm) // 폼에 있는 정보를 data로 넘겨줄 수 있도록 변환
-        }) 
-        .then(response => {
+        }).then(response => {
           console.log(response.data)
           // 댓글을 추가하는 로직
           const comments = document.querySelector('#v-comments')
@@ -123,47 +130,61 @@
           div.appendChild(p)
           div.appendChild(btn)
           div.appendChild(hr)
-          comments.appendChild(div) 
+          comments.appendChild(div)
           commentForm.reset()
         })
       })
-      function remove(e) {
-        console.log(e.target.dataset.commentId)
-        var delete_warning = confirm('댓글을 삭제하시겠습니까?')
-        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
-        const commentForm = document.querySelector('#v-comment-form')
-        if (delete_warning === true) {
-          axios({
-            method: 'post',
-            url: `/volunteers/${commentForm.dataset.articleId}/comments/${event.target.dataset.commentId}/delete/`,
-            headers: {'X-CSRFToken': csrftoken},
-          })
-          .then(response => { 
-            const div = document.getElementById(e.target.dataset.commentId)
-            div.remove()
-          })
-        }
-      }
-    const bookmarkBtn = document.querySelector('#bookmark-btn')
-    bookmarkBtn.addEventListener('click', function (event){
-        console.log(event.target.dataset)
+
+    function remove(e) {
+      console.log(e.target.dataset.commentId)
+      var delete_warning = confirm('댓글을 삭제하시겠습니까?')
+      const csrftoken = document
+        .querySelector('[name=csrfmiddlewaretoken]')
+        .value
+      const commentForm = document.querySelector('#v-comment-form')
+      if (delete_warning === true) {
         axios({
-            method: 'get',
-            url: `/volunteers/${event.target.dataset.articleId}/bookmark/` //서버에 요청 보냈고,
+          method: 'post',
+          url: `/volunteers/${commentForm.dataset.articleId}/comments/${event.target.dataset.commentId}/delete/`,
+          headers: {
+            'X-CSRFToken': csrftoken
+          }
+        }).then(response => {
+          const div = document.getElementById(e.target.dataset.commentId)
+          div.remove()
         })
-        .then(context => {
-            console.log(context)
-            console.log(context.data)
-            if (context.data.isbookmarked === true) {
-              event.target.classList.add('bi-bookmark-heart-fill')
-              event.target.classList.remove('bi-bookmark-heart')
-            } else {
-              event.target.classList.add('bi-bookmark-heart')
-              event.target.classList.remove('bi-bookmark-heart-fill')
-            }
-            const bookmarkCount = document.querySelector('#bookmark-count')
-            bookmarkCount.innerText = context.data.bookmarkcount
-        }) // 돌아오면 어떤걸 하고 싶은가?
+      }
+    }
+    const bookmarkBtn = document.querySelector('#bookmark-btn')
+    bookmarkBtn.addEventListener('click', function (event) {
+      console.log(event.target.dataset)
+      axios({
+        method: 'get', url: `/volunteers/${event.target.dataset.articleId}/bookmark/` //서버에 요청 보냈고,
+      }).then(context => {
+        console.log(context)
+        console.log(context.data)
+        if (context.data.isbookmarked === true) {
+          event
+            .target
+            .classList
+            .add('bi-bookmark-heart-fill')
+          event
+            .target
+            .classList
+            .remove('bi-bookmark-heart')
+        } else {
+          event
+            .target
+            .classList
+            .add('bi-bookmark-heart')
+          event
+            .target
+            .classList
+            .remove('bi-bookmark-heart-fill')
+        }
+        const bookmarkCount = document.querySelector('#bookmark-count')
+        bookmarkCount.innerText = context.data.bookmarkcount
+      }) // 돌아오면 어떤걸 하고 싶은가?
     })
-</script>
+  </script>
 {% endblock %}
