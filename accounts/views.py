@@ -60,7 +60,7 @@ def kakao_login(request):
         if request.user.is_authenticated:
             raise SocialLoginException("User already logged in")
         client_id = '06c4cb15bfd5667fb4b0b1df8cba5fe2'
-        redirect_uri = "http://127.0.0.1:8000/accounts/login/kakao/callback/"
+        redirect_uri = "http://localhost:8000/accounts/login/kakao/callback/"
 
         return redirect(
             f"https://kauth.kakao.com/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code"
@@ -80,7 +80,7 @@ def kakao_login_callback(request):
         if code is None:
             KakaoException("Can't get code")
         client_id = '06c4cb15bfd5667fb4b0b1df8cba5fe2'
-        redirect_uri = "http://127.0.0.1:8000/accounts/login/kakao/callback/"
+        redirect_uri = "http://localhost:8000/accounts/login/kakao/callback/"
         client_secret = 'lQlWoTYHOa3jgVMlr6ukfXAkzx7CHgCE'
         request_access_token = requests.post(
             f"https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id={client_id}&redirect_uri={redirect_uri}&code={code}&client_secret={client_secret}",
