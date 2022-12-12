@@ -22,3 +22,16 @@ class User(AbstractUser):
     area = models.CharField(max_length=20, default='서울')
     followings = models.ManyToManyField('self', symmetrical=False, related_name='followers')
     name = models.CharField(max_length=20)
+
+    LOGIN_EMAIL = "email"
+    LOGIN_GITHUB = "github"
+    LOGIN_KAKAO = "kakao"
+
+    LOGIN_CHOICES = (
+        (LOGIN_EMAIL, "Email"),
+        (LOGIN_KAKAO, "Kakao"),
+    )
+
+    login_method = models.CharField(
+        max_length=6, choices=LOGIN_CHOICES, default=LOGIN_EMAIL
+    )
