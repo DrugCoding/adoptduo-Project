@@ -27,3 +27,16 @@ font-weight: bold;
 .font-nanum {
   font-family: "NanumSquareNeo-Variable";
 }
+
+.hover-control:hover {
+  background-color: #ffec83;
+}
+.detail_btn {
+  background-color: #ffec83;
+}
+.detail_btn:hover {
+  background-color: #ffcd00;
+  font-weight: bold;
+}
+
+
