@@ -25,29 +25,51 @@
         <div class="row mb-3">
           <div class="col" style="height: 50px;">
             <p class="text-center" style="color: grey; margin-bottom: 5px;">팔로워</p>
-            <p class="fw-bold text-center">{{ user.followers.count }}</p>
+            <p class="fw-bold text-center"><span id='followers-count'>{{ user.followers.all|length }}</span></p>
           </div>
           <div class="col border-start" style="height: 50px;">
             <p class="text-center" style=" color: grey; margin-bottom: 5px;">팔로잉</p>
-            <p class="fw-bold text-center">{{ user.followings.count }}</p>
+            <p class="fw-bold text-center"><span id='followings-count'>{{ user.followings.all|length }}</span></p>
           </div>
         </div>
         <!-- 버튼 -->
+        {% if request.user != user %}
         <div>
-          {% if request.user != user %}
-          <a href="{% url 'accounts:follow' user.pk %}">
+          <form id='follow-form' data-user-id='{{ user.pk }}'>
+            {% csrf_token %}
             {% if request.user in user.followers.all %}
-            <button class="btn" style="width: 100%; margin:0 auto; font-family: 'NanumSquareNeo-Variable';">팔로우 취소</button>
+              <input type="submit" value="팔로우 취소">
+              {% comment %} <button class="btn" style="width: 100%; margin:0 auto; font-family: 'NanumSquareNeo-Variable';">팔로우 취소</button> {% endcomment %}
             {% else %}
-            <button class="btn" style="width: 100%; margin:0 auto; font-family: 'NanumSquareNeo-Variable';">팔로우</button>
+              <input type="submit" value="팔로우">
+              {% comment %} <button class="btn" style="width: 100%; margin:0 auto; font-family: 'NanumSquareNeo-Variable';">팔로우</button> {% endcomment %}
             {% endif %}
-          </a>
-          {% else %}
-          <a href="{% url 'accounts:update' %}"><button class="btn" style="width: 100%; margin:0 auto; font-family: 'NanumSquareNeo-Variable';">프로필
-              수정</button></a>
-          {% endif %}
+          </form>
         </div>
+        {% else %}
+        <div>
+          <a href="{% url 'accounts:update' %}">
+            <button class="btn" style="width: 100%; margin:0 auto; font-family: 'NanumSquareNeo-Variable';">프로필 수정</button>
+          </a>
+        </div>
+        {% endif %}
 
+        {% comment %} <form id='follow-form' data-user-id='{{ user.pk }}'>
+          <div>
+            {% if request.user != user %}
+            <a href="{% url 'accounts:follow' user.pk %}">
+              {% if request.user in user.followers.all %}
+                <button class="btn" style="width: 100%; margin:0 auto; font-family: 'NanumSquareNeo-Variable';">팔로우 취소</button>
+                {% else %}
+                <button class="btn" style="width: 100%; margin:0 auto; font-family: 'NanumSquareNeo-Variable';">팔로우</button>
+                {% endif %}
+              </a>
+              {% else %}
+              <a href="{% url 'accounts:update' %}"><button class="btn" style="width: 100%; margin:0 auto; font-family: 'NanumSquareNeo-Variable';">프로필
+                  수정</button></a>
+              {% endif %}
+          </div>
+        </form> {% endcomment %}
       </div>
     </div>
     <div class="col-9">
@@ -204,5 +226,35 @@
   </div>
 </div>
 {% endif %}
-
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  const form = document.querySelector('#follow-form')
+  const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+  form.addEventListener('submit', function (event) {
+    event.preventDefault()
+    const userId = event.target.dataset.userId
+    axios({
+      method: 'post',
+      url: `/accounts/${userID}/follow/`,
+      headers: {'X-CSRFToken': csrftoken,}
+    })
+      .then((response) => {
+        const isFollowed = response.data.is_followed
+        const followBtn = document.querySelector('#follow-form > input[type=submit]')
+        if (isFollowed === true ) {
+          followBtn.value = '팔로우 취소'
+        } else {
+          followBtn.value = '팔로우'
+        }
+        const followersCountTag = document.querySelector('#followers-count')
+        const followingsCountTag = document.querySelector('#followings-count')
+        const followersCount = response.data.followers_count
+        const followingsCount = response.data.followings_count
+        followersCountTag.innerText = followersCount
+        followingsCountTag.innerText = followingsCount
+      })
+      .catch((error) => {
+        console.log(error.response)
+      })
+  })    
 {% endblock content %}
