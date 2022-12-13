@@ -214,11 +214,11 @@ def follow(request, pk):
         me = request.user
         you = Users.objects.get(pk=pk)
         if me != you:
-            if you.followers.filter(pk=me.pk).exists():
-                you.followers.remove(me)
+            if me in you.followings.all():
+                you.followings.remove(me)
                 is_followed = False
             else:
-                you.followers.add(me)
+                you.followings.add(me)
                 is_followed = True
             context = {
                 "is_followed": is_followed,
