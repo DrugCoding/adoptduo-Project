@@ -7,7 +7,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <!-- favicon -->
+    <link rel="shortcut icon" href="{% static 'images/favicon3.png' %}" type="image/x-icon">
+    <title>입양해듀오</title>
     <!-- CSS only -->
     {% bootstrap_css %}
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
@@ -20,19 +22,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gothic+A1:wght@800&family=Inter&family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
     <!-- Channel Plugin Scripts -->
     <script>
-      (function() {
+      (function () {
         var w = window;
         if (w.ChannelIO) {
-          return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+          return (window.console.error || window.console.log || function () {})('ChannelIO script included twice.');
         }
-        var ch = function() {
+        var ch = function () {
           ch.c(arguments);
         };
         ch.q = [];
-        ch.c = function(args) {
-          ch.q.push(args);
+        ch.c = function (args) {
+          ch
+            .q
+            .push(args);
         };
         w.ChannelIO = ch;
+
         function l() {
           if (w.ChannelIOInitialized) {
             return;
@@ -44,7 +49,9 @@
           s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
           s.charset = 'UTF-8';
           var x = document.getElementsByTagName('script')[0];
-          x.parentNode.insertBefore(s, x);
+          x
+            .parentNode
+            .insertBefore(s, x);
         }
         if (document.readyState === 'complete') {
           l();
@@ -55,11 +62,9 @@
           window.addEventListener('load', l, false);
         }
       })();
-      ChannelIO('boot', {
-        "pluginKey": "129bd42f-6973-475b-990c-11bb2b9dc1c1"
-      });
+      ChannelIO('boot', {"pluginKey": "129bd42f-6973-475b-990c-11bb2b9dc1c1"});
     </script>
-<!-- End Channel Plugin -->
+    <!-- End Channel Plugin -->
   </head>
 
   <body>
@@ -134,4 +139,5 @@
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
       {% block script %}{% endblock script %}
     </body>
+
   </html>

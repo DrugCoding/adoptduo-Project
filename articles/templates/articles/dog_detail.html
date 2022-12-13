@@ -140,7 +140,7 @@
       {% csrf_token %}
       <div class="my-4 d-flex" id="{{dog_comment.pk}}">
         <div class="comment-info flex-fill">
-          <span>{{ dog_comment.user.username }}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;작성일자: {{ dog_comment.created_at }}</span>
+          <span>🐶{{ dog_comment.user.username }}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;📅작성일자: {{ dog_comment.created_at }}</span>
           <div class="comment-txt mt-3">
             <span>{{ dog_comment.content }}</span>
           </div>
