@@ -43,16 +43,13 @@ def create(request):
 
 
 def detail(request, pk):
-    v_article = get_object_or_404(Volunteer, pk=pk)
+    v_article = Volunteer.objects.get(pk=pk)
     v_comment_form = VolunteerCommentForm()
-    v_comments = v_article.volunteercomment_set.order_by('-created_at')
     context = {
         "v_article": v_article,
+        "v_comments": v_article.volunteercomment_set.all(),
         "v_comment_form": v_comment_form,
-        "v_comments": v_comments,
     }
-    v_article.hits +=1
-    v_article.save()
     return render(request, "volunteers/detail.html", context)
 
 
