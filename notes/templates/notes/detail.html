@@ -1,42 +1,50 @@
 {% extends 'base.html' %}
+{% load static %}
 {% load django_bootstrap5 %}
 {% block content %}
+  <link rel="stylesheet" href="{% static 'css/story_detail.css' %}">
 
-<div id="container" class="container mt-4" style="max-width:550px;">
+  <div id="container" class="container mt-4" style="max-width:550px;">
     <div class="d-flex justify-content-center mb-2" id="profile">
-    {% if note.from_user.image %}
-      <img id="profileimage" src="{{ note.from_user.image.url }}" alt="프로필 이미지" style="width: 120px; height:120px;" class="rounded-circle">
-    {% else %}
+      {% if note.from_user.image %}
+        <img id="profileimage" src="{{ note.from_user.image.url }}" alt="프로필 이미지" style="width: 120px; height:120px;" class="rounded-circle">
+      {% else %}
         <img src="https://cdn.discordapp.com/attachments/1044493548071948309/1049236425708666940/review_default_profile_image.jpg" alt="" style="width: 25%; height:25%;" class="rounded-circle">
-    {% endif %}
+      {% endif %}
     </div>
     <div id="container" class="container p-0">
-        <div class="card" style="border-radius: 18px;"  id="cust-card">
-          <div style="height: 70px;"></div>
-          <hr>
-          <div class="container ms-3">
-                <div class="fs-4 fw-bold">{{ note.title }}</div>
-                <div class="fs-5">
-                <p>{{ note.content }}</p></div>
-          </div>
-          <hr>
+      <div class="card" style="border-radius: 18px;" id="cust-card">
+        <div class="" style="height: 50px;">
+          <p class="detail-font-title mx-3 my-3">To.
+            {{ note.to_user.username }}
+            <p></div>
+            <hr>
+            <div class="container ms-3">
+              <div class="fs-4 fw-bold">{{ note.title }}</div>
+              <div class="fs-5">
+                <p>{{ note.content }}</p>
+              </div>
+            </div>
+            <hr>
             {% if request.user == note.from_user %}
             {% else %}
-            <a style="text-decoration:none;" href="{% url 'notes:send' note.from_user.pk %}" class="fs-6 d-flex justify-content-end me-3 text-black custom-link">답장하기</a>
+              <a style="text-decoration:none;" href="{% url 'notes:send' note.from_user.pk %}" class="fs-6 d-flex justify-content-end me-3 text-black custom-link">답장하기</a>
             {% endif %}
-          <div class="d-flex justify-content-end mx-3">          
-            <p class="custom-link fs-4">from.{{ note.from_user.username }}</p>
-          </div>
-          <div class="d-flex justify-content-end">
-                <small class="mx-3 mb-2">
-                {{ note.created_at|date:'o.m.d' }} {{ note.created_at|time:"H:i" }}
-                </small>
-          </div>
+            <div class="d-flex justify-content-end mx-3 my-3" style="height: 50px;">
+              <p class="custom-link fs-4">from.{{ note.from_user.username }}</p>
+            </div>
+            <div class="d-flex justify-content-end">
+              <small class="mx-3 mb-2">
+                {{ note.created_at|date:'o.m.d' }}
+                {{ note.created_at|time:"H:i" }}
+              </small>
+            </div>
 
-            <a href="{% url 'articles:index' %}" class="text-decoration-none">메인으로</a></h3>
+            <a href="{% url 'articles:index' %}" class="text-decoration-none">메인으로</a>
+          </h3>
 
         </div>
+      </div>
     </div>
-</div>
 
-{% endblock %}
+  {% endblock %}
