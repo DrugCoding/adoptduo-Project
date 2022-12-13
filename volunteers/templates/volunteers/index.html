@@ -52,7 +52,9 @@
         <a href="{% url 'volunteers:create' %}" class="hover1 cat-create btn text-center">봉사자 글작성</a>
          </div>
       {% else %}
-        <p>이동봉사 지원자만 글을 작성할 수 있습니다</p>
+      <div class="container d-flex justify-content-end my-3">
+        <span  class="vol-text">이동봉사 지원자만 글을 작성할 수 있습니다</p>
+      </div>
       {% endif %}
     {% else %}
       <div class="container d-flex justify-content-end my-3">
