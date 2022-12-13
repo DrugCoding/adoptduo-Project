@@ -136,27 +136,26 @@
       <div class="volunteers-post-subsection">
         <p></p>
         <marquee behavior="scroll" scrolldelay="60" direction="" loop="-1">
-          <div class="d-flex row row-cols-5 container">
-            {% for use in user %}
-              {% if use.volunteer_c == "가능" %}
-                <div class="animated-title">
-                  <div class="col track ">
-                    <a style="text-decoration:none;" href="{% url 'accounts:detail' use.pk %}">
-                      <div class="card h-100 content " id="animatedBackground">
-                        {% if use.image %}
-                          <img src="{{ use.image.url }}" class="card-img-top" alt="...">
-                        {% else %}
-                          <img src="{% static 'images/unknown_image.jpg' %}" style="border-radius: 10px;" alt="">
-                        {% endif %}
-                      </div>
-                    </a>
+            <div class="d-flex col col-5  container">
+              {% for use in user %}
+                {% if use.volunteer_c == "가능" %}
+                  <div class="animated-title mx-2 ">
+                    <div class="col track  ">
+                      <a style="text-decoration:none;" href="{% url 'accounts:detail' use.pk %}">
+                        <div class="card h-100 content " id="animatedBackground">
+                          {% if use.image %}
+                            <img style="width:300px;" src="{{ use.image.url }}" class="card-img-top" alt="...">
+                          {% else %}
+                            <img style="width:300px;" src="{% static 'images/unknown_image.jpg' %}" style="border-radius: 10px;" alt="">
+                          {% endif %}
+                        </div>
+                      </a>
+                    </div>
                   </div>
-                </div>
-              {% endif %}
-            {% endfor %}
-          </div>
-        </div>
-      </marquee>
+                {% endif %}
+              {% endfor %}
+            </div>
+        </marquee>
     </div>
   </div>
 {% endblock content %}
