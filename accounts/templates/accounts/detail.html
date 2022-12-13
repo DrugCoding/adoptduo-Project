@@ -100,19 +100,19 @@
             <p class="m-0">작성댓글</p>
             {% if user.dogarticlecomment_set %}
             <p class="m-0" style="font-size: 22px; color:#d7ac00; font-weight: 600;">
-              {{ user.dogarticlecomment_set.count|add:user.catarticlecomment_set.count }}
+              {{ user.dogarticlecomment_set.count|add:user.catarticlecomment_set.count|add:user.storycomment_set.count }}
               <span style="font-size: 1rem;">개</span>
             </p>
             {% elif user.catarticlecomment_set %}
             <p class="m-0" style="font-size: 22px; color:#d7ac00; font-weight: 600;">
-              {{ user.dogarticlecomment_set.count|add:user.catarticlecomment_set.count }}
+              {{ user.dogarticlecomment_set.count|add:user.catarticlecomment_set.count|add:user.storycomment_set.count }}
               <span style="font-size: 1rem;">개</span>
             </p>
-            <!-- {% elif user.storiescomment_set %}
+            {% elif user.storycomment_set %}
             <p class="m-0" style="font-size: 22px; color:#d7ac00; font-weight: 600;">
-              {{ user.dogarticlecomment_set.count|add:user.catarticlecomment_set.count }}
+              {{ user.dogarticlecomment_set.count|add:user.catarticlecomment_set.count|add:user.storycomment_set.count }}
               <span style="font-size: 1rem;">개</span>
-            </p> -->
+            </p>
             {% else %}
             <p class="m-0" style="font-size: 22px; color:#d7ac00; font-weight: 600;">
               0<span style="font-size: 1rem;">개</span>
