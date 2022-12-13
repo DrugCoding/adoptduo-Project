@@ -59,7 +59,7 @@ def dog_index(request):
     dog_articles = DogArticle.objects.all()
 
     dog_article_item = DogArticle.objects.order_by("pk")  # pk 순으로 정렬(등록한 것부터)
-    paginator = Paginator(dog_article_item, 10)  # 정렬을 9개까지 보여줌
+    paginator = Paginator(dog_article_item, 8)  # 정렬을 9개까지 보여줌
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 
@@ -172,7 +172,7 @@ def cat_index(request):
     form = CatArticleForm()
 
     cat_article_item = CatArticle.objects.order_by("pk")  # pk 순으로 정렬(등록한 것부터)
-    paginator = Paginator(cat_article_item, 10)  # 정렬을 9개까지 보여줌
+    paginator = Paginator(cat_article_item, 8)  # 정렬을 9개까지 보여줌
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 
@@ -372,7 +372,7 @@ def cat_category(request, cat_category_pk):
     
     category_articles = CatArticle.objects.filter(cat_breed=category)
 
-    paginator = Paginator(category_articles, 10)
+    paginator = Paginator(category_articles, 8)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 
@@ -391,7 +391,7 @@ def dog_category(request, dog_category_pk):
     category_articles = DogArticle.objects.filter(dog_breed=category)
 
 
-    paginator = Paginator(category_articles, 10)  # 정렬을 9개까지 보여줌
+    paginator = Paginator(category_articles, 8)  # 정렬을 9개까지 보여줌
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 
