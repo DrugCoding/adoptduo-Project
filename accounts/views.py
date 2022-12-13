@@ -13,6 +13,8 @@ import requests
 import datetime
 from .models import User
 import os
+from django.http import JsonResponse
+
 
 def index(request):
     accounts = get_user_model().objects.order_by("-pk")
@@ -56,86 +58,149 @@ def login(request):
     }
     return render(request, 'accounts/login.html', context)
 
-def kakao_login(request):
-    try:
-        if request.user.is_authenticated:
-            raise SocialLoginException("User already logged in")
-        client_id = os.getenv("REACT_APP_KAKAO_REST_API_KEY")
-        redirect_uri = "http://localhost:8000/accounts/login/kakao/callback/"
+# def kakao_login(request):
+#     try:
+#         if request.user.is_authenticated:
+#             raise SocialLoginException("User already logged in")
+#         client_id = os.getenv("REACT_APP_KAKAO_REST_API_KEY")
+#         redirect_uri = "http://localhost:8000/accounts/login/kakao/callback/"
 
-        return redirect(
-            f"https://kauth.kakao.com/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code"
-        )
-    except KakaoException as error:
-        messages.error(request, error)
-        return redirect("articles:index")
-    except SocialLoginException as error:
-        messages.error(request, error)
-        return redirect("articles:index")
+#         return redirect(
+#             f"https://kauth.kakao.com/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code"
+#         )
+#     except KakaoException as error:
+#         messages.error(request, error)
+#         return redirect("articles:index")
+#     except SocialLoginException as error:
+#         messages.error(request, error)
+#         return redirect("articles:index")
+
+def kakao_login(request):
+    client_id = os.environ.get("REACT_APP_KAKAO_REST_API_KEY")
+    REDIRECT_URI = "http://localhost:8000/accounts/login/kakao/callback/"
+    return redirect(
+        f"https://kauth.kakao.com/oauth/authorize?client_id={client_id}&redirect_uri={REDIRECT_URI}&response_type=code"
+    )
 
 def kakao_login_callback(request):
     try:
-        if request.user.is_authenticated:
-            raise SocialLoginException("User already logged in")
-        code = request.GET.get("code", None)
-        if code is None:
-            KakaoException("Can't get code")
-        client_id = os.getenv("REACT_APP_KAKAO_REST_API_KEY")
-        redirect_uri = "http://localhost:8000/accounts/login/kakao/callback/"
-        client_secret = os.getenv("REACT_APP_KAKAO_CLIENT_API_KEY")
-        request_access_token = requests.post(
-            f"https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id={client_id}&redirect_uri={redirect_uri}&code={code}&client_secret={client_secret}",
-            headers={"Accept": "application/json"},
+    	#(1)
+        code = request.GET.get("code")
+        client_id = os.environ.get("REACT_APP_KAKAO_REST_API_KEY")
+        REDIRECT_URI = "http://localhost:8000/accounts/login/kakao/callback/"
+        #(2)
+        token_request = requests.get(
+            f"https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id={client_id}&redirect_uri={REDIRECT_URI}&code={code}"
         )
-        access_token_json = request_access_token.json()
-        error = access_token_json.get("error", None)
+        #(3)
+        token_json = token_request.json()
+        error = token_json.get("error", None)
         if error is not None:
-            print(error)
-            KakaoException("Can't get access token")
-        access_token = access_token_json.get("access_token")
-        headers = {"Authorization": f"Bearer {access_token}"}
-        profile_request = requests.post(
+            raise KakaoException()
+        #(4)
+        access_token = token_json.get("access_token")
+        #(5)
+        profile_request = requests.get(
             "https://kapi.kakao.com/v2/user/me",
-            headers=headers,
+            headers={"Authorization": f"Bearer {access_token}"},
         )
         profile_json = profile_request.json()
-        kakao_account = profile_json.get("kakao_account")
-        profile = kakao_account.get("profile")
-
-        nickname = profile.get("nickname", None)
-        avatar_url = profile.get("profile_image_url", None)
-        email = kakao_account.get("email", None)
-        gender = kakao_account.get("gender", None)
-
-        user = get_user_model().objects.get_or_none(email=email)
-        if user is not None:
-            if user.login_method != get_user_model().LOGIN_KAKAO:
-                raise GithubException(f"Please login with {user.login_method}")
-        else:
-            user = get_user_model().objects.create_user(
+        #(6)
+        email = profile_json.get("kakao_account", None).get("email")
+        if email is None:
+            raise KakaoException()
+        properties = profile_json.get("properties")
+        nickname = properties.get("nickname")
+        profile_image = properties.get("profile_image")
+        #(7)
+        try:
+            user = User.objects.get(email=email)
+            if user.login_method != User.LOGIN_KAKAO:
+                raise KakaoException()
+        except User.DoesNotExist:
+            user = User.objects.create(
                 email=email,
                 username=email,
                 first_name=nickname,
-                gender=gender,
-                login_method=get_user_model().LOGIN_KAKAO,
+                login_method=User.LOGIN_KAKAO,
+                email_verified=True,
             )
-
-            if avatar_url is not None:
-                avatar_request = requests.get(avatar_url)
-                user.avatar.save(
-                    f"{nickname}-avatar", ContentFile(avatar_request.content)
-                )
             user.set_unusable_password()
             user.save()
-        messages.success(request, f"{user.email} signed up and logged in with Kakao")
+            #(8)
+            if profile_image is not None:
+                photo_request = requests.get(profile_image)
+                user.avatar.save(
+                    f"{nickname}-avatar", ContentFile(photo_request.content)
+                )
         login(request, user)
         return redirect(reverse("articles:index"))
-    except KakaoException as error:
-        messages.error(request, error)
-        return redirect(reverse("articles:index"))
-    except SocialLoginException as error:
-        messages.error(request, error)
-        return redirect(reverse("articles:index"))
+    except KakaoException:
+        return redirect(reverse("accounts:login"))
+
+# def kakao_login_callback(request):
+#     try:
+#         if request.user.is_authenticated:
+#             raise SocialLoginException("User already logged in")
+#         code = request.GET.get("code", None)
+#         if code is None:
+#             KakaoException("Can't get code")
+#         client_id = os.getenv("REACT_APP_KAKAO_REST_API_KEY")
+#         redirect_uri = "http://localhost:8000/accounts/login/kakao/callback/"
+#         client_secret = os.getenv("REACT_APP_KAKAO_CLIENT_API_KEY")
+#         request_access_token = requests.post(
+#             f"https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id={client_id}&redirect_uri={redirect_uri}&code={code}&client_secret={client_secret}",
+#             headers={"Accept": "application/json"},
+#         )
+#         access_token_json = request_access_token.json()
+#         error = access_token_json.get("error", None)
+#         if error is not None:
+#             print(error)
+#             KakaoException("Can't get access token")
+#         access_token = access_token_json.get("access_token")
+#         headers = {"Authorization": f"Bearer {access_token}"}
+#         profile_request = requests.post(
+#             "https://kapi.kakao.com/v2/user/me",
+#             headers=headers,
+#         )
+#         profile_json = profile_request.json()
+#         kakao_account = profile_json.get("kakao_account")
+#         profile = kakao_account.get("profile")
+
+#         nickname = profile.get("nickname", None)
+#         avatar_url = profile.get("profile_image_url", None)
+#         email = kakao_account.get("email", None)
+#         gender = kakao_account.get("gender", None)
+
+#         user = get_user_model().objects.get_or_none(email=email)
+#         if user is not None:
+#             if user.login_method != get_user_model().LOGIN_KAKAO:
+#                 raise GithubException(f"Please login with {user.login_method}")
+#         else:
+#             user = get_user_model().objects.create_user(
+#                 email=email,
+#                 username=email,
+#                 first_name=nickname,
+#                 gender=gender,
+#                 login_method=get_user_model().LOGIN_KAKAO,
+#             )
+
+#             if avatar_url is not None:
+#                 avatar_request = requests.get(avatar_url)
+#                 user.avatar.save(
+#                     f"{nickname}-avatar", ContentFile(avatar_request.content)
+#                 )
+#             user.set_unusable_password()
+#             user.save()
+#         messages.success(request, f"{user.email} signed up and logged in with Kakao")
+#         login(request, user)
+#         return redirect(reverse("articles:index"))
+#     except KakaoException as error:
+#         messages.error(request, error)
+#         return redirect(reverse("articles:index"))
+#     except SocialLoginException as error:
+#         messages.error(request, error)
+#         return redirect(reverse("articles:index"))
 
 def logout(request):
     auth_logout(request)
@@ -144,14 +209,38 @@ def logout(request):
 
 @login_required
 def follow(request, pk):
-    accounts = get_user_model().objects.get(pk=pk)
-    if request.user == accounts:
-        return redirect("accounts:detail", pk)
-    if request.user in accounts.followers.all():
-        accounts.followers.remove(request.user)
-    else:
-        accounts.followers.add(request.user)
-    return redirect("accounts:detail", pk)
+    if request.user.is_authenticated:
+        Users = get_user_model()
+        me = request.user
+        you = Users.objects.get(pk=pk)
+        if me != you:
+            if you.followers.filter(pk=me.pk).exists():
+                you.followers.remove(me)
+                is_followed = False
+            else:
+                you.followers.add(me)
+                is_followed = True
+            context = {
+                "is_followed": is_followed,
+                "followers_count": you.followers.count(),
+                "followings_count": you.followings.count(),
+            }
+            return JsonResponse(context)
+        return redirect('accounts:detail', you.username)
+    return redirect('accounts:login')
+
+
+
+# @login_required
+# def follow(request, pk):
+#     accounts = get_user_model().objects.get(pk=pk)
+#     if request.user == accounts:
+#         return redirect("accounts:detail", pk)
+#     if request.user in accounts.followers.all():
+#         accounts.followers.remove(request.user)
+#     else:
+#         accounts.followers.add(request.user)
+#     return redirect("accounts:detail", pk)
 
 @login_required
 def update(request):
