@@ -85,10 +85,16 @@
           <div class="card story-card">
             <!-- 카드 헤더 -->
             <div class="card-header story-card-image">
-              {% if story.image %}
-              <img class="story-card-image story-image " src="{{ story.image.url }}" alt="">
-              {% else %}
-              <img class="story-card-image story-image " src="{% static 'images/index_story.png' %}" alt="">
+              {% if story.stories_image.count %}
+                {% for img in story.stories_image.all %}
+                  {% if forloop.counter == 1 %}
+                      <img class="story-card-image story-image " src="{{ img.image.url }}" alt="">
+                    {% else %}
+                      {% if forloop.counter == 1 %}
+                        <img class="story-card-image story-image " src="{% static 'images/index_story.png' %}" alt="">
+                      {% endif %}
+                  {% endif %}
+                {% endfor %}
               {% endif %}
             </div>
             <!-- 카드 바디 -->
@@ -148,6 +154,9 @@
                           {% else %}
                             <img style="width:300px;" src="{% static 'images/unknown_image.jpg' %}" style="border-radius: 10px;" alt="">
                           {% endif %}
+                          <p class="d-flex justify-content-center my-2" style="color:black;">
+                          {{ use.username }}님 감사합니다!
+                          </p>
                         </div>
                       </a>
                     </div>

@@ -8,7 +8,7 @@ from .models import (
     DogCategory,
 )
 from .forms import DogArticleForm, CatArticleForm, DogCommentForm, CatCommentForm
-from stories.models import Stories
+from stories.models import Stories, Image
 from volunteers.models import Volunteer
 from accounts.models import User
 from django.core.paginator import Paginator
@@ -27,6 +27,7 @@ def index(request):
     stor = Stories.objects.all()
     storie = stor.annotate(like_count=Count("like"))
     stories = storie.order_by("-like_count")[0:3]
+    image = Image.objects.order_by("-pk")
     vol = Volunteer.objects.all()
     user = User.objects.all()
     context = {
@@ -35,6 +36,7 @@ def index(request):
         "stories": stories,
         "vol": vol,
         "user": user,
+        "image": image,
     }
     return render(request, "articles/index.html", context)
 
@@ -221,18 +223,16 @@ def cat_detail(request, cat_article_pk):
     cat_comment_form = CatCommentForm()
 
     latlngdict = {
-        'lat' : cat_article.lat,
-        'lng' : cat_article.lng
+        'lat': cat_article.lat,
+        'lng': cat_article.lng
     }
     latlngjson = json.dumps(latlngdict)
-
-
 
     context = {
         "cat_article": cat_article,
         "cat_comments": cat_article.catarticlecomment_set.all(),  # 도그 게시물의 모든 댓글 출력하기
         "cat_comment_form": cat_comment_form,
-        "latlngjson" : latlngjson
+        "latlngjson": latlngjson
     }
     cat_article.hits += 1
     cat_article.save()
@@ -369,17 +369,16 @@ def cat_category(request, cat_category_pk):
         category = CatCategory.objects.get(pk=cat_category_pk)
     except CatCategory.DoesNotExist:
         category = None
-    
+
     category_articles = CatArticle.objects.filter(cat_breed=category)
 
     paginator = Paginator(category_articles, 8)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 
+    context = {"category": category, "category_articles": category_articles,
+               "page_category": page_category}
 
-    context = {"category": category, "category_articles": category_articles, "page_obj":page_obj}
-
-    
     return render(request, "articles/cat.html", context)
 
 
@@ -389,13 +388,12 @@ def dog_category(request, dog_category_pk):
     except DogCategory.DoesNotExist:
         category = None
     category_articles = DogArticle.objects.filter(dog_breed=category)
-
-
     paginator = Paginator(category_articles, 8)  # 정렬을 9개까지 보여줌
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 
-    context = {"category": category, "category_articles": category_articles, "page_obj": page_obj}
+    context = {"category": category,
+               "category_articles": category_articles, "page_obj": page_obj}
 
     return render(request, "articles/dog.html", context)
 
