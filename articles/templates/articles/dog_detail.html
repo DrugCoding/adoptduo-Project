@@ -144,7 +144,6 @@
   </div>
   <div class="container text-center">
     <div id="dog-comments">
-      <h4 class="mt-5"><span style="color:red">{{ dog_comments.count }}개</span>의 댓글이 있습니다.</h4>
       {% for dog_comment in dog_comments %}
       {% csrf_token %}
       <div class="my-4 d-flex" id="{{dog_comment.pk}}">
@@ -156,8 +155,6 @@
         </div>
         <span class="comment-delete mx-auto my-auto align-items-center"><button class="comment-del-btn Nanum" data-comment-id="{{dog_comment.pk}}" onclick="remove(event)">댓글삭제</button></span>
       </div>
-      {% empty %}
-        <p>댓글이 없어요! </p>
       {% endfor %}
     </div>
     <form id="dog-comment-form" data-article-id="{{ dog_article.pk }}">
