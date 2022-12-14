@@ -13,15 +13,16 @@ def index(request):
     user = User.objects.all()
     v_articles = Volunteer.objects.order_by('-pk')
     vv_articles = Volunteer.objects.order_by('pk')
-    paginator = Paginator(v_articles, 10)  # 정렬을 9개까지 보여줌
+    paginator = Paginator(v_articles, 8)  
     page_number = request.GET.get("page")
-    page_obj = paginator.get_page(page_number)
+    page_ob = paginator.get_page(page_number)
     context = {
         'v_articles': v_articles,
         'vv_articles': vv_articles,
         'user': user,
-        'page_obj': page_obj,
+        'page_ob': page_ob,
     }
+    print(context)
     return render(request, 'volunteers/index.html', context)
 
 
