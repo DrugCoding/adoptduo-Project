@@ -115,7 +115,7 @@
 
 ## **📂 페이지 구성 상세**
 
-![main.png](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\main.gif)
+![main.gif](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\main.gif)
 
 ### main.html
 
@@ -125,21 +125,21 @@
 
 ### Accounts App
 
-![녹화_2022_12_12_15_35_47_325.gif](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\sighup.gif)
+![signup.gif](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\sighup.gif)
 
 **accounts/signup.html**
 
 - 회원 가입 폼 작성 후, 가입하기 **버튼 클릭 시 회원가입 완료**
 - 
 
-![녹화_2022_12_12_15_37_13_296.gif](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\login.gif)
+![login.gif](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\login.gif)
 
 **accounts/login.html**
 
 - **로그인 폼과, signup.html로** 이동하는 버튼이 있다
 - 
 
-![Untitled](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\profile.png)
+![profile.png](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\profile.png)
 
 **accounts/detail.html**
 
@@ -154,21 +154,21 @@
   
   - 쪽지함 구현
     
-    ![Untitled](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\profile_bookmark.png)
+    ![profile_bookmark.png](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\profile_bookmark.png)
     
-    ![Untitled](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\profile_follow.png)
+    ![profile_follow.png](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\profile_follow.png)
 
 **채널톡 API**
 
 - **채널톡 API를 사용하여 입양해듀오 챗봇 생성**
 
-![Untitled](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\chat.png)
+![chat.png](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\chat.png)
 
 ### Articles App
 
 ![녹화_2022_12_12_15_52_20_224.gif](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\introduction.gif)
 
-![Untitled](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\introdunction_link.png)
+![introdunction_link.png](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\introdunction_link.png)
 
 **articles/introduction.html**
 
@@ -177,11 +177,11 @@
 - **홈페이지 소개로 컨텐츠 길이가 긴 만큼 심심하지 않게 페이드업으로 애니메이션 추가**
 - **마지막에는 링크를 통해 각 페이지로 이동할 수 있는 버튼**
 
-![녹화_2022_12_12_15_55_30_417.gif](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\information.gif)
+![information.gif](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\information.gif)
 
-![녹화_2022_12_12_15_55_36_34.gif](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\information2.gif)
+![information2.gif](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\information2.gif)
 
-![녹화_2022_12_12_15_55_41_355.gif](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\information3.gif)
+![information3.gif](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\information3.gif)
 
 **articles/information.html**
 
@@ -190,9 +190,9 @@
 - **해외이동봉사, 입양절차, 학대신고 등에 필요한 정보들을 모았다.**
 - **url을 분리해 이동하게 하였고 hover 효과**
 
-![Untitled](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\dog_index.gif)
+![dog_index.gif](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\dog_index.gif)
 
-![녹화_2022_12_12_16_03_16_563.gif](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\dog_index.png)
+![dog_index.png](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\dog_index.png)
 
 **articles/dog_index.html**
 
@@ -200,7 +200,7 @@
 
 - **강아지 품종에 따라 카테고리 분류**
 
-![녹화_2022_12_12_16_05_07_953.gif](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\dog_detail.gif)
+![dog_detail.gif](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\dog_detail.gif)
 
 **articles/dog_detail.html**
 
@@ -209,7 +209,7 @@
 - **디테일에서 위치정보와 작성자 팝업으로 프로필,메세지보내기 바로가기 구현**
 - **즐겨찾기 기능과 댓글 구현**
 
-![Untitled](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\create_form.png)
+![create_form.png](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\create_form.png)
 
 **articles/dog_create.html**
 
@@ -218,9 +218,9 @@
 - **내 위치를 기반해 지도 생성**
 - **카테고리 분류 폼**
 
-![Untitled](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\cat_index.gif)
+![cat_index.gif](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\cat_index.gif)
 
-![녹화_2022_12_12_16_19_29_181.gif](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\cat_index.png)
+![cat_index.png](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\cat_index.png)
 
 **articles/cat_index.html**
 
@@ -228,7 +228,7 @@
 
 - **고양이 품종에 따라 카테고리 분류**
 
-![녹화_2022_12_12_16_20_13_521.gif](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\cat_detail.gif)
+![cat_detail.gif](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\cat_detail.gif)
 
 **articles/cat_detail.html**
 
@@ -237,7 +237,7 @@
 - **디테일에서 위치정보와 작성자 팝업으로 프로필,메세지보내기 바로가기 구현**
 - **즐겨찾기 기능과 댓글 구현**
 
-![Untitled](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\create_form.png)
+![create_form.png](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\create_form.png)
 
 **articles/cat_create.html**
 
@@ -248,7 +248,7 @@
 
 ### Stories App
 
-![Untitled](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\stories_index.png)
+![stories_index.png](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\stories_index.png)
 
 **stories/index.html**
 
@@ -256,7 +256,7 @@
 
 - **반려동물 자랑 글, 입,분양 후기 등 자유게시판 형식**
 
-![녹화_2022_12_12_16_27_52_959.gif](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\stories_detail.gif)
+![stories_detail.gif](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\stories_detail.gif)
 
 **stories/detail.html**
 
@@ -264,7 +264,7 @@
 
 - **심플한 디테일, 댓글, 좋아요 구현**
 
-![Untitled](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\stories_form.png)
+![stories_form.png](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\stories_form.png)
 
 **stories/create.html**
 
@@ -274,7 +274,7 @@
 
 ### Volrunteers App
 
-![녹화_2022_12_12_16_31_38_758.gif](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\volunteer_index.gif)
+![volunteer_index.gif](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\volunteer_index.gif)
 
 **volunteers/index.html**
 
@@ -282,7 +282,7 @@
 
 - **상단에는 봉사를 지원한 유저들의 프로필을 지나가게 함**
 
-![Untitled](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\volunteer_form.png)
+![volunteer_form.png](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\volunteer_form.png)
 
 **volunteers/create.html**
 
@@ -290,7 +290,7 @@
 
 - **작성 폼에는 해외이동, 국내 봉사를 위한 출발지역, 도착지역과 이동날짜를 작성할 수 있다**
 
-![](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\volunteers_detail.png)
+![volunteers_detail.png](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\volunteers_detail.png)
 
 **volunteers/detail.html**
 
@@ -302,7 +302,7 @@
 
 ### Note App
 
-![Untitled](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\mailbox.png)
+![mailbox.png](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\mailbox.png)
 
 **note/index.html**
 
@@ -310,7 +310,7 @@
 
 - **작성 폼에는 해외이동, 국내 봉사를 위한 출발지역, 도착지역과 이동날짜를 작성할 수 있다**
 
-![](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\mail_send.png)
+![mail_send.png](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\mail_send.png)
 
 **note/create.html**
 
@@ -318,7 +318,7 @@
 
 - **쪽지를 보낼 수 있는 폼**
 
-![](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\mail_detail.png)
+![mail_detail.png](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\mail_detail.png)
 
 **note/detail.html**
 
