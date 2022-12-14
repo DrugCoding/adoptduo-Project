@@ -24,8 +24,8 @@
         {% endif %}
         <p class="detail-font-text text-center mt-2" style="font-size:15px;">{{ request.user.username }}</p>
         <div class="article-upd-del text-center">
-          <a href="http://localhost:8000/notes" class="btn detail_btn2  my-3" style="width:100%;">✍️받은 편지함</a>
-          <a href="http://localhost:8000/notes/to" class="btn detail_btn2 my-3" style="width:100%;">✍️보낸 편지함
+          <a href="{% url "notes:index" %}" class="btn detail_btn2  my-3" style="width:100%;">✍️받은 편지함</a>
+          <a href="{% url "notes:index2" %}" class="btn detail_btn2 my-3" style="width:100%;">✍️보낸 편지함
           </a>
 
         </div>
