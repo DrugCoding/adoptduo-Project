@@ -123,7 +123,7 @@
                       <a href="{% url 'articles:dog_detail' dog.pk %}">
                         <span class="created_at">
                           <i class="bi bi-clock"></i>
-                          {{ dog.created_at | timesince }}
+                           <span class="like-text1">{{ dog.created_at | timesince }}</span>
                         </span>
                       </a>
                     </div>

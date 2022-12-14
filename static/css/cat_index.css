@@ -308,7 +308,7 @@ h3 {
 
 .bi-hand-thumbs-up{
     position: absolute;
-    left: 2.8rem;
+    left: 4rem;
     top: 0.2rem;
 }
 
@@ -351,4 +351,21 @@ h3 {
 .bi-eye{
     position: relative;
     top: 0.1rem;
+}
+
+.like-text{
+     position: relative;
+    top: 0.08rem;
+    left: 0.9rem;
+}
+
+.bi-clock{
+    position: relative;
+     left: 1.8rem;
+}
+
+.like-text1{
+     position: relative;
+    top: 0.08rem;
+    left: 1.7rem;
 }
