@@ -3,7 +3,7 @@
 {% load static %}
 {% block content %}
   <link rel="stylesheet" href="{% static 'css/dog_cat_detail.css' %}"/>
-
+  <link rel="stylesheet" href="{% static 'css/dog_cat_detail.css' %}">
   <div>
     <div class="cropped_ d-flex justify-content-center">
       <img class="cropped_img_" src="{% static 'images/volunteer_banner.jpg' %}" alt="">
@@ -16,9 +16,75 @@
     </div>
   </div>
 
-  <div class="container mt-4">
-    <h2>{{ v_article.title }}</h2>
-    <hr id="divider"/>
+  <div class="container mt-4 text-start">
+    <div class="d-flex">
+      <h2 class="my-auto me-auto">{{ v_article.title }}</h2>
+
+      <div class="title-info d-flex justify-content-between">
+        <h6 class="my-auto"></h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <h6 class="my-auto">👤작성자: 
+          <a href="{% url 'accounts:detail' v_article.user.pk %}" class="text-decoration-none text-dark">{{ v_article.user.username }}</a>
+          {% comment %} <a class="btn btn-sm mt-1 p-0" data-toggle="popover" data-title ="adsf" data-content="link">➕</a> {% endcomment %}
+          <button type="button" 
+          data-container="body" 
+          class="btn btn-sm mt-1 p-0" 
+          data-bs-toggle="popover" 
+          title="" 
+          data-bs-content=
+          {% if request.user.pk != v_article.user.pk  %}
+
+            "<a role='button' class='text-decoration-none' href='{% url 'notes:send' v_article.user.pk %}'>✉️메시지보내기</a><br/>
+
+            {% if request.user != v_article.user %}
+              {% if request.user in v_article.user.followers.all %}
+              <a role='button' class='text-decoration-none' href='{% url 'accounts:follow' v_article.user.pk %}'>🖐️팔로우취소</a><br/>
+              {% else %}
+              <a role='button' class='text-decoration-none' href='{% url 'accounts:follow' v_article.user.pk %}'>👀팔로우하기</a><br/>
+              {% endif %}
+            {% endif %}"
+
+          {% else %}
+            "✅자기자신입니다!"
+          {% endif %}➕
+          data-bs-html="true">➕
+          </button>
+        </h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <h6 class="my-auto">👁️‍🗨️조회수: {{ v_article.hits }}회</h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <h6 class="my-auto"><span>🔖즐겨찾기 수: 
+          <span id="bookmark-count">{{ v_article.bookmarks.count }}</span>
+        </span></h6>
+          {% comment %} {% if request.user.is_authenticated %} 
+            {% if request.user in cat_article.bookmarks.all %}
+              <i id="bookmark-btn" data-article-id="{{ cat_article.pk }}" class="bi-bookmark-heart-fill"></i>
+            {% else %}
+              <i id="bookmark-btn" data-article-id="{{ cat_article.pk }}" class="bi-bookmark-heart"></i>
+            {% endif %}
+            <span id="bookmark-count">{{ cat_article.bookmarks.count }}</span>
+        </span>
+        {% endif %} </h6> {% endcomment %}
+      </div>
+    </div>
+    <hr id="divider">
+  </div
+  <>
+  <div class="container">
+    <div class="article-upd-del text-end">
+      {% if request.user.is_authenticated %}
+        {% if request.user in v_article.bookmarks.all %}
+          <a data-article-id="{{ v_article.pk }}" id="bookmark-btn" class="btn detail_btn2 mx-2 my-3">✅즐겨찾기 완료</a>
+        {% else %}
+          <a data-article-id="{{ v_article.pk }}" id="bookmark-btn" class="btn detail_btn2 mx-2 my-3">🔖즐겨찾기 추가</a>
+        {% endif %}
+      {% endif %}
+
+      {% if request.user.pk == v_article.user.pk  %}
+        <a href="{% url 'volunteers:update' v_article.pk %}" class="btn detail_btn2 mx-2 my-3">✍️글수정</a>
+        <a href="{% url 'volunteers:delete' v_article.pk %}" class="btn detail_btn2 mx-2 my-3">🗑️글삭제</a>
+      {% endif %}
+
   </div>
   <div class="container">
     <h2 class="text-center mb-3">봉사자 정보</h2>
@@ -54,47 +120,33 @@
   <div class="container mt-4">
     <div class="row d-flex justify-content-center">
       <div id="pet-info-var-div" class="col-1 py-3 text-center">추가정보</div>
-      <div id="pet-info-div" class="col-5 py-3">{{ v_article.content | safe }}</div>
+      <div id="pet-info-div" class="col-5 py-3">{{ v_article.content }}</div>
     </div>
   </div>
   <div class="container text-center">
-    {% if request.user == v_article.user %}
-      <a href="{% url 'volunteers:update' v_article.pk %}" class="btn btn-primary detail_btn2 mx-2 my-3">글수정</a>
-      <a href="{% url 'volunteers:delete' v_article.pk %}" class="btn btn-primary detail_btn2 mx-2 my-3">글삭제</a>
-    {% endif %}
-    <span>
-      {% if request.user.is_authenticated %}
-        {% if request.user in v_article.bookmarks.all %}
-          <i id="bookmark-btn" data-article-id="{{ v_article.pk }}" class="bi-bookmark-heart-fill"></i>
-        {% else %}
-          <i id="bookmark-btn" data-article-id="{{ v_article.pk }}" class="bi-bookmark-heart"></i>
-        {% endif %}
-        <span id="bookmark-count">{{ v_article.bookmarks.count }}</span>
-      </span>
-    {% endif %}
-    <h4 class="mt-5">댓글</h4>
-    <form id="v-comment-form" data-article-id="{{ v_article.pk }}">
-      {% csrf_token %}
-      {% bootstrap_form v_comment_form %}
-      {% bootstrap_button content="ok" button_type="submit" button_class="btn-danger col-3" %}
-    </form>
-    <hr>
-    <p>{{ v_comments.count }}개의 댓글이 있습니다.</p>
     <div id="v-comments">
+      <h4 class="mt-5"><span style="color:red">{{ v_comments.count }}개</span>의 댓글이 있습니다.</h4>
       {% for v_comment in v_comments %}
-        {% csrf_token %}
-        <div id="{{ v_comment.pk }}">
-          <p>
-            {{ v_comment.user.username }}
-            |
-            {{ v_comment.content }}</p>
-          <button data-comment-id="{{ v_comment.pk }}" onclick="remove(event)">댓글 삭제</button>
-          <hr>
+      {% csrf_token %}
+      <div class="my-4 d-flex" id="{{v_comment.pk}}">
+        <div class="comment-info flex-fill">
+          <span>🐶{{ v_comment.user.username }}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;📅작성일자: {{ v_comment.created_at }}</span>
+          <div class="comment-txt mt-3">
+            <span>{{ v_comment.content }}</span>
+          </div>
         </div>
-        {% empty %}
-        <p>댓글이 없어요 ㅠ_ㅠ</p>
+        <span class="comment-delete mx-auto my-auto align-items-center"><button class="comment-del-btn Nanum" data-comment-id="{{v_comment.pk}}" onclick="remove(event)">댓글삭제</button></span>
+      </div>
+      {% empty %}
+        <p>댓글이 없어요! </p>
       {% endfor %}
     </div>
+    <form id="v-comment-form" data-article-id="{{ v_article.pk }}">
+        {% csrf_token %}
+        {% bootstrap_form v_comment_form %}
+        {% bootstrap_button content="댓글작성" button_type="submit" button_class="comment-post-btn col-3" %}
+    </form>
+  </div> 
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
