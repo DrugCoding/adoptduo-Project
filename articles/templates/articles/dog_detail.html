@@ -21,31 +21,38 @@
         <h6 class="my-auto">🐕분류: {{ dog_article.dog_breed }}</h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
         <h6 class="my-auto">👤작성자: 
-          <a href="{% url 'accounts:detail' dog_article.user.pk %}" class="text-decoration-none text-dark">{{ dog_article.user.username }}</a>
+          {{ dog_article.user.username }}
           {% comment %} <a class="btn btn-sm mt-1 p-0" data-toggle="popover" data-title ="adsf" data-content="link">➕</a> {% endcomment %}
+
           <button type="button" 
+          id="show-popover"
           data-container="body" 
           class="btn btn-sm mt-1 p-0" 
           data-bs-toggle="popover" 
           title="" 
-          data-bs-content=
-          {% if request.user.pk != dog_article.user.pk  %}
-
-            "<a role='button' class='text-decoration-none' href='{% url 'notes:send' dog_article.user.pk %}'>✉️메시지보내기</a><br/>
-
-            {% if request.user != dog_article.user %}
-              {% if request.user in dog_article.user.followers.all %}
-              <a role='button' class='text-decoration-none' href='{% url 'accounts:follow' dog_article.user.pk %}'>🖐️팔로우취소</a><br/>
-              {% else %}
-              <a role='button' class='text-decoration-none' href='{% url 'accounts:follow' dog_article.user.pk %}'>👀팔로우하기</a><br/>
-              {% endif %}
-            {% endif %}"
-
-          {% else %}
-            "✅자기자신입니다!"
-          {% endif %}➕
           data-bs-html="true">➕
           </button>
+
+          <div id="popover-content" class="d-none">
+            <div class="card border-0">
+              <div>
+                {% if request.user.pk != dog_article.user.pk %}
+
+                <a role='button' class='text-decoration-none' href="{% url 'notes:send' dog_article.user.pk %}">✉️메시지보내기</a><br/>
+                
+                  {% if request.user != dog_article.user %}
+                  
+                  <a id='follow' href="{% url 'accounts:detail' dog_article.user.pk %}" role='button' class='text-decoration-none'>🏠프로필방문</a><br/>
+
+                  {% endif %}
+
+                {% else %}
+                ✅자기자신입니다!
+                {% endif %}
+              </div>
+            </div>
+          </div>
+
         </h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
         <h6 class="my-auto">👁️‍🗨️조회수: {{ dog_article.hits }}회</h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -170,9 +177,23 @@
   crossorigin="anonymous"></script>
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-639882a381a3781a"></script>
 <script>
-    $(document).ready(function(){ //풀오버 작동하게 하기
-      $('[data-bs-toggle="popover"]').popover();
-    });
+    //팝오버 작동
+  $(function () {
+    $('#show-popover').popover({
+      container: 'body',
+      html: true,
+      placement: 'right',
+      sanitize: false,
+      content: function() {
+        return $('#popover-content').html();
+      }
+    })
+  });
+
+  $('#show-div').click(function(){
+    $('#hidden-content').toggle();
+  });
+
     const commentForm = document.querySelector('#dog-comment-form')
     const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     commentForm.addEventListener('submit', function(event){
