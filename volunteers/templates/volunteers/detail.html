@@ -99,7 +99,7 @@
       {% if v_article.user.image %}
         <a href="{% url 'accounts:detail' v_article.user.pk %}"><img class="mb-4 w-25 rounded" src="{{ v_article.user.image.url }}" alt="cat_article.image"/></a>
       {% else %}
-        <a href="{% url 'accounts:detail' v_article.user.pk %}"><img src="{% static 'images/unknown_image.jpg' %}" style="width:200px;" alt=""></a>
+        <a href="{% url 'accounts:detail' v_article.user.pk %}"><img class="mb-4 w-25 rounded" src="{% static 'images/unknown_image.jpg' %}" style="width:200px;" alt=""></a>
       {% endif %}
     </div>
     <div class="row">
