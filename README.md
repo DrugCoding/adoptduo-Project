@@ -115,7 +115,7 @@
 
 ## **📂 페이지 구성 상세**
 
-![main.gif](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\main.gif)
+![main.png](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\main.gif)
 
 ### main.html
 
