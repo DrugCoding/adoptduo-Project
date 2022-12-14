@@ -347,7 +347,7 @@ h3.volunteers-font {
 .bi-hand-thumbs-up{
     position: absolute;
   top: 0.1rem;
-  left: 0rem;
+  left:-0.3rem;
 }
 
 .icon-comments_count{
@@ -361,7 +361,7 @@ h3.volunteers-font {
 
 .bi-img{
   position: absolute;
-  left: 9.4rem;
+  left: 9.2rem;
 
 }
 
