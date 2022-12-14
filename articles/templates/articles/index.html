@@ -89,12 +89,10 @@
                 {% for img in story.stories_image.all %}
                   {% if forloop.counter == 1 %}
                       <img class="story-card-image story-image " src="{{ img.image.url }}" alt="">
-                    {% else %}
-                      {% if forloop.counter == 1 %}
-                        <img class="story-card-image story-image " src="{% static 'images/index_story.png' %}" alt="">
-                      {% endif %}
                   {% endif %}
                 {% endfor %}
+              {% else %}
+                      <img class="story-card-image story-image " src="{% static 'images/index_story.png' %}" alt="">
               {% endif %}
             </div>
             <!-- 카드 바디 -->
