@@ -33,17 +33,23 @@
         </div>
         <!-- 버튼 -->
         {% if request.user != user %}
-        <div>
-          <form id='follow-form' data-user-id='{{ user.pk }}'>
-            {% csrf_token %}
-            {% if request.user in user.followers.all %}
-            {% comment %} <input type="submit" value="팔로우 취소"> {% endcomment %}
-            <button type='submit' class="btn" style="width: 100%; margin:0 auto; font-family: 'NanumSquareNeo-Variable';">팔로우 취소</button>
-            {% else %}
-            {% comment %} <input type="submit" value="팔로우"> {% endcomment %}
-            <button type='submit' class="btn" style="width: 100%; margin:0 auto; font-family: 'NanumSquareNeo-Variable';">팔로우</button>
-            {% endif %}
-          </form>
+        <div style="width: 100%; text-align: center;">
+          <div style="width: 49%; display: inline-block;">
+            <form id='follow-form' data-user-id='{{ user.pk }}'>
+              {% csrf_token %}
+              {% if request.user in user.followers.all %}
+              {% comment %} <input type="submit" value="팔로우 취소"> {% endcomment %}
+              <button type='submit' class="btn" style="width: 100%; margin:0 auto; font-family: 'NanumSquareNeo-Variable';">팔로우 취소</button>
+              {% else %}
+              {% comment %} <input type="submit" value="팔로우"> {% endcomment %}
+              <button type='submit' class="btn" style="width: 100%; margin:0 auto; font-family: 'NanumSquareNeo-Variable';">팔로우</button>
+              {% endif %}
+            </form>
+          </div>
+          <div style="width: 49%; display: inline-block;">
+            <a href="{% url 'notes:send' user.pk %}"><button class="btn" style="width: 100%; margin:0 auto; font-family: 'NanumSquareNeo-Variable'">쪽지
+                보내기</button></a>
+          </div>
         </div>
         {% else %}
         <div>
@@ -52,26 +58,6 @@
           </a>
         </div>
         {% endif %}
-        {% comment %} <form id='follow-form' data-user-id='{{ user.pk }}'>
-          <div class="d-flex">
-            {% if request.user != user %}
-            <a href="{% url 'accounts:follow' user.pk %}">
-              {% if request.user in user.followers.all %}
-              <button class="btn" style="width: 100%; margin:0 auto; font-family: 'NanumSquareNeo-Variable';">팔로우 취소</button>
-              {% else %}
-              <button class="btn" style="width: 100%; margin:0 auto; font-family: 'NanumSquareNeo-Variable';">팔로우</button>
-              {% endif %}
-            </a>
-            <a href="{% url 'notes:send' user.pk %}"><button class="btn" style="width: 100%; margin:0 auto; font-family: 'NanumSquareNeo-Variable'">쪽지
-                보내기</button></a>
-            {% else %}
-            <a href="{% url 'accounts:update' %}"><button class="btn" style="width: 100%; margin:0 auto; font-family: 'NanumSquareNeo-Variable';">프로필
-                수정</button></a>
-            <a href="{% url 'notes:index' %}"><button class="btn"
-                style="width: 100%; margin:0 auto; font-family: 'NanumSquareNeo-Variable'">쪽지함</button></a>
-            {% endif %}
-          </div>
-        </form> {% endcomment %}
       </div>
     </div>
     <div class=" col-9">
