@@ -37,11 +37,11 @@
           <form id='follow-form' data-user-id='{{ user.pk }}'>
             {% csrf_token %}
             {% if request.user in user.followers.all %}
-              {% comment %} <input type="submit" value="팔로우 취소"> {% endcomment %}
-              <button type='submit' class="btn" style="width: 100%; margin:0 auto; font-family: 'NanumSquareNeo-Variable';">팔로우 취소</button>
+            {% comment %} <input type="submit" value="팔로우 취소"> {% endcomment %}
+            <button type='submit' class="btn" style="width: 100%; margin:0 auto; font-family: 'NanumSquareNeo-Variable';">팔로우 취소</button>
             {% else %}
-              {% comment %} <input type="submit" value="팔로우"> {% endcomment %}
-              <button type='submit' class="btn" style="width: 100%; margin:0 auto; font-family: 'NanumSquareNeo-Variable';">팔로우</button>
+            {% comment %} <input type="submit" value="팔로우"> {% endcomment %}
+            <button type='submit' class="btn" style="width: 100%; margin:0 auto; font-family: 'NanumSquareNeo-Variable';">팔로우</button>
             {% endif %}
           </form>
         </div>
@@ -53,24 +53,28 @@
         </div>
         {% endif %}
         {% comment %} <form id='follow-form' data-user-id='{{ user.pk }}'>
-          <div>
+          <div class="d-flex">
             {% if request.user != user %}
             <a href="{% url 'accounts:follow' user.pk %}">
               {% if request.user in user.followers.all %}
-                <button class="btn" style="width: 100%; margin:0 auto; font-family: 'NanumSquareNeo-Variable';">팔로우 취소</button>
-                {% else %}
-                <button class="btn" style="width: 100%; margin:0 auto; font-family: 'NanumSquareNeo-Variable';">팔로우</button>
-                {% endif %}
-              </a>
+              <button class="btn" style="width: 100%; margin:0 auto; font-family: 'NanumSquareNeo-Variable';">팔로우 취소</button>
               {% else %}
-              <a href="{% url 'accounts:update' %}"><button class="btn" style="width: 100%; margin:0 auto; font-family: 'NanumSquareNeo-Variable';">프로필
-                  수정</button></a>
+              <button class="btn" style="width: 100%; margin:0 auto; font-family: 'NanumSquareNeo-Variable';">팔로우</button>
               {% endif %}
+            </a>
+            <a href="{% url 'notes:send' user.pk %}"><button class="btn" style="width: 100%; margin:0 auto; font-family: 'NanumSquareNeo-Variable'">쪽지
+                보내기</button></a>
+            {% else %}
+            <a href="{% url 'accounts:update' %}"><button class="btn" style="width: 100%; margin:0 auto; font-family: 'NanumSquareNeo-Variable';">프로필
+                수정</button></a>
+            <a href="{% url 'notes:index' %}"><button class="btn"
+                style="width: 100%; margin:0 auto; font-family: 'NanumSquareNeo-Variable'">쪽지함</button></a>
+            {% endif %}
           </div>
         </form> {% endcomment %}
       </div>
     </div>
-    <div class="col-9">
+    <div class=" col-9">
       <section class="d-flex flex-column" style="gap: 4px">
         <div class="d-flex d-grid" style="width: 100%; height: 100%; gap: 4px;">
           <div style="width:320px; height:200px; background-color: white; padding:30px 30px;">
@@ -230,12 +234,12 @@
     axios({
       method: 'post',
       url: `/accounts/${userId}/follow/`,
-      headers: {'X-CSRFToken': csrftoken,}
+      headers: { 'X-CSRFToken': csrftoken, }
     })
       .then((response) => {
         const isFollowed = response.data.is_followed
         const followBtn = document.querySelector('#follow-form > button[type=submit]')
-        if (isFollowed === true ) {
+        if (isFollowed === true) {
           followBtn.innerText = '팔로우 취소'
         } else {
           followBtn.innerText = '팔로우'
