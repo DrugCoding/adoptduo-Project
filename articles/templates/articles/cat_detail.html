@@ -154,7 +154,9 @@
             <span>{{ cat_comment.content }}</span>
           </div>
         </div>
+        {% if cat_comment.user == request.user %}
         <span class="comment-delete mx-auto my-auto align-items-center"><button class="comment-del-btn Nanum" data-comment-id="{{ cat_comment.pk }}" onclick="remove(event)">댓글삭제</button></span>
+        {% endif %}
       </div>
       {% endfor %}
     </div>

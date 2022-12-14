@@ -160,7 +160,7 @@ def dog_update(request, dog_article_pk):
         request, "articles/form.html", context
     )  # 유효하지 않을 때나, 제출 안눌렀을 때는 위의 컨텍스트 값을 가져와서 forms.html을 보여줌
 
-
+@login_required
 def dog_delete(request, dog_article_pk):
 
     dog_article = DogArticle.objects.get(id=dog_article_pk)
@@ -184,7 +184,7 @@ def cat_index(request):
         request, "articles/cat.html", context
     )  # 템플릿 네임 적어주고, 이쪽으로 context 값을 넘겨줌
 
-
+@login_required
 def cat_create(request):
     if request.method == "POST":
         cat_article_form = CatArticleForm(
@@ -239,7 +239,7 @@ def cat_detail(request, cat_article_pk):
 
     return render(request, "articles/cat_detail.html", context)
 
-
+@login_required
 def cat_update(request, cat_article_pk):
     cat_article = CatArticle.objects.get(id=cat_article_pk)
 
@@ -267,7 +267,7 @@ def cat_update(request, cat_article_pk):
         request, "articles/catform.html", context
     )  # 유효하지 않을 때나, 제출 안눌렀을 때는 위의 컨텍스트 값을 가져와서 forms.html을 보여줌
 
-
+@login_required
 def cat_delete(request, cat_article_pk):
 
     cat_article = CatArticle.objects.get(id=cat_article_pk)
@@ -275,7 +275,7 @@ def cat_delete(request, cat_article_pk):
 
     return redirect("articles:cat_index")
 
-
+@login_required
 def dog_comment_create(request, dog_article_pk):
 
     dog_article = DogArticle.objects.get(pk=dog_article_pk)
@@ -292,7 +292,7 @@ def dog_comment_create(request, dog_article_pk):
         }
         return JsonResponse(context)
 
-
+@login_required
 def cat_comment_create(request, cat_article_pk):
     cat_article = CatArticle.objects.get(pk=cat_article_pk)
     cat_comment_form = CatCommentForm(request.POST)
@@ -309,21 +309,21 @@ def cat_comment_create(request, cat_article_pk):
 
     return JsonResponse(context)
 
-
+@login_required
 def dog_comments_delete(request, dog_article_pk, dog_comment_pk):
     dog_comment = DogArticleComment.objects.get(pk=dog_comment_pk)
     dog_comment.delete()
     context = {"1": 1}
     return JsonResponse(context)
 
-
+@login_required
 def cat_comments_delete(request, cat_article_pk, cat_comment_pk):
     cat_comment = CatArticleComment.objects.get(pk=cat_comment_pk)
     cat_comment.delete()
     context = {"1": 1}
     return JsonResponse(context)
 
-
+@login_required
 def dog_bookmark(request, dog_article_pk):
     dog_article = DogArticle.objects.get(pk=dog_article_pk)
     # 만약에 로그인한 유저가 이 글을 좋아요를 눌렀다면,
@@ -343,7 +343,7 @@ def dog_bookmark(request, dog_article_pk):
     return JsonResponse(context)
     # 상세 페이지로 redirect
 
-
+@login_required
 def cat_bookmark(request, cat_article_pk):
     cat_article = CatArticle.objects.get(pk=cat_article_pk)
     # 만약에 로그인한 유저가 이 글을 좋아요를 눌렀다면,
