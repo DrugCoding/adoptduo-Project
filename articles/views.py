@@ -18,12 +18,13 @@ from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from accounts.models import User
 import json
+
 # Create your views here.
 
 
 def index(request):
-    dog_articles = DogArticle.objects.all()[0:5]
-    cat_articles = CatArticle.objects.all()[0:5]
+    dog_articles = DogArticle.objects.order_by("-pk")[0:5]
+    cat_articles = CatArticle.objects.order_by("-pk")[0:5]
     stor = Stories.objects.all()
     storie = stor.annotate(like_count=Count("like"))
     stories = storie.order_by("-like_count")[0:3]
@@ -69,9 +70,7 @@ def dog_index(request):
         "dog_articles": dog_articles,
         "page_obj": page_obj,
     }
-    return render(
-        request, "articles/dog.html", context
-    )  # 템플릿 네임 적어주고, 이쪽으로 context 값을 넘겨줌
+    return render(request, "articles/dog.html", context)  # 템플릿 네임 적어주고, 이쪽으로 context 값을 넘겨줌
 
 
 @login_required
@@ -82,13 +81,11 @@ def dog_create(request):
         )  # 사용자가 요청하여 Productform에 담긴 포스트를 productform 변수에 저장
 
         if dog_article_form.is_valid():
-            dog_article = dog_article_form.save(
-                commit=False
-            )  # 저장하기 전에 잠깐 멈추기 위해 commit=false사용
+            dog_article = dog_article_form.save(commit=False)  # 저장하기 전에 잠깐 멈추기 위해 commit=false사용
             dog_article.user = request.user  # product.user와 요청한 user가 같다를 정의
-            lat1 = request.POST.get('lat')
+            lat1 = request.POST.get("lat")
             print(lat1)
-            lng1 = request.POST.get('lon')
+            lng1 = request.POST.get("lon")
             print(lng1)
             dog_article.lat = lat1
             dog_article.lng = lng1
@@ -105,26 +102,21 @@ def dog_create(request):
         # post일 때는 post의 product_form이 여기에 해당 되고, 해당 페이지 접속일 (글생성 x)때는 else의 product_form이 들어감
     }
 
-    return render(
-        request, "articles/form.html", context
-    )  # 제출에 이슈가 있다면 값을 보내며 다시 폼으로 돌아가기
+    return render(request, "articles/form.html", context)  # 제출에 이슈가 있다면 값을 보내며 다시 폼으로 돌아가기
 
 
 def dog_detail(request, dog_article_pk):
     dog_article = DogArticle.objects.get(id=dog_article_pk)
     dog_comment_form = DogCommentForm()
 
-    latlngdict = {
-        'lat': dog_article.lat,
-        'lng': dog_article.lng
-    }
+    latlngdict = {"lat": dog_article.lat, "lng": dog_article.lng}
     latlngjson = json.dumps(latlngdict)
 
     context = {
         "dog_article": dog_article,
         "dog_comments": dog_article.dogarticlecomment_set.all(),  # 도그 게시물의 모든 댓글 출력하기
         "dog_comment_form": dog_comment_form,
-        "latlngjson": latlngjson
+        "latlngjson": latlngjson,
     }
     dog_article.hits += 1
     dog_article.save()
@@ -144,12 +136,9 @@ def dog_update(request, dog_article_pk):
         if dog_article_form.is_valid():  # 위 폼이 유효하다면
             dog_article_form.save()  # 저장
 
-            return redirect(
-                "articles:dog_detail", dog_article_pk
-            )  # 몇번 상품의 디테일 페이지에 보내줄껀지?
+            return redirect("articles:dog_detail", dog_article_pk)  # 몇번 상품의 디테일 페이지에 보내줄껀지?
     else:
-        dog_article_form = DogArticleForm(
-            instance=dog_article)  # 기존 모델에 저장 되어있는 값을 보여줌
+        dog_article_form = DogArticleForm(instance=dog_article)  # 기존 모델에 저장 되어있는 값을 보여줌
 
     context = {
         # 유효하지 않을 때는 요청 받은 product_form, 제출 안눌렀을 때는 바로위의 폼
@@ -178,11 +167,8 @@ def cat_index(request):
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 
-    context = {"cat_articles": cat_articles,
-               "page_obj": page_obj, "form": form}
-    return render(
-        request, "articles/cat.html", context
-    )  # 템플릿 네임 적어주고, 이쪽으로 context 값을 넘겨줌
+    context = {"cat_articles": cat_articles, "page_obj": page_obj, "form": form}
+    return render(request, "articles/cat.html", context)  # 템플릿 네임 적어주고, 이쪽으로 context 값을 넘겨줌
 
 
 def cat_create(request):
@@ -192,12 +178,10 @@ def cat_create(request):
         )  # 사용자가 요청하여 Productform에 담긴 포스트를 productform 변수에 저장
 
         if cat_article_form.is_valid():
-            cat_article = cat_article_form.save(
-                commit=False
-            )  # 저장하기 전에 잠깐 멈추기 위해 commit=false사용
+            cat_article = cat_article_form.save(commit=False)  # 저장하기 전에 잠깐 멈추기 위해 commit=false사용
             cat_article.user = request.user  # product.user와 요청한 user가 같다를 정의
-            lat1 = request.POST.get('lat')
-            lng1 = request.POST.get('lon')
+            lat1 = request.POST.get("lat")
+            lng1 = request.POST.get("lon")
             cat_article.lat = lat1
             cat_article.lng = lng1
             cat_article.save()  # 위에 요청 받은 폼을 저장, 값을 만들고 저장하는 용도고 값을 보내줄 것이 없으니까 redirect를 사용
@@ -213,26 +197,21 @@ def cat_create(request):
         # post일 때는 post의 product_form이 여기에 해당 되고, 해당 페이지 접속일 (글생성 x)때는 else의 product_form이 들어감
     }
 
-    return render(
-        request, "articles/catform.html", context
-    )  # 제출에 이슈가 있다면 값을 보내며 다시 폼으로 돌아가기
+    return render(request, "articles/catform.html", context)  # 제출에 이슈가 있다면 값을 보내며 다시 폼으로 돌아가기
 
 
 def cat_detail(request, cat_article_pk):
     cat_article = CatArticle.objects.get(id=cat_article_pk)
     cat_comment_form = CatCommentForm()
 
-    latlngdict = {
-        'lat': cat_article.lat,
-        'lng': cat_article.lng
-    }
+    latlngdict = {"lat": cat_article.lat, "lng": cat_article.lng}
     latlngjson = json.dumps(latlngdict)
 
     context = {
         "cat_article": cat_article,
         "cat_comments": cat_article.catarticlecomment_set.all(),  # 도그 게시물의 모든 댓글 출력하기
         "cat_comment_form": cat_comment_form,
-        "latlngjson": latlngjson
+        "latlngjson": latlngjson,
     }
     cat_article.hits += 1
     cat_article.save()
@@ -251,12 +230,9 @@ def cat_update(request, cat_article_pk):
         if cat_article_form.is_valid():  # 위 폼이 유효하다면
             cat_article_form.save()  # 저장
 
-            return redirect(
-                "articles:cat_detail", cat_article_pk
-            )  # 몇번 상품의 디테일 페이지에 보내줄껀지?
+            return redirect("articles:cat_detail", cat_article_pk)  # 몇번 상품의 디테일 페이지에 보내줄껀지?
     else:
-        cat_article_form = CatArticleForm(
-            instance=cat_article)  # 기존 모델에 저장 되어있는 값을 보여줌
+        cat_article_form = CatArticleForm(instance=cat_article)  # 기존 모델에 저장 되어있는 값을 보여줌
 
     context = {
         # 유효하지 않을 때는 요청 받은 product_form, 제출 안눌렀을 때는 바로위의 폼
@@ -376,8 +352,11 @@ def cat_category(request, cat_category_pk):
     page_number = request.GET.get("page")
     page_category = paginator.get_page(page_number)
 
-    context = {"category": category, "category_articles": category_articles,
-               "page_category": page_category}
+    context = {
+        "category": category,
+        "category_articles": category_articles,
+        "page_category": page_category,
+    }
 
     return render(request, "articles/cat.html", context)
 
@@ -392,8 +371,7 @@ def dog_category(request, dog_category_pk):
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 
-    context = {"category": category,
-               "category_articles": category_articles, "page_obj": page_obj}
+    context = {"category": category, "category_articles": category_articles, "page_obj": page_obj}
 
     return render(request, "articles/dog.html", context)
 
@@ -405,27 +383,25 @@ def search(request):
     cats = ""
     stories = ""
 
-    if 'searchs' in request.GET:  # 요청한 값에 검색어가 있다면
-        query = request.GET.get('searchs')  # 요청한 검색어를 쿼리에 넣음
+    if "searchs" in request.GET:  # 요청한 값에 검색어가 있다면
+        query = request.GET.get("searchs")  # 요청한 검색어를 쿼리에 넣음
         if query == "":  # 쿼리가 공백일 때
             return redirect("articles:search")  # search 페이지를 보여준다.
         else:
             dogs = DogArticle.objects.all().filter(
-                Q(title__icontains=query) |
-                Q(content__icontains=query) |
-                Q(dog_breed__name__icontains=query)
+                Q(title__icontains=query)
+                | Q(content__icontains=query)
+                | Q(dog_breed__name__icontains=query)
             )[0:6]
 
             cats = CatArticle.objects.all().filter(
-                Q(title__icontains=query) |
-                Q(content__icontains=query) |
-                Q(cat_breed__name__icontains=query)
+                Q(title__icontains=query)
+                | Q(content__icontains=query)
+                | Q(cat_breed__name__icontains=query)
             )[0:6]
 
             stories = Stories.objects.all().filter(
-                Q(title__icontains=query) |
-                Q(content__icontains=query) |
-                Q(breed__icontains=query)
+                Q(title__icontains=query) | Q(content__icontains=query) | Q(breed__icontains=query)
             )[0:6]
         # # 조회수 최다 강아지 분양글
         # most_dog = DogArticle.objects.order_by('-hits')[:4]

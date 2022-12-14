@@ -117,9 +117,6 @@
                           {{ vol.hits }}
                         </a>
                         <a class="like" href="{% url 'volunteers:detail' vol.pk %}">
-                          <i class="bi bi-hand-thumbs-up"></i>
-                          
-                          {{ vol.like.all | length }}
                         </a>  
                           <span class="created_at">  
                             <a class="mx-1" href="{% url 'volunteers:detail' vol.pk %}">

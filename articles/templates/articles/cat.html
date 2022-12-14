@@ -189,7 +189,7 @@
                       <a href="{% url 'articles:cat_detail' cat.pk %}">
                         <span class="created_at">
                           <i class="bi bi-clock"></i>
-                          {{ cat.created_at | timesince }}
+                          <span class="like-text1">{{ cat.created_at | timesince }}</span>
                         </span>
                       </a>
                     </div>
