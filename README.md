@@ -125,21 +125,21 @@
 
 ### Accounts App
 
-![signup](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\sighup.gif)
+![signup](https://github.com/rrwe23/Final_Project/blob/master/assets/images/sighup.gif)
 
 **accounts/signup.html**
 
 - 회원 가입 폼 작성 후, 가입하기 **버튼 클릭 시 회원가입 완료**
 - 
 
-![login](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\login.gif)
+![login](https://github.com/rrwe23/Final_Project/blob/master/assets/images/login.gif)
 
 **accounts/login.html**
 
 - **로그인 폼과, signup.html로** 이동하는 버튼이 있다
 - 
 
-![profile](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\profile.png)
+![profile](https://github.com/rrwe23/Final_Project/blob/master/assets/images/profile.png)
 
 **accounts/detail.html**
 
@@ -154,21 +154,21 @@
   
   - 쪽지함 구현
     
-    ![profile_bookmark](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\profile_bookmark.png)
+    ![profile_bookmark](https://github.com/rrwe23/Final_Project/blob/master/assets/images/profile_bookmark.png)
     
-    ![profile_follow](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\profile_follow.png)
+    ![profile_follow](https://github.com/rrwe23/Final_Project/blob/master/assets/images/profile_follow.png)
 
 **채널톡 API**
 
 - **채널톡 API를 사용하여 입양해듀오 챗봇 생성**
 
-![chat](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\chat.png)
+![chat](https://github.com/rrwe23/Final_Project/blob/master/assets/images/chat.png)
 
 ### Articles App
 
-![introduction](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\introduction.gif)
+![introduction](https://github.com/rrwe23/Final_Project/blob/master/assets/images/introduction.gif)
 
-![introdunction_link](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\introdunction_link.png)
+![introdunction_link](https://github.com/rrwe23/Final_Project/blob/master/assets/images/introdunction_link.png)
 
 **articles/introduction.html**
 
@@ -177,11 +177,11 @@
 - **홈페이지 소개로 컨텐츠 길이가 긴 만큼 심심하지 않게 페이드업으로 애니메이션 추가**
 - **마지막에는 링크를 통해 각 페이지로 이동할 수 있는 버튼**
 
-![information](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\information.gif)
+![information](https://github.com/rrwe23/Final_Project/blob/master/assets/images/information.gif)
 
-![information2](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\information2.gif)
+![information2](https://github.com/rrwe23/Final_Project/blob/master/assets/images/information2.gif)
 
-![information3](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\information3.gif)
+![information3](https://github.com/rrwe23/Final_Project/blob/master/assets/images/information3.gif)
 
 **articles/information.html**
 
@@ -190,9 +190,9 @@
 - **해외이동봉사, 입양절차, 학대신고 등에 필요한 정보들을 모았다.**
 - **url을 분리해 이동하게 하였고 hover 효과**
 
-![dog_index](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\dog_index.gif)
+![dog_index](https://github.com/rrwe23/Final_Project/blob/master/assets/images/dog_index.gif)
 
-![dog_index](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\dog_index.png)
+![dog_index](https://github.com/rrwe23/Final_Project/blob/master/assets/images/dog_index.png)
 
 **articles/dog_index.html**
 
@@ -200,7 +200,7 @@
 
 - **강아지 품종에 따라 카테고리 분류**
 
-![dog_detail](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\dog_detail.gif)
+![dog_detail](https://github.com/rrwe23/Final_Project/blob/master/assets/images/dog_detail.gif)
 
 **articles/dog_detail.html**
 
@@ -209,7 +209,7 @@
 - **디테일에서 위치정보와 작성자 팝업으로 프로필,메세지보내기 바로가기 구현**
 - **즐겨찾기 기능과 댓글 구현**
 
-![create_form](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\create_form.png)
+![create_form](https://github.com/rrwe23/Final_Project/blob/master/assets/images/create_form.png)
 
 **articles/dog_create.html**
 
@@ -218,9 +218,9 @@
 - **내 위치를 기반해 지도 생성**
 - **카테고리 분류 폼**
 
-![cat_index](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\cat_index.gif)
+![cat_index](https://github.com/rrwe23/Final_Project/blob/master/assets/images/cat_index.gif)
 
-![cat_index](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\cat_index.png)
+![cat_index](https://github.com/rrwe23/Final_Project/blob/master/assets/images/cat_index.png)
 
 **articles/cat_index.html**
 
@@ -228,7 +228,7 @@
 
 - **고양이 품종에 따라 카테고리 분류**
 
-![cat_detail](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\cat_detail.gif)
+![cat_detail](https://github.com/rrwe23/Final_Project/blob/master/assets/images/cat_detail.gif)
 
 **articles/cat_detail.html**
 
@@ -237,7 +237,7 @@
 - **디테일에서 위치정보와 작성자 팝업으로 프로필,메세지보내기 바로가기 구현**
 - **즐겨찾기 기능과 댓글 구현**
 
-![create_form](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\create_form.png)
+![create_form](https://github.com/rrwe23/Final_Project/blob/master/assets/images/create_form.png)
 
 **articles/cat_create.html**
 
@@ -248,7 +248,7 @@
 
 ### Stories App
 
-![stories_index](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\stories_index.png)
+![stories_index](https://github.com/rrwe23/Final_Project/blob/master/assets/images/stories_index.png)
 
 **stories/index.html**
 
@@ -256,7 +256,7 @@
 
 - **반려동물 자랑 글, 입,분양 후기 등 자유게시판 형식**
 
-![stories_detail](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\stories_detail.gif)
+![stories_detail](https://github.com/rrwe23/Final_Project/blob/master/assets/images/stories_detail.gif)
 
 **stories/detail.html**
 
@@ -264,7 +264,7 @@
 
 - **심플한 디테일, 댓글, 좋아요 구현**
 
-![stories_form](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\stories_form.png)
+![stories_form](https://github.com/rrwe23/Final_Project/blob/master/assets/images/stories_form.png)
 
 **stories/create.html**
 
@@ -274,7 +274,7 @@
 
 ### Volrunteers App
 
-![volunteer_index](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\volunteer_index.gif)
+![volunteer_index](https://github.com/rrwe23/Final_Project/blob/master/assets/images/volunteer_index.gif)
 
 **volunteers/index.html**
 
@@ -282,7 +282,7 @@
 
 - **상단에는 봉사를 지원한 유저들의 프로필을 지나가게 함**
 
-![volunteer_form](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\volunteer_form.png)
+![volunteer_form](https://github.com/rrwe23/Final_Project/blob/master/assets/images/volunteer_form.png)
 
 **volunteers/create.html**
 
@@ -290,7 +290,7 @@
 
 - **작성 폼에는 해외이동, 국내 봉사를 위한 출발지역, 도착지역과 이동날짜를 작성할 수 있다**
 
-![volunteers_detail](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\volunteers_detail.png)
+![volunteers_detail](https://github.com/rrwe23/Final_Project/blob/master/assets/images/volunteers_detail.png)
 
 **volunteers/detail.html**
 
@@ -302,7 +302,7 @@
 
 ### Note App
 
-![mailbox](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\mailbox.png)
+![mailbox](https://github.com/rrwe23/Final_Project/blob/master/assets/images/mailbox.png)
 
 **note/index.html**
 
@@ -310,7 +310,7 @@
 
 - **작성 폼에는 해외이동, 국내 봉사를 위한 출발지역, 도착지역과 이동날짜를 작성할 수 있다**
 
-![mail_send](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\mail_send.png)
+![mail_send](https://github.com/rrwe23/Final_Project/blob/master/assets/images/mail_send.png)
 
 **note/create.html**
 
@@ -318,7 +318,7 @@
 
 - **쪽지를 보낼 수 있는 폼**
 
-![mail_detail](C:\Users\이주현\Desktop\My%20Full%20Stack\pair%20project\Final%20project%203\assets\images\mail_detail.png)
+![mail_detail](https://github.com/rrwe23/Final_Project/blob/master/assets/images/mail_detail.png)
 
 **note/detail.html**
 
@@ -331,48 +331,6 @@
 - `이주현`
   
   프로젝트를 진행하면서 실력부족으로 인해 벽에 부딪힐 때도 많았지만 팀원들의 캐리로 무사히 진행 할 수 있었습니다! 다들 잘하면서 실력을 숨기고 있었던 거였고 덕분에 많이 배울 수 있었어요 무엇보다 편안한 분위기에서 진행되어서 즐기듯이 프로젝트에 임할 수 있었어요 우리 팀원들 다들 고생했어~~!!
-
-- `서민수`
-  
-  프론트를 지향해서 프론트 작업을 주로 했지만 하면서 느낀건 결국 백엔드의 실력도 어느정도 갖추어야한다고 뼈저리게 느꼈다.
-  백에서 다룬 로직들을 html에서 보여주기 위한 로직처리도 중요했다.
-  또 반응형 프론트를 구성하고 싶었지만 아직 실력이 부족하여 반응형을 구현하지 못하였지만 다른사람들의 디스플레이를 봤을 때 
-  화면이 틀어지는 일이 많아서 반응형이 왜 필요한지, 반응형으로 왜 만들어야하는지를 깨달았다
-   이번 프로젝트에서는 깃부터 시작해서 코드까지 정말 오류가 났을 때 도움이 필요할 때면 누구든 나서서 같이 고민해주고 해결해주는 팀원들 때문에 파이널프로젝트를 잘 마칠수 있었던 것 같다. 정말 좋은 사람들과 좋은 시간을 보낼 수 있었으며 이 계기로 좀 더 내 자신이 성장할 수 있었던것 같다.
-
-- `이동희`
-  
-  프론트 담당이었지만, 개발에 있어서 프론트나 백 한 분야만 공부한다는 것은 어불성설임을 깨달았어요. 결국 세부적인 기능과 시스템을 이해하며 개발을 하기 위해서는 두 분야 모두 잘하는 풀스택 개발자가 되는게 베스트지만, 아직 그러한 개발자가 되기에는 한없이 부족함을 느낄 수 있었어요. 힘들었지만 이번 경험을 토대로 미래에 어떤 개발자가 되어야 할지에 대한 고찰을 할 수 있어서 뿌듯했어요. 커밋 푸시하면서 충돌이 많이 나서 애먹기도 했는데, 프로젝트를 진행할 때 커밋-푸시 메뉴얼이 조금 빈약했지 않나 싶어요. 원활한 협업을 위한 규칙, 메뉴얼도 굉장히 중요함을 깨달았어요. 밤늦게 머리 긁으면서 "이게 왜?" 하는 순간이 많았지만 지나고 보니 그 또한 저를 한단계 더 성장시켜준 기회였고, 즐거운 추억의 일부로 자리잡게 될 것 같아요! 4주간 우리 입양해듀오 팀원들 너무 고생 많으고 함께할 수 있어서 기뻤습니다! 실력과 인성 모두 겸비한 좋은 팀원들 만나서 즐거웠습니다!
-
-- `현지수`
-  
-  프로젝트 첫 참여라 걱정을 많이 했는데 혼자서 헤맬 때마다 팀원분들이 많이 도와주셔서 무사히 마무리할 수 있었습니다. 프로젝트 기획부터 깃 활용까지 팀업 활동에 대한 실습을 처음 참여해본 과정이라 의미가 깊었고, 프론트를 꾸미면서 부트스트랩을 이렇게 많이 사용해 본 경험이 없었어서 이번 프로젝트를 통해 많이 배울 수 있었어요. 늘 새벽까지 모여서 작업하던 열정 넘치는 모습이 오래 기억에 남을 것 같습니다. 입양해듀오 팀원들 3주간 정말 감사했습니다! 고생 많으셨어요.
-
-- `김교민`
-  
-  프로젝트를 진행하는 동안 각자 맡은 파트를 진행하면서 어려웠던 부분도 있었지만 서로서로 캐리해 주면서 동시에 부족한 부분을 배워가며 프로젝트를 완성시켰습니다! 그리고 처음 계획을 세웠을 때부터 좋은 분위기를 유지해서 재미있게 작업을 진행할 수 있었습니다. 우리 입양해듀오팀 모두 고생 많았고 부족한 걸 배울 수 있었던 좋은 계기가 되었읍니다!
-
-- `이종은`
-  
-  좋은 팀원 분들과 프로젝트를 하여 해보지 않았던 여러 기능들을 도전해볼 수 있었고, 기능이 구현되는 것을 경험할 때 자신감이 생겨 또 다른 프로젝트를 해보고 싶은 마음이 들었습니다. 
-  특히 지도나 공유하기 , 채널톡 기능을 구현할 때 API 사용법에 대해서 숙지할 수 있게 되었고, API를 다른 기능에도 이용해보고 싶다는 생각이 들었습니다. 
-  또, 따뜻한 팀원 분들을 만나 서로 도와주며 협업의 필요성과 중요성을 알았고 감사했습니다.
-
-- `이현성`
-  
-  다시 한번 프로젝트는 꼭 필요한 과정이라고 느꼈습니다.
-  실무에서 많이 쓰는 github 협업도 경험해보고,
-  모르는데 막연하게 알고 있다고 생각한 부분을 정확히 알 수 있었고,
-  아는 것은 직접하며 다시 한 번 배우는 시간이었습니다.
-  팀 내 분위기도 좋아서 즐겁게 배우는 시간이었습니다.
-  정말 작은 것 조금 틀려서 몇 시간 고민 끝에 해결했을 때의 기분이 좋았지만
-  아직 사소한 것 하나 모른다는 것에 화도 났습니다
-  프로젝트는 내가 알고 있는 것이 무엇인지 정확하게 알게 해주고
-  더 공부해야겠다는 생각을 하게 해주는 좋은 경험이었습니다.
-
-- `이주현`
-  
-  프로젝트를 진행하면서 실력부족으로 인해 벽에 부딪힐 때도 많았지만 팀원들의 캐리로 무사히 진행 할 수 있었습니다! 다들 잘하면서 실력을 숨기고 있었던 거였고 덕분에 많이 배울 수 있었어요 무엇보다 편안한 분위기에서 진행되어서 즐기듯이 프로젝트에 임할 수 있었어요 우리 팀원들 다들 고생했어~~
 
 - `서민수`
   
