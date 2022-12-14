@@ -52,6 +52,8 @@ def detail(request, pk):
         "v_comments": v_comments,
         "v_comment_form": v_comment_form,
     }
+    v_article.hits += 1
+    v_article.save()
     return render(request, "volunteers/detail.html", context)
 
 
