@@ -125,7 +125,6 @@
   </div>
   <div class="container text-center">
     <div id="v-comments">
-      <h4 class="mt-5"><span style="color:red">{{ v_comments.count }}개</span>의 댓글이 있습니다.</h4>
       {% for v_comment in v_comments %}
       {% csrf_token %}
       <div class="my-4 d-flex" id="{{v_comment.pk}}">
@@ -137,8 +136,6 @@
         </div>
         <span class="comment-delete mx-auto my-auto align-items-center"><button class="comment-del-btn Nanum" data-comment-id="{{v_comment.pk}}" onclick="remove(event)">댓글삭제</button></span>
       </div>
-      {% empty %}
-        <p>댓글이 없어요! </p>
       {% endfor %}
     </div>
     <form id="v-comment-form" data-article-id="{{ v_article.pk }}">
