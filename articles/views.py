@@ -374,7 +374,7 @@ def cat_category(request, cat_category_pk):
 
     paginator = Paginator(category_articles, 8)
     page_number = request.GET.get("page")
-    page_obj = paginator.get_page(page_number)
+    page_category = paginator.get_page(page_number)
 
     context = {"category": category, "category_articles": category_articles,
                "page_category": page_category}
