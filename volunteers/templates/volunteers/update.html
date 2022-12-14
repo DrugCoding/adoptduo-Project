@@ -1,11 +1,16 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
-
+{% load static %}
 {% block content %}
-  <h1>글 수정하기</h1>
-  <form action="" method="POST">
+<link rel="stylesheet" href="{% static 'css/volunteers_form.css' %}">
+<div class="container my-5 rounded">
+  <h1 class="text-center my-5 mx-auto fw-bold">봉사자 글 수정</h1>
+</div>
+<div class="container py-2">
+  <form action="" method="POST" style="width:40%; margin:0 auto">
     {% csrf_token %}
     {% bootstrap_form v_form %}
-    {% bootstrap_button button_type="submit" content="수정완료" %}
+    {% bootstrap_button button_type="submit" button_class="btn write_btn" content="수정완료" %}
   </form>
+</div>
 {% endblock content %}

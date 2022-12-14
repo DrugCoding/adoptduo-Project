@@ -55,9 +55,9 @@ class VolunteerCommentForm(forms.ModelForm):
     class Meta:
         model = VolunteerComment
         fields = ['content',]
-        # labels = {
-        #     "content": "댓글입력",
-        # }
-        # widgets = {
-        #     "content": forms.Textarea(attrs={"rows": 1, "cols": 10}),
-        # }
+        labels = {
+            "content": "댓글입력",
+        }
+        widgets = {
+            "content": forms.Textarea(attrs={"rows": 1, "cols": 10}),
+        }
