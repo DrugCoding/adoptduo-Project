@@ -242,8 +242,9 @@
           })
         }
       }
-    const bookmarkBtn = document.querySelector('#bookmark-btn')
-    bookmarkBtn.addEventListener('click', function (event){
+    if(document.querySelector('#bookmark-btn')){
+      const bookmarkBtn = document.querySelector('#bookmark-btn')
+      bookmarkBtn.addEventListener('click', function (event){
         console.log(event.target.dataset)
         axios({
             method: 'get',
@@ -268,6 +269,9 @@
             bookmarkCount.innerText = context.data.bookmarkcount
         }) // 돌아오면 어떤걸 하고 싶은가?
     })
+
+     }
+    
     var latlng = JSON.parse("{{ latlngjson|escapejs }}")
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
