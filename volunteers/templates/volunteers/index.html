@@ -66,27 +66,27 @@
       </div>
     {% endif %}
   </div>
-  <div class="layout container">
-    <div class="d-flex justify-content-center">
-      <main id="wrap" class="wrap-list">
-        <section class="container">
-          <div role="main" class="contents">
-            <div class="articles-list">
-              {% for vol in page_obj %}
-                <div class="articles-list-pre ">
-                  <div class="title">
-                    <h3>
-                      <a href="{% url 'volunteers:detail' vol.pk %}">
-                        {% if vol.image %}
-                          {{ vol.title |truncatechars:15  }}
-                        {% else %}
-                          {{ vol.title |truncatechars:30  }}
-                        {% endif %}
-                      </a>
-                    </h3>
-                    <p>
-                      <a href="{% url 'volunteers:detail' vol.pk %}">
-                        {% if vol.image %}
+    <div  class="layout container" >
+      <div class="d-flex justify-content-center">
+        <main id="wrap" class="wrap-list">
+          <section class="container">
+            <div role="main" class="contents">
+              <div class="articles-list">
+                {% for vol in page_ob %}
+                  <div class="articles-list-pre ">
+                    <div class="title">
+                      <h3>
+                        <a href="{% url 'volunteers:detail' vol.pk %}">
+                           {% if vol.image %}
+                            {{ vol.title |truncatechars:15  }}
+                           {% else %}
+                            {{ vol.title |truncatechars:30  }}
+                          {% endif %}
+                        </a>
+                      </h3>
+                      <p>
+                        <a href="{% url 'volunteers:detail' vol.pk %}">
+                          {% if vol.image %}
                           {{ vol.content |truncatechars:20 }}
                         {% else %}
                           {{ vol.content |truncatechars:70 }}
@@ -137,21 +137,19 @@
         </section>
       </main>
     </div>
-  </div>
-  <div class="container text-center my-5">
-    <ul class="pagination d-flex justify-content-center">
-      {% if page_obj.has_previous %}
+    <ul class="pagination d-flex justify-content-center my-5">
+      {% if page_ob.has_previous %}
         <li class="page-item">
-          <a class="page-link" href="?page={{ page_obj.previous_page_number }}">이전</a>
+          <a class="page-link" href="?page={{ page_ob.previous_page_number }}">이전</a>
         </li>
       {% else %}
         <li class="page-item disabled">
           <a class="page-link" href="#" tabindex="-1" aria-disabled="true">이전</a>
         </li>
       {% endif %}
-      {% for page_number in page_obj.paginator.page_range %}
-        {% if page_number >= page_obj.number | add : -5 and page_number <= page_obj.number | add : 5 %}
-          {% if page_number == page_obj.number %}
+      {% for page_number in page_ob.paginator.page_range %}
+      {% if page_number >= page_ob.number|add:-5 and page_number <= page_ob.number|add:5 %}
+          {% if page_number == page_ob.number %}
             <li class="page-item active" aria-current="page">
               <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
             </li>
@@ -162,10 +160,9 @@
           {% endif %}
         {% endif %}
       {% endfor %}
-      {% if page_obj.has_next %}
+      {% if page_ob.has_next %}
         <li class="page-item">
-          <a class="page-link" href="?page={{ page_obj.next_page_number }}">다음</a>
-
+          <a class="page-link" href="?page={{ page_ob.next_page_number }}">다음</a>
         </li>
       {% else %}
         <li class="page-item disabled">
@@ -173,5 +170,4 @@
         </li>
       {% endif %}
     </ul>
-  </div>
 {% endblock content %}
