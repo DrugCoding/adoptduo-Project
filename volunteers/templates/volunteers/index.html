@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% load django_bootstrap5 %}
-
 {% block content %}
   <link rel="stylesheet" href="{% static 'css/volunteers.css' %}">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..21,100..700,0..1,-50..200"/>
@@ -29,11 +27,11 @@
                     {% if use.image %}
                       <img style="width:200px;" src="{{ use.image.url }}" class="card-img-top" alt="...">
                     {% else %}
-                      <img style="width:200px;" src="{% static 'images/unknown_image.jpg' %}" style="border-radius: 10px;" alt="">
+                      <img style="border-radius: 10px;" src="{% static 'images/unknown_image.jpg' %}" alt="">
                     {% endif %}
-                     <p class="d-flex justify-content-center my-2" style="color:black;">
-                          {{ use.username }}
-                      </p>
+                    <p class="d-flex justify-content-center my-2" style="color:black;">
+                      {{ use.username }}
+                    </p>
                   </div>
                 </a>
               </div>
@@ -44,23 +42,23 @@
     </marquee>
   </div>
 
-    <div class="container my-5">
-      <div class="d-flex justify-content-center mt-5">
-          <h3 class="story-font" >봉사자</h3>
-      </div>
-      <div class="dog-stroke container "></div>
+  <div class="container my-5">
+    <div class="d-flex justify-content-center mt-5">
+      <h3 class="story-font">봉사자</h3>
     </div>
-    <!-- 글작성 버튼 -->
+    <div class="dog-stroke container "></div>
+  </div>
+  <!-- 글작성 버튼 -->
   <div class=" container  ">
     {% if request.user.is_authenticated %}
       {% if request.user.volunteer_c == '가능' %}
-         <div class="container d-flex justify-content-end my-3" style="">
-        <a href="{% url 'volunteers:create' %}" class="hover1 cat-create btn text-center">봉사자 글작성</a>
-         </div>
+        <div class="container d-flex justify-content-end my-3" style="">
+          <a href="{% url 'volunteers:create' %}" class="hover1 cat-create btn text-center">봉사자 글작성</a>
+        </div>
       {% else %}
-      <div class="container d-flex justify-content-end my-3">
-        <span  class="vol-text">이동봉사 지원자만 글을 작성할 수 있습니다</p>
-      </div>
+        <div class="container d-flex justify-content-end my-3">
+          <span class="vol-text">이동봉사 지원자만 글을 작성할 수 있습니다</p>
+        </div>
       {% endif %}
     {% else %}
       <div class="container d-flex justify-content-end my-3">
@@ -90,52 +88,54 @@
                         <a href="{% url 'volunteers:detail' vol.pk %}">
                           {% if vol.image %}
                           {{ vol.content |truncatechars:20 }}
-                          {% else %}
+                        {% else %}
                           {{ vol.content |truncatechars:70 }}
-                          {% endif %}
+                        {% endif %}
+                      </a>
+                    </p>
+                    <span>
+                      {% if vol.image %}
+                        <img style="width:180px;margin-top:-200px; margin-left:290px;" class="attach-img" src="{{ vol.image.url }}" alt="">
+                      {% else %}
+                        <img src="" alt="">
+                      {% endif %}
+                    </span>
+                  </div>
+                  <div class="sub1">
+                    <p>
+                      <a class="sub-content" href="">
+                        #{{ vol.area}}
+                        #{{ vol.adopt_date }}
+                        #{{ vol.area }}
+                        ~
+                        {{ vol.adopt_location }}
+                      </a>
+                    </p>
+                    <p class="name ">
+                      <a href="{% url 'volunteers:detail' vol.pk %}">
+                        {{ vol.user.username }}
+                      </a>
+                    </p>
+                    <div class="wrap-info">
+                      <a href="{% url 'volunteers:detail' vol.pk %}" class="view">
+                        <i class="bi bi-eye"></i>
+                        {{ vol.hits }}
+                      </a>
+                      <a class="like" href="{% url 'volunteers:detail' vol.pk %}"></a>
+                      <span class="created_at">
+                        <a class="mx-1" href="{% url 'volunteers:detail' vol.pk %}">
+                          <i class="bi bi-clock"></i>
+                          {{ vol.created_at | timesince }}전
                         </a>
-                      </p>
-                      <span>
-                          {% if vol.image %}
-                           <img style="width:180px;margin-top:-200px; margin-left:290px;" class="attach-img" src="{{ vol.image.url }}" alt="">
-                          {% else %}
-                          <img src="" alt="">
-                          {% endif %}
                       </span>
                     </div>
-                    <div class="sub1">
-                      <p>
-                        <a class="sub-content" href="">
-                          #{{ vol.area}} #{{ vol.adopt_date }} #{{ vol.area }} ~ {{ vol.adopt_location }}
-                        </a>
-                      </p>
-                      <p class="name ">
-                        <a href="{% url 'volunteers:detail' vol.pk %}">
-                          {{ vol.user.username }}
-                        </a>
-                      </p>
-                      <div class="wrap-info">
-                        <a href="{% url 'volunteers:detail' vol.pk %}" class="view">
-                          <i class="bi bi-eye"></i>
-                          {{ vol.hits }}
-                        </a>
-                        <a class="like" href="{% url 'volunteers:detail' vol.pk %}">
-                        </a>  
-                          <span class="created_at">  
-                            <a class="mx-1" href="{% url 'volunteers:detail' vol.pk %}">
-                              <i class="bi bi-clock"></i>
-                              {{ vol.created_at | timesince }}전
-                            </a>
-                          </span>
-                      </div>
-                    </div>
                   </div>
-                {% endfor %}
-              </div>
+                </div>
+              {% endfor %}
             </div>
-          </section> 
-        </main>
-      </div>
+          </div>
+        </section>
+      </main>
     </div>
     <ul class="pagination d-flex justify-content-center my-5">
       {% if page_ob.has_previous %}
