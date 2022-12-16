@@ -6,40 +6,40 @@ from django.http import JsonResponse
 from django.db.models import Count
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+
 # Create your views here.
 
 
 def index(request):
     user = User.objects.all()
-    v_articles = Volunteer.objects.order_by('-pk')
-    vv_articles = Volunteer.objects.order_by('pk')
-    paginator = Paginator(v_articles, 10)  # 정렬을 9개까지 보여줌
+    v_articles = Volunteer.objects.order_by("-pk")
+    vv_articles = Volunteer.objects.order_by("pk")
+    paginator = Paginator(v_articles, 2)  # 정렬을 9개까지 보여줌
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     context = {
-        'v_articles': v_articles,
-        'vv_articles': vv_articles,
-        'user': user,
-        'page_obj': page_obj,
+        "v_articles": v_articles,
+        "vv_articles": vv_articles,
+        "user": user,
+        "page_obj": page_obj,
     }
-    return render(request, 'volunteers/index.html', context)
+    print(context)
+    return render(request, "volunteers/index.html", context)
 
 
 @login_required
 def create(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         v_form = VolunteerForm(request.POST)
         if v_form.is_valid():
             v_article = v_form.save(commit=False)
             v_article.user = request.user
             v_article.save()
-            return redirect('volunteers:index')
+            return redirect("volunteers:index")
     else:
         v_form = VolunteerForm()
-    context = {
-        'v_form': v_form
-    }
-    return render(request, 'volunteers/create.html', context)
+    context = {"v_form": v_form}
+    return render(request, "volunteers/create.html", context)
 
 
 def detail(request, pk):
@@ -88,9 +88,9 @@ def comment_create(request, pk):
         v_comment.user = request.user  # 로그인한 유저가 댓글작성자(커멘트의 유저)임!
         v_comment.save()
         context = {
-            'v_content': v_comment.content,
-            'v_userName': v_comment.user.username,
-            'v_pk': v_comment.pk,
+            "v_content": v_comment.content,
+            "v_userName": v_comment.user.username,
+            "v_pk": v_comment.pk,
         }
         return JsonResponse(context)
 
@@ -98,9 +98,7 @@ def comment_create(request, pk):
 def comment_delete(request, pk, c_pk):
     v_comment = VolunteerComment.objects.get(pk=c_pk)
     v_comment.delete()
-    context = {
-        '1': 1
-    }
+    context = {"1": 1}
     return JsonResponse(context)
 
 
@@ -113,7 +111,7 @@ def bookmark(request, pk):
         v_article.bookmarks.add(request.user)
         is_bookmarked = True
     context = {
-        'isbookmarked': is_bookmarked,
-        'bookmarkcount': v_article.bookmarks.count()
+        "isbookmarked": is_bookmarked,
+        "bookmarkcount": v_article.bookmarks.count(),
     }
     return JsonResponse(context)
