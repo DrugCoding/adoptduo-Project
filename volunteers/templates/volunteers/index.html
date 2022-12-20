@@ -28,7 +28,7 @@
                     {% if use.image %}
                       <img style="width:200px;" src="{{ use.image.url }}" class="card-img-top" alt="...">
                     {% else %}
-                      <img style="border-radius: 10px;" src="{% static 'images/unknown_image.jpg' %}" alt="">
+                      <img style="width:200px;" src="{% static 'images/unknown_image.jpg' %}" style="border-radius: 10px;" alt="">
                     {% endif %}
                     <p class="d-flex justify-content-center my-2" style="color:black;">
                       {{ use.username }}
@@ -78,9 +78,9 @@
                   <div class="title">
                     <h3>
                       <a href="{% url 'volunteers:detail' vol.pk %}">
-                          {% if vol.image %}
+                        {% if vol.image %}
                           {{ vol.title |truncatechars:15  }}
-                          {% else %}
+                        {% else %}
                           {{ vol.title |truncatechars:30  }}
                         {% endif %}
                       </a>
@@ -88,56 +88,56 @@
                     <p>
                       <a href="{% url 'volunteers:detail' vol.pk %}">
                         {% if vol.image %}
-                        {{ vol.content |truncatechars:20 }}
-                      {% else %}
-                        {{ vol.content |truncatechars:70 }}
-                      {% endif %}
-                    </a>
-                  </p>
-                  <span>
-                    {% if vol.image %}
-                      <img style="width:180px;margin-top:-200px; margin-left:290px;" class="attach-img" src="{{ vol.image.url }}" alt="">
-                    {% else %}
-                      <img src="" alt="">
-                    {% endif %}
-                  </span>
-                </div>
-                <div class="sub1">
-                  <p>
-                    <a class="sub-content" href="">
-                      #{{ vol.area}}
-                      #{{ vol.adopt_date }}
-                      #{{ vol.area }}
-                      ~
-                      {{ vol.adopt_location }}
-                    </a>
-                  </p>
-                  <p class="name ">
-                    <a href="{% url 'volunteers:detail' vol.pk %}">
-                      {{ vol.user.username }}
-                    </a>
-                  </p>
-                  <div class="wrap-info">
-                    <a href="{% url 'volunteers:detail' vol.pk %}" class="view">
-                      <i class="bi bi-eye"></i>
-                      {{ vol.hits }}
-                    </a>
-                    <a class="like" href="{% url 'volunteers:detail' vol.pk %}"></a>
-                    <span class="created_at">
-                      <a class="mx-1" href="{% url 'volunteers:detail' vol.pk %}">
-                        <i class="bi bi-clock"></i>
-                        {{ vol.created_at | timesince }}전
+                          {{ vol.content |truncatechars:20 }}
+                        {% else %}
+                          {{ vol.content |truncatechars:70 }}
+                        {% endif %}
                       </a>
+                    </p>
+                    <span>
+                      {% if vol.image %}
+                        <img style="width:180px;margin-top:-200px; margin-left:290px;" class="attach-img" src="{{ vol.image.url }}" alt="">
+                      {% else %}
+                        <img src="" alt="">
+                      {% endif %}
                     </span>
                   </div>
+                  <div class="sub1">
+                    <p>
+                      <a class="sub-content" href="">
+                        #{{ vol.area}}
+                        #{{ vol.adopt_date }}
+                        #{{ vol.area }}
+                        ~
+                        {{ vol.adopt_location }}
+                      </a>
+                    </p>
+                    <p class="name ">
+                      <a href="{% url 'volunteers:detail' vol.pk %}">
+                        {{ vol.user.username }}
+                      </a>
+                    </p>
+                    <div class="wrap-info">
+                      <a href="{% url 'volunteers:detail' vol.pk %}" class="view">
+                        <i class="bi bi-eye"></i>
+                        {{ vol.hits }}
+                      </a>
+                      <a class="like" href="{% url 'volunteers:detail' vol.pk %}"></a>
+                      <span class="created_at">
+                        <a class="mx-1" href="{% url 'volunteers:detail' vol.pk %}">
+                          <i class="bi bi-clock"></i>
+                          {{ vol.created_at | timesince }}전
+                        </a>
+                      </span>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            {% endfor %}
+              {% endfor %}
+            </div>
           </div>
-        </div>
-      </section>
-    </main>
-  </div>
+        </section>
+      </main>
+    </div>
   </div>
 
   <ul class="pagination d-flex justify-content-center my-5">
@@ -151,7 +151,7 @@
       </li>
     {% endif %}
     {% for page_number in page_ob.paginator.page_range %}
-    {% if page_number >= page_ob.number|add:-5 and page_number <= page_ob.number|add:5 %}
+      {% if page_number >= page_ob.number|add:-5 and page_number <= page_ob.number|add:5 %}
         {% if page_number == page_ob.number %}
           <li class="page-item active" aria-current="page">
             <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
