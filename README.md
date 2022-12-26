@@ -9,8 +9,8 @@
 
 ## 목차
 
-- [Contributors](https://www.notion.so/5938324146a442e2a5658433d114145c)
-- [기술 스택](https://github.com/sunbongE/PARA#-%EA%B8%B0%EC%88%A0-%EC%8A%A4%ED%83%9D)
+- [Contributors](#Contributors)
+- [기술 스택](#⚙️-기술-스택)
 - [**Role**](https://www.notion.so/5938324146a442e2a5658433d114145c)
 - [**주요 기능**](https://www.notion.so/5938324146a442e2a5658433d114145c)
 - [페이지 구성 상세](https://www.notion.so/5938324146a442e2a5658433d114145c)
