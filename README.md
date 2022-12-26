@@ -10,33 +10,33 @@
 ## 목차
 
 - [Contributors](#Contributors)
-- [기술 스택](#⚙️-기술-스택)
-- [**Role**](https://www.notion.so/5938324146a442e2a5658433d114145c)
-- [**주요 기능**](https://www.notion.so/5938324146a442e2a5658433d114145c)
-- [페이지 구성 상세](https://www.notion.so/5938324146a442e2a5658433d114145c)
-  - [main.html](https://github.com/sunbongE/PARA#mainhtml)
-  - [Accounts App](https://github.com/sunbongE/PARA#accounts-app)
-    - [accounts/signup.html](https://github.com/sunbongE/PARA#accountssignuphtml)
-    - [accounts/login.html](https://github.com/sunbongE/PARA#accountsloginhtml)
-    - [accounts/index.html](https://github.com/sunbongE/PARA#accountsindexhtml)
-    - [accounts/detail.html](https://github.com/sunbongE/PARA#accountsdetailhtml)
-    - [채널톡 API](https://github.com/sunbongE/PARA#%EC%B1%84%EB%84%90%ED%86%A1-api)
-  - [Products App](https://github.com/sunbongE/PARA#products-app)
-    - [products/index.html](https://github.com/sunbongE/PARA#productsindexhtml)
-    - [products/detail.html](https://github.com/sunbongE/PARA#productsdetailhtml)
-  - [Cart App](https://github.com/sunbongE/PARA#cart-app)
-    - [cart/detail.html](https://github.com/sunbongE/PARA#cartdetailhtml)
-  - [Reviews App](https://github.com/sunbongE/PARA#reviews-app)
-    - [reviews/detail.html](https://github.com/sunbongE/PARA#reviewsdetailhtml)
-    - [taggit](https://github.com/sunbongE/PARA#taggit)
-  - [Navbar](https://github.com/sunbongE/PARA#navbar)
-    - [Profile](https://github.com/sunbongE/PARA#profile)
-    - [매장 찾기](https://github.com/sunbongE/PARA#%EB%A7%A4%EC%9E%A5-%EC%B0%BE%EA%B8%B0)
-    - [searched.html](https://github.com/sunbongE/PARA#searchedhtml)
-    - [bestseller.html](https://github.com/sunbongE/PARA#bestsellerhtml)
-    - [category.html](https://github.com/sunbongE/PARA#categoryhtml)
-  - [모바일 화면](https://github.com/sunbongE/PARA#%EB%AA%A8%EB%B0%94%EC%9D%BC-%ED%99%94%EB%A9%B4)
-- [후기](https://github.com/sunbongE/PARA#%ED%9B%84%EA%B8%B0)
+- [기술 스택](#⚙️기술-스택)
+- [**Role**](#role)
+- [**주요 기능**](#주요-기능)
+- [페이지 구성 상세](#📂-페이지-구성-상세)
+  - [main.html]
+  - [Accounts App]
+    - [accounts/signup.html]
+    - [accounts/login.html]
+    - [accounts/index.html]
+    - [accounts/detail.html]
+    - [채널톡 API]
+  - [Products App]
+    - [products/index.html]
+    - [products/detail.html]
+  - [Cart App]
+    - [cart/detail.html]
+  - [Reviews App]
+    - [reviews/detail.html]
+    - [taggit]
+  - [Navbar]
+    - [Profile]
+    - [매장 찾기]
+    - [searched.html]
+    - [bestseller.html]
+    - [category.html]
+  
+- [후기](#🎉후기)
 
 ## **Contributors**
 
