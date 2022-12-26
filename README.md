@@ -5,15 +5,20 @@
 > 반려동물들의 무료,분양 입양을 위한 커뮤니티 사이트 
 
 - `개발 기간` : **2022/11/23 ~ 2022/12/14**
-- [기획서](https://www.notion.so/b5cd1dea198f4b8e8ea5bb972e7a275f)
+- [기획서](https://hg-edu.notion.site/b5cd1dea198f4b8e8ea5bb972e7a275f)
 
 ## 목차
 
 - [Contributors](#Contributors)
-- [기술 스택](#-기술-스택)
+
+- [기술 스택](#기술-스택)
+
 - [**Role**](#role)
+
 - [**주요 기능**](#주요-기능)
+
 - [페이지 구성 상세](#페이지-구성-상세)
+  
   - [main.html]
   - [Accounts App]
     - [accounts/signup.html]
@@ -35,7 +40,7 @@
     - [searched.html]
     - [bestseller.html]
     - [category.html]
-  
+
 - [후기](#후기)
 
 ## **Contributors**
