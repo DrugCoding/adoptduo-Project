@@ -10,10 +10,10 @@
 ## 목차
 
 - [Contributors](#Contributors)
-- [기술 스택](#⚙️기술-스택)
+- [기술 스택](#기술-스택)
 - [**Role**](#role)
 - [**주요 기능**](#주요-기능)
-- [페이지 구성 상세](#📂-페이지-구성-상세)
+- [페이지 구성 상세](#페이지-구성-상세)
   - [main.html]
   - [Accounts App]
     - [accounts/signup.html]
